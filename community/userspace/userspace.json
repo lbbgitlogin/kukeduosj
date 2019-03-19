@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "用户空间",
+  "usingComponents": {
+    "auth-info": "../../common/authorization-info/authorization-info"
+  }
+}

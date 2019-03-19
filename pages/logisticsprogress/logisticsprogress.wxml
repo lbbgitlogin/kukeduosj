@@ -1,0 +1,38 @@
+<view class="m-logisticsbox">
+  <view class="m-cells">
+    <!-- <view class="m-cell ">
+      <view class="m-cell-bd">
+        <text>物流单号：{{Logistics.LogisticCode}}</text>
+      </view>
+    </view>
+    <view class="m-cell">
+      <view class="m-cell-bd">
+        <text>物流公司：{{Logistics.ShipperName}}</text>
+      </view>
+    </view> -->
+    <view class="m-cell">
+      <view class="m-cell-bd" wx:if="{{LogisticName!='达达配送'&&LogisticName!='UU配送'}}">
+        <text>物流状态：{{Logistics.StateStr}}</text>
+      </view>
+      <view class="m-cell-bd" wx:if="{{LogisticName=='达达配送'||LogisticName=='UU配送'}}">
+        <text>物流状态：{{DLogistics.StateStr}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="map" wx:if="{{(LogisticName=='达达配送'&&Info.Status==3)||(LogisticName=='UU配送'&&(Info.Status==3||Info.Status==4||Info.Status==5||Info.Status==6))}}">
+    <image src="http://appicon-1253690476.file.myqcloud.com/img/playcall.png" bindtap="call"></image>
+    <map class="m-map" longitude="{{Info.TransporterLng}}" latitude="{{Info.TransporterLat}}" markers="{{markers}}" scale="14" show-location style="width: 100%; height: 400rpx;"></map>
+  </view>
+  <view class="m-logistbox" wx:if="{{LogisticName=='达达配送'||LogisticName=='UU配送'}}">
+    <view wx:for="{{DLogistics.Traces}}" wx:for-item="item" class="m-logistitem">
+      {{item.AcceptStation}}
+      <view>{{item.AcceptTimeStr}}</view>
+    </view>
+  </view>
+  <view class="m-logistbox" wx:if="{{LogisticName!='达达配送'&&LogisticName!='UU配送'}}">
+    <view wx:for="{{Logistics.Traces}}" wx:for-item="item" class="m-logistitem">
+      {{item.AcceptStation}}
+      <view>{{item.AcceptTimeStr}}</view>
+    </view>
+  </view>
+</view>

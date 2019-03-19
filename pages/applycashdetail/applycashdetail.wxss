@@ -1,0 +1,12 @@
+.m-media-box-thumb{border-radius: 100%;overflow: hidden;}
+.m-media-box-num{float: right;font-size: 32rpx;}
+.m-media-box-num text{color:#DB384C;}
+.m-media-box-info{-webkit-box-flex:2;-webkit-flex:2;flex:2;}
+.m-tab{position: fixed;width: 100%;top: 0;z-index: 2;}
+.m-scrollBox{position: absolute;box-sizing: border-box;width: 100%;height: 100%; }
+.m-panel{margin-top:-4rpx;}
+.m-num{float: right;color: #DB384C}
+.m-panel-hd label{color: #DB384C;font-size: 28rpx;margin-left: 20rpx;}
+.m-media-box{padding-top:20rpx;padding-bottom: 20rpx;line-height: 40rpx;}
+.m-media-box-info{margin-top:5rpx;}
+.m-media-box-title{font-size: 28rpx;}

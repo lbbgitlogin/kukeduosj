@@ -1,0 +1,53 @@
+<scroll-view class="scroll-view_H" scroll-x style="width: 100%;background: #fff;">
+<!--  -->
+ <view  bindtap="classifyClick" wx:for="{{Classification}}" wx:key="id" data-id="{{item.Id}}" data-Title="{{item.Name}}" class="scroll-view-item_H {{categoryId==item.Id?'currentTab':''}}">
+{{item.Name}}
+ </view>
+</scroll-view>
+<block wx:if="{{isData}}">
+  <view class='top_hea'  wx:if="{{Info.length>0}}" >
+    <navigator url="../../news/newsletterdetail/newsletterdetail?id={{items.Id}}&i={{index}}" class="m-activity-item" wx:for="{{Info}}" wx:for-item="items">
+      <!-- <image src="{{items.MainPhoto}}" mode="aspectFill" class="m-activity-img" /> -->
+      <zip-img source_img="{{items.MainPhoto}}" class="m-activity-img"></zip-img>
+      <view class="m-activity-info">
+        <view class="m-activity-name" style="word-wrap:break-word;">{{items.Title}}</view>
+        <view>
+          <label class="m-activity-time" style='float:left'>{{items.PublishTimeText}}</label>
+            <label class='rmtz_box_content_box_dz' style='float:right'>
+          <image class='dz' src='http://appicon-1253690476.file.myqcloud.com/img/tzxq_03.png'></image>
+          <span wx:if="{{items.ViewCounts<1000}}">{{items.ViewCounts}}</span>
+           <span wx:else>1000+</span>
+        </label>
+        </view>
+      
+      </view>
+    </navigator>
+    <view class="m-loading-box">
+      <block wx:if="{{flag}}">
+        <view class="u-loadmore">
+          <lael class="u-loading"></lael>
+          <text class="u-loadmore-tips">正在加载</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips">没有更多了</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+</block>
+<view class="m-nullcontent" wx:else>
+  <view class="m-nullpage-middle">
+    <label class="iconfont icon-meiyougengduo"></label>
+    <view class="m-null-tip">
+      <text>亲~什么都没有</text>
+    </view>
+  </view>
+</view>
+<view class="u-top">
+  <navigator url='../index/index' open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+</view>

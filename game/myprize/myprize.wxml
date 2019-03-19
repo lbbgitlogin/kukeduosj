@@ -1,0 +1,19 @@
+<block wx:if="{{Prize.length > 0}}">
+  <view class="m-myprice-item" wx:for="{{Prize}}">
+    <image src="{{item.PrizeImage}}" />
+    <view class="price-title">{{item.PrizeName}}</view>
+    <view class="price-time">{{item.WinningTimeText}}</view>
+    <view class="price-btn {{item.IsSend?'gray':'red'}}" bindtap="buttonclicked" data-id="{{item.LuckyDrawId}}" data-prizeid="{{item.LuckyDrawPrizeId}}" data-issend="{{item.IsSend}}" data-uniqueid="{{item.Id}}">{{item.IsSend?'已经发奖':'去领奖品'}}</view>
+  </view>
+</block>
+<view class="m-nullcontent" wx:else>
+  <view class="m-nullpage-middle">
+    <label class="iconfont icon-meiyougengduo"></label>
+    <view class="m-null-tip">
+      <text>亲~什么都没有</text>
+      <text>没有{{tip1}}中的奖品，快去{{tip2}}吧~~</text>
+    </view>
+  </view>
+</view>
+
+

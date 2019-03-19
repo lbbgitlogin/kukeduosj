@@ -1,0 +1,24 @@
+.nearbylist-item{padding: 20rpx 30rpx;border-bottom: 1px solid #eee;background: white;}
+.nearbylist-item:last-child{border: none;}
+.item-info{position: relative;font-size: 28rpx;}
+.item-name{display: inline-block;font-size: 30rpx;}
+.item-phone{line-height: 45rpx;display:flex;align-items:center;}
+.item-distance{float: right;font-size: 26rpx;color: #bbb;}
+.item-address{position: relative;font-size: 26rpx;color:#bbb;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;margin-right: 40rpx;line-height: 40rpx}
+.item-info::after{content: " ";display: inline-block;height: 12rpx;width: 12rpx;border-width: 4rpx 4rpx 0 0;border-color: #C8C8CD;border-style: solid;-webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);top: -4rpx;position: absolute;top: 72%;right: 4rpx;padding: 3rpx;}
+.m-nearbylist{
+  height: 100%;
+  position: absolute
+}
+.open_ba{width: 80%;margin:0 auto}
+.open_dl{
+width:34%;
+height:79rpx;
+background:#33cc66;
+border-radius:20rpx;
+text-align:center;
+color:#fff;
+margin:79rpx auto 0 auto;
+line-height:75rpx;
+
+}

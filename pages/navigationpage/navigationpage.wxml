@@ -1,0 +1,304 @@
+<import src="../../tpl/coupon_msk.wxml" />
+<template is="success_msk" wx:if="{{!isCancelSuccess}}" data="{{Coupons,Currency,mskType}}" />
+<scroll-view scroll-y style="position:absolute;top:0;left:0;width:100%;min-height:100%;background:{{BgConfig.BackgroundObj.type==1?BgConfig.BackgroundObj.bgColor:('url('+BgConfig.BackgroundObj.path+') no-repeat '+ BgConfig.BackgroundObj.pathColor)}};background-size:cover !important;background-position: top center !important;">
+  <view wx:for="{{PageContent}}" wx:for-item="item" class="dropItem" wx:for-index="i">
+    <!--第一个模板-->
+      <send-message MessageType="3" data-id="{{item.ad1obj.data.did}}" data-name="{{item.ad1obj.data.name}}" data-type="{{item.ad1obj.data.selectType}}" data-keyWord="{{item.ad1obj.data.keyWord}}" data-AppId="{{item.ad1obj.data.AppId}}" data-AppUrl="{{item.ad1obj.data.AppUrl}}"
+        data-MinAppUrl="{{item.ad1obj.data.MinAppUrl}}" bindtap="tplGoToPage" wx:if="{{item.adType==1}}" class="ms {{item.ad1obj.layout==1?'s1':''}} {{item.ad1obj.layout==2?'s2h':''}} {{item.ad1obj.layout==3?'s2v':''}} {{item.ad1obj.layout==4?'s4h':''}} {{item.ad1obj.layout==5?'s4v':''}} {{item.ad1obj.layout==6?'s8h':''}} {{item.ad1obj.layout==7?'s8v':''}} {{item.ad1obj.layout==8?'s16':''}} {{item.ad1obj.layout==9?'s250h':''}} {{item.ad1obj.border?'borderStyle':''}} {{item.ad1obj.align==1?'fl':''}} {{item.ad1obj.align==2?'fr':''}}"
+        style="padding:{{item.ad1obj.padding_top*2}}rpx {{item.ad1obj.padding_right*2}}rpx {{item.ad1obj.padding_bottom*2}}rpx {{item.ad1obj.padding_left*2}}rpx;background-color:{{item.bgColor}}" data-imgurl="{{item.ad1obj.data.path}}">
+        <image lazy-load mode="scaleToFill" src="{{item.ad1obj.data.path}}"></image>
+      </send-message>
+      <!--第一个模板-->
+      <!--第二个模板-->
+      <view wx:if="{{item.adType==2}}" class="m-RichText" style="padding:{{item.ad2obj.padding*2}}rpx;background-color:{{item.bgColor}};clear: both;">
+        <html-view innerText='{{item.ad2obj.data.words}}'></html-view>
+      </view>
+      <!--第二个模板-->
+      <!--第三个模板-->
+      <swiper wx:if="{{item.adType==3}}" class="m-scrollBox" style="height:{{item.ad3obj.height*2}}rpx;background-color:{{item.bgColor}};clear: both;" autoplay="true" indicator-dots="true">
+        <swiper-item wx:for="{{item.ad3obj.data}}" wx:for-item="items">
+          <send-message MessageType="3" data-id="{{items.did}}" data-name="{{items.name}}" data-type="{{items.selectType}}" data-keyWord="{{items.keyWord}}" data-AppId="{{items.AppId}}" data-AppUrl="{{items.AppUrl}}" data-MinAppUrl="{{item.MinAppUrl}}" bindtap="tplGoToPage">
+            <image lazy-load mode="scaleToFill" style="width:100%;height:{{item.ad3obj.height*2}}rpx;" src="{{items.path}}"></image>
+          </send-message>
+        </swiper-item>
+      </swiper>
+      <!--第三个模板-->
+      <!--第四个模板-->
+      <scroll-view wx:if="{{item.adType==4}}" scroll-y="{{item.ad4obj.listTyle!=5}}" scroll-x="{{item.ad4obj.listTyle==5}}" style="background-color:{{item.bgColor}};clear: both;">
+        <view class="m_plist {{item.ad4obj.listTyle==1?'p1':''}} {{item.ad4obj.listTyle==2?'p2':''}} {{item.ad4obj.listTyle==3?'p3':''}}{{item.ad4obj.listTyle==4?'p4':''}}{{item.ad4obj.listTyle==5?'p5':''}}">
+          <send-message MessageType="3" class="m_pitem" wx:for="{{item.ad4obj.data}}" wx:for-item="items" data-id="{{items.did}}" data-name="{{items.name}}" data-type="{{items.selectType}}" data-keyWord="{{items.keyWord}}" data-AppId="{{items.AppId}}" data-AppUrl="{{items.AppUrl}}"
+            data-MinAppUrl="{{item.MinAppUrl}}" bindtap="tplGoToPage">
+            <view class="m_pinfo">
+              <view class="pimg">
+                <image lazy-load src="{{items.path}}"></image>
+              </view>
+              <view class="pinfo">
+                <view class="pname">
+                  <label style="height:{{item.ad4obj.charLine==1?'36rpx':'68rpx'}};-webkit-line-clamp:{{item.ad4obj.charLine}}">{{items.name}}</label>
+                </view>
+                <view class="pSelling" wx:if="{{items.SellingPoints!='' && item.ad4obj.isSellingPoints}}" style="{{item.ad4obj.isPrice?'':'display: inline-block; padding-top: 24rpx;padding-bottom: 24rpx'}}">{{items.SellingPoints||''}}
+                </view>
+                <view class="pprice" wx:if="{{item.ad4obj.isPrice}}">
+                  <view class="pc" style="color:{{item.ad4obj.priceColor}}">
+                    <label>{{Currency}}</label>{{items.SalePrice}}
+                  </view>
+                  <view wx:if="{{item.ad4obj.btnType==4}}" class="c4" style="background-color:{{item.ad4obj.btnColor}};color:{{item.ad4obj.btnFontColor}};">
+                    <label wx:if="{{item.ad4obj.btnType==4}}">{{item.ad4obj.btnText}}</label>
+                  </view>
+                  <view wx:else class="c{{item.ad4obj.btnType}}">
+                    <label wx:if="{{item.ad4obj.btnType==3}}">buy</label>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </send-message>
+        </view>
+      </scroll-view>
+      <!--第四个模板-->
+      <view wx:if="{{item.adType==5}}" class="m-blank" style="height:{{item.ad5obj.height*2}}rpx;line-height:{{item.ad5obj.height*2}}rpx;background-color:{{item.bgColor}}">
+      </view>
+
+      <!--第六个模板-->
+      <scroll-view scroll-x wx:if="{{item.adType==6}}" style='clear:both'>
+        <flex-view 
+        dir="{{item.ad6obj.flexDirection==0?'left':item.ad6obj.flexDirection==1?'right':item.ad6obj.flexDirection==2?'top':item.ad6obj.flexDirection==3?'bottom':'left'}}" 
+        main="{{item.ad6obj.justifyContent==0?'start':item.ad6obj.justifyContent==1?'end':item.ad6obj.justifyContent==2?'center':item.ad6obj.justifyContent==3?'between':item.ad6obj.justifyContent==4?'around':'start'}}" 
+        cross="{{item.ad6obj.alignItems==0?'start':item.ad6obj.alignItems==1?'end':item.ad6obj.alignItems==2?'center':item.ad6obj.alignItems==3?'baseline':item.ad6obj.alignItems==4?'stretch':'stretch'}}" 
+        wrap="{{item.ad6obj.flexWrap==0?'nowrap':item.ad6obj.flexWrap==1?'wrap':item.ad6obj.flexWrap==2?'reverse':'nowrap'}}">
+          <send-message MessageType="3"  wx:for="{{item.ad6obj.data}}" wx:for-item="items" class="{{item.ad6obj.width>1?'':'boxFlexItem1'}}" style=" padding-top:{{item.ad6obj.padding_top*2}}rpx;padding-bottom:{{item.ad6obj.padding_bottom*2}}rpx;padding-left:{{item.ad6obj.padding_left*2}}rpx;padding-right:{{item.ad6obj.padding_right*2}}rpx;background-color:{{item.bgColor}} "
+          data-id="{{items.did}}" data-name="{{items.name}}" data-type="{{items.selectType}}" data-keyWord="{{items.keyWord}}" data-AppId="{{items.AppId}}" data-AppUrl="{{items.AppUrl}}"
+          data-MinAppUrl="{{item.MinAppUrl}}" bindtap="tplGoToPage">
+
+
+            <view wx:if="{{item.ad6obj.type==1}}" style="font-Size:{{item.ad6obj.fontSize*2}}rpx;color:{{item.ad6obj.fontColor}}">{{items.name}}</view>
+            <image lazy-load  mode="{{item.ad6obj.height<1?'widthFix':'scaleToFill'}}" wx:if="{{item.ad6obj.type==0}}" src="{{items.path}}" style="width:{{item.ad6obj.width>1?((item.ad6obj.width*2)+'rpx'):'100%'}};height:{{item.ad6obj.height>1?((item.ad6obj.height*2)+'rpx'):'auto'}}"></image>
+
+          </send-message>
+        </flex-view>
+      </scroll-view>
+      <!--第六个模板-->
+      <!--第七个模版-->
+      <view wx:if="{{item.adType==7}}" class="boxGrids {{item.ad7obj.border? 'boxGridsBorder': ''}} ">
+        <send-message MessageType="3" class="boxGrid {{item.ad7obj.border? 'boxGridBorder': ''}} " wx:if="{{item.ad7obj.data.length>0}}" wx:for="{{item.ad7obj.data}}" wx:for-item="items" style="width:{{(100/item.ad7obj.column)}}%;padding-top:{{item.ad7obj.padding_top*2}}rpx;padding-bottom:{{item.ad7obj.padding_bottom*2}}rpx;padding-left:{{item.ad7obj.padding_left*2}}rpx;padding-right:{{item.ad7obj.padding_right*2}}rpx;background-color:{{item.bgColor}};"
+          data-id="{{items.did}}" data-name="{{items.name}}" data-type="{{items.selectType}}" data-keyWord="{{items.keyWord}}" data-AppId="{{items.AppId}}" data-AppUrl="{{items.AppUrl}}" data-MinAppUrl="{{item.MinAppUrl}}" bindtap="tplGoToPage">
+          <view class="boxGridIcon">
+            <image lazy-load src="{{items.path}}"></image>
+          </view>
+          <label class="boxGridLabel">{{items.name}}</label>
+        </send-message>
+      </view>
+      <!--第七个模版-->
+      <!--第八个模版-->
+      <view wx:if="{{item.adType==8}}" class="mTel" style="background-color:{{item.bgColor}}" data-tel="{{item.ad8obj.tel}}" bindtap="callTel">
+        <label class="iconfont icon-dianhua--copy" style="font-size:60rpx;color:{{item.ad8obj.fontColor}}"></label>
+      </view>
+      <!--第八个模版-->
+      <!--第九个模版-->
+      <navigator url="../search/search" class="u-search-box" wx:if="{{item.adType==9}}" style="background-color:{{item.bgColor}};padding-top:{{item.ad9obj.padding_top*2}}rpx;padding-bottom:{{item.ad9obj.padding_bottom*2}}rpx;padding-left:{{item.ad9obj.padding_left*2}}rpx;padding-right:{{item.ad9obj.padding_right*2}}rpx;clear: both;">
+        <view class="u-search-cont">
+          <icon type="search" size="14" color='#d5d5d5'></icon>
+          <text>{{item.ad9obj.tipText}}</text>
+        </view>
+      </navigator>
+      <!--第九个模版-->
+      <!--第十一个模版-->
+      <view wx:if="{{item.adType==11}}" class="mCS" style="background-color:{{item.bgColor}}">
+        <label class="iconfont icon-more" style="font-size:60rpx;color:{{item.ad11obj.fontColor}}"></label>
+        <contact-button size="27" type="default-dark" session-from="weapp">
+        </contact-button>
+      </view>
+      <!--第十一个模版-->
+      <!--第十二个模版-->
+      <view wx:if="{{item.adType==12}}" style="background-color:{{item.bgColor}};padding-top:{{item.ad12obj.padding_top*2}}rpx;padding-bottom:{{item.ad12obj.padding_bottom*2}}rpx;padding-left:{{item.ad12obj.padding_left*2}}rpx;padding-right:{{item.ad12obj.padding_right*2}}rpx;clear: both;">
+        <video src="{{item.ad12obj.src}}" poster="{{item.ad12obj.poster}}" controls="{{item.ad12obj.controls}}" autoplay="{{item.ad12obj.autoplay}}" loop="{{item.ad12obj.loop}}" style="width:100%;height:{{item.ad12obj.height*2}}}rpx">
+        </video>
+      </view>
+      <!--第十二个模版-->
+      <!--第十三个模版-->
+      <form class="formBox" bindsubmit="formSubmit" bindreset="formReset" wx:if="{{item.adType==13}}" style="background-color:{{item.bgColor}};clear: both;">
+        <view wx:for="{{item.ad13obj.data}}" wx:for-item="items">
+          <view class="fromInput" wx:if="{{items.type==1}}">
+            <label style="color:{{item.ad13obj.labelColor}}">{{items.labelText}}</label>
+            <input type='text' name="{{items.id}}" maxlength="200" placeholder="{{items.placeholderText}}" style='border-Color:{{items.borderColor}};color:{{item.ad13obj.textColor}}' />
+          </view>
+          <view class="fromInput" wx:if="{{items.type==2}}">
+            <label style="color:{{item.ad13obj.labelColor}}">{{items.labelText}}</label>
+            <picker mode="date" value="{{items.name}}" data-id="{{items.id}}" bindchange="bindDateChange">
+              <view class="picker">
+                {{items.name||'请选择时间'}}
+              </view>
+            </picker>
+          </view>
+          <view class="fromInput" wx:if="{{items.type==3}}">
+            <label style="color:{{item.ad13obj.labelColor}}">{{items.labelText}}</label>
+            <textarea name="{{items.id}}" maxlength="400" placeholder="{{items.placeholderText}}" style="border-Color:{{items.borderColor}};color:{{item.ad13obj.textColor}}">
+
+            </textarea>
+          </view>
+          <radio-group name="{{items.id}}" class="fromInput" wx:if="{{items.type==4}}">
+            <label style="color:{{item.ad13obj.labelColor}}">{{items.labelText}}</label>
+            <view class="fromCK_item" wx:for="{{items.data}}" wx:for-item="info">
+              <radio color="{{items.selColor}}" value='{{info.text}}' />
+              <text style="color:{{item.ad13obj.textColor}}">{{info.text}}</text>
+            </view>
+          </radio-group>
+          <checkbox-group name="{{items.id}}" class="fromInput" wx:if="{{items.type==5}}">
+            <label style="color:{{item.ad13obj.labelColor}}">{{items.labelText}}</label>
+            <view class="fromCK_item" wx:for="{{items.data}}" wx:for-item="info">
+              <checkbox color="{{items.selColor}}" value='{{info.text}}' />
+              <text style="color:{{item.ad13obj.textColor}}">{{info.text}}</text>
+            </view>
+          </checkbox-group>
+        </view>
+        <view class="formSubmit">
+          <button class="formButtom" formType="submit" style="background-Color:{{item.ad13obj.btnColor}};color:{{item.ad13obj.fontColor}}">{{item.ad13obj.btnText}}</button>
+        </view>
+      </form>
+      <!--第十三个模版-->
+      <!--第十四个模版-->
+      <view wx:if="{{item.adType==14}}" class='notice' style="background-color:{{item.bgColor}};padding-top:{{item.ad14obj.padding_top*2}}rpx;padding-bottom:{{item.ad14obj.padding_bottom*2}}rpx;clear: both;">
+        <view class="notice-icon ">
+          <image src="{{item.ad14obj.image?item.ad14obj.image:'http://appicon-1253690476.file.myqcloud.com/notice/Notice1.png'}}"></image>
+        </view>
+        <swiper autoplay vertical="{{item.ad14obj.scrollDir==0?true:false}}" circular class="notice-content">
+          <swiper-item wx:for="{{item.ad14obj.data}}" wx:for-item="items" data-id="{{items.did}}" data-name="{{items.name}}" data-type="{{items.selectType}}" data-keyWord="{{items.keyWord}}" data-AppId="{{items.AppId}}" data-AppUrl="{{items.AppUrl}}" data-MinAppUrl="{{item.MinAppUrl}}"
+            bindtap="tplGoToPage">
+            <label style="color:{{item.ad14obj.fontColor}}">{{items.name}}</label>
+          </swiper-item>
+        </swiper>
+        <view class="notice-arrow" style="color:{{item.ad14obj.arrowColor}}">
+          <label class="iconfont icon-right"></label>
+        </view>
+      </view>
+      <!--第十四个模版-->
+      <!--第十五个模版-->
+      <view class="head-title" wx:if="{{item.adType==15}}" style="background-color:{{item.bgColor}};margin-top:{{item.ad15obj.margin_top*2}}rpx;margin-bottom:{{item.ad15obj.margin_bottom*2}}rpx;clear: both;">
+        <image wx:if="{{item.ad15obj.isIcon}}" src="{{item.ad15obj.icon}}" mode="aspectFit"></image>
+        <view class="title-label" style="color:{{item.ad15obj.titleColor}}">{{item.ad15obj.title}}</view>
+        <home-countdown wx:if="{{item.ad15obj.isCountdown}}" class="countdown-box time{{item.ad15obj.cssType}}" startTime="{{item.ad15obj.startTime}}" endTime="{{item.ad15obj.endTime}}" cttitle="cttitle" time-box="time-box"></home-countdown>
+        <view wx:if="{{item.ad15obj.isLink}}" data-id="{{item.ad15obj.data.did}}" data-name="{{item.ad15obj.data.name}}" data-type="{{item.ad15obj.data.selectType}}" data-keyWord="{{item.ad15obj.data.keyWord}}" data-AppId="{{item.ad15obj.data.AppId}}" data-AppUrl="{{item.ad15obj.data.AppUrl}}"
+          data-MinAppUrl="{{item.ad15obj.data.MinAppUrl}}" bindtap="tplGoToPage" class="title-linke" style="color:{{item.ad15obj.fontColor}}">{{item.ad15obj.linkText}}
+          <label class="iconfont icon-right" style="color:{{item.ad15obj.arrowColor}}"></label>
+        </view>
+      </view>
+      <!--第十五个模版-->
+      <!--第十六个模版-->
+      <view wx:if="{{item.adType==16}}" style="background-Color:{{item.bgColor}};margin-top:{{item.ad16obj.margin_top*2}}rpx;margin-bottom:{{item.ad16obj.margin_bottom*2}}rpx;clear: both;">
+        <!--第一个布局-->
+        <scroll-view scroll-x wx:if="{{item.ad16obj.layout==1}}">
+          <view class="activity-box1">
+            <navigator url='../../pages/productdetail/productdetail?pid={{items.did}}' class="activity-item" wx:for="{{item.ad16obj.data}}" wx:for-item="items">
+              <view class="activity-img">
+                <image src="{{items.path}}" />
+                <view class="activity-countdown" wx:if="{{item.ad16obj.isCountdown}}" style="background-color:{{item.ad16obj.countdownBgColor}};color:{{item.ad16obj.countdownFontColor}}">
+                  <home-countdown startTime="{{items.StartTimeStr}}" endTime="{{items.EndTimeStr}}" showType="1"></home-countdown>
+                </view>
+                <view class="mark" wx:if="{{item.ad16obj.isLabel}}">
+                  <image src="{{items.selectType==12?'http://appicon-1253690476.file.myqcloud.com/auth/prize3.png':items.selectType==13?'http://appicon-1253690476.file.myqcloud.com/auth/prize1.png':'http://appicon-1253690476.file.myqcloud.com/auth/prize2.png'}}" />
+                </view>
+              </view>
+              <view class="activity-info">
+                <view class="activity-name" wx:if="{{item.ad16obj.isShowPname==null || item.ad16obj.isShowPname}}" style="height:{{item.ad16obj.charLine==1?'30rpx':'64rpx'}};-webkit-line-clamp:{{item.ad16obj.charLine}}">
+                  {{items.name}}
+                </view>
+                <view class="activity-price" wx:if="{{item.ad16obj.isShowPrice==null || item.ad16obj.isShowPrice}}">
+                  <label class="price" style="color:{{item.ad16obj.priceColor}}">￥{{items.SalePrice}}</label>
+                  <label class="del-price" wx:if="{{items.selectType==14}}">￥{{items.MarketPice}}</label>
+                  <label class="tip" wx:if="{{items.selectType!=14}}">{{items.UserLimit}}人团</label>
+                </view>
+                <view class="activity-desc" wx:if="{{item.ad16obj.isShowNum}}">
+                  已有{{items.OrderCount}}人参加
+                </view>
+              </view>
+            </navigator>
+          </view>
+        </scroll-view>
+        <!--第一个布局-->
+        <!--第二个布局-->
+        <view wx:if="{{item.ad16obj.layout==2}}" class="activity-box2">
+          <navigator url='../../pages/productdetail/productdetail?pid={{items.did}}' class="activity-item" wx:for="{{item.ad16obj.data}}" wx:for-item="items">
+            <view class="activity-img">
+              <image src="{{items.path}}" />
+              <view class="activity-countdown" wx:if="{{item.ad16obj.isCountdown}}" style="background-color:{{item.ad16obj.countdownBgColor}};color:{{item.ad16obj.countdownFontColor}}">
+                <home-countdown startTime="{{items.StartTimeStr}}" endTime="{{items.EndTimeStr}}" showType="1"></home-countdown>
+              </view>
+              <view class="mark" wx:if="{{item.ad16obj.isLabel}}">
+                <image src="{{items.selectType==12?'http://appicon-1253690476.file.myqcloud.com/auth/prize3.png':items.selectType==13?'http://appicon-1253690476.file.myqcloud.com/auth/prize1.png':'http://appicon-1253690476.file.myqcloud.com/auth/prize2.png'}}" />
+              </view>
+            </view>
+            <view class="activity-info">
+              <view class="activity-name" wx:if="{{item.ad16obj.isShowPname==null || item.ad16obj.isShowPname}}" style="height:{{item.ad16obj.charLine==1?'30rpx':'64rpx'}};-webkit-line-clamp:{{item.ad16obj.charLine}}">
+                {{items.name}}
+              </view>
+              <view class="activity-price" wx:if="{{item.ad16obj.isShowPrice==null || item.ad16obj.isShowPrice}}">
+                <label class="price" style="color:{{item.ad16obj.priceColor}}">￥{{items.SalePrice}}</label>
+                <label class="del-price" wx:if="{{items.selectType==14}}">￥{{items.MarketPice}}</label>
+                <label class="tip" wx:if="{{items.selectType!=14}}">{{items.UserLimit}}人团</label>
+              </view>
+              <view class="activity-desc" wx:if="{{item.ad16obj.isShowNum}}">
+                已有{{items.OrderCount}}人参加
+              </view>
+            </view>
+          </navigator>
+        </view>
+        <!--第二个布局-->
+        <!--第三个布局-->
+        <view wx:if="{{item.ad16obj.layout==3}}" class="activity-box3">
+          <navigator url='../../pages/productdetail/productdetail?pid={{items.did}}' class="activity-item" wx:for="{{item.ad16obj.data}}" wx:for-item="items">
+            <view class="activity-img">
+              <image src="{{items.path}}" />
+              <view class="activity-countdown" wx:if="{{item.ad16obj.isCountdown}}" style="background-color:{{item.ad16obj.countdownBgColor}};color:{{item.ad16obj.countdownFontColor}}">
+                <home-countdown startTime="{{items.StartTimeStr}}" endTime="{{items.EndTimeStr}}" showType="1"></home-countdown>
+              </view>
+              <view class="mark" wx:if="{{item.ad16obj.isLabel}}">
+                <image src="{{items.selectType==12?'http://appicon-1253690476.file.myqcloud.com/auth/prize3.png':items.selectType==13?'http://appicon-1253690476.file.myqcloud.com/auth/prize1.png':'http://appicon-1253690476.file.myqcloud.com/auth/prize2.png'}}" />
+              </view>
+            </view>
+            <view class="activity-info">
+              <view class="activity-name" wx:if="{{item.ad16obj.isShowPname==null || item.ad16obj.isShowPname}}" style="height:{{item.ad16obj.charLine==1?'30rpx':'64rpx'}};-webkit-line-clamp:{{item.ad16obj.charLine}}">
+                {{items.name}}
+              </view>
+              <view class="activity-desc">
+                <label class="tip" wx:if="{{items.selectType!=14}}">{{items.UserLimit}}人团</label>
+                <label wx:if="{{item.ad16obj.isShowNum}}">已有{{items.OrderCount}}人参加</label>
+              </view>
+              <view class="activity-price" wx:if="{{item.ad16obj.isShowPrice==null || item.ad16obj.isShowPrice}}">
+                <label class="price" style="color:{{item.ad16obj.priceColor}}">￥{{items.SalePrice}}</label>
+                <label class="del-price" wx:if="{{items.selectType==14}}">￥{{items.MarketPice}}</label>
+                <view class='activity-btn' style="background-color:{{item.ad16obj.btnBgColor}};color:{{item.ad16obj.btnFontColor}}">{{items.words||(items.selectType==14?'去秒杀':'立即开团')}}</view>
+              </view>
+            </view>
+          </navigator>
+        </view>
+        <!--第三个布局-->
+      </view>
+      <!--第十六个模版-->
+      <!--第十七个模版-->
+      <view wx:if="{{item.adType==17}}" style="background-Color:{{item.bgColor}};margin-top:{{item.ad17obj.margin_top*2}}rpx;margin-bottom:{{item.ad17obj.margin_bottom*2}}rpx;clear:both">
+        <scroll-view scroll-x>
+          <view class="coupon_box">
+            <view class="coupon_item" wx:if="{{item.ad17obj.layout==1}}" wx:for="{{item.ad17obj.data}}" wx:for-item="items" data-id="{{items.did}}" data-name="{{items.name}}" data-type="{{items.selectType}}" data-keyWord="{{items.keyWord}}" data-AppId="{{items.AppId}}"
+              data-AppUrl="{{items.AppUrl}}" data-MinAppUrl="{{item.MinAppUrl}}" bindtap="tplGoToPage">
+              <view class="coupon_price">￥{{items.SalePrice}}</view>
+              <view class="coupon_desc">{{items.SellingPoints}}</view>
+            </view>
+            <view wx:if="{{item.ad17obj.layout==2}}" wx:for="{{item.ad17obj.data}}" wx:for-item="items" class="coupon_img" data-id="{{items.did}}" data-name="{{items.name}}" data-type="{{items.selectType}}" data-keyWord="{{items.keyWord}}" data-AppId="{{items.AppId}}"
+              data-AppUrl="{{items.AppUrl}}" data-MinAppUrl="{{item.MinAppUrl}}" bindtap="tplGoToPage">
+              <image src="{{items.path}}"></image>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+      <!--第十七个模版-->
+      <!--第十八个模板-->
+      <view class='official-account' wx:if="{{item.adType==18}}" style="background-color:{{item.bgColor}};padding-top:{{item.ad18obj.padding_top*2}}rpx;padding-bottom:{{item.ad18obj.padding_bottom*2}}rpx;clear: both;">
+        <official-account></official-account>
+      </view>
+      <!--第十八个模板-->
+  </view>
+  <view class="u-tap-btn">
+    <navigator url="../index/index" open-type="switchTab" class="u-go-home">
+      <view class="iconfont icon-shouyeshouye" style='font-size:60rpx;'></view>
+    </navigator>
+  </view>
+</scroll-view>

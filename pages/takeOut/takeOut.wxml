@@ -1,0 +1,161 @@
+ <view class="m-banner">
+  <image src="{{commonTPL.shopinfo.BackGroundPath}}" />
+  <view class="m-content-box">
+  </view>
+  <view class="m-logo">
+    <image src="{{commonTPL.shopinfo.WapLogoPath}}" />
+  </view>
+  <view class="m-shopinfo">
+    <label>{{commonTPL.shopinfo.ShopName}}</label>
+    <label class="iconfont icon-qijiandian"></label>
+    <text wx:if="{{commonTPL.shopinfo.ShopFeatures!=''}}">公告：{{commonTPL.shopinfo.ShopFeatures}}</text>
+  </view>
+</view>
+
+
+<view class="content" style="height:{{commonTPL.windowHeight}}px">
+  <scroll-view class="category" scroll-y="true" style="height:{{commonTPL.windowHeight}}px">
+    <view class="category-item {{commonTPL.cid==item.id?'category-item-select':''}}" wx:for="{{commonTPL.smallCategory}}" bindtap="ckallPD6" data-id="{{item.id}}" data-name="{{item.name}}">{{item.name}}</view>
+    <view style="height:200rpx;"></view>
+  </scroll-view>
+  <scroll-view class="body" scroll-y="true" wx:if="{{isShow == 1}}" bindscrolltolower="scrollbottom" style="height:{{commonTPL.windowHeight}}px">
+    <view class="body-title">{{commonTPL.categoryname}}</view>
+    <view class="body-item" wx:for="{{commonTPL.pdlist}}" url="../productdetail/productdetail?pid={{item.id}}" hover-class="none">
+      <navigator url="../productdetail/productdetail?pid={{item.id}}" hover-class="none">
+        <image src="{{item.ProductPic}}"></image>
+      </navigator>
+      <view class="body-item-info">
+        <navigator class="item-info-title" url="../productdetail/productdetail?pid={{item.id}}" hover-class="none">{{item.productName}}</navigator>
+        <view class="item-info-salenum">已售：{{item.SaleNum}}</view>
+        <view class="item-info-price">
+          <label>{{Currency}}</label>{{item.SalePrice}}
+          <view class="item-num-box" style="bottom:0;right:0;font-weight: normal;height:50rpx;">
+            <label class="item-num-over" wx:if="{{item.Stock == 0}}">已售空</label>
+            <block wx:else>
+              <block wx:if="{{!item.HasManualSku}}">
+                <view catchtap="subcontent" data-num="{{item.UserShoppingCartCount}}" data-stock="{{item.Stock}}" data-pid="{{item.id}}" data-pname="{{item.productName}}" data-skuid="{{item.DefaultProductSkuId}}" data-index="{{index}}" wx:if="{{item.UserShoppingCartCount>0}}"
+                  class="iconfont icon-jian " style="font-size:50rpx;"></view>
+                <text class="item-num-add" wx:if="{{item.UserShoppingCartCount>0}}">{{item.UserShoppingCartCount>99?'99+':item.UserShoppingCartCount}}</text>
+                <view catchtap="addcontent" data-num="{{item.UserShoppingCartCount}}" data-stock="{{item.Stock}}" data-pid="{{item.id}}" data-pname="{{item.productName}}" data-skuid="{{item.DefaultProductSkuId}}" data-index="{{index}}" class="iconfont icon-add " style="font-size:50rpx;position:relative;bottom:5rpx;"></view>
+              </block>
+              <label class="item-num-choose" catchtap="InitProduct" data-pid="{{item.id}}" data-index="{{index}}" wx:else>选规格
+                  <view class="car-num" wx:if="{{item.UserShoppingCartCount>0}}" style="right:-10rpx;top:-15rpx;">{{item.UserShoppingCartCount>99?'99+':item.UserShoppingCartCount}}</view>
+                </label>
+            </block>
+
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="m-loading-box">
+      <block wx:if="{{commonTPL.ispage}}">
+        <view class="u-loadmore">
+          <lael class="u-loading"></lael>
+          <text class="u-loadmore-tips">正在加载</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips" style="background:white;">没有更多数据啦！</text>
+        </view>
+      </block>
+    </view>
+    <view style="height:200rpx;"></view>
+  </scroll-view>
+  <view class="m-nullcontent" style="flex:4;width:80%;" wx:if="{{isShow == 2}}">
+    <view class="m-nullpage-middle">
+      <label class="iconfont icon-meiyougengduo"></label>
+      <view class="m-null-tip">
+        <text>亲~什么都没有</text>
+        <!-- <text>暂时没有商品哦</text> -->
+      </view>
+    </view>
+  </view>
+</view>
+<view class="window " wx:if="{{!commonTPL.click6}}">
+  <view class="window-top" catchtap="cancelwindow">
+    <view class="top-content {{!commonTPL.click6?'animated slideInUp':''}}">
+      <view class="window-clear">
+        <label bindtap="delAll" class="delAll">清空购物车</label>
+        <label class="iconfont icon-delete" bindtap="delAll"></label>
+      </view>
+      <view class="top-scrollbox">
+        <block wx:for="{{commonTPL.cartlist.VendorList[0].ShoppingCartList}}">
+          <view class="window-scroll-item" wx:if="{{item.IsCheck}}">
+            <lable class="window-item-title" wx:if="{{item.speStr == null}}">{{item.ProductSaleName}}</lable>
+            <view class="window-item-title-sp" wx:else>
+              <view class="sp-name">{{item.ProductSaleName}}</view>
+              <view class="sp-content">{{item.speStr}}</view>
+            </view>
+            <lable class="window-item-price">{{Currency}}{{item.jiage}}</lable>
+            <view class="item-num-box">
+              <view catchtap="sub" data-num="{{item.Amount}}" data-stock="{{item.Stock}}" data-cid="{{item.Id}}" data-pid="{{item.ProductId}}" class="iconfont icon-jian icon" style="font-size:45rpx;"></view>
+              <text class="item-num-add">{{item.Amount>99?'99+':item.Amount}}</text>
+              <view catchtap="add" data-num="{{item.Amount}}" data-stock="{{item.Stock}}" data-cid="{{item.Id}}" data-pid="{{item.ProductId}}" class="iconfont icon-add icon" style="font-size:45rpx;position:relative;bottom:5rpx;"></view>
+
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class="window-bottom"></view>
+</view>
+<view class="car" catchtap="shoppingcarclicked" wx:if="{{commonTPL.isdata}}">
+  <view class="iconfont icon-gouwucheover car-img  {{commonTPL.cartlist.Total>0?'red':'gray'}}"></view>
+  <view class="car-num" wx:if="{{commonTPL.cartlist.Total>0}}">{{commonTPL.cartlist.Total>99?'99+':commonTPL.cartlist.Total}}
+  </view>
+</view>
+<view class="bottom-bar" wx:if="{{commonTPL.isdata}}">
+  <view class="bar-left" catchtap="shoppingcarclicked">
+    <view class="price-box" wx:if="{{commonTPL.cartlist.Total>0}}">
+      <view class="price-money">
+        <label>{{Currency}}</label>{{commonTPL.cartlist.TotalPrice}}</view>
+      <view class="price-delivery">不含<block wx:if='{{sendInfo.DistributionType!=2}}'>运费</block><block wx:if='{{sendInfo.DistributionType==2}}'>配送费</block></view>
+    </view>
+    <text class="text-null" wx:else>购物车为空</text> 
+  </view>
+  <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo" wx:if='{{sendInfo.PostAmountThresholdEnabled==false}}' class="bar-right {{commonTPL.cartlist.Total>0?'bar-right-red':'bar-right-gray'}}"  style="border-radius: 0;padding-left: 0px;padding-right: 0px;"  >结算 {{commonTPL.cartlist.Total>0?'(':''}}{{commonTPL.cartlist.Total>0?(commonTPL.cartlist.Total>99?'99+':commonTPL.cartlist.Total):''}}{{commonTPL.cartlist.Total>0?')':''}}
+  </button>
+  <!-- catchtap="submitorder" -->
+  <button style="border-radius: 0;padding-left: 0px;padding-right: 0px;" open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo" wx:if='{{sendInfo.PostAmountThresholdEnabled&&TotalPrice>=sendInfo.PostAmountThreshold}}' class="bar-right {{commonTPL.cartlist.Total>0?'bar-right-red':'bar-right-gray'}}" >结算 {{commonTPL.cartlist.Total>0?'(':''}}{{commonTPL.cartlist.Total>0?(commonTPL.cartlist.Total>99?'99+':commonTPL.cartlist.Total):''}}{{commonTPL.cartlist.Total>0?')':''}}
+  </button> 
+  <view wx:if='{{sendInfo.PostAmountThresholdEnabled&&TotalPrice<sendInfo.PostAmountThreshold}}' class="bar-right bar-right-gray">{{Currency}}{{sendInfo.PostAmountThreshold}}起送
+  </view>
+</view>
+
+<view class="msk1" wx:if="{{commonTPL.addCar}}" style="z-index:20;" catchtap="closeaddcar">
+  <view class="m-sp-box" catchtap="innertouch"> 
+
+    <view class="m-sp-top">
+      <view class="u-close-sp" catchtap="closeaddcar">✕</view>
+      <view class="m-sp-title">{{commonTPL.ProductInfo.SalesName}}</view>
+      <view class="m-sp-body" wx:for="{{commonTPL.ProductInfo.SpecLst}}" wx:for-item="items">
+        <view>{{items.Name}}：</view>
+        <view class="m-sp-unit">
+          <view  wx:for="{{items.svLst}}" wx:for-item="item" class="m-sp-choose {{item.IsChecked?'sp-choose-item-checked':''}}">
+            <label class="sp-choose-item " data-ckid="{{items.ckid}}" data-spid="{{item.Id}}" catchtap="selectsp">{{item.Name}}</label>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="m-sp-bottom">
+      <label class="sp-bottom-price">{{Currency}}{{commonTPL.ProductInfo.ShowPrice}}</label> <label class="sp-bottom-des">(
+          <block wx:for="{{commonTPL.ProductInfo.SpecLst}}" wx:for-item="items">
+              <block wx:for="{{items.svLst}}" wx:for-item="item">
+                <block wx:if="{{item.IsChecked}}">{{item.Name}} </block>
+              </block>
+            </block>
+            )</label>
+      <view class="item-num-box" style="bottom:0;right:30rpx;font-weight: normal;height:100rpx;">
+        <block>
+          <view catchtap="subcontentsp" data-stock="{{commonTPL.ProductInfo.Stock}}" data-pid="{{commonTPL.ProductInfo.Id}}" data-pname="{{commonTPL.ProductInfo.SalesName2}}" data-skuid="{{commonTPL.ProductInfo.ProductSKU_Id}}" class="iconfont icon-jian " style="font-size:50rpx;"
+            wx:if="{{commonTPL.count>0}}"></view>
+          <text class="item-num-add" wx:if="{{commonTPL.count>0}}">{{commonTPL.count>99?'99+':commonTPL.count}}</text>
+          <view catchtap="addcontentsp" data-stock="{{commonTPL.ProductInfo.Stock}}" data-pid="{{commonTPL.ProductInfo.Id}}" data-pname="{{commonTPL.ProductInfo.SalesName2}}" data-skuid="{{commonTPL.ProductInfo.ProductSKU_Id}}" class="iconfont icon-add " style="font-size:50rpx;position:relative;bottom:5rpx;"></view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+</view> 

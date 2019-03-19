@@ -1,0 +1,262 @@
+<!-- <scroll-view scroll-y="true" scroll-top="{{scposition}}" bindscroll="scrolltoupper" bindscrolltolower="scrollbottom" bindscrolltoupper="scrolltop" style="width:100%;height:100%;box-sizing: border-box;"> -->
+
+<!-- 头部导航 -->
+<view class='title-nav'>
+  <view class="{{tabNav==1?'items':''}}" data-type='1' catchtap='navTap'>
+    <text>售后管理</text>
+  </view>
+  <view class="{{tabNav==2?'items':''}}" data-type='2' catchtap='navTap'>
+    <text>申请记录</text>
+  </view>
+</view>
+
+<!-- <scroll-view scroll-y="true" scroll-top="{{scposition}}" bindscroll="scrolltoupper"> -->
+<!-- 售后管理 盒子 -->
+<view wx:if="{{tabNav==1}}">
+  <block wx:if="{{serviceOrderList.length>0&&serviceShow}}" wx:for="{{serviceOrderList}}" wx:for-item="items">
+    <view class="content-box">
+      <!-- 头部编号盒子 -->
+      <view class="panel-hd">订单编号：{{items.OrderNum}}
+        <!-- 注释 备用 -->
+        <!-- <label wx:if="{{items.OrderStatusId==4}}">待收货</label>
+        <label wx:if="{{items.OrderStatusId==5}}">待收货</label> -->
+      </view>
+      <!-- 商品详情 -->
+      <block wx:for="{{items.OrderdetailList}}" wx:for-item="item">
+        <view class='product'>
+          <view class="product-img">
+            <image src='{{item.Path}}'></image>
+          </view>
+          <view class="product-info">
+            <view class='product-name'>
+              <text wx:if="{{items.SecondType==1}}" class="u-tuan-label">拼</text>
+              <text wx:if="{{items.SecondType==2}}" class="u-tuan-label">抽</text>
+              <text wx:if="{{items.SecondType==10}}" class="u-tuan-label">砍</text> {{item.ProductName}}
+            </view>
+            <view class='product-specification'>{{item.SpecStr==null?"":item.SpecStr}}</view>
+            <view class='product-num'>
+              <view class='product-price'>{{Currency}}{{item.FactPrice}}</view>
+              <view>x{{item.Amount}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <view class='m-total-info'>
+        <view class='total'>
+          实付款：
+          <label>{{Currency}}{{items.RealTotal}}</label>
+        </view>
+        <view>
+          下单时间：
+          <text>{{items.CreateTime}}</text>
+        </view>
+      </view>
+      <view class='link-btn-box'>
+        <view>
+          <view wx:if="{{items.OrderStatusId==4}}">
+            确认收货后可申请售后
+          </view>
+          <view wx:if="{{items.OrderStatusId===5&&items.HasReturnAmount>0}}">
+            已申请售后
+          </view>
+
+          <view wx:if="{{items.OrderStatusId===5&&items.HasReturnAmount==0&&items.CompiteTime>items.ValidityDuration}}">
+            已超过售后期
+            <text class='end'>!</text>
+          </view>
+        </view>
+        <view wx:if="{{items.OrderStatusId===4}}" data-on="{{items.OrderNum}}" class="u-link-btn" catchtap="confirmReceipt">确认收货</view>
+        <view wx:if="{{items.OrderStatusId===5&&items.IsCanRefund==false&&items.CompiteTime>items.ValidityDuration}}" class="u-link-btn link-for" catchtap='linkService'>申请售后</view>
+        <view wx:if="{{items.OrderStatusId===5&&items.IsCanRefund==false&&items.CompiteTime<=items.ValidityDuration}}" class="u-link-btn link-for">申请售后</view>
+        <navigator url='/prodReturnDelivery/afterFor/afterFor?on={{items.OrderNum}}' wx:if="{{items.IsCanRefund}}" class="u-link-btn">申请售后</navigator>
+      </view>
+    </view>
+  </block>
+
+  <view class="m-loading-box" wx:if="{{serviceOrderList.length>3&&tabNav==1}}">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <label class="u-loading"></label>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+  <block wx:if="{{serviceOrderList.length==0&&serviceShow}}">
+    <view class="nullpage">
+      <view class="m-nullpage-middle">
+        <view class="m-null-tip">
+          <label style="font-size:32rpx;">亲~您还没有订单哦</label>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<!-- 申请记录 -->
+<view wx:if="{{tabNav==2}}">
+  <block wx:if="{{recordList.length>0&&recordShow}}" wx:for="{{recordList}}" wx:for-item="items">
+    <view class="content-box">
+      <!-- 头部编号盒子 -->
+      <view class="panel-hd">售后单号：{{items.GoodsReturnNum}}
+        <label>退货</label>
+      </view>
+      <block wx:for="{{items.OrderDetailList}}" wx:for-item="item">
+        <view class='product'>
+          <view class="product-img">
+            <image src='{{item.Path}}'></image>
+          </view>
+          <view class="product-info">
+            <view class='product-name'>{{item.ProductName}}</view>
+            <view class='product-specification'>{{item.SpecStr==null?"":item.SpecStr}}</view>
+            <view class='product-num'>
+              <view class='product-price'>{{Currency}}{{item.FactPrice}}</view>
+              <view>x{{item.Amount}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <!-- 商品详情 -->
+
+      <view class='total-info'>
+        <view class='condition'>
+          <view style='margin-right:12rpx;'>
+            <icon type="success" color="#DB384C" />
+          </view>
+          <view>
+            {{items.StatusStr}}
+          </view>
+        </view>
+        <view class='t-text'>
+          <view>
+            <view>{{items.StatusExplain}}</view>
+            <view wx:if="{{items.Status!=8}}">{{items.StatusNextStr}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='link-btn'>
+        <navigator url='/prodReturnDelivery/afterSalesWrite/afterSalesWrite?on={{items.GoodsReturnNum}}' wx:if="{{items.Status==2&&items.TotalMilliseconds>0}}" class="u-link-btn">填写寄回单</navigator>
+        <navigator url='/prodReturnDelivery/afterSalesWrite/afterSalesWrite?on={{items.GoodsReturnNum}}&m=1' wx:if="{{items.Status==3}}" class="u-link-btn">更改寄回单</navigator>
+        <navigator url='/prodReturnDelivery/afterSalesDetali/afterSalesDetali?on={{items.GoodsReturnNum}}' class="u-link-btn">查看详情</navigator>
+        <view class="u-link-btn" wx:if="{{items.Status==2||items.Status==3}}" catchtap='makeTap'>寄回地址</view>
+        <view class="u-link-btn" catchtap='cancelTap' wx:if="{{items.Status!=8&&items.Status!=5&&items.Status!=6&&items.Status!=7}}" data-returnNum='{{items.GoodsReturnNum}}'>取消申请</view>
+        <view class="u-link-btn" wx:if="{{items.Status==8}}">已取消</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="m-loading-box" wx:if="{{recordList.length>3&&tabNav==2}}">
+    <block wx:if="{{recordpage}}">
+      <view class="u-loadmore">
+        <label class="u-loading"></label>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+
+  <block wx:if="{{recordList.length==0&&recordShow}}">
+    <view class="nullpage">
+      <view class="m-nullpage-middle">
+        <view class="m-null-tip">
+          <label style="font-size:32rpx;">亲~您还没有申请记录哦</label>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+<!-- </scroll-view> -->
+
+<view class='site-bg' wx:if="{{siteShow}}" catchtap="closesp"></view>
+<view class='site-box' wx:if="{{siteShow}}">
+  <view class='s-title'>
+    <view>寄回地址</view>
+    <view>
+      <icon type="cancel" class="m-panel-sp-icon" color="#888" catchtap="closesp" />
+    </view>
+  </view>
+  <view class='site'>
+    <view>收 件 人 :</view>
+    <view>{{recordList[0].ReturnContact}}</view>
+  </view>
+  <view class='site'>
+    <view>联系电话:</view>
+    <view>{{recordList[0].ReturnPhone}}</view>
+    <!-- <input type='num' value='' placeholder='13520201313' placeholder-style=' color: #000;' /> -->
+  </view>
+  <view class='site'>
+    <view>收货地址:</view>
+    <view>{{recordList[0].ReturnAddress}}</view>
+    <!-- <input value='' placeholder='上海市明航区' placeholder-style=' color: #000;' /> -->
+  </view>
+</view>
+
+<view class='site-bg' wx:if="{{lshow==true}}" catchtap='closeService'></view>
+
+<view class='link-service' wx:if="{{lshow==true}}">
+  <view class='l-text'>
+    <text>
+        抱歉，您已错过申请时效，如果有相关疑问，可联系在线客服
+    </text>
+  </view>
+  <view class='l-btn-box'>
+    <view catchtap='closeService'>取消</view>
+    <view class='l-link'>
+      <text style=' color: #DB384C;;'>联系客服</text>
+      <contact-button type="default-dark" session-from="weapp">
+
+      </contact-button>
+    </view>
+  </view>
+</view>
+
+
+<view class="u-top" wx:if="{{isnav}}">
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+</view>
+
+<view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+  <view class="u-top1">
+    <view style='position:relative'>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/index/index' open-type='switchTab'>
+        <text>首页</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/orderlist/orderlist'>
+        <text>我的订单</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/icon/myOrder.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/UserCenter/UserCenter' open-type='switchTab'>
+        <text>个人中心</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_usercenter.png' class='quicknav'></image>
+      </navigator>
+
+      <!-- 联系客服 -->
+      <view class='{{animation?"navtext1":"navtext"}}'>
+        <text style=' color: #fff;'>联系客服</text>
+        <contact-button size='28' type="default-dark" session-from="weapp">
+
+        </contact-button>
+        <image src='http://appicon-1253690476.file.myqcloud.com/icon/link.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+      </view>
+    </view>
+  </view>
+</view>

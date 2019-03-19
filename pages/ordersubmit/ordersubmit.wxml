@@ -1,0 +1,292 @@
+<view wx:if="{{flag && !cartinfo11 }}">
+  <view wx:if="{{addressid>0}}" bindtap="selectAddress" class="m-addres-info m-cell-access">
+    <view class="m-ad-name">
+      <text>{{submitinfo.DeliveryAddress.consignee}}</text>
+      <text>{{submitinfo.DeliveryAddress.phone}}</text>
+    </view>
+    <view class="m-ad-address">
+      <text>{{submitinfo.DeliveryAddress.consigneeAddress}}</text>
+    </view>
+    <view class="m-cell-ft"></view>  
+  </view>
+  <view wx:else class="m-addres-info m-cell-access" bindtap="selectAddress">
+    <view class="m-ad-address u-null-ad">
+      <label class="iconfont icon-shouhuodizhi"></label>你还没有收货地址,马上
+      <text>添加</text>
+    </view>
+    <view class="m-cell-ft "></view>
+  </view>
+</view>
+<view wx:if="{{submitinfo.ShoppingCartHeaderInfo.EstimatedArriveTimeEnabled&&flag&&!flag1}}">
+  <picker mode="time" value="{{time}}" start="{{estimatedArriveTime}}" end="23:59" bindchange="bindTimeChange" disabled="{{!submitinfo.VedorCityDisSetting.CustomDeliverTimeEnabled}}">
+    <view class='Estimated_time'>
+      <view>最快送达时间</view>
+      <view class='m-cell-access'>
+        <text style='color:#4674fe;' wx:if="{{IsTime}}">尽快送达({{time}})</text>
+        <text style='color:#4674fe;' wx:else>指定送达({{time}})</text>
+        <text class="m-cell-ft" wx:if="{{submitinfo.VedorCityDisSetting.CustomDeliverTimeEnabled}}"></text>
+      </view>
+    </view>
+  </picker>
+</view>
+
+
+<!-- <view class='Estimated_time' wx:if="{{submitinfo.ShoppingCartHeaderInfo.EstimatedArriveTimeEnabled&&flag}}">
+  <view catchtap='timeTab'>最快送达时间</view>
+  <block wx:if="{{submitinfo.VedorCityDisSetting.CustomDeliverTimeEnabled}}">
+    <view wx:if="{{IsTime}}" style='color:#4674fe;margin-right:30rpx;'>尽快送达（{{estimatedArriveTime}}）</view>
+    <picker wx:if="{{IsTime==false}}" mode="time" value="{{time}}" start="{{estimatedArriveTime}}" end="23:59" bindchange="bindTimeChange">
+      <view style='color:#4674fe;margin-right:30rpx;'>
+        指定送达（{{time}})
+      </view>
+    </picker>
+    <view class='Estimated_img' bindtap='timeTab'>
+      <image src='http://appicon-1253690476.file.myqcloud.com/img/arrow.png'></image>
+    </view>
+  </block>
+  <block wx:else>
+    <view style='color:#4674fe;' wx:if="{{IsTime}}"> 尽快送达（{{estimatedArriveTime}}）</view>
+  </block>
+</view> -->
+<block wx:if="{{submitinfo.VedorCityDisSetting.DeliverTimeSpanEnabled&&flag&&!flag1}}">
+  <view class='Estimated_time'>
+    <view> {{submitinfo.ShoppingCartHeaderInfo.EstimatedArriveTimeEnabled?"可送达时间":"可配送时间"}}</view>
+    <view>
+      <text> {{submitinfo.ShoppingCartHeaderInfo.EstimatedArriveTimeEnabled?startdate:submitinfo.VedorCityDisSetting.DeliverTimeSpanStart}}-{{submitinfo.ShoppingCartHeaderInfo.EstimatedArriveTimeEnabled?enddate:submitinfo.VedorCityDisSetting.DeliverTimeSpanEnd}}</text>
+    </view>
+  </view>
+</block>
+<view class="m-product-all">
+  <view class="m-product-list">
+    <block wx:for="{{submitinfo.VendorShoppingCartItemsList}}" wx:for-item="items">
+      <view wx:for="{{items.ShoppingCartList}}" wx:for-item="item" class="m-product-item">
+        <view class="m-product-img">
+          <image src="{{item.ProductPic}}" />
+        </view>
+        <view class="m-product-info">
+          <view class="m-product-name">
+            <label>{{item.ProductSaleName}}</label>
+            <label class="m-min-name" style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1">{{item.speStr==null?"":item.speStr}}</label>
+          </view>
+          <view class="m-product-price">
+            <label>{{Currency}}</label>{{item.ProductPrice}}
+            <text>x{{item.Amount}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+<view class="distribution {{ishide?'hide':''}}" wx:if="{{submitinfo.ShoppingCartHeaderInfo.UserTakeEnabled || cartinfo11 }}">
+  <view style="width:30%">配送方式</view>
+  <view class="check" style="display:flex;align-items: center;width:65%;justify-content: flex-end">
+    <view wx:if="{{!cartinfo11}}" style="display:flex;align-items: center;" bindtap="express">
+     <!-- 圆圈 -->
+      <view wx:if="{{flag1}}" class="border" style="border-radius:50%;width:13px;height:13px;border:1px solid #db384c">
+      </view>
+      <!-- 对勾 -->
+      <image wx:if="{{flag}}" style="width:18px;height:18px;border-radius:50%" src="http://appicon-1253690476.file.myqcloud.com/img/ziti.png"></image>
+      <view style="margin-left:10rpx">
+        <block wx:if='{{submitinfo.ShoppingCartHeaderInfo.DistributionType!=2}}'>快递配送</block>
+        <block wx:if='{{submitinfo.ShoppingCartHeaderInfo.DistributionType==2}}'>同城配送</block>
+      </view>
+    </view>
+    <view style="display:flex;align-items: center;margin-left:17%" bindtap="draw">
+      <view wx:if="{{flag}}"  class="border" style="border-radius:50%;width:13px;height:13px;border:1px solid #db384c">
+      </view>
+      <image wx:if="{{flag1}}"   style="width:18px;height:18px;border-radius:50%" src="http://appicon-1253690476.file.myqcloud.com/img/ziti.png"></image>
+      <view style="margin-left:10rpx">门店自提</view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{flag1}}" class="m-cells" style="background:#fff;font-size:28rpx;padding:20rpx 30rpx">
+  <picker mode="date" value="{{date}}" start="{{starttime}}" end="{{eddate}}" bindchange="bindDateChange">
+    <view class="picker" style="display:flex;justify-content: space-between">
+      <view>选择自提日期:</view>
+      <view style="color:#717171;padding-right:40rpx">{{date||starttime}}</view>
+    </view>
+  </picker>
+</view>
+<!-- 自提 -->
+<!-- tw false -->
+<navigator wx:if="{{flag1}}" url="../drawnearbylist/drawnearbylist?adid={{addressid}}&pid={{productIdSet}}&spid={{spinfo}}" class="m-addres-info m-cell-access " style="margin-top:20rpx">
+  <label style="font-size:28rpx;margin-left:20rpx">请选择门店:</label>
+  <view class="nearbylist-item" data-address="{{AddressInfo.Address}}" data-name="{{AddressInfo.StoreName}}" data-lat="{{AddressInfo.AddressLat}}" data-lng="{{AddressInfo.AddressLng}}">
+    <view class="item-info">
+      <lable class="item-name">{{AddressInfo.StoreName}}</lable>
+      <label wx:if="{{AddressInfo.BusinessHoursStart&&AddressInfo.BusinessHoursEnd }}" style="font-size:24rpx;color:#717171;margin-left:20rpx;">({{AddressInfo.BusinessHoursStart||""}}~{{AddressInfo.BusinessHoursEnd||""}})</label>
+      <lable class="item-distance">{{AddressInfo.Distance}}</lable>
+      <view class="item-phone">商家电话：{{AddressInfo.StorePhone}}</view>
+      <view class="item-address">
+        <label class="iconfont icon-shouhuodizhi " style="font-size:40rpx;margin-right:15rpx;"></label>
+        <label>{{AddressInfo.Address}}</label>
+      </view>
+    </view>
+  </view>
+</navigator>
+<!-- tw true -->
+<!-- <navigator wx:if="{{flag1 && tw}}" url="../drawnearbylist/drawnearbylist?adid={{addressid}}&pid={{productIdSet}}&spid={{spinfo}}" class="m-addres-info m-cell-access " style="margin-top:20rpx">
+  <label style="font-size:28rpx;margin-left:20rpx">请选择门店:</label>
+  <view class="nearbylist-item" data-address="{{AddressInfo.Address}}" data-name="{{AddressInfo.StoreName}}" data-lat="{{AddressInfo.AddressLat}}" data-lng="{{AddressInfo.AddressLng}}">
+    <view class="item-info">
+      <lable class="item-name">{{tw_name}}</lable>
+      <label wx:if="{{AddressInfo.BusinessHoursStart&&AddressInfo.BusinessHoursEnd }}" style="font-size:24rpx;color:#717171;margin-left:20rpx;">({{AddressInfo.BusinessHoursStart||""}}~{{AddressInfo.BusinessHoursEnd||""}})</label>
+      <lable class="item-distance">{{tw_ju}}</lable>
+      <view class="item-phone">商家电话：{{tw_pho}}</view>
+      <view class="item-address">
+        <label class="iconfont icon-shouhuodizhi " style="font-size:40rpx;margin-right:15rpx;"></label>
+        <label>{{tw_wei}}</label>
+      </view>
+    </view>
+  </view>
+</navigator> -->
+<view wx:if="{{flag1}}" class="m-cells m-cells-form " style="margin-top:20rpx;z-index:1">
+  <view class="m-cell">
+    <view class="m-cell-hd" style="width:20%">
+      <label class="u-label">提货人</label>
+    </view>
+    <view class="m-cell-bd">
+      <input class="u-input" maxlength="20" type="text" value="{{showconsignee}}" placeholder="请输入提货人姓名" bindinput="inputconsignee" />
+    </view>
+    <div wx:if="{{showconsignee==''}}" class="m-cell-ft">
+      <icon class="m-icon-warn" type="warn"></icon>
+    </div>
+  </view>
+
+  <view wx:if="{{flag1 || cartinfo11}}" class="m-cell">
+    <view class="m-cell-hd" style="width:20%">
+      <label for="" class="u-label">手机号码</label>
+    </view>
+    <view class="m-cell-bd">
+      <input class="u-input" type="number" value="{{showphone}}" placeholder="请输入手机号码" bindinput="inputphone" />
+    </view>
+    <div wx:if="{{ showphone ==''}}" class="m-cell-ft">
+      <icon class="m-icon-warn" type="warn"></icon>
+    </div>
+  </view>
+</view>
+<!-- 自提 -->
+<view class="m-cells-title {{ishide?'hide':''}}">备注</view>
+<view class="m-cells m-cells-form {{ishide?'hide':''}}">
+  <view class="m-cell">
+    <view class="m-cell-bd">
+      <textarea class="u-textarea" maxlength="200" value="{{remark}}" bindinput="inputRemark"></textarea>
+      <view class="u-textarea-counter">
+        <label>{{remarkLength}}</label>/200</view>
+    </view>
+  </view>
+</view>
+<view class="m-cells total-info {{ishide?'hide':''}}">
+  <view class="m-cell">
+    <view class="m-cell-bd">
+      <text>商品总额</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.TotalPrice}}</view>
+    <view class="arrow"></view>
+  </view>
+  <view class="m-cell" wx:if="{{isNullsubmitinfo.ShoppingCartHeaderInfo.OrderEventDiscountMoney>0}}">
+    <view class="m-cell-bd">
+      <text>活动优惠</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">-{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.OrderEventDiscountMoney}}</view>
+    <view class="arrow"></view>
+  </view>
+  <view class="m-cell" bindtap="suitcouponlist" wx:if="{{isCoupon&&type!='LUCKYFIGHTGROUP'}}">
+    <view class="m-cell-bd">
+      <text>优惠券</text>
+      <text style="color:#DB384C;font-size:24rpx;" wx:if="{{submitinfo.ShoppingCartCouponInfoList!=null}}">  ({{submitinfo.ShoppingCartCouponInfoList.length}}张优惠券可用)</text>
+      <text style="color:#DB384C;font-size:24rpx;" wx:else>  (无可用优惠券)</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">-{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.CouponDiscountMoney}}</view>
+    <view class="arrow m-cell-access">
+      <view class="m-cell-ft "></view>
+    </view>
+  </view>
+  <view class="m-cell" wx:if="{{!(submitinfo.UserMembership.MemberDiscountMoney==0)&&isMembership}}">
+    <view class="m-cell-bd">
+      <text>会员折扣</text>
+      <text style="font-size:24rpx;color:#717171">({{submitinfo.UserMembership.MemberDiscount}}折)</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">-{{Currency}}{{submitinfo.UserMembership.MemberDiscountMoney}}</view>
+    <view class="arrow"></view>
+  </view>
+  <view class="m-cell {{cartinfo11==true?'hide':'show'}}"  wx:if="{{type!='LUCKYFIGHTGROUP' && submitinfo.ShoppingCartHeaderInfo.DistributionType == 1}}">
+    <view class="m-cell-bd">
+      <text>运费</text>
+      <text wx:if="{{submitinfo.ShoppingCartHeaderInfo.OrderFullFreightType}}" style='color:#DB384C;font-size:24rpx;'>(满{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.OrderFullAmount}}免运费)</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">+{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.FreightPrice}}</view>
+    <view class="arrow"></view>
+  </view>
+  <view class="m-cell" wx:if="{{submitinfo.ShoppingCartHeaderInfo.DistributionType == 2}}">
+    <view class="m-cell-bd">
+      <text>配送费</text>
+      <text wx:if="{{submitinfo.ShoppingCartHeaderInfo.OrderFullFreightType}}" style='color:#DB384C;font-size:24rpx;'>(满{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.OrderFullAmount}}免配送费)</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">+{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.FreightPrice}}</view>
+    <view class="arrow"></view>
+  </view>
+  <view class="m-cell" wx:if="{{submitinfo.UserMembership.AllowPointAsCash&&submitinfo.UserMembership.UsablePoint>0&&isMembership}}">
+    <view class="m-cell-bd">
+      <text>使用积分</text>
+      <text style="font-size:24rpx;color:#717171">(可使用{{submitinfo.UserMembership.UsablePoint}}积分)</text>
+    </view>
+    <input type="number" class=" m-cell-ft m-order-typetxt" value="{{integral}}" placeholder="请输入抵扣积分" bindinput="count" />
+    <view class="arrow"></view>
+  </view>
+
+  <view class="m-cell" wx:if="{{submitinfo.UserMembership.AllowPointAsCash&&submitinfo.UserMembership.UsablePoint>0&&isMembership}}">
+    <view class="m-cell-bd">
+      积分抵现
+    </view>
+    <view class="m-cell-ft m-order-typetxt" style="padding-right:20rpx">-{{Currency}}{{discount}}</view>
+  </view>
+  <view class="m-cell" wx:if="{{submitinfo.ShoppingCartHeaderInfo.MaxUsableCash>0&&isECashCard}}">
+    <view class="m-cell-bd">
+      <text>余额抵扣</text>
+      <text style="font-size:24rpx;color:#717171">(可使用{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.MaxUsableCash}})</text>
+    </view>
+    <view class=" m-cell-ft m-order-typetxt" wx:if="{{isBalance}}">{{Currency}}{{balance}}</view>
+    <switch checked bindchange="switchChange" style="transform:scale(0.6);" />
+  </view>
+  <view class="m-cell ">
+    <view class="m-cell-bd">
+    </view>
+    <view class="m-cell-ft m-total-info">
+      实付款：
+      <label class="m-total-price" wx:if="{{isBalance}}">{{Currency}}{{realMoney}}</label>
+      <label class="m-total-price" wx:if="{{isBalance==false}}">{{Currency}}{{disbursements}}</label>
+    </view>
+  </view>
+</view>
+
+<view class="u-cleanbox"></view>
+
+<view class="m-footer-btn {{ishide?'hide':''}}">
+  <view class="m-footer-btn-list">
+    <view class="m-footer-btn-item m-cart-total">
+      <view class="{{cartinfo11==true?'lin_hei':''}}">合计：
+        <label>{{Currency}}</label>
+        
+        <text class="m-total-price" wx:if="{{isBalance}}">{{realMoney}}</text>
+        <text class="m-total-price" wx:if="{{isBalance==false}}">{{disbursements}}</text>
+      </view>
+      <view class="{{cartinfo11==true?'hide':'show'}}"  wx:if='{{submitinfo.ShoppingCartHeaderInfo.DistributionType == 1 }}'>运费(
+        <label>{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.FreightPrice}}</label>)</view>
+      <view wx:if='{{submitinfo.ShoppingCartHeaderInfo.DistributionType == 2}}'>配送费(
+        <label>{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.FreightPrice}}</label>)</view>
+    </view>
+  </view>
+  <view wx:if="{{isSubmit}}" class="m-footer-btn-main u-disabled">
+    正在提交....
+  </view>
+  <block wx:else>
+    <form report-submit="true" bindsubmit="submitorder" wx:if='{{submitinfo.ShoppingCartHeaderInfo.SubmitOrderEnabled||shipMethod==1}}'>
+      <button class="m-footer-btn-main" formType="submit">提交订单</button>
+    </form>
+    <form report-submit="true" bindsubmit="submitorder" wx:if='{{submitinfo.ShoppingCartHeaderInfo.SubmitOrderEnabled==false}}'>
+      <button class="m-footer-btn-main" style='padding:0;background:#ccc'>{{submitinfo.ShoppingCartHeaderInfo.SubmitDisabledMessage}}</button>
+    </form>
+  </block>
+</view>
+<!-- <auth-info></auth-info> -->

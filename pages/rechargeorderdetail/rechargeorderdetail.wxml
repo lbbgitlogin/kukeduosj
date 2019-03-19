@@ -1,0 +1,30 @@
+<view style="background:#f8f8f8">
+  <view class="paysuccess">
+    <icon type="success" size="50" color="rgb(101,192,122)"/>
+    <text style="margin-top:40rpx">{{info.OrderStatus}}</text>
+  </view>
+  <view class="content">
+    <view class="details">
+      <view class="details-left">
+        
+        <view class="charge">
+          <text>充值金额：<text style="color:red">{{Currency}}{{info.TotalCardCash}}</text></text>
+        </view>
+        <view class="pay">
+          <text>实际支付：<text style="color:red">{{Currency}}{{info.RealCardCash}}</text></text>
+        </view>
+      </view>
+      <view class="details-right">
+        <view class="num">
+          <text>订单编号：{{info.OrderNum}}</text>
+        </view>
+        <view class="time">
+          <text>充值时间：{{info.CreateTimeText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="m-btn-box" style="margin-top:80rpx">
+  <view  class="u-btn u-btn-default" bindtap="goback">完成</view>
+</view>

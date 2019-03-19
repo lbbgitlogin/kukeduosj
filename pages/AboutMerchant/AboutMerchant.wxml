@@ -1,0 +1,38 @@
+<view class="body">
+  <view class="header">
+    <view class="header-top">
+      <image src="{{UserInfo.BackGroundPath}}"></image>
+    </view>
+    <view class="header-bottom">
+      <text>{{UserInfo.ShopName}}</text>
+    </view>
+    <view class="logo">
+      <image src="{{UserInfo.WapLogoPath}}"></image>
+    </view>
+  </view>
+  <view class="introduce">
+    <view class="title">店铺介绍</view>
+    <view class="text">{{UserInfo.VendorInfo||" "}}</view>
+  </view>
+  <view class="message">
+    <view class="title">公司信息</view>
+    <!-- <view class="companyname aboutUs">
+      <view>名\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n称：</view>
+      <label>{{UserInfo.CompanyName}}</label>
+    </view> -->
+    <view class="peoplename aboutUs">
+      <view>联\r\n\r\n系\r\n\r\n人：</view>
+      <label>{{UserInfo.LegalPerson}}</label>
+    </view>
+    <view class="tel aboutUs" bindtap="call">
+      <view>联系方式：</view>
+        <image src="http://appicon-1253690476.file.myqcloud.com/img/call.png" style="width:30rpx;height:30rpx;margin-right:10rpx"></image>
+        <label style="color:#17abe3">{{UserInfo.LegalNumber}}</label>
+    </view>
+    <view class="address aboutUs">
+      <view>公司地址：</view>
+      <label>{{UserInfo.LegalAdress}}</label>
+    </view>
+  </view>
+</view>
+

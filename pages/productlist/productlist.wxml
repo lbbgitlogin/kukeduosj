@@ -1,0 +1,134 @@
+<block wx:if="{{isData}}">
+  <scroll-view scroll-y="true" class="m-product-all u-pa" bindscrolltolower="scrollbottom" scroll-top="{{scposition}}" bindscroll="scrolltoupper" wx:if="{{isdata}}">
+    <view class="m-tab">
+      <view class="m-navbar">
+        <view class="m-navbar-item {{post.orderby==1?'m-navbar-item-on':''}}" bindtap="sealnum">
+          销量
+        </view>
+        <view class="m-navbar-item {{post.orderby==2?'m-navbar-item-on':''}}" bindtap="newpd">
+          新品
+        </view>
+        <view class="m-navbar-item {{post.orderby==3?'m-navbar-item-on':''}} " bindtap="pdprice">
+          <label class="m-sort"> 价格
+            <image src="http://appicon-1253690476.file.myqcloud.com/img/{{sort==1?'sort-desc':'sort-asc'}}.png" />
+          </label>
+        </view>
+      </view>
+    </view>
+    <view class="m-product-list {{viewtype==1?'m-listv':''}}">
+      <block wx:for="{{pdlist}}" wx:for-item="item">
+        <!-- <navigator wx:if="{{!isFG}}" url="{{item.ProductForm==2?'../../server/productdetail/productdetail':'../productdetail/productdetail'}}?pid={{item.id}}" class="m-product-item">
+        <view class="m-product-img">
+          <image src="{{item.ProductPic}}" />
+        </view>
+        <view class="m-product-info">
+          <view class="m-product-name">
+            <label>{{item.SalesName}}</label>
+          </view>
+          <view class="m-product-price1">
+            <view class="money">
+              <label>￥</label>{{item.SalePrice}}
+            </view>
+            <view class="num">
+              已售
+            </view>
+          </view>
+        </view>
+      </navigator> -->
+        <navigator wx:if="{{!isFG}}" url="{{item.ProductForm==2?'../../server/productdetail/productdetail':'../productdetail/productdetail'}}?pid={{item.id}}" class="m-product-item">
+          <view class="m-product-img">
+            <zip-img source_img='{{item.ProductPic}}'>
+              <!-- <image src="{{item.ProductPic}}" />  -->
+            </zip-img>
+          </view>
+          <view class="m-product-info1" style="display:flex; flex-flow: column;justify-content: space-between;">
+            <view class="m-product-name2">
+              <label>{{item.SalesName}}</label>
+            </view>
+            <view class="m-product-price1">
+              <view class="money">
+                <label>{{Currency}}</label>
+                <label style='font-size:32rpx'>{{item.SalePrice}}</label>
+              </view>
+              <view class="num" wx:if="{{item.SaleNum>0}}">
+                <text>已售 </text>
+                <lable style="color:#db384c">{{item.SaleNum}}</lable>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </block>
+    </view>
+
+    <view class="m-loading-box">
+      <block wx:if="{{ispage}}">
+        <view class="u-loadmore">
+          <label class="u-loading"></label>
+          <text class="u-loadmore-tips">正在加载</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips">没有更多数据啦！</text>
+        </view>
+      </block>
+    </view>
+    
+    <view class="u-top" wx:if="{{isnav}}">
+      <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav' style='position: fixed;right: 20rpx;bottom:320rpx'></image>
+      <image bindtap="viewType" src='{{viewtype==1?"http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_show_block.png":"http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_show_list.png"}}' class='quicknav' style='position: fixed;right: 20rpx;bottom:220rpx'></image>      
+      <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop" style='position: fixed;right: 20rpx;bottom:120rpx'></image>
+     <!-- <view class="u-view" bindtap="viewType">
+        <label class="iconfont {{viewtype==1?'icon-viewlist':'icon-viewgallery'}}"></label>
+      </view> -->
+    </view>
+
+
+    <!--从此处开始  -->
+    <view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+      <view style='position:relative'>
+        <view class="u-top1">
+          <navigator class='{{animation?"navtext1":"navtext"}}' url='../index/index' open-type='switchTab'>
+            <text>首页</text>
+            <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+          </navigator>
+          <navigator class='{{animation?"navtext1":"navtext"}}' url='../cart/cart' open-type='switchTab'>
+            <text>购物车</text>
+            <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_shopcart.png' class='quicknav'></image>
+          </navigator>
+          <navigator class='{{animation?"navtext1":"navtext"}}' url='../goodcollection/goodcollection'>
+            <text>我的收藏</text>
+            <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_my_favor.png' class='quicknav'></image>
+          </navigator>
+          <navigator class='{{animation?"navtext1":"navtext"}}' url='../UserCenter/UserCenter' open-type='switchTab'>
+            <text>个人中心</text>
+            <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_usercenter.png' class='quicknav'></image>
+          </navigator>
+          <view class='navtext' style='margin-bottom:12rpx'>
+            <text></text>
+            <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+          </view>
+          <view class='navtext' style='margin-bottom:2rpx'>
+            <text></text>
+            <image bindtap="viewType" src='{{viewtype==1?"http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_show_block.png":"http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_show_list.png"}}' class='quicknav'></image>
+          </view>
+          <view class='navtext'>
+            <text></text>
+            <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+  </scroll-view>
+</block>
+<navigator url="../search/search" redirect="true" class="m-nullpage" wx:else>
+  <view class="m-nullpage-middle">
+    <label class="iconfont icon-sousuo-sousuo"></label>
+    <view class="m-null-tip">
+      <text>亲~找不到您想要的商品</text>
+      <text>再多点提示呗</text>
+    </view>
+  </view>
+</navigator>

@@ -1,0 +1,120 @@
+<view class='warp'>
+  <view class='tab'>
+    <view wx:if="{{isECashCard}}" class='tab_item {{cashType==1?"tab_sel":""}}' bindtap='cutType'>余额提现</view>
+    <view wx:if="{{isMemDist}}" class='tab_item {{cashType==2?"tab_sel":""}}' bindtap='cutType'>佣金提现</view>
+  </view>
+  <view wx:if="{{total_price>0 && (isECashCard||isMemDist)}}">
+    <view class='info_box'>
+      <view class='total_num'>
+        <label>{{total_price}}</label>
+        <label class='unit'>元</label>
+      </view>
+      <view class='tip'>{{cashType==1?'可提现余额':'可提现佣金'}}</view>
+    </view>
+    <view class='payType_box'>
+      <view class='tip'>提现到</view>
+      <view class='paylist'>
+        <view wx:if="{{cashType==2}}" class='payitem {{payType==0?"payitem_sel":""}}' data-t='0' bindtap='cutPayType'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/icon/yue_pay.png'></image>
+          <label>转到余额</label>
+          <image class='recommend' src='http://appicon-1253690476.file.myqcloud.com/auth/mark.png'></image>
+        </view>
+        <view wx:if="{{(WithdrawType&1)==1}}" class='payitem {{payType==1?"payitem_sel":""}}' data-t='1' bindtap='cutPayType'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/auth/wexin_pay.png'></image>
+          <label>微信零钱</label>
+          <image wx:if="{{cashType==1}}" class='recommend' src='http://appicon-1253690476.file.myqcloud.com/auth/mark.png'></image>
+        </view>
+        <view wx:if="{{(WithdrawType&2)==2}}" class='payitem {{payType==2?"payitem_sel":""}}' data-t='2' bindtap='cutPayType'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/auth/ali_pay.png'></image>
+          <label>支付宝</label>
+        </view>
+        <view wx:if="{{(WithdrawType&4)==4}}" class='payitem {{payType==3?"payitem_sel":""}}' data-t='3' bindtap='cutPayType'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/auth/union_pay.png'></image>
+          <label>银行卡</label>
+        </view>
+      </view>
+    </view>
+
+    <form bindsubmit="formSubmit">
+      <view class="m-cells m-cells-form">
+        <view class="m-cell" wx:if="{{cashType==2}}">
+          <view class="m-cell-hd">
+            <label class="u-label">提现金额</label>
+          </view>
+          <view class="m-cell-bd">
+            <input class="u-input" name="money" type="number" placeholder="请输入提现金额" maxlength='10' data-t='1' bindfocus="inputVerification" />
+          </view>
+          <view wx:if="{{verificationType['1']}}" class="m-cell-ft">
+            <icon class="m-icon-warn" type="warn" color='#db384c'></icon>
+          </view>
+        </view>
+        <view class="m-cell" wx:if="{{payType==2}}">
+          <view class="m-cell-hd">
+            <label class="u-label">支付宝账号</label>
+          </view>
+          <view class="m-cell-bd">
+            <input class="u-input" name="ali_account" type="number" placeholder="请输入支付宝账号" maxlength='25' data-t='2' bindfocus="inputVerification" />
+          </view>
+          <view wx:if="{{verificationType['2']}}" class="m-cell-ft">
+            <icon class="m-icon-warn" type="warn" color='#db384c'></icon>
+          </view>
+        </view>
+        <view class="m-cell" wx:if="{{payType==3}}">
+          <view class="m-cell-hd">
+            <label class="u-label">开户行</label>
+          </view>
+          <view class="m-cell-bd">
+            <input class="u-input" name="bank_name" placeholder="请输入开户行" maxlength='20' data-t='3' bindfocus="inputVerification" />
+          </view>
+          <view wx:if="{{verificationType['3']}}" class="m-cell-ft">
+            <icon class="m-icon-warn" type="warn" color='#db384c'></icon>
+          </view>
+        </view>
+        <view class="m-cell" wx:if="{{payType==3}}">
+          <view class="m-cell-hd">
+            <label class="u-label">银行卡号</label>
+          </view>
+          <view class="m-cell-bd">
+            <input class="u-input" name="bank_num" placeholder="请输入银行卡号" maxlength='19' data-t='4' bindfocus="inputVerification" />
+          </view>
+          <view wx:if="{{verificationType['4']}}" class="m-cell-ft">
+            <icon class="m-icon-warn" type="warn" color='#db384c'></icon>
+          </view>
+        </view>
+        <view class="m-cell" wx:if="{{payType>0}}">
+          <view class="m-cell-hd">
+            <label class="u-label">提现人姓名</label>
+          </view>
+          <view class="m-cell-bd">
+            <input class="u-input" name="name" placeholder="请输入提现人姓名" maxlength='8' data-t='5' bindfocus="inputVerification" />
+          </view>
+          <view wx:if="{{verificationType['5']}}" class="m-cell-ft">
+            <icon class="m-icon-warn" type="warn" color='#db384c'></icon>
+          </view>
+        </view>
+        <view class="m-cell" wx:if="{{payType>0}}">
+          <view class="m-cell-hd">
+            <label class="u-label">联系人手机号</label>
+          </view>
+          <view class="m-cell-bd">
+            <input class="u-input" name="phone" type="number" placeholder="请输入联系人手机号" maxlength='11' data-t='6' bindfocus="inputVerification" />
+          </view>
+          <view wx:if="{{verificationType['6']}}" class="m-cell-ft">
+            <icon class="m-icon-warn" type="warn" color='#db384c'></icon>
+          </view>
+        </view>
+      </view>
+      <view class='cash_tip'>{{payType==0?'通过审核后，自动提现账户余额。':payType==1?'通过审核后，自动提现到微信钱包零钱':payType==2?'通过审核后，商家转账到你的支付宝账户':'通过审核后，商家转账到你的银行账户'}}
+        <label wx:if="{{cashType==2}}">
+          粉丝在店铺内订单支付后你将会获得佣金收益，收益在订单支付后
+          <label style="color:red">{{ValidDays}}</label>天可提现。订单若发生退款你将不会收到佣金收益。
+        </label>
+      </view>
+      <button class='fixed_button' formType="submit" hover-class='none'>确认提现</button>
+    </form>
+  </view>
+  <view wx:else class='default_page'>
+    <label class="iconfont icon-meiyougengduo" style='font-size:150rpx;'></label>
+    <label>{{cashType==1?'没有可提现余额:(':'没有可提现佣金:('}}</label>
+  </view>
+</view>

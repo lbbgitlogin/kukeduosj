@@ -1,0 +1,78 @@
+.body{
+  background: #f8f8f8;
+}
+.header{
+   width:100%;
+   height:400rpx;
+   background: #ffffff;
+   border-bottom: 2rpx solid #d9d9d9;
+}
+.header-top{
+   width:100%;
+   height:250rpx;
+}
+.header-top image{
+   width:100%;
+   height:250rpx
+}
+.header-bottom{
+   height:150rpx;
+   display:flex;
+   justify-content: center;
+   font-size: 32rpx;
+   color: #000;
+}
+.header-bottom text{
+  margin-top: 90rpx
+}
+.logo{
+   width:150rpx;
+   height:150rpx;
+   position:absolute;
+   top:180rpx;left:300rpx
+}
+.logo image{
+   width:100%;
+   height:150rpx
+}
+.introduce{
+  background: #ffffff;
+  margin-top: 30rpx;
+  border-top: 2rpx solid #d9d9d9;
+  border-bottom: 2rpx solid #d9d9d9;
+  padding: 20rpx;
+}
+.introduce .title{
+  font-size: 28rpx;
+  color: #000;
+}
+.introduce .text{
+  font-size: 28rpx;
+  color: #717171;
+  margin-top: 10rpx;
+}
+.message{
+  background: #ffffff;
+  padding: 20rpx 20rpx 0 20rpx;
+  border-top:1rpx solid #d9d9d9; 
+  margin-top: 30rpx;
+}
+.message .title{
+  padding-bottom: 20rpx;
+  font-size: 28rpx;
+  color: #000;
+   border-bottom: 1px solid #d9d9d9;
+}
+.message .aboutUs{
+  border-bottom: 1px solid #d9d9d9;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+  color: #333;
+  display: flex;
+}
+.message .aboutUs view{
+  width: 160rpx;
+}
+.message .aboutUs label{
+  color: #717171
+}

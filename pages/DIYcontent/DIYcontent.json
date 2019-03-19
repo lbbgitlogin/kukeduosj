@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "社区",
+   "usingComponents": {
+      "send-message": "../../common/send-message/send-message",
+      "auth-info": "../../common/authorization-info/authorization-info",
+      "home-countdown": "../../common/home-countdown/home-countdown",
+      "html-view": "../../common/html-view/html-view",
+      "flex-view": "../../common/flex-view/flex-view"
+    }
+}

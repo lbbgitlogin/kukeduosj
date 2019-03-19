@@ -1,0 +1,345 @@
+<!--轮播图  -->
+<!-- 
+<scroll-view scroll-y="true" scroll-top="{{scposition}}" class="m-product-all u-pa" bindscrolltolower="scrollbottom" bindscroll="scrolltoupper"> -->
+<view wx:if="{{isShow}}">
+  <view class='notHave' wx:if="{{Info.IsEnabled != true}}">
+    <image src='/img/construction.png'></image>
+    <view class='notText'>
+      积分商城正在建设中...
+    </view>
+  </view>
+  <view wx:if="{{Info.IsEnabled == true}}">
+    <swiper class='swiperbox' style='display:{{showHide}}' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{Info.EPointSlideList}}">
+        <swiper-item>
+          <image src="{{item.ImageUrl}}" class="slide-image" data-imgUrl='{{item.LinkUrl}}' catchtap='skip' />
+        </swiper-item>
+      </block>
+    </swiper>
+    <!--兑换记录  -->
+    <view class='forRecordBox'>
+      <!--图像  -->
+      <view class='headPortrait' catchtap='vipImg'>
+        <image src='{{vipInfo.Photo}}'></image>
+      </view>
+      <!--名称  -->
+      <view class='nickBox'>
+        <navigator url="/pages/integral/integral">
+          <view class='nick'>
+            <open-data type="userNickName" class="nickName"></open-data>
+            <image src='http://appicon-1253690476.file.myqcloud.com/img/gold.png'></image>
+            <text class='vip'>{{vipInfo.Name}}</text>
+          </view>
+          <view class='usable'>
+            <text>可用积分：</text>
+            <text>{{vipInfo.UsablePoint}}</text>
+          </view>
+        </navigator>
+      </view>
+      <!--兑换记录  -->
+      <navigator url="/integratShop/forRecord/forRecord" class='recordBox'>
+        <view>
+          <image src='http://appicon-1253690476.file.myqcloud.com/img/hist.png'></image>
+          <text>兑换记录</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/img/arrow.png'></image>
+        </view>
+      </navigator>
+
+    </view>
+  <view class="{{flag4?'cover':''}}" style="z-index:9">
+
+  </view>
+    <!--超值兑换  -->
+    <view class='overbalance' wx:if="{{mostParticipants.length > 0}}">
+      <!--超值兑换标题  -->
+      <view class='overbalanceTitle'>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/gift lite.png'></image>
+        <text>超值热兑</text>
+      </view>
+      <!--兑换块 （最多八个）  -->
+      <scroll-view class='overbalanceConversion' scroll-x='true' scroll-left>
+        <block wx:for="{{mostParticipants}}">
+          <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo1" class='everyConversion' id="{{item.ProductOrCouponId}}" wx:if="{{item.Type == 1}}">
+            <!-- <navigator url="/integratShop/commodityDetails/commodityDetails?pid={{item.ProductOrCouponId}}"> -->
+              <image src='{{item.Path}}'></image>
+              <text class='titel'>{{item.Name}}</text>
+              <view class='integralBtn'>
+                <text>{{item.ProductPoint}}积分</text>
+                <button>兑换</button>
+              </view>
+            <!-- </navigator> -->
+          </button>
+          <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo" class='everyConversion' data-id='{{item.ProductOrCouponId}}' data-eventId='{{item.EventId}}' wx:if="{{item.Type == 2}}" >
+            <view class='moreCoupon'>
+              <view>￥
+                <text>{{item.DiscountMoney}}</text>
+              </view>
+              <view>
+                <text>{{item.CouponUserDesc}}</text>
+              </view>
+            </view>
+            <text class='titel'>{{item.Name}}</text>
+            <view class='integralBtn'>
+              <text>{{item.ProductPoint}}积分</text>
+              <button>兑换</button>
+            </view>
+          </button>
+        </block>
+
+      </scroll-view>
+    </view>
+    <!-- <scroll-view scroll-y="true" scroll-top="{{scposition}}" class="m-product-all u-pa" bindscrolltolower="scrollbottom" bindscroll="scrolltoupper"> -->
+    <!--积分商品  积分兑换 筛选  -->
+    <!--超值兑换标题  -->
+    <view class='conversionTitle' wx:if="{{three}}">
+      <view class="{{tabTrue?'titleTab ItemsIndex':'titleTab'}}" data-type="1" catchtap='forTab'>积分商品</view>
+      <view class="{{tabTrue==false?'ItemsIndex':''}}" data-type="2" catchtap='forTab'>积分兑劵</view>
+      <view class='filtrate' catchtap='sizeTab'>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/filler.png'></image>
+        <text>筛选</text>
+      </view>
+    </view>
+    <view wx:else>
+      <view class='onlyMall' wx:if="{{forGoods}}">
+        <image src='/img/basket.png'></image>
+        <view class='titleTab'>积分商品</view>
+        <view class='filtrate' catchtap='sizeTab'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/img/filler.png'></image>
+          <text>筛选</text>
+        </view>
+      </view>
+      <view class='onlyCoupon' wx:if="{{forConvertible}}">
+        <image src='/img/coupon@1x.png'></image>
+        <view class='titleTab'>积分兑券</view>
+        <view class='filtrate' catchtap='sizeTab'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/img/filler.png'></image>
+          <text>筛选</text>
+        </view>
+      </view>
+    </view>
+    <!--筛选  -->
+    <view class='sizerBox' style='z-index:{{sizerIsShow}}; visibility:{{hideShow}};'>
+      <view class='sortTit'>排序</view>
+      <view class='sizer'>
+        <block wx:for="{{sizer}}">
+          <view data-index='{{index+1}}' class="{{(index+1)==swithType?'Items':''}}" catchtap='sizerCondition'>{{item}}</view>
+        </block>
+      </view>
+      <view style='font-size: 24rpx;line-height: 33rpx;color: #000000;margin-bottom: 23rpx;'>积分区间</view>
+      <form bindsubmit='confirm'>
+        <view class='InputBox'>
+          <input placeholder='最低积分' type='number' value='{{minNum}}' name="minNum" placeholder-class='place'></input>
+          <text style='font-size:24rpx;margin:0 9rpx;'>-</text>
+          <input placeholder='最高积分' type='number' value='{{maxNum}}' name="maxNum" placeholder-class='place'></input>
+        </view>
+        <view class='resetBtn'>
+          <button catchtap='reset'>重置筛选条件</button>
+          <button form-type='submit'>确定</button>
+        </view>
+      </form>
+    </view>
+
+    <!--商品块 盒子  -->
+    <!-- wx:if="{{forGoods}}"  -->
+    <view class='commodityBox' wx:if="{{tabTrue == true&&forGoods}}">
+      <view wx:if="{{commodityList.length <= 0}}" class="expect">
+        积分商品正在备货中
+      </view>
+      <block wx:for="{{commodityList}}">
+        <view class='commodityLeft' catchtap='details' id="{{item.ProductId}}">
+          <image src='{{item.Path}}'></image>
+          <text>{{item.ProductName}}</text>
+          <view class='price'>
+            <view>{{item.ProductPoint}}积分</view>
+            <view>
+              <view wx:if="{{item.IsShowSoldAmount}}">已售 {{item.SaleNum}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <!--积分兑劵  -->
+    <!--tabTrue == false&&  -->
+    <view class="m-coupon-item" wx:if="{{tabTrue == false&&forConvertible}}">
+      <view wx:if="{{couponListityList.length <= 0}}" class="expect">
+        积分兑券活动正在准备中
+      </view>
+      <block wx:for="{{couponListityList}}">
+        <button  open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo" class="button yes" data-id='{{item.CouponId}}' data-eventId='{{item.EventId}}' data-showsucessbutton="{{item.ShowSucessButton}}"  >
+          <view class="m-coupon-info">
+            <view class="m-coupon-text">
+              <label >{{item.Name}}</label>
+              <view class='CouponUserDesc_box'>
+                <view class="text1">{{item.CouponUserDesc}}</view>
+              </view>
+              <view class='integralVal'>
+                <text>￥</text>
+                <text>{{item.DiscountMoney}}</text>
+                <text>{{item.ProductPoint}}积分兑换</text>
+              </view>
+
+            </view>
+          </view>
+          <view class='but_box'>
+            <view class='but_top'>
+              <view class='but_rule'>
+                <text style='padding-top:18rpx;'>已兑</text>
+                <text style='font-size: 30rpx;'>{{item.Percentage}}%</text>
+              </view>
+            </view>
+            <view class='lingqu' wx:if="{{item.ShowSucessButton == true}}">
+              已兑完
+            </view>
+            <view class='lingqu' wx:else>
+              立即兑换
+            </view>
+          </view>
+        </button>
+      </block>
+    </view>
+    <view class="m-loading-box" wx:if="{{commodityList.length>0&&tabTrue}}">
+      <block wx:if="{{ispage}}">
+        <view class="u-loadmore">
+          <label class="u-loading"></label>
+          <text class="u-loadmore-tips">正在加载</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips">没有更多数据啦！</text>
+        </view>
+      </block>
+    </view>
+
+    <view class="m-loading-box" wx:if="{{couponListityList.length>0&&tabTrue ==false}}">
+      <block wx:if="{{ispageCon}}">
+        <view class="u-loadmore">
+          <label class="u-loading"></label>
+          <text class="u-loadmore-tips">正在加载</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips">没有更多数据啦！</text>
+        </view>
+      </block>
+    </view>
+    <!-- </scroll-view> -->
+  </view>
+
+
+  <view class="msk2" wx:if="{{!flag}}" bindtap="outertouch">
+    <view class='m-coupon-box' catchtap='innertouch'>
+      <view class='coupon_title'>兑换成功</view>
+      <view class='coupon_back' style=''>
+        <view style='width:100%;height:280rpx;background:#fff;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx'>
+          <view class='shopbox'>
+            <view class='shop_name'>
+              {{Coupons.Name}}
+            </view>
+          </view>
+          <view class='context_box'>
+            <view wx:if="{{islength.length<4}}" class='left'>
+              <text style='font-size:48rpx'>￥</text>
+              <text style='font-size:80rpx'>{{Coupons.DiscountMoney}}</text>
+            </view>
+            <view wx:else class='left2'>
+              <text style='font-size:26rpx'>￥</text>
+              <text style='font-size:70rpx'>{{Coupons.DiscountMoney}}</text>
+            </view>
+            <view class='right' wx:if="{{islength.length<4}}">
+              <view class='youhuiquan' style='font-size:28rpx'>{{Coupons.CouponMoneyLimitDec}}</view>
+              <view class='manjian' style='font-size:24rpx'>{{Coupons.CouponTypeDec}}</view>
+            </view>
+            <view wx:else class='right'>
+              <view class='youhuiquan' style='font-size:28rpx'>{{Coupons.CouponMoneyLimitDec}}</view>
+              <view class='manjian' style='font-size:24rpx'>{{Coupons.CouponTypeDec}}</view>
+            </view>
+          </view>
+          <view class='youxiaoqi'>
+            <text>{{Coupons.StrValidateEnd}}</text>
+          </view>
+        </view>
+        <view style='width:100%;height:32rpx'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/img/partingLine.png' style='width:100%;height:100%;vertical-align:top;'></image>
+        </view>
+        <view style='width:100%;height:136rpx;background:#fff;border-bottom-left-radius: 20rpx;border-bottom-right-radius: 20rpx'>
+          <navigator class='lijishiyong_box' url="/pages/couponsuitproduct/couponsuitproduct?id={{Id}}" hover-class='none'>
+            <view class='lijishiyong'>立即使用</view>
+          </navigator>
+        </view>
+        <view class="close_msk1" wx:if="{{!flag}}" catchtap="outertouch">
+          <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="u-top" wx:if="{{isnav}}">
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+</view>
+
+<view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+  <view class="u-top1">
+    <view style='position:relative'>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/index/index' open-type='switchTab'>
+        <text>首页</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/homePage.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/usercoupon/usercoupon'>
+        <text>我的券</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/myticket.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/member/member'>
+        <text>会员中心</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/vipcentre.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/UserCenter/UserCenter' open-type='switchTab'>
+        <text>个人中心</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/personal.png' class='quicknav'></image>
+      </navigator>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+      </view>
+    </view>
+  </view>
+</view>
+   <view class="alert" wx:if="{{flag3}}" style="z-index:1000">
+        <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/true.png"></image>
+        <text style="margin-left:20rpx">{{Info1.Describe}}</text>
+      </view>
+      <view class="alert1" wx:if="{{flag4}}" style="z-index:1000">
+        <view>抱歉！今日您已签到</view>
+        <view style="margin-top:20rpx">~明天再来哦~</view>
+      </view>
+<view class='u-top3' style='z-index:10' wx:if="{{isColor ==false}}">
+  <view  style="width: 120rpx;height: 60rpx;position: ：relative;">
+   
+
+       <button hover-class='none'  style="box-shadow:4px 1px  15px 1px rgba(0,0,0,0.1)"  class='anniu_qd' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo9" wx:if="{{isColor ==false}}">
+       <image class='inter_bj' style="box-shadow:20px 2px  10px 2px rgba(0,0,0,0.1)" src='../../img/integra.png'></image>
+        </button>
+        <!-- <view wx:if="{{isColor ==true}}" style="font-size: 12px;color: #292929;position: absolute;top: 19%;left: 41%;"  bindtap="click">
+        </view> -->
+  </view>
+</view>
+<view class='u-top3' style='z-index:10' wx:else>
+  <view  style="width: 136rpx;height: 60rpx;position: ：relative;">
+    <image class='inter_bj' style="" src='../../img/true_qd.png'></image>
+    <!-- <image src='../../img/jifen.png' class='jifen_inter' ></image> -->
+
+     
+        <view wx:if="{{isColor ==true}}" style="font-size: 26rpx;color: #D9D9D9;position: absolute;top: 19%;left:26%;"  bindtap="click">
+          已签到
+        </view>
+  </view>
+</view>
+<!-- <auth-info isMust="true"></auth-info> -->

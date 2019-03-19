@@ -1,0 +1,19 @@
+.button {
+  position: relative;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align:initial;
+  text-decoration: none;
+  line-height: initial;
+  border-radius: 0rpx;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  color: #000;
+  background:none;
+  border: none;
+}
+.button::after{
+  border: none;
+}

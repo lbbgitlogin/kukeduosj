@@ -1,0 +1,37 @@
+<template name="shareMskTpl1">
+  <view class="shareMsk {{PageQRCodeInfo2.IsShare?'':'hide'}}">
+    <view class="sharebox {{PageQRCodeInfo2.IsShareBox?'bounceInUp animated':'bounceOutDown animated'}}">
+      <view class='shareList g-flex '>
+        <view class='shareItem g-flex-item'>
+          <view class='shareBtn'>
+            <button open-type="share" style='line-height:0' hover-class="none">
+              <image src='http://appicon-1253690476.file.myqcloud.com/img/friend.png' style='width:100rpx;height:100rpx;margin-bottom:6rpx'></image>
+            </button>
+            <label>分享给好友</label>
+          </view>
+        </view>
+        <view class='shareItem g-flex-item'>
+          <view class='shareBtn'>
+           <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo"  style='line-height:0' hover-class="none"   class='login-button'> <image  mode="widthFix" src='../../img/Group6.png' style='width:100rpx;height:100rpx;margin-bottom:3px'></image></button>
+           
+             <label style='margin-top:21rpx;'>生成海报</label>
+            <!-- <button  open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo"   style='line-height:0' hover-class="none" style="font-size:24rpx;display:block;margin-top:19rpx;"  class='login-button'>生成海报</button> -->
+            <!-- <label></label> -->
+          </view>
+        </view>
+      </view>
+      <view class='cancelShare' bindtap='cancelShare'>取消</view>
+    </view>
+        <image bindtap='cancelShare' class=" {{PageQRCodeInfo2.IsJT?'':'hide'}}" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png" style="position: absolute;top: 86%;left: 47%;width: 21px;height: 21px;" ></image>
+    <view class="shareCodeImg {{PageQRCodeInfo2.IsJT?'':'hide'}}" style="width: 540rpx;top:47%;padding-top:20rpx;left:47%;left:47%;padding-bottom:20rpx;">
+      <!-- <icon type="clear" size="20" bindtap='cancelShare' ></icon> -->
+      <view bindtap='showCodeImg' data-imgurl='{{PageQRCodeInfo2.Path}}'>
+        <image mode="widthFix" src='{{PageQRCodeInfo2.Path}}' style='width:91%;height:713rpx'></image>
+      </view>
+     
+    </view> 
+     <label class="{{PageQRCodeInfo2.IsJT?'':'hide'}}" style="font-size: 12px;display: block;margin: 10px;color: #fff;position: absolute;top: 78%;left: 30%;">保存至相册，分享给好友</label>
+      <button hover-class='none' class="{{PageQRCodeInfo2.IsJT?'':'hide'}}"  style='width:400rpx;margin:0 auto;background:#caa686;position: absolute;top: 72%;left: 24%;' type="primary" size="mini" bindtap="saveImg"> 保存图片 </button>
+  </view>
+
+</template>

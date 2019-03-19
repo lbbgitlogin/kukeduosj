@@ -1,0 +1,8 @@
+/* pages/datalits_card/datalits_card.wxss */
+.card_name{
+width:95%;
+border-bottom:2rpx solid #ccc;
+margin:0 auto;
+padding-bottom:3%;
+font-size:30rpx;
+}

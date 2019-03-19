@@ -1,0 +1,39 @@
+<view class="m-cells m-cells-form">
+  <view class="m-cell">
+    <view class="m-cell-hd">
+      <label class="u-label">姓名：</label>
+    </view>
+    <view class="m-cell-bd">
+      <input class="u-input" type="text" placeholder="请输入姓名" bindinput="inputname" value="{{UserName}}"/>
+    </view>
+    <view wx:if="{{!isName}}" class="m-cell-ft">
+      <icon class="m-icon-warn" type="warn"></icon>
+    </view>
+  </view>
+  <view class="m-cell">
+    <view class="m-cell-hd">
+      <label class="u-label">电话：</label>
+    </view>
+    <view class="m-cell-bd">
+      <input class="u-input" type="number" placeholder="请输入手机号" value="{{UserPhone}}" bindinput="inputphone" maxlength="11"/>
+    </view>
+    <view wx:if="{{!isPhone}}" class="m-cell-ft">
+      <icon class="m-icon-warn" type="warn"></icon>
+    </view>
+  </view>
+  <view class="m-cell">
+    <view class="m-cell-hd">
+      <label class="u-label">地址：</label>
+    </view>
+    <view class="m-cell-bd">
+      <input class="u-input" type="text" placeholder="请输入地址" bindinput="inputaddress" value="{{UserAddress}}"/>
+    </view>
+    <view wx:if="{{!isAddress }}" class="m-cell-ft">
+      <icon class="m-icon-warn" type="warn"></icon>
+    </view>
+  </view>
+</view>
+<view class="m-tip">注：为了方便兑奖，请认真填写兑奖信息。若因未填写资料或资料填写错误导致兑奖失败,主办方不承担任何责任</view>
+<view class="btn_box">
+  <button class="u-btn u-btn-default" bindtap="submit" >提交信息</button>
+</view>

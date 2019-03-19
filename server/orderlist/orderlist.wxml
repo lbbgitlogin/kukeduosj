@@ -1,0 +1,138 @@
+<view class="{{show?'cover':''}}">
+
+</view>
+<view class="m-product-all">
+  <view class="m-tab">
+    <view class="m-navbar">
+      <view class="m-navbar-item {{tapindex==1?'m-navbar-item-on':''}}" bindtap="allOrders">
+        全部订单
+      </view>
+      <view class="m-navbar-item {{tapindex==2?'m-navbar-item-on':''}}" bindtap="toBePaid">
+        待支付
+      </view>
+      <view class="m-navbar-item {{tapindex==3?'m-navbar-item-on':''}}" bindtap="receiptOfGoods">
+        待服务
+      </view>
+      <view class="m-navbar-item {{tapindex==4?'m-navbar-item-on':''}}" bindtap="toBeEvaluated">
+        已完成
+      </view>
+    </view>
+  </view>
+  <block wx:if="{{isData}}">
+    <scroll-view wx:if="{{orderlist.length>0}}" scroll-y="true" class="m-orderlist" bindscrolltolower="scrollbottom">
+      <view wx:for="{{orderlist}}" wx:for-item="items" class="m-panel m-panel-access">
+        <view class="m-panel-hd">订单编号：{{items.OrderNum}}
+          <label>{{items.StrOrderStatus}}</label>
+        </view>
+        <view class="m-product-list">
+          <navigator  wx:if="{{items.PayMethodCode==1}}" url="../orderdetail/orderdetail?on={{items.OrderNum}}" wx:for="{{items.OrderdetailList}}" wx:for-item="item" class="m-product-item">
+            <view class="m-product-img">
+              <!-- <image src="{{item.Path}}" mode="aspectFill" /> -->
+              <zip-img source_img="{{item.Path}}"></zip-img>
+            </view>
+            <view class="m-product-info">
+              <view class="m-product-name">
+                <label>
+                  <text wx:if="{{items.OrderType==1}}" class="u-tuan-label">团</text>
+                  <text wx:if="{{items.OrderType==2}}" class="u-tuan-label">抽</text>
+                  {{item.ProductName}}</label>
+                <label class="m-min-name">{{item.SpecStr==null?"":item.SpecStr}}</label>
+              </view>
+              <view class="m-product-price">
+                <label>{{Currency}}</label>{{item.FactPrice}}
+                <text>x{{item.Amount}}</text>
+              </view>
+            </view>
+          </navigator>
+
+
+  <navigator wx:if="{{items.PayMethodCode==2}}" url="../offlineorderdetail/offlineorderdetail?on={{items.OrderNum}}" wx:for="{{items.OrderdetailList}}" wx:for-item="item" class="m-product-item">
+            <view class="m-product-img">
+              <!-- <image src="{{item.Path}}" mode="aspectFill" /> -->
+              <zip-img source_img="{{item.Path}}"></zip-img>
+            </view>
+            <view class="m-product-info">
+              <view class="m-product-name">
+                <label>
+                  <text wx:if="{{items.OrderType==1}}" class="u-tuan-label">团</text>
+                  <text wx:if="{{items.OrderType==2}}" class="u-tuan-label">抽</text>
+                  {{item.ProductName}}</label>
+                <label class="m-min-name">{{item.SpecStr==null?"":item.SpecStr}}</label>
+              </view>
+              <view class="m-product-price">
+                <label>{{Currency}}</label>{{item.FactPrice}}
+                <text>x{{item.Amount}}</text>
+              </view>
+            </view>
+          </navigator>
+
+
+
+
+
+
+
+
+        </view>
+        <view class="{{items.StrOrderStatus != '已完成'?'m-total-info1':'m-total-info'}}">
+        <view style="flex: 1;" wx:if="{{items.StrOrderStatus != '已完成'}}">
+            预约时间：
+          <label style="color: #333;font-size: 26rpx;" class="m-total-price">{{items.ReservationTimeText}}</label>
+        </view>
+        <view>
+            实付款：
+          <label class="m-total-price">{{Currency}}{{items.RealTotal}}</label>
+        </view>
+      
+        </view>
+        <view class="m-total-btn">
+          <form report-submit="true" bindsubmit="gotopay">
+            <button data-ON="{{items.OrderNum}}" wx:if="{{items.ShowOrderButton.IsPay&&items.PayMethodCode==1}}" class="u-link-btn" bindtap="gotopay" formType="submit">去支付</button>
+          </form>
+          <navigator url="../PComment/PComment?od={{items.OrderNum}}" wx:if="{{items.ShowOrderButton.IsOrderEvaluate}}" class="u-link-btn">去评价</navigator>
+          <navigator url="../PComment/PComment?od={{items.OrderNum}}" wx:if="{{items.ShowOrderButton.IsShowEvaluate}}" class="u-link-btn">查看评价</navigator>
+          <view data-ON="{{items.OrderNum}}" wx:if="{{items.ShowOrderButton.IsGoWriteOff&&items.ServicePlaceCode==2}}" class="u-link-btn" bindtap="writeOrder">确认服务</view>
+          <view data-ON="{{items.OrderNum}}" wx:if="{{items.ShowOrderButton.IsCancel}}" class="u-link-btn" bindtap="cancelOrder">取消订单</view>
+          <!--<view data-ON="{{items.OrderNum}}" wx:if="{{items.ShowOrderButton.IsCinfirmReceipt}}" class="u-link-btn" bindtap="confirmReceipt">确认收货</view>-->
+          <navigator wx:if="{{items.PayMethodCode==1}}" url="../orderdetail/orderdetail?on={{items.OrderNum}}" class="u-link-btn">查看详情</navigator>
+          <navigator wx:if="{{items.PayMethodCode==2}}" url="../offlineorderdetail/offlineorderdetail?on={{items.OrderNum}}" class="u-link-btn">查看详情</navigator>
+        </view>
+      </view>
+      <view class="m-loading-box">
+        <block wx:if="{{ispage}}">
+          <view class="u-loadmore">
+            <lael class="u-loading"></lael>
+            <text class="u-loadmore-tips">正在加载</text>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="u-loadmore u-loadmore-line">
+            <text class="u-loadmore-tips">没有更多数据啦！</text>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </block>
+  <navigator url="../productList/productList" class="m-nullpage" wx:else>
+    <view class="m-nullpage-middle">
+      <view class="m-null-tip">
+        <label style="font-size:32rpx;">亲~您还没有服务预约哦，</label>
+        <label style="border-bottom:1px solid #db384c;color: #db384c;font-size:32rpx;">快去看看吧</label>
+      </view>
+    </view>
+  </navigator>
+  <view class="alert" wx:if="{{show}}">
+    <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/true.png"></image>
+    <text style="margin-left:20rpx">{{Info}}</text>
+  </view>
+</view>
+<!-- <view class="u-tap-btn">
+    <navigator url="../../pages/index/index" open-type="switchTab" class="u-go-home">
+      <view class="iconfont icon-shouyeshouye" style="font-size:50rpx;"></view>
+    </navigator>
+  </view> -->
+<view class="u-top">
+  <navigator url="../../pages/index/index" open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+</view>

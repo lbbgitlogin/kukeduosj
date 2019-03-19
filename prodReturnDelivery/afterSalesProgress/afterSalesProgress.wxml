@@ -1,0 +1,64 @@
+<view class='progress-top'>
+  <view>售后状态</view>
+  <view>{{statusStr}}</view>
+</view>
+
+<view class='progress'>
+  <view class="m-product-all clear">
+    <view class="p-icon">
+      <view class=" m-cart-ck" wx:for="{{Info}}" wx:for-index="index">
+        <icon type="{{index==0?'success':'success'}}" color="{{index==0? '#DB384C': '#d5d5d5'}} " />
+         <view class='border'></view>
+      </view>
+    </view>
+    <view class='p-content'>
+       <view wx:for="{{Info}}" wx:for-item="items">
+        <view>{{items.StatusStr}}</view>
+        <view>{{items.CreateTimeStr}}</view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+
+<view class="u-top" wx:if="{{isnav}}">
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+</view>
+
+<view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+  <view class="u-top1">
+    <view style='position:relative'>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/index/index' open-type='switchTab'>
+        <text>首页</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/orderlist/orderlist'>
+        <text>我的订单</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/icon/myOrder.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/UserCenter/UserCenter' open-type='switchTab'>
+        <text>个人中心</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_usercenter.png' class='quicknav'></image>
+      </navigator>
+
+      <!-- 联系客服 -->
+      <view class='{{animation?"navtext1":"navtext"}}'>
+        <text style=' color: #fff;'>联系客服</text>
+        <contact-button size='28' type="default-dark" session-from="weapp">
+
+        </contact-button>
+        <image src='http://appicon-1253690476.file.myqcloud.com/icon/link.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的社区消息",
+  "usingComponents": {
+    "auth-info": "../../common/authorization-info/authorization-info"
+  }
+}

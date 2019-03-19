@@ -1,0 +1,61 @@
+<view class="topbg">
+  <view class="topinfo">
+    <view>
+      <label>{{Currency}}</label><label style="font-size:56px">{{CashData.TotalWealth}}</label>
+    </view>
+    <view class="portionMoney"><label>余额{{Currency}}{{CashData.CardCashBalance}}</label><label>佣金{{Currency}}{{CashData.CashBalance}}</label></view>
+    <!-- <navigator url="../applycash/applycash?price={{CashData.CashBalance}}" class="m-t-text">申请提现</navigator> -->
+  </view>
+  <view class="menu_list">
+    <navigator url="../profitlist/profitlist?tp=1" class="menu_item">
+      <view>{{Currency}}{{CashData.MonthBonuses}}</view>
+      <text>本月预估收益</text>
+    </navigator>
+    <navigator url="../fanslist/fanslist" class="menu_item">
+      <view>{{CashData.MonthFansNum}}</view>
+      <text>本月新增粉丝(个)</text>
+    </navigator>
+  </view>
+</view>
+<view class="m-cells">
+  <navigator url="../fanslist/fanslist" class="m-cell m-cell-access" wx:if="{{isMemDist}}">
+    <view class="m-cell-bd">
+      <label>我的粉丝</label>
+    </view>
+    <view class="m-cell-ft">{{CashData.TotalFansNum}}</view>
+  </navigator>
+  <navigator url="../profitlist/profitlist" class="m-cell m-cell-access" wx:if="{{isMemDist}}">
+    <view class="m-cell-bd">
+      <label>分销总收益</label>
+    </view>
+    <view class="m-cell-ft">{{CashData.TotalBonuses}}</view>
+  </navigator>
+  <navigator url="../cashdetaillist/cashdetaillist" class="m-cell m-cell-access" wx:if="{{isMemDist||isECashCard}}">
+    <view class="m-cell-bd">
+      <label>资金明细</label>
+    </view>
+    <view class="m-cell-ft"></view>
+  </navigator>
+  <navigator url="../applycashdetail/applycashdetail" class="m-cell m-cell-access" wx:if="{{isMemDist||isECashCard}}">
+    <view class="m-cell-bd">
+      <label>提现记录</label>
+    </view>
+    <view class="m-cell-ft"></view>
+  </navigator>
+</view>
+<!-- <view class="m-text-box" wx:if="{{isMemDist}}">
+  <view bindtap="showTip">
+    <label class="iconfont icon-14052218"></label>代言规则
+  </view>
+</view> -->
+<view class="m-btn-box">
+  <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo" class="u-btn u-btn-default"  wx:if="{{isECashCard}}">我要充值</button>
+</view>
+<view class="m-btn-box">
+  <navigator url="../applycash/applycash" class="u-btn u-btn-default-two">我要提现</navigator>
+</view>
+<view class="u-top">
+  <navigator url='../index/index' open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+</view>

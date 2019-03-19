@@ -1,0 +1,63 @@
+<import src="../../tpl/shareMskTpl.wxml" />
+<movable-area  class="move-area">
+  <movable-view wx:if="{{info.IsRedPacketIcon}}" inertia class="move-img" direction="all" bindtap='IsShowRPK'>
+    <image src="http://kkdfile.kukeduo.cn/appicon/rpk_min.png"></image>
+  </movable-view>
+  <view style="background:#f8f8f8">
+    <view class="paysuccess">
+      <label>
+        <image src="http://appicon-1253690476.file.myqcloud.com/img/true.png" style="width:40rpx;height:40rpx;margin-top:8rpx"></image>
+      </label>
+      <text style="margin-left:10rpx">{{info.OrderStatus}}</text>
+    </view>
+    <view class="content">
+      <view class="store">
+        {{info.VendorShopName}}
+      </view>
+      <view class="details">
+        <view class="details-left">
+
+          <view class="charge">
+            <text>消费金额：<text style="color:red">{{Currency}}{{info.ProTotalMoney}}</text></text>
+          </view>
+          <view class="pay">
+            <text>实际支付：<text style="color:red">{{Currency}}{{info.RealTotal}}</text></text>
+          </view>
+          <view class="monetary">
+            <text>优惠金额：<text style="color:red">{{Currency}}{{discount}}</text></text>
+          </view>
+        </view>
+        <view class="details-right">
+          <view class="num">
+            <text>订单编号：{{info.OrderNum}}</text>
+          </view>
+          <view class="time">
+            <text>消费时间：{{info.CreateTime}}</text>
+          </view>
+          <view class="monetary">
+            <text>余额抵扣：<text style="color:red">{{Currency}}{{deduction}}</text></text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="u-cleanbox"></view>
+  <view class="m-footer-btn">
+    <form report-submit="true" bindsubmit="gotopay">
+      <button data-ON="{{info.OrderNum}}" wx:if="{{info.ShowOrderButton.IsPay}}" class="u-link-btn" formType="submit">去支付</button>
+    </form>
+    <view data-ON="{{info.OrderNum}}" wx:if="{{info.ShowOrderButton.IsCancel}}" class="u-link-btn" bindtap="cancelOrder">取消订单</view>
+  </view> -->
+  </view>
+</movable-area>
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}"/>
+<view class="shareRPK " wx:if="{{showRPK && info.IsRedPacketIcon && type==1}}" bindtap='IsShowRPK'>
+  <view class="shareRPKBox {{showRPK?'animated bounceIn':'animated bounceOut'}}"catchtap style='background:url(http://kkdfile.kukeduo.cn/appicon/rpk_box.png) no-repeat;background-size: cover;'>
+    <view class="sendRPK" catchtap='shareBox'></view>
+    <view class="closeRPK" catchtap='IsShowRPK'></view>
+  </view>
+</view>
+<view class="u-top">
+  <navigator url='../index/index' open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+</view>

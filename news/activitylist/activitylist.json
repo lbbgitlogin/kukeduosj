@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "活动中心",
+    "usingComponents": {
+      "zip-img": "../../common/zip-img/zip-img"
+    }
+  }

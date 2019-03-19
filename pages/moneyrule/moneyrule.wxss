@@ -1,0 +1,16 @@
+.titlebox{padding:0 20rpx;box-sizing: border-box;height: 70rpx;display: flex;align-items: center;}
+.descbox{background-color: #fff;box-sizing: border-box;padding: 20rpx;font-size: 24rpx;color: #333;line-height: 40rpx;}
+.descbox label{display: block;font-size: 28rpx;color: #db384c;}
+.textbox{margin-bottom: 15rpx;}
+.textbox text{color: #db384c;}
+.t1{width: 191rpx;height: 44rpx;}
+.t2{width: 233rpx;height: 43rpx;}
+.t3{width: 233rpx;height: 43rpx;}
+.pop-box{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.5);display: flex;align-items: center;justify-content: center;flex-direction:column; }
+.pop-con{width: 640rpx;height: 850rpx;background-color: #fff;border-radius: 16rpx;position: relative;box-sizing: border-box;padding: 40rpx;}
+.pop-title{color: #db384c;font-size: 30rpx;text-align: center;}
+.pop-close{width: 86rpx;height: 86rpx;margin-top: 70rpx;border-radius: 100%;}
+.pop-close image{width: 100%;height: 100%;}
+.pinfo-box{margin-top: 40rpx;height:680rpx; }
+.pinfo{background-color: #f7f7f7;border-radius: 8rpx;box-sizing: border-box;padding: 20rpx;font-size: 26rpx;line-height: 50rpx;margin-bottom: 30rpx;}
+.ptitle{font-size: 28rpx;color: #333;}

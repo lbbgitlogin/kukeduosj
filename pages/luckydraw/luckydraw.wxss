@@ -1,0 +1,80 @@
+page {background-color: #292438;font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;}
+.activity-outdated{position: absolute;width: 100%;height: 100%;background: #f8f8f8;}
+.m-draw-box{height: 1940rpx;background:url(http://kkdfile.kukeduo.cn/appicon/luckdraw_bg.png) center no-repeat;background-size: cover;padding: 42rpx;text-align: center;color: white;}
+.m-title{margin-top: 40rpx;}
+.m-title-main{font-size: 80rpx;font-weight: bold;line-height: 90rpx;height: 90rpx;overflow: hidden;}
+.m-title-sub{font-size: 60rpx;font-weight: bold;line-height: 70rpx;}
+.m-title-time{font-size: 22rpx;line-height: 40rpx;}
+/**抽奖盒子**/
+.m-table{position: relative;width: 666rpx;height: 666rpx;margin-top: 30rpx;}
+.m-table-td{width: 144rpx; height: 144rpx;position:absolute;border-radius: 8rpx;background: white;left: 0;top: 0;display: flex;align-items: center;justify-content: center;flex-direction: column;}
+.price-text{color:gray;font-size: 24rpx;overflow: hidden;height: 28rpx;line-height: 28rpx;}
+.m-table-td image{ width: 60%;height: 60%;box-sizing: border-box;margin: 10rpx;}
+.m-table-td:nth-child(2){margin-left: 174rpx;}
+.m-table-td:nth-child(3){margin-left: 348rpx;}
+.m-table-td:nth-child(4){margin-left: 522rpx;}
+.m-table-td:nth-child(5){margin-top: 174rpx;left:522rpx;}
+.m-table-td:nth-child(6){margin-top: 348rpx;left:522rpx;}
+.m-table-td:nth-child(7){margin-top: 522rpx;left:522rpx;bottom: 0;}
+.m-table-td:nth-child(8){margin-top: 522rpx;left:348rpx;bottom: 0;}
+.m-table-td:nth-child(9){margin-top: 522rpx;left:174rpx;bottom: 0;}
+.m-table-td:nth-child(10){margin-top: 522rpx;bottom: 0;}
+.m-table-td:nth-child(11){margin-top: 348rpx;}
+.m-table-td:nth-child(12){margin-top: 174rpx;}
+.m-table-btn image{width: 318rpx;height: 318rpx;border-radius: 20rpx;position: absolute;left: 174rpx;top: 174rpx;background: #FFDC44;padding: 50rpx;box-sizing: border-box;border: 10rpx;border-style:solid;border-top-color: #FFF068;border-bottom-color: #FFC61F;border-left-color: #FFC61F;border-right-color: #FFDC44;}
+.select-table{background-color: #FFAC33;}
+/**抽奖盒子**/
+.m-tip{font-size: 24rpx;line-height: 90rpx;}
+.m-tip label{color: #FFDC44;}
+.m-model-outline{width: 320rpx;height: 65rpx;margin: 0 auto;border-bottom: 1px dotted white;margin-top: 70rpx;border-radius: 33rpx;}
+.m-model{height: 60rpx;line-height: 60rpx;border-radius: 30rpx;font-size: 32rpx;font-weight: bold;}
+.yellow{background: #FFAC33;}
+.m-luckylist{font-size: 26rpx;text-align: left;margin-top: 40rpx;height: 400rpx;overflow: hidden;}
+.m-luckylist-item{line-height: 80rpx;border-top: 1rpx dotted white;box-sizing: border-box;height: 80rpx;}
+.m-luckylist-item label{color: #FFDC44;}
+.m-winner-nothing{text-align: left;font-size: 26rpx;padding: 30rpx 0;}
+
+.blue{background: #43C4E9;}
+.m-rule{font-size: 26rpx;line-height: 40rpx;text-align: left;margin-top: 30rpx;}
+
+.mskprize{position: fixed;height: 100%;width: 100%;background-color: rgba(0, 0, 0, 0.70);z-index: 5;top: 0;left: 0;display: flex;justify-content: center;align-items: center;color: white;text-align: center;}
+.mskshare{position: fixed;height: 100%;width: 100%;background-color: rgba(0, 0, 0, 0.70);z-index: 5;top: 0;left: 0;}
+.share-oncemore{width: 700rpx;margin: 0 auto;}
+.share-text{margin: 0 auto;font-size: 40rpx; line-height: 80rpx;color: white;text-align: center;margin-top:45%}
+.m-result-box{width: 500rpx;height: 600rpx;background: #DB384B;position: relative;border-radius: 20rpx;}
+.m-result-cancel{position: absolute;right: 25rpx;top: 15rpx;font-size: 36rpx;}
+.m-success-text{line-height: 80rpx;margin-top: 50rpx;font-size: 30rpx;}
+.m-success-img{width: 250rpx;height: 250rpx;background: white;margin: 0 auto;}
+.m-success-name{color: #FFAC33;font-size: 26rpx;line-height: 50rpx;}
+.m-success-bottom{position: absolute;bottom: 40rpx;line-height: 65rpx;font-size: 28rpx;display: flex;justify-content: center;width: 100%;}
+.succes-continue{height: 65rpx;width: 200rpx;background: #FFCA3A;display: inline-block;border-radius: 5rpx;}
+.succes-checkprice{height: 65rpx;width:200rpx;background: white;color: black; display: inline-block;border-radius: 5rpx;margin-right: 30rpx;}
+
+.m-failimg-bg{width: 350rpx;height: 350rpx;border-radius: 175rpx;background-color: rgba(255, 255, 255, 0.10);margin: 40rpx auto 20rpx;padding: 50rpx;box-sizing: border-box;}
+.m-fail-img{width: 100%;height: 100%;border-radius: 150rpx;background-color: rgba(255, 255, 255, 0.20);}
+.m-fail-name{font-size: 26rpx;line-height: 50rpx;}
+.m-fail-button{width: 300rpx;height: 65rpx;line-height: 65rpx;position: absolute;bottom: 40rpx;background: #FFCA3A;border-radius: 5rpx;font-size: 28rpx;left: 100rpx;}
+
+.red-dot{width: 20rpx;height: 20rpx;border-radius: 10rpx;background: #DB384C;position: fixed;bottom: 280rpx;right: 20rpx;z-index: 5;}
+.u-tap-btn{position: fixed;right: 20rpx;bottom: 150rpx;}
+.u-go-home{border-radius: 100%;width: 80rpx;height: 80rpx;border: 1px solid #eee;font-size: 20rpx;text-align: center;background-color: #fff;box-shadow: 0px 4rpx 8rpx rgba(0,0,0,0.35);z-index: 2;opacity: 0.8;line-height:80rpx; margin-bottom: 20rpx;}
+.u-go-home .iconfont{font-size: 36rpx;}
+ .u-view2{
+  width: 84rpx;
+  height: 84rpx;
+  line-height: 93rpx;
+  border-radius: 100%;
+  overflow: hidden;
+  text-align: center;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20rpx;
+  opacity: 0.8;
+  box-shadow: 0px 4rpx 8rpx rgba(0,0,0,0.35);
+}
+.u_top {
+  width: 40rpx;
+  height: 40rpx;
+}

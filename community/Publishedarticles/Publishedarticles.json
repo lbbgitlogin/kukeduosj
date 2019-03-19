@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "发帖",
+  "usingComponents": {
+    "send-message": "../../common/send-message/send-message"
+  }
+}

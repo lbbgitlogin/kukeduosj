@@ -1,0 +1,118 @@
+<import src="../../tpl/coupon_msk.wxml" />
+<block wx:if="{{isPage}}">
+  <view wx:if="{{outdated}}" class="box">
+    <view class="remainingcount">您还有{{RemainingCount}}次机会</view>
+    <view class="egg-box">
+      <view class="hammer"  animation="{{animationData}}"></view>
+      <view class="egg-top">
+        <view bindtap='knock' style="background-color:rgba(0,0,0,0.000001) " open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo" class="egg {{move?'move1':''}}">
+          <image style="height: 120.7358px;width: 206rpx;" src="{{ImgPath}}goldenEggs{{selectImg==1?'-1':''}}.png" mode="widthFix" data-num="1"></image>
+        </view>
+        <view bindtap='knock' style="background-color:rgba(0,0,0,0.000001) " open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo"  class="egg {{move?'move2':''}}">
+          <image style="height: 120.7358px;width: 206rpx;" src="{{ImgPath}}goldenEggs{{selectImg==2?'-1':''}}.png" mode="widthFix" data-num="2"></image>
+        </view>
+      </view>
+      <view class="egg-bottom">
+        <view bindtap='knock' class="egg {{move?'move3':''}}" style="background-color:rgba(0,0,0,0.000001) " open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo" >
+          <image style="height: 120.7358px;width: 206rpx;" src="{{ImgPath}}goldenEggs{{selectImg==3?'-1':''}}.png" mode="widthFix" data-num="3"></image>
+        </view>
+        <view bindtap='knock' class="egg {{move?'move4':''}}" style="background-color:rgba(0,0,0,0.000001) " open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo" >
+          <image style="height: 120.7358px;width: 206rpx;" src="{{ImgPath}}goldenEggs{{selectImg==4?'-1':''}}.png" mode="widthFix" data-num="4"></image>
+        </view>
+        <view bindtap='knock' class="egg {{move?'move5':''}}" style="background-color:rgba(0,0,0,0.000001) " open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo" >
+          <image style="height: 120.7358px;width: 206rpx;" src="{{ImgPath}}goldenEggs{{selectImg==5?'-1':''}}.png" mode="widthFix" data-num="5"></image>
+        </view>
+      </view>
+    </view>
+    <view class="winner-box">
+      <view class="winner-title">本期中奖名单</view>
+      <image src="{{ImgPath}}tip-1.png" class="winner-img" mode="widthFix"></image>
+      <view class="winner-list">
+        <block wx:if="{{DrawInfo.Winners.length >0}}">
+          <swiper autoplay="true" interval="4000" duration="2000" vertical="false" circular="true" class="m-luckylist">
+            <swiper-item wx:for="{{pageSize}}" wx:for-index="i">
+              <block wx:for="{{DrawInfo.Winners}}" wx:for-index="j">
+                <view wx:if="{{j>=(i*5) && j<=((i+1)*5)}}" class="m-winner-item ">
+                  <label style='width:50%;overflow:hidden;white-space: nowrap;text-overflow:ellipsis;display:inline-block;'>{{item.NickName}}砸中</label>
+                  <label class="prize-name">{{item.PrizeName}}</label>
+                </view>
+              </block>
+            </swiper-item>
+          </swiper>
+        </block>
+        <view class="m-winner-item" style="background: #FEE39F;" wx:else>暂无中奖名单数据</view>
+      </view>
+    </view>
+    <view class="rule-box">
+      <image src="{{ImgPath}}tip-2.png" class="winner-img" mode="widthFix"></image>
+      <html-view innerText='{{DrawInfo.DrawDesc}}'></html-view>
+    </view>
+  </view>
+
+  <view class="activity-outdated" wx:else>
+    <view class="m-nullcontent">
+      <view class="m-nullpage-middle">
+        <label class="iconfont icon-meiyougengduo"></label>
+        <view class="m-null-tip">
+          <text>亲~您来晚了哦</text>
+          <text>该砸金蛋活动已经失效啦~</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+
+
+<view class="u-top">
+  <navigator url='../../game/myprize/myprize?category=2' style='display: inline-block'>
+    <view class="u-view2">
+      <image class='u_top' src="http://bbcfile.kukeduo.cn//postsplate/201801/15/f3b1dff6-1250-48dd-8ace-bdccac522910.png"></image>
+    </view>
+  </navigator>
+  <view class="red-dot"></view>
+  <navigator url="../index/index" open-type="switchTab" class="u-go-home">
+    <view class="iconfont icon-shouyeshouye" style="font-size:50rpx;"></view>
+  </navigator>
+</view>
+<view class="mskprize" wx:if="{{clickmsk}}" bindtap="cancelprize">
+  <view class="m-result-box bounceIn animated" catchtap="nothing" wx:if="{{PrizeResult.IsWin}}">
+    <view class="m-result-cancel" bindtap="cancelprize">✕</view>
+    <view class="m-success-text">恭喜你获得了</view>
+    <image src="{{PrizeResult.WinningPrizeImage}}" class="m-success-img" />
+    <view class="m-success-name">{{PrizeResult.WinningPrizeName}}</view>
+    <view class="m-success-name">{{PrizeResult.PrizeSendingMessage}}</view>
+    <view class="m-success-bottom">
+      <navigator url="../../game/myprize/myprize?category=2" class="succes-checkprice">查看奖品</navigator>
+      <view class="succes-continue" bindtap="cancelprize">继续抽奖</view>
+    </view>
+  </view>
+  <view class="m-result-box wobble animated" catchtap="nothing" wx:else>
+    <view class="m-result-cancel" bindtap="cancelprize">✕</view>
+    <view class="m-failimg-bg">
+      <image src="http://appicon-1253690476.file.myqcloud.com/img/nothing.png" class="m-fail-img" />
+    </view>
+    <view class="m-fail-name">{{DrawInfo.LosingDesc}}</view>
+    <view class="m-fail-button" bindtap="cancelprize">继续抽奖</view>
+  </view>
+</view>
+<view class="mskshare" wx:if="{{clickshare}}" bindtap="cancelshare">
+  <!-- <image src="../../img/share.png" class="share-oncemore" mode="widthFix"></image> -->
+  <view class="share-text">
+    <view>你今天已经没有砸蛋机会了</view>
+    <view>分享给好友或者群聊</view>
+    <view>将额外获得
+      <lable>{{DrawInfo.IncreasementFromShare}}次</lable>砸蛋机会</view>
+    <button class="u-btn u-btn-default" open-type="share">分享给好友</button>
+  </view>
+</view>
+<view wx:if="{{ifsho}}" catchtouchmove="ture" style="position: fixed;top: 0;width: 100%;height: 100%;z-index: 999;">
+ 
+ 
+    <button hover-class='none' catchtouchmove="ture" style="width: 100%;height: 100%;padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-top: 0px;border-radius: 0px;background-color: transparent;" class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo13">
+     
+    </button>
+
+</view>
+<template is="index_msk" wx:if="{{IsNewUser==1 && CouponAmount>0}}" data="{{CouponAmount, isCancel}}" />
+<template is="success_msk" wx:if="{{!isCancelSuccess}}" data="{{Coupons}}" />
+<!-- <auth-info></auth-info> -->

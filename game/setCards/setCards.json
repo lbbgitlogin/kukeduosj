@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "集卡片 领大礼",
+  "usingComponents": {
+    "count-down": "../../common/count-down/count-down",
+    "send-message": "../../common/send-message/send-message",
+    "auth-info": "../../common/authorization-info/authorization-info"
+  }
+}

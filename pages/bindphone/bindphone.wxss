@@ -1,0 +1,5 @@
+.m-cell-vcode {padding-top: 0;padding-right: 0;padding-bottom: 0;}
+.m-vcode-img{width: 216rpx;height: 88rpx;}
+.btn_box{padding: 20rpx;}
+.m-code{right: 210rpx;}
+.m-vcode-btn{width: 150rpx;text-align: center;}

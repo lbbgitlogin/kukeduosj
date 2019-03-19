@@ -1,0 +1,102 @@
+/* pages/Flavorcho/Flavorcho.wxss */
+.header{
+  height: 120rpx;
+  display: flex;
+  background: #fff;
+  align-items: center;
+  font-size: 28rpx;
+  justify-content: space-between;
+  padding: 0 22rpx;
+}
+.header image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right:20rpx
+}
+.selected{
+  height: 90rpx;
+  font-size: 28rpx;
+  padding-left: 20rpx;
+  line-height: 96rpx;
+}
+.message{
+  display:flex;
+  justify-content: space-between;
+  height:100rpx;
+  align-items: center;
+  padding: 0 30rpx;
+}
+.more{
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 24rpx;
+}
+.totlemoney{
+  height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  line-height: 100rpx;
+  background: #fff;
+  color: #717171
+}
+.section{
+  display: flex;
+  font-size: 28rpx;
+  padding: 20rpx 30rpx;
+  justify-content: space-between;
+}
+.section1{
+  display: flex;
+  font-size: 28rpx;
+  padding: 30rpx 30rpx;
+  justify-content: space-between;
+}
+.button{
+  width: 80%;
+  height: 80rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: #db384c;
+  line-height: 80rpx;
+  text-align: center;
+  margin: 80rpx auto;
+}
+.condition{
+  width: 16%;
+  margin: 10rpx 20rpx 10rpx 0;
+  height: 60rpx;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 62rpx;
+  border: 1px solid #d9d9d9;
+  border-radius: 16rpx;
+  background: #fff;
+  color: #717171; 
+}
+.m-footer-btn{height: 100rpx;width: 100%;position:fixed;bottom: 0;left: 0;background-color: #fff;border-top: 1rpx solid #d5d5d5;border-radius:0;z-index: 100;}
+.m-footer-btn-main{width: 25%;height: 100%;float: right;background-color: #DB384C;color: #fff;line-height: 100rpx;font-size:32rpx;text-align: center;border-radius: 0;}
+.m-cell-ft::after {
+  content: " ";
+  display: inline-block;
+  height: 12rpx;
+  width: 12rpx;
+  border-width: 4rpx 4rpx 0 0;
+  border-color: #999999;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: relative;
+  margin-top: -8rpx;
+  top:-4rpx;
+  right: -4rpx;
+}
+.checked {
+background-color:#DB384C;
+color:#fff;
+border:border-box;
+
+}

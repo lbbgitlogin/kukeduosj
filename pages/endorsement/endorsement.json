@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "代言人",
+    "usingComponents": {
+      "auth-info": "../../common/authorization-info/authorization-info"
+    }
+  }

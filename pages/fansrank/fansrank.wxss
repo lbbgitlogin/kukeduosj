@@ -1,0 +1,42 @@
+.top3-box{font-size: 28rpx;padding-top:70rpx;background: white;border-bottom: 1px solid #ddd;height: 320rpx;}
+.top3-item{text-align: center;float: left;width: 33.33%;padding: 20rpx 20rpx 30rpx;box-sizing: border-box;}
+.top3-icon-box{height: 150rpx;position: relative;margin-top: 10rpx;}
+.top3-icon-img{height: 120rpx;width: 120rpx;border-radius: 60rpx;box-sizing: border-box;}
+.top3-icon-front{width: 180rpx;height: 180rpx;margin: 0 auto;position: relative;top:-160rpx;}
+.top1-icon-img{height: 150rpx;width: 150rpx;border-radius: 75rpx;box-sizing: border-box;}
+.top1-icon-front{width: 225rpx;height: 225rpx;position: relative;top:-232rpx;left: -4rpx;}
+.top3-username{font-size: 28rpx;line-height: 70rpx;height: 70rpx;overflow: hidden;}
+.top3-text{font-size: 28rpx;line-height: 40rpx;height: 40rpx;overflow: hidden;}
+
+.m-scrollBox{position: absolute;top: 0;left: 0;width: 100%;height: 100%;padding-top:70rpx;box-sizing: border-box;background: white;}
+.m-fun-item{padding: 30rpx 20rpx;height: 80rpx;line-height: 80rpx;position: relative;font-size: 28rpx;}
+.my-fun-item{padding: 30rpx 20rpx;height: 80rpx;line-height: 80rpx;position: relative;font-size: 28rpx;border-bottom: 10rpx solid #eee;}
+.my-username-box{height: 80rpx;position: absolute;left: 200rpx;line-height: 40rpx;width: 280rpx;}
+.my-username-text{height: 40rpx;overflow: hidden;color: #444;}
+.my-username-rank{color: #bbb;}
+.m-fun-item::after{content: " ";position: absolute;left: 30rpx;bottom: 0;right: 0;height: 2rpx;border-bottom: 1rpx solid #ccc;-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: scaleY(0.5);transform: scaleY(0.5);z-index: 2;}
+
+.m-rank-num{line-height: 80rpx;height: 80rpx;position: absolute;left: 40rpx;}
+.m-icon-box{width: 80rpx;height: 80rpx; position: absolute;left: 90rpx;top: 30rpx;}
+.m-icon-img{border-radius: 100%;width: 80rpx;height: 80rpx;}
+.m-username{margin-left: 180rpx;color: #444;height:80rpx;display:inline-block;overflow: hidden;width: 280rpx;}
+.m-fun-text{color: gray;line-height: 80rpx;height: 80rpx;position: absolute;right: 120rpx}
+.m-fun-num{line-height: 80rpx;height: 80rpx;position: absolute;width: 80rpx;right:30rpx;overflow: hidden;}
+
+.m-tab-indent{width: 100%;box-sizing:border-box;position: fixed;top: 0;left: 0;border-bottom: 1px solid #ccc;z-index: 5;}
+.m-nav{display: flex;padding: 0 100rpx;background: white;}
+.m-nav-item {padding: 20rpx 0;font-size: 26rpx;border: none;flex:1;position: relative;text-align: center;}
+.m-nav-item.m-nav-item-on {color: #DB384C;}
+.m-nav-item.m-nav-item-on::before {content: " ";position: absolute;left: 0;bottom: -1px;right: 0;height: 6rpx;border-bottom: 6rpx solid #DB384C;-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: scaleY(0.5);transform: scaleY(0.5);z-index: 2;}
+
+.rule-msk{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,.5); z-index: 10;}
+.rule-box{position:absolute;top: 50%;left: 50%;margin-left: -260rpx;width: 520rpx;background: white;height: 640rpx;margin-top: -320rpx;border-radius: 15rpx;box-shadow:5px 10rpx 30rpx rgba(0,0,0,0.35);}
+.rule-title{position: absolute;top: 0;left: 0;width: 100%;height: 150rpx;border-radius: 15rpx;}
+.rule-text{margin-top:170rpx;overflow: scroll;position: absolute;box-sizing: border-box;height: 420rpx;font-size: 24rpx;line-height: 45rpx;width: 100%;padding: 0 50rpx;}
+.rule-close{width: 60rpx;height: 60rpx;line-height: 60rpx;text-align: center;border: 5rpx solid white;color: white;border-radius: 50%;position: absolute;bottom: -130rpx;left: 50%;margin-left: -30rpx;}
+.u-tap-btn{position: fixed;right: 14rpx;bottom: 169rpx;z-index: 5}
+.u-tap-btn1{position: fixed;right: 20rpx;bottom: 430rpx;border-radius: 100%;width: 80rpx;height: 80rpx;font-size: 20rpx;text-align: center;z-index: 5;}
+.u-tap-btn2{position: fixed;right: 20rpx;bottom: 318rpx;border-radius: 100%;width: 80rpx;height: 80rpx;font-size: 20rpx;text-align: center;z-index: 5;}
+.u-go-home1{height: 50rpx;color: #DB384C;}
+.u-go-home-text{height: 30rpx;color: gray;}
+.u-back2 image{border-radius: 100%;width: 88rpx;height: 88rpx;font-size: 20rpx;text-align: center;z-index: 999;opacity: 0.8;line-height:77rpx; margin-bottom: 20rpx;}

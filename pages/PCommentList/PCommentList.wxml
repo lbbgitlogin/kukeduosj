@@ -1,0 +1,53 @@
+<view class="m-tab">
+  <view class="m-navbar">
+    <view class="m-navbar-item {{TapIndex==1?'m-navbar-item-on':''}}" bindtap="picDetail">
+      好评（{{PraiseNum}}）
+    </view>
+    <view class="m-navbar-item {{TapIndex==2?'m-navbar-item-on':''}}" bindtap="spcParam">
+      中评（{{SatisfiedNum}}）
+    </view>
+    <view class="m-navbar-item {{TapIndex==3?'m-navbar-item-on':''}}" bindtap="packingList">
+      差评（{{BadNum}}）
+    </view>
+  </view>
+</view>
+<scroll-view scroll-y="true" class="m-panel-bd scroll-box" bindscrolltolower="scrollPage">
+  <view class="m-media-box m-media-box-appmsg" wx:for="{{CommentList}}" wx:for-item="item">
+    <view class="m-media-box-hd">
+      <image class="m-media-box-thumb" src="{{item.Title}}" />
+    </view>
+    <view class="m-media-box-bd">
+      <label class="m-media-box-title">{{item.Account_User}}</label>
+       <view class="m-media-box-desc">
+        <view style="margin-bottom:10rpx;">
+          <label wx:for="{{item.CommentProductSkuList}}" wx:for-item="itemSku" style="margin-right:10rpx;font-size:20rpx;">
+            {{itemSku.Name}}：{{itemSku.SpecificationValueAlias}}
+          </label>
+        </view>
+        <label wx:if="{{item.CommentInfo!=null}}" > {{item.CommentInfo}}</label>
+      </view> 
+      <view class="m-media-box-info">
+        <view class="m-media-box-info-meta m-start" wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="itemIndex">
+          <label class="iconfont icon-start {{(itemIndex<=item.Grade)?'sel':''}}" data-index="{{itemIndex}}" data-type="1" bindtap="ServiceStart"></label>
+        </view>
+        <view class="m-media-box-info-meta m-tiem">{{item.CreateTimeStr}}</view>
+        <view class="m-media-list">
+          <image data-id="{{item.ProductCommentId}}" wx:for="{{item.CommentPicList}}" wx:for-item="items" src="{{items.Path}}" bindtap="ImgTap"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="m-loading-box">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <lael class="u-loading"></lael>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+</scroll-view>

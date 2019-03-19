@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "幸运抽奖",
+    "usingComponents": {
+      "auth-info": "../../common/authorization-info/authorization-info",
+      "html-view": "../../common/html-view/html-view"
+    }
+    
+  }

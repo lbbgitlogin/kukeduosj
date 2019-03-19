@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "幸运砸金蛋",
+    "usingComponents": {
+      "auth-info": "../../common/authorization-info/authorization-info",
+      "html-view": "../../common/html-view/html-view"
+    }   
+  }

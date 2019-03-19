@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "售后服务",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "send-message": "../../common/send-message/send-message",
+    "zip-img": "../../common/zip-img/zip-img"
+  }
+}

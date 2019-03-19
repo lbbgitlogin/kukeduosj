@@ -1,0 +1,108 @@
+<view class="m-activity-container" wx:if="{{isPage}}">
+  <view class="m-activity-info">
+      <image src="{{Info.EventMainPic}}" mode="aspectFill" class="m-activity-img" wx:if="{{!isEventMainPic}}" />
+    <view class="m-activity-name">{{Info.Title}}</view>
+    <view class="m-activity-eventdesc">{{Info.EventDesc}}</view>
+    <view class="m-cell m-cell-access">
+      <view class="m-cell-hd " style="color:#DB384C">
+        <label class="iconfont icon-shijian "></label>
+      </view>
+      <view class="m-cell-bd m-cell-primary">
+        <p> 活动开始时间：{{Info.EventTime}}</p>
+      </view>
+    </view>
+     <view class="m-cell m-cell-access">
+       <view class="m-cell-hd " style="color:#DB384C;width:40rpx;height:46rpx">
+      </view> 
+      <view class="m-cell-bd m-cell-primary">
+        <p> 活动结束时间：{{Info.EventendTime}}</p>
+      </view>
+    </view>
+    <view class="m-cell m-cell-access">
+      <view class="m-cell-hd" style="color:#EB543D">
+        <label class="iconfont icon-gerenziliao "></label>
+      </view>
+      <view class="m-cell-bd m-cell-primary">
+        <p> 报名截止时间：{{Info.EndJoinTime}}</p>
+      </view>
+    </view>
+    <view class="m-cell m-cell-access">
+      <view class="m-cell-hd" style="color:#1BC2A6">
+        <label class="iconfont icon-shouhuodizhi "></label>
+      </view>
+      <view class="m-cell-bd m-cell-primary">
+        <p> 活动地址：{{Info.EventAddress}}</p>
+      </view>
+    </view>
+
+    <view class="m-activity-otherinfo" wx:if="{{!isEventDetail}}">
+      <view class="item-otherinfo">
+        <view class="item-title">活动介绍</view>
+      </view>
+        <html-view innerText='{{activitydetail}}'></html-view>
+    </view>
+    <view class="m-activity-otherinfo" wx:if="{{!isVip1}}">
+      <view class="item-otherinfo">
+        <view class="item-title">嘉宾介绍</view>
+      </view>
+      <image src="{{Info.VipGuestPic1}}" mode="widthFix" class="item-otherimg" wx:if="{{!isVip1}}" />
+      <image src="{{Info.VipGuestPic2}}" mode="widthFix" class="item-otherimg" wx:if="{{!isVip2}}" />
+      <image src="{{Info.VipGuestPic3}}" mode="widthFix" class="item-otherimg" wx:if="{{!isVip3}}" />
+      <image src="{{Info.VipGuestPic4}}" mode="widthFix" class="item-otherimg" wx:if="{{!isVip4}}" />
+      <image src="{{Info.VipGuestPic5}}" mode="widthFix" class="item-otherimg" wx:if="{{!isVip5}}" />
+    </view>
+    <view class="m-activity-otherinfo" wx:if="{{!isAgendaPlan}}">
+      <view class="item-otherinfo">
+        <view class="item-title">活动议程</view>
+      </view>
+      <view>
+        <html-view innerText='{{activityagenda}}'></html-view>
+      </view>
+    </view>
+
+    <view class="m-activity-otherinfo">
+      <view class="item-otherinfo" style="margin-bottom:0rpx;">
+        <view class="item-title">主办单位</view>
+      </view>
+    <view class="m-cell m-cell-access borderNone">
+        <view class="m-cell-hd" style="color:#1BC2A6">
+          <label class="iconfont icon-icon1"></label>
+        </view>
+        <view class="m-cell-bd m-cell-primary">
+          <p> 主办方：{{Info.Sponsor }}</p>
+        </view>
+      </view>
+      <view class="m-cell m-cell-access">
+        <view class="m-cell-hd" style="color:#1BC2A6">
+          <label class="iconfont icon-icon "></label>
+        </view>
+        <view class="m-cell-bd m-cell-primary">
+          <p> 联系人：{{Info.ContactUser}}</p>
+        </view>
+      </view>
+      <view class="m-cell m-cell-access">
+        <view class="m-cell-hd" style="color:#1BC2A6">
+          <label class="iconfont icon-mobilephone "></label>
+        </view>
+        <view class="m-cell-bd m-cell-primary">
+          <p> 联系电话：{{Info.ContactPhone}}</p>
+        </view>
+      </view>
+    </view>
+    <view class="u-cleanbox"></view>
+  </view>
+  <view class="bottombar g-flex">
+    <view class="service">
+      <label class="iconfont icon-more"></label>
+      <view class="text-kefu">客服</view>
+    </view>
+    <view class="signin {{isGray ?'m-footer-desable':''}}" bindtap="signinnow">{{content}}</view>
+  </view>
+  <contact-button size="27" type="default-dark" session-from="weapp" class="kefu"></contact-button>
+</view>
+
+<view class="u-tap-btn">
+      <navigator url="../../pages/index/index" open-type="switchTab" class="u-go-home">
+    <view class="iconfont icon-shouyeshouye" style="font-size:50rpx;"></view>
+  </navigator>
+</view>

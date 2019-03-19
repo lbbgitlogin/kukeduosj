@@ -1,0 +1,120 @@
+<import src="../../tpl/shareMskTpl.wxml" />
+<movable-area  class="move-area">
+  <movable-view wx:if="{{Info[0].IsRedPacketIcon}}" inertia class="move-img" direction="all" bindtap='IsShowRPK'>
+    <image src="http://kkdfile.kukeduo.cn/appicon/rpk_min.png"></image>
+  </movable-view>
+
+<view class="header">
+  <view style='width:90%;display:flex;align-items: center;'>
+    <image src="{{shoplogo}}"></image>
+    <view class="shopname">{{shopname}}</view>
+  </view>
+</view>
+<view class="selected">订单信息</view>
+<view class="b">
+  <view class="b1">
+      <view>订单编号: {{Info[0].OrderNum}}</view>
+      <view class="order-typetxt"><view>支付状态:</view><view>{{Info[0].PayStatusName}}</view></view>
+  </view>
+  <view class="b2">
+      <view class="serial-number">桌\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n号:{{Info[0].Num}}</view>
+      <view class="table-number"><view>流\r\n\r\n水\r\n\r\n号:</view><view>{{Info[0].SequenceNum}}</view></view>
+  </view>
+</view>
+<view class="selected">
+  已选菜品
+</view>
+<view class="m-cells total-info" style='height:{{height}}rpx;overflow:hidden;font-size:28rpx;'>
+  <view class="message" style="" wx:for="{{Info[0].OrderDetailVOList}}" wx:for-item="item">
+    <view style="display:flex;width:64%;justify-content: space-between">
+      <text style='width:55%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;'>{{item.Name}}</text>
+      <text style="color:#999" wx:if="{{item.SpecStr}}">({{item.SpecStr}})</text>
+      <text>×{{item.Amount}}</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">{{Currency}}{{item.TotalMoney}}</view>
+  </view>
+</view>
+<view class="more" bindtap='more' wx:if="{{isShow}}">展示更多</view>
+<view class="selected" wx:if="{{Info[0].OrderDetailAddMealVOList.length>0}}">
+  已加菜品
+</view>
+<view class="m-cells total-info" style='height:{{height}}rpx;overflow:hidden;font-size:28rpx;' wx:if="{{Info[0].OrderDetailAddMealVOList.length>0}}">
+  <view class="message" style="" wx:for="{{Info[0].OrderDetailAddMealVOList}}" wx:for-item="item">
+    <view style="display:flex;width:64%;justify-content: space-between">
+      <text style='width:55%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;'>{{item.Name}}</text>
+      <text style="color:#999" wx:if="{{item.SpecStr}}">({{item.SpecStr}})</text>
+      <text>×{{item.Amount}}</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">{{Currency}}{{item.TotalMoney}}</view>
+  </view>
+</view>
+<view class="more" bindtap='more1' wx:if="{{isShow1}}">展示更多</view>
+<view class='totlemoney'>
+  <view style='text-align:right;width:67%'>共{{Info[0].DetailCount}}份</view>
+  <view style='text-align:right;padding-right:30rpx'>小计:<label style='color:#db384c'>{{Currency}}{{Info[0].TotalMoney}}</label> </view>
+</view>
+<view class="m-cells">
+  <view class='m-cell section1'>
+    <view>就餐人数</view>
+    <view class="picker">
+      <text style='color:#717171'>{{Info[0].GuestCount}}人</text>
+    </view>
+  </view>
+  <view bindtap='remark' class="section1 m-cell">
+    <view style='width:18%'>备注</view>
+    <view>
+      <view style='color:#717171'>{{Info[0].Remark}}</view>
+    </view>
+  </view>
+</view>
+<view class="m-cells total-info" style="margin-top:40rpx;font-size:28rpx" wx:if="{{Info[0].PayStatusName=='已支付'}}">
+  <view class="m-cell" wx:if="{{Info[0].CouponDiscount!=0}}">
+      <view class="m-cell-bd">
+        <text>优惠券</text> 
+      </view>
+      <view class="m-cell-ft m-order-typetxt" style="color:#db384c;">-{{Currency}}{{Info[0].CouponDiscount}}</view>
+  </view>
+  <view class="m-cell" wx:if="{{Info[0].MemberDiscountMoney!=0}}">
+    <view class="m-cell-bd">
+      <text>会员折扣</text>
+      <text style="font-size:24rpx;color:#717171">({{Info[0].MomentMemberDiscount}}折)</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt" style="color:#db384c">-{{Currency}}{{Info[0].MemberDiscountMoney}}</view>
+  </view>
+  <view class="m-cell" wx:if="{{Info[0].PointAsCash!=0}}">
+    <view class="m-cell-bd">
+      <text>积分抵现</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt" style="color:#db384c">-{{Currency}}{{Info[0].PointAsCash}}</view>
+  </view>
+  <view class="m-cell" wx:if="{{deduction>0}}">
+    <view class="m-cell-bd">
+      <text>余额抵扣</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt" style="color:#db384c;">-{{Currency}}{{deduction}}</view>
+  </view>
+  <view class="m-cell ">
+    <view class="m-cell-bd">
+    </view>
+    <view class="m-total-info">
+      实付款：
+      <label class="m-total-price" style="color:#db384c">{{Currency}}{{Info[0].RealTotal}}</label>
+    </view>
+  </view>
+</view>
+<view style='height:104rpx'></view>
+ <view class="m-footer-btn" wx:if="{{Info[0].PayStatusName=='未支付'&&Info[0].AllowPayOnline}}">
+  <view class="gobuy" bindtap="goback" style="border-right:1px solid #d9d9d9">我要加菜</view>
+  <view class="gobuy" bindtap="gobuy">去买单</view>
+</view> 
+<view class="m-footer-btn" wx:if="{{Info[0].PayStatusName=='未支付'&&Info[0].AllowPayOnline==false}}">
+  <view class="gobuy" style="width:100%" bindtap="goback">我要加菜</view>
+</view>
+</movable-area>
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />
+<view class="shareRPK " wx:if="{{showRPK && Info[0].IsRedPacketIcon}}" bindtap='IsShowRPK'>
+  <view class="shareRPKBox {{showRPK?'animated bounceIn':'animated bounceOut'}}" catchtap='shareBox' style='background:url(http://kkdfile.kukeduo.cn/appicon/rpk_box.png) no-repeat;background-size: cover;'>
+    <view class="sendRPK" bindtap='shareBox'></view>
+    <view class="closeRPK"  catchtap='IsShowRPK'></view>
+  </view>
+</view>

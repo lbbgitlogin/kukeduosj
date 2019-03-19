@@ -1,0 +1,92 @@
+/*全部商品 start*/
+.m-navbar-item {padding: 20rpx 0;font-size: 24rpx;}
+.m-navbar-item:after {border: none;}
+.m-navbar-item.m-navbar-item-on {background-color: #fff;color: #DB384C;}
+.m-navbar-item.m-navbar-item-on::before {content: " ";position: absolute;left: 0;bottom: 0;right: 0;height: 6rpx;border-bottom: 6rpx solid #DB384C;color: #CCCCCC;-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: scaleY(0.5);transform: scaleY(0.5);z-index: 3;}
+.m-sort{position: relative}
+.m-sort image{width: 24rpx; height: 24rpx;position: absolute;top: 50%;margin-top: -12rpx;margin-left:2rpx;}
+.m-product-info1{padding: 20rpx 0}
+/*全部商品 end*/
+.introduce{
+    font-size: 24rpx;
+    color: #DB384C !important;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:1;
+    margin-top: 10rpx;
+}
+.m-product-price1{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.num{
+    font-size: 24rpx;
+    color: #717171;
+    padding-right: 20rpx;
+    /*margin-left:260rpx; */
+}
+/* .m-listv{
+  padding-left: 0rpx
+}
+.m-listv .m-product-item{
+  margin:5rpx;
+  width:365rpx;
+  height:550rpx;
+  overflow:hidden;
+  float:left;
+  border-radius:8rpx;
+}
+.m-listv .m-product-img{
+  width:367rpx;
+  height:367rpx
+}
+.m-listv .m-product-name1{
+  width:367rpx
+}
+.m-listv .m-product-price1{
+  width:367rpx
+}
+.m-listv .m-product-img image{width:100%;height:100%;box-sizing: border-box;padding: 0rpx;} */
+.u-top1 .navtext:nth-child(1){display: flex;align-items: center;justify-content: space-between;position: absolute;right: 0;animation:mymove1 500ms;animation-fill-mode: forwards}
+.u-top1 .navtext:nth-child(2){display: flex;align-items: center;justify-content: space-between;position: absolute;right: 0;animation:mymove2 500ms;animation-fill-mode: forwards}
+.u-top1 .navtext:nth-child(3){display: flex;align-items: center;justify-content: space-between;position: absolute;right: 0;animation:mymove3 500ms;animation-fill-mode: forwards}
+.u-top1 .navtext:nth-child(4){display: flex;align-items: center;justify-content: space-between;position: absolute;right: 0;animation:mymove4 500ms;animation-fill-mode: forwards}
+.u-top1 .navtext1:nth-child(1){display: flex;align-items: center;justify-content: space-between;position: absolute;bottom:10rpx;right: 0;animation:mymove5 300ms;animation-fill-mode: forwards}
+.u-top1 .navtext1:nth-child(2){display: flex;align-items: center;justify-content: space-between;position: absolute;bottom:10rpx;right: 0;animation:mymove6 300ms;animation-fill-mode: forwards}
+.u-top1 .navtext1:nth-child(3){display: flex;align-items: center;justify-content: space-between;position: absolute;bottom:10rpx;right: 0;animation:mymove7 300ms;animation-fill-mode: forwards}
+.u-top1 .navtext1:nth-child(4){display: flex;align-items: center;justify-content: space-between;position: absolute;bottom:10rpx;right: 0;animation:mymove8 300ms;animation-fill-mode: forwards}
+@keyframes mymove1{
+  from {bottom:120rpx;opacity: 0}
+  to {bottom: 520rpx;opacity: 1}
+}
+@keyframes mymove2{
+  from {bottom:120rpx;opacity: 0}
+  to {bottom: 420rpx;opacity: 1}
+}
+@keyframes mymove3{
+  from {bottom:120rpx;opacity: 0}
+  to {bottom: 320rpx;opacity: 1}
+}
+@keyframes mymove4{
+  from {bottom:120rpx;opacity: 0}
+  to {bottom: 220rpx;opacity: 1}
+}
+@keyframes mymove5{
+  from {bottom:520rpx;opacity: 1}
+  to {bottom: 110rpx;}
+}
+@keyframes mymove6{
+  from {bottom:420rpx;opacity: 1}
+  to {bottom: 110rpx;opacity: 0}
+}
+@keyframes mymove7{
+  from {bottom:320rpx;opacity: 1}
+  to {bottom: 110rpx;opacity: 0}
+}
+@keyframes mymove8{
+  from {bottom:220rpx;opacity: 1}
+  to {bottom: 110rpx;opacity: 0}
+}

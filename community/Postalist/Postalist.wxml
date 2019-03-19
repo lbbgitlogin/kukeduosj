@@ -1,0 +1,126 @@
+<scroll-view scroll-y="true" class="m-orderlist" bindscrolltolower="scrollbottom" scroll-top="{{scposition}}" bindscrolltoupper="scrollView">
+  <view wx:if="{{!isshow}}">
+    <!-- 版块内容 -->
+
+    <!-- 版块内容 -->
+    <!-- 帖子列表 -->
+    <view wx:if="{{isdata}}">
+      <view class='box_title_box' wx:for="{{PlatePostList}}" wx:for-item="item">
+        <!-- 头像昵称 -->
+        <view class='box_title' id="{{item.Id}}">
+
+          <navigator url='../userspace/userspace?uid={{item.UserId}}' style='display:flex;float:left'>
+            <view class='box_title_img'>
+              <image class='box_title_Image' src='{{item.UserPhoto}}'></image>
+            </view>
+            <view class='box_title_name'>{{item.NiceName}}</view>
+            <view class='box_title_name_time'>{{item.CreateTimeStr}}</view>
+          </navigator>
+
+          <view class='box_title_guanzhu'>
+            <view class='box_title_guanzhu_text' wx:if="{{item.IsTop}}">置顶</view>
+          </view>
+
+        </view>
+        <!-- 头像昵称 -->
+        <!-- 帖子列表内容 -->
+        <navigator url='../tzparticulars/tzparticulars?id={{item.Id}}' style='display: inline-block'>
+          <view class='box_title_conton'>
+            <span>{{item.PostsTitle}}</span>
+          </view>
+          <view class='newsimg_box_img'>
+            <block wx:for="{{item.ImgList}}" wx:for-item="itemss">
+              <!-- <image class='newsimg_box_image3' src='{{itemss}}'></image> -->
+               <view  class='newsimg_box_image3' style='background: url({{itemss}}) center no-repeat ;background-size:cover;'></view>
+            </block>
+          </view>
+          <!-- <view class='pldz_box'>
+            <view style='width:472rpx;'>
+              <view class='rmtz_box_content_box_dz'>
+                <image class='dz' src='http://appicon-1253690476.file.myqcloud.com/img/tzxq_03.png'></image>
+                <span>{{item.BrowseCount}}</span>
+              </view>
+              <view class='rmtz_box_content_box_pl'>
+                <image class='pl' src='http://appicon-1253690476.file.myqcloud.com/img/tzxq_05.png'></image>
+                <span>{{item.CommentCount}}</span>
+              </view>
+            </view>
+            <view class='rmtz_box_content_box_pl'>
+              <span>来自：{{item.PlateName}}</span>
+            </view>
+          </view> -->
+
+          <view class='pldz_box'>
+      <view style='width:350rpx;'>
+        <view class='rmtz_box_content_box_dz'>
+          <image class='dz' src='http://appicon-1253690476.file.myqcloud.com/img/tzxq_03.png'></image>
+          <span>{{item.BrowseCount}}</span>
+        </view>
+        <view class='rmtz_box_content_box_pl'>
+          <image class='pl' src='http://appicon-1253690476.file.myqcloud.com/img/tzxq_05.png'></image>
+          <span>{{item.CommentCount}}</span>
+        </view>
+      </view>
+      <view class='rmtz_box_content_box_p11'>
+        <span>来自：{{item.PlateName}}</span>
+      </view>
+    </view>
+        </navigator>
+        <!-- 帖子列表内容 -->
+      </view>
+      <view class="m-loading-box">
+        <block wx:if="{{ispage}}">
+          <view class="u-loadmore">
+            <lael class="u-loading"></lael>
+            <text class="u-loadmore-tips">正在加载</text>
+          </view>
+          <view>
+            <text></text>
+            <canvas />
+          </view>
+        </block>
+        <block wx:else>
+          <view class="u-loadmore u-loadmore-line">
+            <text class="u-loadmore-tips">没有更多数据啦！</text>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view wx:else>
+      <block>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips">没有数据！</text>
+        </view>
+      </block>
+    </view>
+    <!-- 帖子列表 -->
+  </view>
+  <view wx:else>
+    <block>
+
+  <navigator url="../../pages/DIYcontent/DIYcontent" open-type="switchTab" class="m-nullpage">
+    <!-- url="../productlist/productlist" redirect="true" -->
+    <view class="m-nullpage-middle">
+      <view class="m-null-tip">
+        <text>当前板块已被下线或删除！</text>
+      </view>
+    </view>
+  </navigator>
+
+    </block>
+  </view>
+</scroll-view>
+
+
+<!-- 发帖，置顶按钮 -->
+<view class="u-top">
+  <navigator url='../Publishedarticles/Publishedarticles' style='display: inline-block'>
+    <view class="u-view2" bindtap="viewType">
+      <image class='u_top' src='http://appicon-1253690476.file.myqcloud.com/img/sq_03.png'></image>
+    </view>
+  </navigator>
+  <view class="u-back2" bindtap="returnTop">
+    <image class='u_top' src='http://appicon-1253690476.file.myqcloud.com/img/sq_06.png'></image>
+  </view>
+</view>
+<!-- 发帖，置顶按钮 -->

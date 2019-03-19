@@ -1,0 +1,52 @@
+<!--pages/carDdetails/carDdetails.wxml-->
+<!--pages/cardbag_pub/cardbag_pub.wxml-->
+<!-- 卡包详情 -->
+<view class='zt'>
+  <view class='nr' style='background-image:url("{{member.BackgroundImageUrl}}");background:{{member.BackgroundColor}};background-size:100% 100%' bindtap='Height'>
+    <view class="content">
+      <view class='logobackground'>
+        <view style="float: left;">
+          <image class='logo' mode="aspectFill" src='{{member.VendorLogo}}'></image>
+        </view>
+        <view class='name'>
+          <view class='category' style='color:#fff'>{{member.VendorName}}</view>
+        </view>
+        <view class='card_name'>
+          <view class='category'style="color: #fff;font-size: 26rpx;">{{member.CardName}}</view>
+        </view>
+      </view>
+      <!-- <view class='lb_box' style="width: 100%;margin: 0 auto;height:22px;">
+        <view style="width: 100%;color: #fff;">
+
+          <view style='float:left;margin-left: 6%;font-size:15px;color:#fff'>{{member.MemberCardPoint}}</view>
+        </view>
+      </view> -->
+      <view class='lb_box' style="width: 100%;margin: 64rpx auto 0 auto;height:22px;">
+        <view style="width: 100%;color: #fff;">
+
+          <view style='float:left;margin-left: 6%;font-size:15px;color:#fff'>{{member.CardNum}}</view>
+        </view>
+      </view>
+
+
+    </view>
+  </view>
+  <view style='width:89%;margin:33px auto 0 auto;background:white;border-top:1px solid #f1f1f1;'>
+    <block wx:for="{{member1}}" wx:for-item="items">
+      <navigator style="border-bottom: 1px solid #f1f1f1;" hover-class="none" url='../../{{items.LinkUrl}}'>
+        <view class='m-cell-access' style="height: 25%;width: 100%;font-size: 14px;line-height: 92rpx;display:-webkit-box;display:flex;align-items:center;">
+          <view style='flex:3;'>{{items.Name}}</view>
+          <view style="flex: 2;color: #ccc;text-align: right;margin-right: 2%;">{{items.Title}}</view>
+          <text class="m-cell-ft"></text>
+        </view>
+      </navigator>
+    </block>
+    <view class='m-cell-access' bindtap='card_xinxi' style="height:100rpx;width: 100%;font-size: 14px;line-height: 92rpx;display:-webkit-box;display:flex;align-items:center;">
+      <view style='flex:1;'>会员卡详情</view>
+      <text class="m-cell-ft"></text>
+      
+    </view>
+
+  </view>
+
+</view>

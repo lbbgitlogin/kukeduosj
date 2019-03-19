@@ -1,0 +1,30 @@
+<view class="header">
+  <view class="header-top">
+   <view class="message">
+        <view style="font-size:112rpx;color:#fff">{{Currency}}{{TotalWealth}}</view>
+        <view class="grade">
+          总余额
+        </view>
+      </view>
+  </view>
+  <view class="header-bottom">
+    <view class="growth">
+      <view class="num">余额</view>
+      <view>{{Currency}}{{CardCashBalance}}</view>
+    </view>
+    <view class="integral">
+      <view class="num">佣金</view>
+      <view>{{Currency}}{{CashBalance}}</view>
+    </view>
+  </view>
+</view>
+<!-- <view class="header" style="height:{{Height}}rpx">
+  <view class="totalMoney"><label style="font-size:112rpx">{{TotalWealth}}</label><label style="font-size:30rpx">元</label></view>
+  <view class="portionMoney"><label>余额：{{CardCashBalance}}元</label><label>佣金：{{CashBalance}}元</label></view>
+</view> -->
+<view class="m-btn-box">
+  <navigator url="../recharge/recharge" class="u-btn u-btn-default" wx:if="{{isECashCard}}">我要充值</navigator>
+</view>
+<view class="m-btn-box">
+  <navigator url="../applycash/applycash" class="u-btn u-btn-default-two">我要提现</navigator>
+</view>

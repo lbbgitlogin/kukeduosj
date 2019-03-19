@@ -1,0 +1,7 @@
+<view class="m-search-box">
+    <view class="u-input-search">
+        <label class="iconfont icon-sousuo-sousuo"></label>
+        <input type="text" bindinput="startinput" focus="true" bindconfirm="search" placeholder="请输入搜索关键字"/>
+        <view class="u-btn" bindtap="search">搜索</view>	
+    </view>
+</view>  

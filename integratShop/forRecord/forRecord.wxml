@@ -1,0 +1,101 @@
+<scroll-view scroll-y="true" scroll-top="{{scposition}}" class="m-product-all u-pa" bindscrolltolower="scrollbottom" scroll-top="{{scposition}}" bindscroll="scrolltoupper">
+
+  <!--没有记录  -->
+  <view class='notHave' wx:if="{{notHasData}}">
+    <image src='http://appicon-1253690476.file.myqcloud.com/img/nohist.png'></image>
+    <text>空空如也</text>
+    <view class='notText'>使用积分可兑换福利，
+      <text catchtap='goPage'>去看看</text>
+    </view>
+  </view>
+
+
+  <!--有记录  -->
+  <view class='have' wx:else>
+
+    <label>恭喜你，使用积分兑换了{{total}}次</label>
+    <block wx:for="{{record}}">
+      <view class='haveRecord' wx:if="{{item.Type == 1}}" catchtap='myorder' data-orderNum='{{item.OrderNum}}' data-type="{{item.Type}}">
+        <view class='commodity'>
+          <image src='{{item.ProductPic}}'></image>
+        </view>
+        <view class='mid'>
+          <view>{{item.Name}}</view>
+          <view>兑换时间 {{item.CreateTimeStr}}</view>
+          <view>{{item.PointCost}}积分</view>
+        </view>
+        <view class='pageTurns'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/img/arrow.png'></image>
+        </view>
+      </view>
+      <view class='haveRecord' wx:if="{{item.Type == 2}}" catchtap='myCoupon' data-OrderNum='{{item.OrderNum}}'>
+        <view class='commodity'>
+          <view class='coupon'>
+            <view>￥
+              <text>{{item.DiscountMoney}}</text>
+            </view>
+          </view>
+        </view>
+        <view class='mid'>
+          <view>{{item.Name}}</view>
+          <view>兑换时间 {{item.CreateTimeStr}}</view>
+          <view>{{item.PointCost}}积分</view>
+        </view>
+        <view class='pageTurns'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/img/arrow.png'></image>
+        </view>
+      </view>
+    </block>
+    <view>
+      <block wx:if="{{record.length>5&&ispage}}">
+        <view class="u-loadmore">
+          <label class="u-loading"></label>
+          <text class="u-loadmore-tips">正在加载</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips">没有更多数据啦！</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+</scroll-view>
+
+
+<view class="u-top" wx:if="{{isnav}}">
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+</view>
+
+<view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+  <view class="u-top1">
+    <view style='position:relative'>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/index/index' open-type='switchTab'>
+        <text>首页</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/homePage.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/usercoupon/usercoupon'>
+        <text>我的券</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/myticket.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/member/member'>
+        <text>会员中心</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/vipcentre.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/UserCenter/UserCenter' open-type='switchTab'>
+        <text>个人中心</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/personal.png' class='quicknav'></image>
+      </navigator>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+      </view>
+    </view>
+  </view>
+</view>

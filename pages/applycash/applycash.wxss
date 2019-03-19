@@ -1,0 +1,23 @@
+.warp{padding-bottom: 120rpx;}
+.tab {display: flex;background-color: #DB384C;font-size: 28rpx;color: #fff;height: 84rpx;justify-content:center;align-items: center;}
+.tab_item{display: flex;align-items: center;height: 100%;margin:0 40rpx;position: relative;}
+.tab_sel::after{content: "";position: absolute;width: 100%;height: 4rpx;background-color: #fff;left: 0;bottom: 0;}
+.info_box{display: flex;height: 260rpx;background-color: #DB384C;flex-direction: column;align-items: center;
+box-sizing: border-box;padding-top: 40rpx;color: #fff;}
+.info_box .tip{font-size: 24rpx;}
+.info_box .total_num{font-size: 84rpx;font-family: Century Gothic;font-weight: bold;}
+.info_box .total_num .unit{font-size: 30rpx;margin-left: 5px;}
+.payType_box{height: 266rpx;background-color: #fff;display: flex;
+flex-direction: column;justify-content:center;margin-bottom: 20rpx;}
+.payType_box .tip{font-size: 28rpx;color: #333;margin-bottom: 35rpx;box-sizing: border-box;padding: 0 20rpx;}
+.paylist{display: flex;flex-direction: row;box-sizing: border-box;justify-content:flex-start;}
+.payitem{width: 220rpx;height: 127rpx;border: 1rpx solid #d1d1d1;border-radius: 8rpx;display: flex;justify-content: center;align-items: center;flex-direction: column;font-size: 24rpx;color: #d1d1d1;position: relative;margin-left: 20rpx;box-sizing: border-box;}
+.payitem:last-child{margin-right: 20rpx;}
+.payitem_sel{border: 1rpx solid #DB384C;color: #DB384C;}
+.payitem image{width: 36rpx;height: 36rpx;}
+.payitem label{margin-top: 10rpx;}
+.recommend{width: 48rpx !important;height: 48rpx !important;position: absolute;left: -4rpx;top: -4rpx;}
+.u-label{font-size: 28rpx;}
+.fixed_button{position: fixed;width: 100%;height: 100rpx;background-color: #DB384C;color: #fff;font-size:28rpx;line-height: 100rpx;left: 0;bottom: 0;border-radius: 0; }
+.cash_tip{color: #999;font-size: 24rpx;padding:30rpx; }
+.default_page{display: flex;width: 100%;height: 500rpx;justify-content:center;align-items: center;flex-direction: column;font-size: 28rpx;color: #cdcdcd;}

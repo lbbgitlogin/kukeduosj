@@ -1,0 +1,27 @@
+@import '../../tpl/bargainTpl/bargainTpl.wxss';
+/*全部商品 start*/
+.groupNumber{position: absolute;bottom: 0;left: 0;font-size:24rpx;color: #db384c;background: #fbebeb;text-align: center;padding: 0 10rpx}
+.groupNumber .icon-icon{font-size:24rpx;display: inline}
+.groupNumber text{color: #ffc001;margin: 0 2rpx}
+.progressBarBox{position: absolute;right: 0;bottom: 0;color: #888;font-size: 24rpx;margin-right: 20rpx;}
+.u-progressBar{display:inline-block;width: 140rpx;height: 20rpx;background-color: #d5d5d5;border-radius: 20rpx;overflow: hidden;}
+.u-progressBar-cont{height: 20rpx;background-color: #ffc001;}
+.m-product-price .u-btn{padding:0;margin: 0 20rpx;width: 160rpx;float: right;font-size: 24rpx;line-height: 50rpx;margin-top: 10rpx;}
+.m-product-GP{height: 232rpx;}
+.m-product-GP .m-product-img {height: 223rpx;width: 223rpx;}
+.m-product-GP .m-product-price{line-height: 80rpx;margin-top: 5rpx;}
+.m-product-GP .m-product-info{height: 232rpx;width: 518rpx;}
+.u-del-price{color:#888888;font-size: 20rpx; text-decoration:line-through;}
+/*全部商品 end*/
+/*顶部提示*/
+.u-toptip{height: 60rpx;}
+.u-toptip .u-loadmore{margin-top: 0;margin-bottom: 0;position: relative;top: 20rpx;}
+/*顶部提示*/
+.m-navbar-item {padding: 20rpx 0;font-size: 24rpx;}
+.m-navbar-item:after {border: none;}
+.m-navbar-item.m-navbar-item-on {background-color: #fff;color: #DB384C;}
+.m-navbar-item.m-navbar-item-on::before {content: " ";position: absolute;left: 0;bottom: 0;right: 0;height: 6rpx;border-bottom: 6rpx solid #DB384C;color: #CCCCCC;-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: scaleY(0.5);transform: scaleY(0.5);z-index: 3;}
+.m-tab{position: fixed;width: 100%;top: 0;z-index: 98;}
+.u-toptip{height: 60rpx;}
+.u-toptip .u-loadmore{margin-top: 0;margin-bottom: 0;position: relative;top: 20rpx;}
+.u-back2 image{border-radius: 100%;width: 77rpx;height: 77rpx;border: 1px solid #eee;font-size: 20rpx;text-align: center;background-color: #fff;box-shadow: 0px 4rpx 8rpx rgba(0,0,0,0.35);z-index: 999;opacity: 0.8;line-height:77rpx; margin-bottom: 20rpx;}

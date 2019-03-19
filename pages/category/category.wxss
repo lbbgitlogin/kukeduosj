@@ -1,0 +1,65 @@
+page{position: fixed}
+.m-category{position: fixed;top: 0;left: 0;width: 100%;height: 100%;}
+.m-category-l{width: 160rpx;height: 100%;position: absolute;left: 0;z-index: 2;}
+.m-category-l-item{font-size: 24rpx; text-align: center;height:100rpx;line-height: 100rpx;background-color: #fff;box-sizing: border-box;border-bottom: 1px solid #eee;border-right: 1px solid #eee;position: relative;}
+.m-category-l-item:last-child{background-color: #f8f8f8;border: none;}
+.m-category-l-select{background-color:#f8f8f8;border-right: none;color:#DB384C;}
+.m-category-l-select::after{content: "";width: 6rpx;position:absolute;left: 0;top: 0;height: 104rpx;background-color:#DB384C;margin-top: -2rpx;}
+.m-category-r{width: 590rpx;height: 100%;box-sizing: border-box;padding:0 20rpx;position: absolute;left: 160rpx;padding-bottom: 120rpx;}
+.m-category-banner {width: 100%;height: 180rpx;margin-bottom: 20rpx;margin-top: 20rpx;}
+.m-category-banner image{width: 100%;height: 100%;}
+.g-grids{margin: 20rpx 0;background-color: #fff;}
+.g-grids::after{border: none}
+.g-grids::before{border: none}
+.g-grid{padding: 20rpx 10rpx 10rpx 10rpx;background-color: #fff;}
+.g-grid::after{border: none}
+.g-grid::before{border: none}
+.g-grid-icon{width: 130rpx;height: 130rpx;}
+.g-grid-label{font-size: 24rpx;line-height: 50rpx;color: #888;}
+
+.u-search-box{background-color: #EFEFF4;padding: 20rpx;}
+.u-search-cont{width: 100%;background-color: #fff;border-radius: 4rpx;text-align: center;padding: 10rpx 0;}
+.u-search-box icon{display: inline-block; vertical-align: middle;margin-right: 10rpx;font-size: 28rpx;}
+.u-search-box text{font-size: 28rpx;color: #d5d5d5}
+.category{
+  background: #fff;
+  margin-bottom: 20rpx
+}
+.scroll{
+  width:100%;
+  height:100%;
+  position:absolute;
+  left:0;
+  z-index:2;
+}
+.title{
+  width: 100%;
+  text-align: center;
+  padding: 60rpx 0
+}
+.categoryTwo{
+  width: 100%;
+  overflow: hidden
+}
+.c-product{
+  width: 25%;
+  height: 200rpx; 
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column; */
+  padding-bottom:50rpx;
+  float: left
+}
+.c-product-img{
+  text-align: center
+}
+.c-product-img image{
+  width: 140rpx;
+  height: 140rpx;
+}
+.c-product-name{
+  font-size: 24rpx;
+  margin-top: 10rpx;
+  display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}

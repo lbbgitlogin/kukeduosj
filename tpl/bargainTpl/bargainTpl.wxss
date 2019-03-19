@@ -1,0 +1,62 @@
+.takeBox {
+  position: fixed;
+  z-index: 99;
+  top: 120rpx;
+  left: -5rpx;
+  box-sizing: border-box;
+}
+
+.takeIn {
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0 50rpx 50rpx 0;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 24rpx;
+  line-height: 50rpx;
+  animation: lateY 4s linear 0s infinite normal running;
+}
+
+.takeIn image {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  box-sizing: border-box;
+  vertical-align: middle;
+  margin-right: 16rpx;
+}
+
+@keyframes lateY {
+  0% {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  60% {
+    transform: translateY(-20rpx);
+    opacity: 0.5;
+  }
+
+  85% {
+    transform: translateY(-60rpx);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(90rpx);
+  }
+}

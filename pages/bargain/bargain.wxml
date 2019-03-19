@@ -1,0 +1,370 @@
+<import src="../../tpl/coupon_msk.wxml" />
+<import src="../../tpl/shareMskTpl.wxml" />
+<!-- <import src="../../tpl/bargainTpl/bargainTpl.wxml" /> -->
+<scroll-view scroll-y="true" class="m-product-all  u-pa" bindscrolltolower="fightPage" scroll-top="{{scposition}}" style='background-color:#f8f8f8'>
+  <navigator class='Spell_shop' wx:if="{{end !=3}}" url='../bargainDetail/bargainDetail?pid={{Info.ProductId}}&MEId={{MEId}}'>
+    <image class='shop_img' src='{{Info.ProductPicture}}'></image>
+    <view class='shop_text'>
+      <view class='text_title'>
+        <label>{{Info.ProductName}}</label>
+      </view>
+      <view class='text_money'>已有 {{Info.CutPriceAllPartakeCount}} 人参加</view>
+      <block wx:if="{{Info.CutSpacePrice > 0}}">
+        <view class='text_man'>还剩可砍金额
+          <text style='font-size:28rpx;'>{{Currency}}{{Info.CutSpacePrice}}</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class='text_man'>已是最底价，可立即出手
+        </view>
+      </block>
+    </view>
+    <!-- </view> -->
+  </navigator>
+  <view class='rule'>
+    <view class='box_title'>
+      <view style='display:flex'>
+        <view class='box_title_img'>
+          <image class='box_title_image' src="{{DetailList[0].Url}}"></image>
+        </view>
+        <view class='box_title_name'>
+          {{DetailList[0].Name}}
+          <text wx:if="{{Info.HasCut&&istrue}}">成功参与活动，快快让好友助自己一臂之力！</text>
+          <text wx:else>正在参与砍价活动，快快助好友一臂之力！</text>
+        </view>
+      </view>
+      <view class='progress_box2'>
+        <view class='progress2' style='width:{{jindu}}%'></view>
+        <view class="progress_bef {{jindu == 0?'paddr':''}}">
+          <view class='progress_bef_con'>
+            <text>{{Currency}}{{balance}}</text>
+          </view>
+          <text class='m-cell-ft22'></text>
+        </view>
+      </view>
+      <view class='price_box'>
+        <view class='price_left'>原价 {{Currency}}{{Info.SalePrice}}</view>
+        <view class='price_right'>底价 {{Currency}}{{Info.FloorPrice}}</view>
+      </view>
+      <!--  -->
+      <view wx:if="{{DetailList.length > 0}}" bindtap='openTap' class='box_title_image2_box_box'>
+        <view style='display:flex;float:left;'>
+          <block wx:for="{{DetailList}}" wx:for-item="item">
+            <image wx:if="{{index<8}}" class='box_title_image2' src='{{item.Url}}'></image>
+          </block>
+        </view>
+        <view class='FabulousUserTotal'>
+          {{Info.CutPricePartakeCount}}人共砍掉
+          <text>{{Info.TotalCutPrice}}元</text>
+        </view>
+      </view>
+      <block>
+        <view class='countdown' wx:if="{{end==2&&Info.IsEnabled}}">
+          还剩
+          <text wx:if="{{Time.day>0}}">{{Time.day||00}}天 {{Time.hour||00}}:{{Time.min||00}}:{{Time.sec||00}} </text>
+          <text wx:else>{{Time.hour||00}}:{{Time.min||00}}:{{Time.sec||00}} </text> 结束，快来砍价吧~
+        </view>
+        <view class='countdown' wx:if="{{end==3||Info.IsEnabled==false}}">
+          活动已结束，看看其他商品吧~
+        </view>
+      </block>
+      <view class='countdown' wx:if="{{istrue==false&&IshasCut}}">
+        <text>一出手就帮好友砍掉了 {{Currency}}{{Info.Amount}} 元，功力了得啊~</text>
+      </view>
+    </view>
+  </view>
+  <view class='rule'>
+    <view class="m-ce m-cell-access">
+      <view class="m-cell-bd m-cell-primary">
+        <p>砍价说明</p>
+      </view>
+    </view>
+    <view class="m-Packinglist" style="font-size:24rpx;color:#888">
+      <view style="text-align:left;line-height:50rpx;">活动时间 {{Info.StartTimeText}} - {{Info.EndTimeText}}</view>
+      <html-view innerText='{{Info.Description}}'></html-view>
+    </view>
+  </view>
+  <view class="boxGrids">
+    <navigator url="../index/index" open-type="switchTab" class='boxGrid' style='width:25%;'>
+      <view class='boxGridIcon'>
+        <image src='http://bbcfile.kukeduo.cn//postsplate/2017/12/116765a1-7226-48be-bba4-8bc5a5511d78.png    '></image>
+      </view>
+      <label class='boxGridLabel'>首页逛逛</label>
+    </navigator>
+    <navigator url="../category/category" open-type="switchTab" class='boxGrid' style='width:25%;'>
+      <view class='boxGridIcon'>
+        <image src='http://bbcfile.kukeduo.cn//postsplate/2017/12/8d25dd73-a014-448f-9877-3408dd7b59f1.png'></image>
+      </view>
+      <label class='boxGridLabel'>全部商品</label>
+    </navigator>
+    <navigator class='boxGrid' url='../receivecontent/receivecontent' style='width:25%;'>
+      <view class='boxGridIcon'>
+        <image src='http://bbcfile.kukeduo.cn//postsplate/2017/12/0ef7fa36-ff61-4d40-bcb7-06a02f691b3c.png'></image>
+      </view>
+      <label class='boxGridLabel'>领券中心</label>
+    </navigator>
+    <navigator class='boxGrid' url='../UserCenter/UserCenter' open-type="switchTab" style='width:25%;'>
+      <view class='boxGridIcon'>
+        <image src='http://bbcfile.kukeduo.cn//postsplate/2017/12/485a4f72-1106-4449-adb4-3306f7225f3b.png'></image>
+      </view>
+      <label class='boxGridLabel'>个人中心</label>
+    </navigator>
+  </view>
+ <view class='m-product-list m-listv' wx:if="{{ProductList.length>0}}">
+    <view class='recommend'>一 为您推荐 一</view>
+    <navigator wx:for="{{ProductList}}" url="{{item.ProductForm==2?'../../server/productdetail/productdetail':'../productdetail/productdetail'}}?pid={{item.id}}" class="m-product-item">
+      <view class="m-product-img">
+        <image src="{{item.ProductPic}}" />
+      </view>
+      <view class="m-product-info" style="display:flex; flex-flow: column;justify-content: space-between;border-bottom:none">
+        <view class="m-product-name">
+          <label>{{item.SalesName}}</label>
+        </view>
+        <view class="m-product-price" style='line-height:70rpx;'>
+          <view class="money">
+            <label>{{Currency}}</label>
+            <label style='font-size:32rpx'>{{item.SalePrice}}</label>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <view class="m-loading-box">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <lael class="u-loading"></lael>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+  <view class="u-top" wx:if="{{isnav}}">
+    <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+    <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+  </view>
+  <view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+    <view style='position:relative'>
+      <view class="u-top1">
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='../index/index' open-type='switchTab'>
+          <text>首页</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+        </navigator>
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='../mybargainlist/mybargainlist'>
+          <text>我的砍价</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_my_cutprice.png' class='quicknav'></image>
+        </navigator>
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='../bargainlist/bargainlist'>
+          <text>砍价列表</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_cutprice.png' class='quicknav'></image>
+        </navigator>
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='../UserCenter/UserCenter' open-type='switchTab'>
+          <text>个人中心</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_usercenter.png' class='quicknav'></image>
+        </navigator>
+        <view class='navtext'>
+          <text></text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+        </view>
+        <view class='navtext'>
+          <text></text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style='width:100%;height:80rpx'></view>
+</scroll-view>
+<view class='bottom_box'>
+  <!-- 砍价 -->
+  <block wx:if="{{Info.HasCut==true&&end!=1&&end!=3&&istrue==true&&Info.HasOrder==false&&Info.IsEnabled}}">
+    <block wx:if="{{Info.CutSpacePrice > 0}}">
+      <view wx:if="{{Info.ProductStoreNum > 0}}" class='bottom_left' hover-class="none" bindtap='shareBox' style='background-color: #fe9402'>
+        <send-message>找人帮砍</send-message>
+      </view>
+      <view wx:if="{{Info.ProductStoreNum <= 0}}" class='bottom_left' hover-class="none" bindtap='shareBox1' style='background-color: #fe9402'>
+        <send-message>找人帮砍</send-message>
+      </view>
+
+    </block>
+    <block wx:if="{{Info.CutSpacePrice <= 0}}">
+      <navigator class='bottom_left' hover-class="none" url='../bargainlist/bargainlist' style='background-color: #fe9402'>
+        <send-message>更多砍价</send-message>
+      </navigator>
+    </block>
+    <view class='bottom_left' hover-class="none" wx:if="{{Info.ProductForm != 2}}" bindtap='goshop' style='background-color: #ff0135'>
+      <send-message>立即出手</send-message>
+    </view>
+    <view class='bottom_left' hover-class="none" wx:if="{{Info.ProductForm == 2}}" bindtap='goshop' style='background-color: #ff0135'>
+      <send-message>立即出手</send-message>
+    </view>
+  </block>
+  <!-- IsInitiator -->
+  <block wx:if="{{IshasCut==false&&istrue==false&&isCut&&end!=1&&end!=3&&Info.HasOrder==false&&Info.IsEnabled}}">
+    <button  open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo44" wx:if="{{Info.ProductStoreNum > 0}}" class='bottom_left' hover-class="none"  style='background-color: #ff0135;width:100%;border-radius:0px;color:#fff'>
+      <send-message style="color:#fff">帮TA砍一刀</send-message>
+    </button>
+    <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo2"  wx:if="{{Info.ProductStoreNum <= 0}}" bindtap='shareBox1' class='bottom_left' hover-class="none" style='background-color: #ff0135;width:100%;border-radius:0px;color:#fff'>
+      <send-message style="color:#fff">帮TA砍一刀</send-message>
+
+    </button>
+  </block>
+  <block wx:if="{{IshasCut==true&&istrue==false&&isCut&&end!=1&&end!=3&&Info.HasOrder==false&&Info.IsEnabled}}">
+    <block wx:if="{{Info.CutSpacePrice <= 0}}">
+      <navigator class='bottom_left' hover-class="none" url='../bargainlist/bargainlist' style='background-color: #fe9402'>
+        <send-message>更多砍价</send-message>
+      </navigator>
+    </block>
+    <block wx:if="{{Info.CutSpacePrice > 0}}">
+      <view wx:if="{{Info.ProductStoreNum > 0}}" class='bottom_left' hover-class="none" bindtap='shareBox' style='background-color: #fe9402'>
+        <send-message>找人帮砍</send-message>
+      </view>
+      <view wx:if="{{Info.ProductStoreNum < 0}}" class='bottom_left' hover-class="none" bindtap='shareBox1' style='background-color: #fe9402'>
+        <send-message>找人帮砍</send-message>
+      </view>
+    </block>
+    <navigator class='bottom_left' hover-class="none" wx:if="{{Info.ProductForm != 2}}" url='../bargainDetail/bargainDetail?pid={{Info.ProductId}}&MEId={{MEId}}' style='background-color: #ff0135'>
+      <send-message>我也要</send-message>
+    </navigator>
+    <navigator class='bottom_left' hover-class="none" wx:if="{{Info.ProductForm == 2}}" url='/server/productdetail/productdetail?pid={{Info.ProductId}}&MEId={{MEId}}' style='background-color: #ff0135'>
+      <send-message>我也要</send-message>
+    </navigator>
+  </block>
+  <block wx:if="{{istrue==false&&isCut==false&&end!=1&&end!=3&&Info.HasOrder==false&&Info.IsEnabled}}">
+    <navigator class='bottom_left' hover-class="none" url='../bargainlist/bargainlist' style='background-color: #fe9402'>
+      <send-message>更多砍价</send-message>
+    </navigator>
+    <navigator class='bottom_left' hover-class="none" wx:if="{{Info.ProductForm != 2}}" url='../bargainDetail/bargainDetail?pid={{Info.ProductId}}&MEId={{MEId}}' style='background-color: #ff0135'>
+      <send-message>我也要</send-message>
+    </navigator>
+    <navigator class='bottom_left' hover-class="none" wx:if="{{Info.ProductForm == 2}}" url='../bargainDetail/bargainDetail?pid={{Info.ProductId}}&MEId={{MEId}}' style='background-color: #ff0135'>
+      <send-message>我也要</send-message>
+    </navigator>
+  </block>
+  <block wx:if="{{Info.HasOrder&&end!=3&&Info.IsEnabled}}">
+    <navigator class='bottom_left' hover-class="none" url='../bargainlist/bargainlist' style='background-color: #ff0135;width:100%'>
+      <send-message>您已购买，再逛逛</send-message>
+    </navigator>
+  </block>
+  <block wx:if="{{end==3&&Info.HasOrder==false||Info.IsEnabled==false}}">
+    <navigator class='bottom_left' hover-class="none" url='../bargainlist/bargainlist' style='background-color: #fe9402'>
+      <send-message>更多砍价</send-message>
+    </navigator>
+    <navigator class='bottom_left' hover-class="none" url='../bargainDetail/bargainDetail?pid={{Info.ProductId}}&MEId={{MEId}}' style='background-color: #ff0135'>
+      <send-message>查看商品</send-message>
+    </navigator>
+  </block>
+</view>
+<view class="animation" wx:if="{{show}}">
+  <!-- 帮砍人砍价背景开启优惠券    -->
+  <image class='njj'  wx:if="{{IsInitiator == false && money.HasUseCoupon == true}}"   style="width: 90%;height: 69%;position: absolute;top: 6%;left: 5%;"></image>
+  <!-- 发起人砍价背景-->
+  <image class='njj' wx:if="{{IsInitiator}}" style="width: 72%;height: 58%;position: absolute;top: 15%;left: 14%;"></image>
+  <!-- 帮砍人砍价背景未开启优惠券 -->
+  <image class='njj' wx:if="{{IsInitiator == false && money.HasUseCoupon == false}}" style="width: 72%;height: 58%;position: absolute;top: 15%;left: 13%;"></image>
+  <image bindtap='back' wx:if="{{IsInitiator == false}}" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png" style="width: 21px;height: 21px;position: absolute;top: 77%;left: 46%;"></image>
+  <image bindtap='back' wx:if="{{IsInitiator}}" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png" style="width: 21px;height: 21px;position: absolute;top: 76%;left: 46%;"></image>
+  <image wx:if="{{IsInitiator}}" animation="{{animation}}" class="kandao {{show?'dao1':''}}  " style="width: 34%;height: 17%;position: absolute;top: 26%;left: 41%;z-index: 3;" bindtap="rotate"></image>
+  <image wx:if="{{showImg&&IsInitiator}}" style="width: 77px;height: 84px;position: absolute;top: 33%;left: 31%;" class="bag delayed1 left_mon {{show?'dao2':''}}"></image>
+  <image wx:if="{{showImg&&IsInitiator}}" style="width: 85px;height: 84px;position: absolute;top: 36%;left: 36%;z-index: 22;" class="bagmoney delayed1 right_mon {{show?'dao3':''}}"> </image>
+  <!--下一行 -->
+   <view wx:if="{{IsInitiator==false && showImg==true }}"class="{{IsInitiator==false&&money.HasUseCoupon==false?'play_ka':'play_ka01'}}" >太棒了，为好友砍掉了</view>
+       <view class='delayed Price' wx:if="{{IsInitiator}}" >太棒了，为自己砍掉了</view>
+  <view wx:if="{{showImg}}" style='top:{{IsInitiator==false&&money.HasUseCoupon==true?"25%":"31%"}}' class='Price '>
+
+    <!--     -->
+    <!--  帮砍人价格 -->
+    <view wx:if="{{IsInitiator==false}}"  class="Price5 {{money.HasUseCoupon==false?'mar02':'mar01'}}" >
+      <view  style="margin: 0 auto;width: 60%;">
+         <label wx:if="{{IsInitiator==false}}" style="color: #fcf5be;font-size: 47px;">{{moneynum}}</label>
+      <!-- -->
+          <label wx:if="{{IsInitiator==false}}" style="line-height: 59px;color: #fcf5be;width: 21%;">元</label>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{IsInitiator&&showImg}}"  class='Price3 '>
+  <view  style="margin: 0 auto;width: 60%;">
+  
+    <label class='delayed' style="color: #fcf5be;font-size: 47px;">{{moneynum}}</label>
+    <label class='delayed' style="line-height: 59px;color: #fcf5be;">元</label>
+    </view>
+  </view>
+  <view wx:if="{{showImg}}" class="{{IsInitiator?'Price1':'Price4'}}" style="top:{{money.HasUseCoupon==false?'57%':'30%'}}">
+    <!--   -->
+    <view style='font-size:24rpx;color:#fff' wx:if="{{IsInitiator}}">去试试小伙伴的功力~</view>
+    <!-- 下一行  -->
+    <view  wx:if="{{IsInitiator==false&&money.HasUseCoupon==true}}"     style='margin-top:6rpx;'>
+
+      <!--  下一行-->
+      <image  wx:if="{{IsInitiator==false}}"   class='help_bj' style="/*flex: 1*//*margin-top: 56px*//*background-size: cover*//*position: relative*/text-align: center;height: 180rpx;width: 80%;background-size: 100% 100%;margin: 20% auto 8px auto;">
+        <view style="position: absolute;top: 45%;width: 80%;">
+        <view style='width:100%;margin:0 auto'>
+          <view style="float: left;font-size: 29px;color: #fe3a54;line-height: 151rpx;/*text-align: center*/margin-left: 5%;max-width: 42%;min-width:20%;font-weight: bold;/*min-width: 41%*/">
+          
+         <label style="font-size: 36rpx;">{{Currency}}</label> 
+         <label>{{money.receiveCoupon.DiscountMoney}}</label>
+          
+          
+          </view>
+          <view style="float: left;margin-left: 5%;padding: 0 0 0 4px;width: 53%;line-height: 54rpx;text-align: center;">
+            <view style="color: #000000;font-size: 26rpx;/*text-align: left;*/text-align: left;  overflow: hidden;  text-overflow: ellipsis;   -o-text-overflow: ellipsis; white-space:nowrap;">{{money.receiveCoupon.Name}}</view>
+            <view style="font-size: 24rpx;color: #818181;text-align: left;">{{money.receiveCoupon.StrValidateEnd}}</view>
+            <view style="font-size: 24rpx;color: #818181;text-align: left;">{{money.receiveCoupon.CouponMoneyLimitDec}}</view>
+          </view>
+          </view>
+        </view>
+      </image>
+      <!-- 下一行-->
+      <view wx:if="{{IsInitiator==false}}" style="font-size: 27rpx;width: 100%;text-align: center;color:#fff">感谢助力，送你一张优惠券~</view>
+    </view>
+  </view>
+  <button style="position: absolute;bottom: 30%;left: 30%;width: 38%;height: 111rpx;background: #fe3642;" open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo66" wx:if="{{IsInitiator==true}}" >
+  <image style='width:100%;height:111rpx;border-radius:10rpx;line-height:66rpx;text-align:center;position:absolute;bottom:0%;left:1%;color:#fff;' wx:if="{{IsInitiator==true}}"  class="success chop" >
+  </image>
+  </button>
+  <!--  -->
+  <navigator wx:if="{{IsInitiator==false&&money.HasUseCoupon==true}}" url='../couponsuitproduct/couponsuitproduct?id={{money.receiveCoupon.Id}}' hover-class='none'>
+    <image class='success play_an'></image>
+  </navigator>
+
+  <!--  下一行-->
+  <navigator wx:if="{{IsInitiator==false&&money.HasUseCoupon==false}}" class='success' hover-class="none" url='../bargainDetail/bargainDetail?pid={{Info.ProductId}}&MEId={{MEId}}'>
+    <image style="width: 97%;left: 2%;" src='../../img/me_y.png' class="success"></image>
+  </navigator>
+</view>
+<!-- 帮砍人列表 -->
+<view class='shadow {{isShow2?"":"hide"}}' bindtap='close5'>
+  <view class='shadow-content'>
+    <view class='shadow-header'>
+      <view style='position:relative'>
+        <image class='photo no-border' src='{{DetailList[0].Url}}'></image>
+        <image class="photo-icon" src="http://appicon-1253690476.file.myqcloud.com/img/invite.png"></image>
+      </view>
+      <label>{{DetailList[0].Name}}</label>
+      <label style='font-size:24rpx;'>{{DetailList[0].CreateTimeStr}}</label>
+    </view>
+    <scroll-view scroll-y="true" wx:if="{{DetailList.length>0}}" class="shadow-scroll" bindscrolltolower="scrollbottom2">
+      <block wx:for="{{DetailList}}">
+        <view class='shadow-center'>
+          <view class='shadow-center-left'>
+            <image class='photo no-border' src='{{item.Url}}'></image>
+            <text>{{item.Name}}</text>
+          </view>
+          <view class='shadow-center-right'>
+            <text>{{item.CreateTimeStr2}}砍掉</text>
+            <text>{{item.Amount}}元</text>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view class="close_msk1" catchtap="close5">
+    <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png"></image>
+  </view>
+</view>
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />
+<!-- <template is="bargainTpl" data="{{bargainIndex}}" /> -->
+<!-- <auth-info isMust="true"></auth-info> -->

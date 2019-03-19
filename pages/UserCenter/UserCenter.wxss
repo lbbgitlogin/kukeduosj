@@ -1,0 +1,211 @@
+.m-banner-img {
+  width: 100%;
+  height: 200rpx;
+  vertical-align: top;
+  position: relative;
+} 
+
+.m-user-info {
+  position: absolute;
+  top: 120rpx;
+  width: 140rpx;
+  height: 140rpx;
+  text-align: center;
+  left: 50%;
+  margin-left: -70rpx;
+  z-index: 3;
+  color: #666;
+}
+
+.m-user-info .Phone {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 120rpx;
+  border: 1px solid #fff;
+  vertical-align: middle;
+  box-shadow: 0px 2rpx 15rpx rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.m-user-info .NickName {
+  line-height: 70rpx;
+  display: block;
+  font-size: 28rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.m-od-tab {
+  font-size: 24rpx;
+  text-align: center;
+  background-color: #fff;
+  line-height: 40rpx !important;
+  box-shadow: 0px 0rpx 10rpx rgba(0, 0, 0, 0.35);
+  color: #888 !important;
+}
+.m-od-tab button{
+  font-size: 24rpx;
+}
+.i-type {
+  font-size: 40rpx;
+  text-align: center
+}
+
+.m-cell-hd {
+  text-align: center;
+  line-height: 56rpx;
+}
+
+.m-od-tab .g-flex-item {
+  padding: 28rpx 0 20rpx 0;
+  line-height: 40rpx !important;
+}
+
+.m-od-tab button{
+  line-height: 40rpx;
+  color:#666;
+}
+
+.m-od-tab .g-flex-item:active {
+  background-color: #ececec;
+}
+.m-od-tab .g-flex-item .iconfont {
+  text-align: center;
+}
+.my_od {
+  border-left: 1px solid #dfdfdf;
+}
+
+.all_order {
+  position: relative;
+  display: block;
+}
+
+.m-panel-bd {
+  margin-top: 40rpx;
+}
+
+.m-panel-bd label {
+  vertical-align: middle;
+  font-size: 50rpx;
+  margin: 0rpx 10rpx;
+}
+
+.m-cell-primary {
+  font-size: 14px;
+  margin-top: 10rpx;
+}
+
+.m-animate-img {
+  width: 100%;
+  height: 250rpx;
+  overflow: hidden;
+  -webkit-animation: imageAnimation 15s linear infinite alternate;
+  animation: imageAnimation 15s linear infinite alternate;
+  webkit-backface-visibility: hidden;
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  margin-top: -20px;
+}
+
+.m-animate-warp {
+  overflow: hidden;
+  height: 200rpx;
+  -webkit-animation: imageAnimation 15s linear infinite alternate;
+  animation: imageAnimation 15s linear infinite alternate;
+}
+
+@-webkit-keyframes imageAnimation {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+@keyframes imageAnimation {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 100%;
+  }
+}
+.iconBoxLattice .m-cell{display: inline-block;width: 25%;box-sizing: border-box;text-align: center;border-right: 1rpx solid #f8f8f8;border-bottom: 1rpx solid #f8f8f8;}
+.iconBoxLattice .m-cell .iconfont{font-size: 60rpx;}
+.iconBoxLattice .m-cell::before{border: none;}
+.iconBoxLattice .m-cell p{font-size: 24rpx;}
+.iconBoxLattice .m-cell image{display: inline-block !important;margin: 0 !important;padding: 0 !important;width: 60rpx !important;height: 60rpx !important;}
+.iconBoxLattice .m-cell-ft{display: none;}
+
+.m-media-box button{
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: left;
+}
+
+.msk{
+  position: fixed;
+  top: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.model{
+  width: 80%;
+  height: 290rpx;
+  background: #fff;
+  border-radius: 6rpx;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0
+}
+.hint{
+  height: 200rpx;
+  display:flex;
+  flex-flow:column;
+  justify-content:center;
+  align-items:center;
+  position: relative;
+}
+.hint::after{content: ''; position: absolute; top: 0; left: 0; border-bottom: 1px solid #e5e5e5; -webkit-box-sizing: border-box; box-sizing: border-box; width: 200%; height: 200%; -webkit-transform: scale(0.5); transform: scale(0.5); -webkit-transform-origin: left top; transform-origin: left top; }  
+.hint .title{
+  font-size: 36rpx;
+}
+.hint .content{
+  width: 80%;
+  color: #999999;
+  font-size: 30rpx;
+  margin-top: 20rpx
+}
+.operation{
+  height: 90rpx;
+  display: flex;
+  align-items: center
+}
+.cancel,.success{
+  flex: 1;
+  background: #fff;
+  height: 90rpx;
+  font-size: 36rpx
+}
+button::after{
+  line-height: none
+}
+.cancel{
+  position: relative;
+  text-align: center;
+  line-height: 90rpx
+}
+.success{
+  color: #3cc51f;
+  padding: 0
+}
+.cancel::after{content: ''; position: absolute; top: 0; left: 0; border-right: 2px solid #e5e5e5; -webkit-box-sizing: border-box; box-sizing: border-box; width: 200%; height: 200%; -webkit-transform: scale(0.5); transform: scale(0.5); -webkit-transform-origin: left top; transform-origin: left top; }  

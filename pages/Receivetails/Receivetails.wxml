@@ -1,0 +1,76 @@
+<!--pages/Receivetails/Receivetails.wxml--> 
+<import src="../../tpl/shareMskTpl.wxml" />    
+<view class='tails_box' style='height:{{CenterCoupon.AllowOfflineWriteOff?"640rpx":"400rpx"}}'>
+  <view class='tails_couname'>
+    <text>{{CenterCoupon.Name}}</text>
+  </view>
+  <view class='tails_mon'>
+    <label style='font-size:30rpx;margin-right:8rpx;margin-left:25%'>{{Currency}}</label>
+    <label style='font-size:60rpx;margin-right: 24rpx;ont-weight:bold;'>{{CenterCoupon.DiscountMoney}}</label>
+    <label style='font-size:24rpx;color:#9B9B9B'>{{CenterCoupon.MoneyLimitStr}}</label>
+  </view>
+  <view class='tails_time' style='width:100%'>
+    {{CenterCoupon.StrValidateEnd}}
+  </view>
+  <view class='tails_time' wx:if="{{CenterCoupon.AllowOfflineWriteOff}}">
+     <image src='{{CenterCoupon.WriteOffCodeUrl}}' style="width: 64%;height: 289rpx;"></image>
+     
+  </view>
+  <view class='tails_time' style='font-size:24rpx;color:#9B9B9B ' wx:if="{{CenterCoupon.AllowOfflineWriteOff}}">
+  {{CenterCoupon.WriteOffCode}}
+  </view>
+  <view class='btn_box' wx:if="{{!CenterCoupon.AllowOfflineWriteOff}}">
+    <view class='but-stl' style="margin-right: 86rpx;" bindtap="receivenowWeixin" wx:if="{{CenterCoupon.UsedStatus == 1  && CenterCoupon.CouponType==2}}" data-id="{{CenterCoupon.Id}}" >立即领取</view>
+    <view class='but-stl' style="margin-right: 86rpx;" bindtap="receivenow" wx:if="{{CenterCoupon.UsedStatus == 1 && CenterCoupon.CouponType==1 }}" data-id="{{CenterCoupon.Id}}" >立即领取</view>
+    <view class='but-stl' style="margin-right: 86rpx;"  wx:if="{{CenterCoupon.UsedStatus == 2}}" data-id="{{CenterCoupon.Id}}" bindtap="usenow">已领完</view>
+    <view class='but-stl' style="margin-right: 86rpx;" data-id="{{CenterCoupon.Id}}"  wx:if="{{CenterCoupon.UsedStatus == 4}}" >已使用</view>
+     <view class='but-stl' style="margin-right: 86rpx;" data-id="{{CenterCoupon.Id}}"  wx:if="{{CenterCoupon.UsedStatus == 5}}" >已过期</view>
+    <view class='but-stl' style="margin-right: 86rpx;" wx:if="{{CenterCoupon.UsedStatus == 3 && CenterCoupon.AllowOfflineWriteOff == false}}" data-id="{{CenterCoupon.Id}}" bindtap="usenow">立即使用</view>
+      <view class='but-stl' style="margin-right: 86rpx;" wx:if="{{CenterCoupon.UsedStatus == 3 && AllowOfflineWriteOff}}" data-id="{{CenterCoupon.Id}}"  bindtap="usenow" >在线使用</view>
+    <view data-id="{{CenterCoupon.Id}}" data-name="{{CenterCoupon.Name}}" bindtap="shareBox" class='but-stl02' >分享给好友</view>
+  </view>
+</view>
+<view class='img_box'>
+  <image src="http://appicon-1253690476.file.myqcloud.com/img/partingLine.png" style="width:100%;height:100%;vertical-align:top;"></image>
+</view>
+<view class='tailfoli' style="overflow: hidden;">
+
+ <view class='btn_box' style='margin:9px auto 0 auto;overflow: hidden' wx:if="{{CenterCoupon.AllowOfflineWriteOff}}"  >
+    <view class='but-stl' style="margin-right: 86rpx;" bindtap="receivenowWeixin" wx:if="{{CenterCoupon.UsedStatus == 1  && CenterCoupon.CouponType==2}}" data-id="{{CenterCoupon.Id}}" >立即领取</view>
+    <view class='but-stl' style="margin-right: 86rpx;" bindtap="receivenow" wx:if="{{CenterCoupon.UsedStatus == 1 && CenterCoupon.CouponType==1 }}" data-id="{{CenterCoupon.Id}}" >立即领取</view>
+    <view class='but-stl' style="margin-right: 86rpx;"  wx:if="{{CenterCoupon.UsedStatus == 2}}" data-id="{{CenterCoupon.Id}}" >已领完</view>
+    <view class='but-stl' style="margin-right: 86rpx;" data-id="{{CenterCoupon.Id}}"  wx:if="{{CenterCoupon.UsedStatus == 4}}" >已使用</view>
+     <view class='but-stl' style="margin-right: 86rpx;" data-id="{{CenterCoupon.Id}}"  wx:if="{{CenterCoupon.UsedStatus == 5}}" >已过期</view>
+    <view class='but-stl' style="margin-right: 86rpx;" wx:if="{{CenterCoupon.UsedStatus == 3 && CenterCoupon.AllowOfflineWriteOff == false}}" data-id="{{CenterCoupon.Id}}" bindtap="usenow">立即使用</view>
+      <view class='but-stl' style="margin-right: 86rpx;" wx:if="{{CenterCoupon.UsedStatus == 3 && CenterCoupon.AllowOfflineWriteOff }}" data-id="{{CenterCoupon.Id}}"  bindtap="usenow" >在线使用</view>
+    <view class='but-stl02'  data-id="{{CenterCoupon.Id}}" bindtap="shareBox" data-name="{{CenterCoupon.Name}}" >分享给好友</view>
+    <view class='btn_mx' wx:if="{{CenterCoupon.AllowOfflineWriteOff}}">支持线下使用（在门店购物时，向店员出示此码抵扣）</view>
+  </view>
+  <view class='tails_tox' wx:if="{{!CenterCoupon.AllowOfflineWriteOff}}">
+    <view class='tail_fo1'>使用条件</view>
+    <view class='tail_fo2'>  
+      <view style="margin-bottom: 10rpx; ">1、{{CenterCoupon.MoneyLimitStr}}</view>
+     <view>
+        <label style="margin-right: 57rpx;"> 2、{{CenterCoupon.ApplyTypeStr}}</label>
+        <label style="color: #FFCA81;" data-id="{{CenterCoupon.Id}}" bindtap="usenow">查看</label>
+     </view>
+    </view>
+  </view>
+</view>
+  <view class='tails_tox'  wx:if="{{CenterCoupon.AllowOfflineWriteOff}}">
+    <view class='tail_fo5'>使用条件</view>
+    <view class='tail_fo6'>
+        <view style="margin-bottom: 10rpx; ">1、{{CenterCoupon.MoneyLimitStr}}</view>
+     <view>
+         <label style="margin-right: 57rpx;"> 2、{{CenterCoupon.ApplyTypeStr}}</label>
+        <label style="color: #FFCA81;" data-id="{{CenterCoupon.Id}}" bindtap="usenow">查看</label></view>
+    </view>
+  </view>
+<view style='width:100%' wx:if="{{CenterCoupon.Description != ''&& CenterCoupon.Description != null  || CenterCoupon.AllowOfflineWriteOff}}">
+  <view class='tails_tox' style="width: 85%;padding-bottom: 60rpx;">
+    <view class='tail_fo1' style='color:#fff '>使用说明</view>
+    <view class='tail_fo3' style='color:#fff;height:43rpx' wx:if="{{CenterCoupon.AllowOfflineWriteOff}}">支持线下使用，领取后向店员展示优惠券详情 </view>
+      <rich-text   style='color:#fff;white-space: pre-line;font-size:22rpx;word-break:break-all' wx:if='{{CenterCoupon.Description}}' nodes='{{CenterCoupon.Description}}'></rich-text>
+  </view>
+</view>
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />

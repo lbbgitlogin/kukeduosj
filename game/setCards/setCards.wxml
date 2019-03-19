@@ -1,0 +1,397 @@
+<import src="../../tpl/coupon_msk.wxml" />
+<import src="../../tpl/shareMskTpl.wxml" />
+<scroll-view scroll-y="true" class="m-product-all u-pa" bindscrolltolower="fightPage" scroll-top="{{scposition}}" style='background-color:#f8f8f8' wx:if="{{isdata == true}}">
+  <!-- <view bindtap='chouka'>抽卡测试</view>
+  <view>-------------------------</view>
+  <view bindtap='choujiang'>抽奖测试</view>  -->
+  <swiper wx:if="{{luckyName.length>0}}" autoplay  interval="2000" duration="500" vertical circular>
+     <block wx:for="{{luckyName}}">                                                                       
+      <swiper-item>
+         <view class='swiper_box'> 
+          <image src="{{item.Photo}}" class="slide-image" />
+          <view class='swiper_info'>
+            <text>{{item.NickName}}</text><label>集到了{{item.PrizeName}}</label>
+          </view>
+         </view> 
+      </swiper-item>
+    </block> 
+  </swiper>
+  <view class='title_img' style='background: url({{gameList.GameRule.GameBackImg}}) center no-repeat ;background-size:cover;'>
+    <view class='cards_Title box_box' style='background: url(http://bbcfile.kukeduo.cn//postsplate/201801/17/b428b488-5453-458c-a3cf-1b96c33d1eeb.png) center no-repeat ;background-size:cover;'>
+      <view class=''>
+        <view class='cards_titles'>{{gameList.GameName}}</view>
+        <view wx:if="{{gameList.GameEventStatus == 3}}">
+          <view class='cards_time'>
+            <text>活动已结束</text>
+          </view>
+        </view>
+        <view wx:else>
+          <view class='cards_time' wx:if="{{gameList.GameEventStatus == 1}}">
+            <text>活动</text>
+            <text class='red'>{{day}}</text>
+            <text>天</text>
+            <text class='red'>{{hours}}</text>
+            <text>小时</text>
+            <text class='red'>{{minutes}}</text>
+            <text>分</text>
+            <text class='red'>{{seconds}}</text>
+            <text>秒后开始</text>
+          </view>
+          <view wx:if="{{gameList.GameEventStatus == 2}}" class='cards_time'>
+            <text>活动剩余时间</text>
+            <text class='red'>{{day}}</text>
+            <text>天</text>
+            <text class='red'>{{hours}}</text>
+            <text>小时</text>
+            <text class='red'>{{minutes}}</text>
+            <text>分</text>
+            <text class='red'>{{seconds}}</text>
+            <text>秒</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='cards_box' style='background: url(http://bbcfile.kukeduo.cn//postsplate/201801/17/87be2e7d-197f-45b7-a2f8-4e810849baa9.png) center no-repeat ;background-size:cover;'>
+
+    <view class='jikapic'>
+      <view class='jikapic_img_box'>
+        <image class='jikapic_img' wx:if="{{usercardList.CardList[0].CardCount == 0 || isusercard == false}}" src="{{gameList.urllist[0]}}"></image>
+        <image class='jikapic_img jikapic_img2' wx:if="{{usercardList.CardList[0].CardCount > 0}}" src="{{gameList.GameRule.CardList[0].Url}}"></image>
+        <view class='CardCount' wx:if="{{usercardList.CardList[0].CardCount > 0}}">{{usercardList.CardList[0].CardCount}}</view>
+      </view>
+
+      <view class='jikapic_img_box'>
+        <image class='jikapic_img' wx:if="{{usercardList.CardList[1].CardCount == 0|| isusercard == false}}" src="{{gameList.urllist[1]}}"></image>
+        <image class='jikapic_img jikapic_img2' wx:if="{{usercardList.CardList[1].CardCount > 0}}" src="{{gameList.GameRule.CardList[1].Url}}"></image>
+        <view class='CardCount' wx:if="{{usercardList.CardList[1].CardCount > 0}}">{{usercardList.CardList[1].CardCount}}</view>
+      </view>
+
+      <view class='jikapic_img_box'>
+        <image class='jikapic_img' wx:if="{{usercardList.CardList[2].CardCount == 0|| isusercard == false}}" src="{{gameList.urllist[2]}}"></image>
+        <image class='jikapic_img jikapic_img2' wx:if="{{usercardList.CardList[2].CardCount > 0}}" src="{{gameList.GameRule.CardList[2].Url}}"></image>
+        <view class='CardCount' wx:if="{{usercardList.CardList[2].CardCount > 0}}">{{usercardList.CardList[2].CardCount}}</view>
+      </view>
+
+      <view class='jikapic_img_box'>
+        <image class='jikapic_img' wx:if="{{usercardList.CardList[3].CardCount == 0|| isusercard == false}}" src="{{gameList.urllist[3]}}"></image>
+        <image class='jikapic_img jikapic_img2' wx:if="{{usercardList.CardList[3].CardCount > 0}}" src="{{gameList.GameRule.CardList[3].Url}}"></image>
+        <view class='CardCount' wx:if="{{usercardList.CardList[3].CardCount > 0}}">{{usercardList.CardList[3].CardCount}}</view>
+      </view>
+
+      <view class='jikapic_img_box'>
+        <image class='jikapic_img' wx:if="{{usercardList.CardList[4].CardCount == 0|| isusercard == false}}" src="{{gameList.urllist[4]}}"></image>
+        <image class='jikapic_img jikapic_img2' wx:if="{{usercardList.CardList[4].CardCount > 0}}" src="{{gameList.GameRule.CardList[4].Url}}"></image>
+        <view class='CardCount' wx:if="{{usercardList.CardList[4].CardCount > 0}}">{{usercardList.CardList[4].CardCount}}</view>
+      </view>
+    </view>
+    <view class='progress'>
+      <view class='progress_text'>
+        集卡进度
+        <view style='padding:2rpx 8rpx;display: inline-block;position:relative;'>
+          <text wx:if="{{isusercard == false}}">0</text>
+          <text wx:else>{{usercardList.AlreadyCount}}</text>
+        </view>
+        <label style='font-size:35rpx;'>/</label>5
+      </view>
+      <view class='progress_box'>
+        <progress percent="{{percent}}" color="#f53c54" stroke-width="6" active="{{active}}" />
+      </view>
+
+      <view class='treasurebox'>
+        <image class='treasure' data-id='1' bindtap='baoxiang' src='http://bbcfile.kukeduo.cn//postsplate/201801/2210/2a0fbea9-b77d-4b51-b106-d9762187290a.png'></image>
+
+      </view>
+    </view>
+    <view wx:if="{{gameList.GameEventStatus == 3}}">
+      <view style='width:100%;display:flex;justify-content:center'>
+        <view class='lijijika' data-id='2' style='background-color:#cccccc;border-radius:16rpx;'>
+          <text>活动已结束</text>
+        </view>
+      </view>
+    </view>
+    <view wx:else>
+      <view wx:if="{{gameList.GameEventStatus == 2}}">
+        <view wx:if="{{usercardList.ButtonStatus != '邀请好友'}}" style='width:100%;display:flex;justify-content:center'>
+          <!-- bindtap='button' -->
+            <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo33" class='lijijika donghua' data-id='2'  data-type='{{usercardList.ButtonStatus}}' style='background: url(http://bbcfile.kukeduo.cn//postsplate/201801/2214/c8766792-a210-40eb-ab8e-9fa9ceedb737.png) center no-repeat ;background-size:cover;'>
+              <view wx:if="{{usercardList.ButtonStatus == '立即集卡' }}"><send-message MessageType="3" class='lijijika'>{{usercardList.ButtonStatus}}(剩余次数{{usercardList.CardCount}}次)</send-message></view>
+              <text wx:else>{{usercardList.ButtonStatus}}</text>
+            </button>
+          
+          
+        </view>
+        <view wx:else class='donghua' style='width:100%;display:flex;justify-content:center'>
+          <!-- <button class='lijijika button' open-type='share' data-type='{{usercardList.ButtonStatus}}' style='background: url(http://bbcfile.kukeduo.cn//postsplate/201801/2214/c8766792-a210-40eb-ab8e-9fa9ceedb737.png) center no-repeat ;background-size:cover;'>
+          <text>邀请到好友可增加{{usercardList.ShareCount}}次集卡机会</text>
+        </button> -->
+          <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo11"   class='lijijika button'  data-type='{{usercardList.ButtonStatus}}' style='background: url(http://bbcfile.kukeduo.cn//postsplate/201801/2214/c8766792-a210-40eb-ab8e-9fa9ceedb737.png) center no-repeat ;background-size:cover;'>
+            <text>求助到好友可增加{{usercardList.ShareCount}}次集卡机会</text>
+          </button>
+        </view>
+      </view>
+      <view wx:else>
+        <view style='width:100%;display:flex;justify-content:center'>
+          <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo22" class='lijijika' data-id='2'  style='background: url(http://bbcfile.kukeduo.cn//postsplate/201801/2214/c8766792-a210-40eb-ab8e-9fa9ceedb737.png) center no-repeat ;background-size:cover;'>
+            <text>求助到好友可增加{{usercardList.ShareCount}}次集卡机会</text>
+          </button>
+        </view>
+      </view>
+    </view>
+
+  </view>
+  <view class='sponsor'>
+    <view class='title'>好友助攻</view>
+    <view class='sponsorContent' wx:if="{{sponsorName.length>0}}">
+      <view class='sponsorName'>
+        <block wx:for="{{sponsorName}}">
+          <image src='{{item.Photo}}' bindtap='open'></image>
+        </block>
+      </view>
+      <view class='sponsornNum'>共获得{{sponsorName[0].Total}}位好友助攻</view>
+    </view>
+    <view class='regulation' wx:else>好友点击你的分享参加活动可获得好友助攻,每个助攻都会获得{{usercardList.ShareCount}}次集卡机会</view>
+  </view>
+  <view class='rule'>
+    <view class="m-ce m-cell-access">
+      <view class="m-cell-bd m-cell-primary">
+        <p>活动规则</p>
+      </view>
+      <!-- <text class="m-cell-ft">详细规则</text>  -->
+    </view>
+    <view class="m-Packinglist" style="font-size:24rpx;">
+      <!-- <text>
+      {{gameList.RulesDescription}}
+      </text> -->
+      <text>{{gameList.RulesDescription}}</text>
+
+    </view>
+  </view>
+  <view class="link">
+    <navigator url="../../pages/index/index" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/index.png"></image>
+      <text>首页逛逛</text>
+    </navigator>
+    <navigator url="../../pages/category/category" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/allproduct.png"></image>
+      <text>全部商品</text>
+    </navigator>
+    <navigator url="../../pages/receivecontent/receivecontent" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/coupon.png"></image>
+      <text>领券中心</text>
+    </navigator>
+    <navigator url="../../pages/UserCenter/UserCenter" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/center.png"></image>
+      <text>个人中心</text>
+    </navigator>
+  </view>
+
+  <view class='m-product-list m-listv' wx:if="{{ProductList.length>0}}">
+    <view class='recommend'>一 为您推荐 一</view>
+    <navigator wx:for="{{ProductList}}" url="{{item.ProductForm==2?'../../server/productdetail/productdetail':'../../pages/productdetail/productdetail'}}?pid={{item.id}}" class="m-product-item">
+      <view class="m-product-img">
+        <image src="{{item.ProductPic}}" />
+      </view>
+      <view class="m-product-info" style="display:flex; flex-flow: column;justify-content: space-between;border-bottom:none">
+        <view class="m-product-name">
+          <label>{{item.SalesName}}</label>
+        </view>
+        <view class="m-product-price" style='line-height:70rpx;'>
+          <view class="money">
+            <label>{{Currency}}</label>
+            <label style='font-size:32rpx'>{{item.SalePrice}}</label>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <view class="m-loading-box">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <lael class="u-loading"></lael>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="u-top">
+    <navigator url='../thePrize/thePrize' style='display: inline-block'>
+      <view class="u-view2">
+        <image class='u_top' src="http://bbcfile.kukeduo.cn//postsplate/201801/15/f3b1dff6-1250-48dd-8ace-bdccac522910.png"></image>
+      </view>
+    </navigator>
+    <view class="u-back2" bindtap="homeindex">
+      <!-- <image class='u_top' src="http://bbcfile.kukeduo.cn//postsplate/201801/15/7ae0aad1-2875-450d-9d5b-2c463dafc46c.png"></image> -->
+      <view class='iconfont icon-shouyeshouye'></view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class='hidden_box' bindtap='close' wx:if="{{ishidden== true && isdata == true}}">
+</view>
+<!-- <view class='hidden_box2' bindtap='close' wx:if="{{ishidden== true && isdata == true}}">
+  <image class='backcards' src='../../img/background.png'></image>
+</view> -->
+<view class='bounced_box' wx:if="{{ishidden== true && isdata == true}}">
+  <view class='bounced donghua2' style='background: url(http://bbcfile.kukeduo.cn//postsplate/201801/2219/c760ab88-8e96-47b4-9033-e53521b79b33.png) center no-repeat ;background-size:cover;'>
+    <view wx:if="{{islijijika == 1}}">
+      <view class='Happycard'>
+        <image class='cards_title_img' src='http://bbcfile.kukeduo.cn//postsplate/201801/14/74c33089-e8d7-4f90-b2a6-a79905f0d699.png'></image>
+      </view>
+      <view class='treasurechest'>
+        <image wx:if="{{isbaoxiang == false}}" class="treasurechest_img {{animation == true?'tada animated':''}}" src='http://kkdfile.kukeduo.cn/appicon/img/baoxiangfalse.png'></image>
+        <image wx:else class='treasurechest_img' src='http://kkdfile.kukeduo.cn/appicon/img/baoxiangtrue.png'></image>
+      </view>
+      <view class='treasurechest_text' style='padding-top:15rpx'>
+        目前进度：
+        <text>{{usercardList.AlreadyCount}}</text> /5
+      </view>
+      <view class='treasurechest_text' style='font-size:24rpx;'>
+        注：集齐五卡，可以开启大礼包
+      </view>
+      <view class='but_true' wx:if="{{percent<100}}">
+        <image class='but' src='http://bbcfile.kukeduo.cn//postsplate/201801/2216/30c86c34-1e76-4e2a-aff7-0293e9d74bd5.png'></image>
+        <text style='color:#fff;'>还差{{5 - usercardList.AlreadyCount}}个卡片</text>
+      </view>
+
+      <view class='but_true' bindtap='OpenPrizeNow' wx:else>
+        <image class='but' src='http://bbcfile.kukeduo.cn//postsplate/201801/2216/4c6879ec-bd31-4b74-8151-c0a570833e0e.png'></image>
+        <text>开礼包</text>
+      </view>
+    </view>
+    <view wx:if="{{islijijika == 2}}">
+      <view class='jika_box' wx:if="{{carsdList != null}}">
+        <image wx:if="{{cardsfalse == true}}" class='jika' src="{{carsdList.Url}}"></image>
+        <image wx:else class='jika' src="http://bbcfile.kukeduo.cn//postsplate/201801/2210/0479c20b-e0fb-4a31-a5c8-5a5225713065.png"></image>
+      </view>
+      <view wx:if="{{cardsfalse == true}}" class='treasurechest_text' style='font-size:24rpx;padding: 67rpx 0 16rpx 0; '>
+        <text class='xgtext' style='font-size:26rpx'>恭喜您获得了</text>
+        <text class='xgtext' style='font-size:30rpx;height:19px;font-weight: bold;line-height:50rpx;'>{{carsdList.CardName}}</text>
+
+      </view>
+      <view wx:else class='treasurechest_text' style='font-size:24rpx;padding: 67rpx 0 16rpx 0; '>
+        <text class='xgtext' style='font-size:26rpx'>有志者，事竟成</text>
+        <text class='xgtext' style='font-size:26rpx'>相信您早晚会中奖</text>
+      </view>
+      <view class='but_true' bindtap='close'>
+        <image class='but' src='http://bbcfile.kukeduo.cn//postsplate/201801/2216/4c6879ec-bd31-4b74-8151-c0a570833e0e.png'></image>
+        <text>继续集卡</text>
+      </view>
+    </view>
+    <view wx:if="{{islijijika == 3}}">
+      <view class='Happycard'>
+        <image class='cards_title_img' src='http://bbcfile.kukeduo.cn//postsplate/201801/14/74c33089-e8d7-4f90-b2a6-a79905f0d699.png'></image>
+      </view>
+      <view class='jika_box' style='padding-top:30rpx;'>
+        <view style='padding:6rpx;background-color:#fff;display:flex;'>
+          <image class='jika2' src="{{prizeList.PrizePic}}" style='border:2rpx solid #fa6565'></image>
+        </view>
+      </view>
+      <view class='treasurechest_text' style='font-size:24rpx;padding: 30rpx 0 16rpx 0; '>
+        恭喜您从大礼包中获得
+      </view>
+      <view class='treasurechest_text' style='font-size:30rpx;padding: 0rpx; font-weight: bold;line-height:50rpx;'>
+        {{prizeList.PrizeName}}
+      </view>
+      <navigator url='../thePrize/thePrize' hover-class="none" class='but_true' style='display: inline-block'>
+        <image class='but' src='http://bbcfile.kukeduo.cn//postsplate/201801/2216/4c6879ec-bd31-4b74-8151-c0a570833e0e.png'></image>
+        <text>立即领取</text>
+      </navigator>
+    </view>
+    <view wx:if="{{islijijika == 4}}">
+      <view class='Happycard'>
+        <image class='cards_title_img' src='http://bbcfile.kukeduo.cn//postsplate/201801/14/74c33089-e8d7-4f90-b2a6-a79905f0d699.png'></image>
+      </view>
+      <view class='jika_box' style='padding-top:30rpx'>
+        <image class='jika2' src="http://bbcfile.kukeduo.cn//postsplate/201801/15/a74a6a42-a7cc-4833-9a65-fca5b6fba84f.png"></image>
+      </view>
+      <view class='treasurechest_text' style='font-size:24rpx;padding: 30rpx 0 16rpx 0; '>
+        抱歉，奖品已经发完了，请下次再来
+      </view>
+      <!-- <view class='treasurechest_text' style='font-size:24rpx;padding: 0rpx; '>
+        {{prizeList.PrizeName}}
+      </view> -->
+      <!-- <view class='but_true' bindtap='lookprize'>
+        <image class='but' src='http://bbcfile.kukeduo.cn//postsplate/201801/2216/4c6879ec-bd31-4b74-8151-c0a570833e0e.png'></image>
+        <text>继续集卡</text>
+      </view> -->
+    </view>
+    <view class='close' bindtap='close'></view>
+  </view>
+</view>
+
+<view wx:if="{{isdata == false}}" class="m-nullpage">
+  <view class="m-nullpage-middle">
+    <label class="iconfont icon-meiyougengduo"></label>
+    <view class="m-null-tip">
+      <text>亲~当前没有活动哦</text>
+      <!-- <text>请尽快去商城后后台完善内容哦</text> -->
+    </view>
+  </view>
+</view>
+
+<view class="u-top">
+  <navigator url='../thePrize/thePrize' style='display: inline-block'>
+    <view class="u-view2">
+      <image class='u_top' src="http://bbcfile.kukeduo.cn//postsplate/201801/15/f3b1dff6-1250-48dd-8ace-bdccac522910.png"></image>
+    </view>
+  </navigator>
+  <view class="u-back2" bindtap="homeindex">
+    <!-- <image class='u_top' src="http://bbcfile.kukeduo.cn//postsplate/201801/15/7ae0aad1-2875-450d-9d5b-2c463dafc46c.png"></image> -->
+    <view class='iconfont icon-shouyeshouye'></view>
+  </view>
+</view>
+
+<view class='hidden_box' bindtap='close2' wx:if="{{isshare == true}}">
+</view>
+<!-- <view class='hidden_box2' bindtap='close2' wx:if="{{isshare == true}}">
+  <image class='shareimg' src='http://bbcfile.kukeduo.cn//postsplate/201801/2216/5aa8e704-1146-434a-a648-9e61c5a3c079.png'></image>
+</view> -->
+<view class='sharebox2' wx:if="{{isshare == true}}" bindtap='close2'>
+  <view class='shareimg' style='background: url(http://bbcfile.kukeduo.cn//postsplate/201801/2216/5aa8e704-1146-434a-a648-9e61c5a3c079.png) center no-repeat ;background-size:cover;'>
+    <view class='cards_titles2'>{{gameList.GameName}}</view>
+    <view style='height:290rpx;width:100%'></view>
+    <view class='share_text'>成功邀请加入的好友越多</view>
+    <view class='share_text'>获得集卡的机会越多</view>
+    <view style='width:100%;display:flex;justify-content:center'>
+      <button class='lijijika2 button' open-type='share' data-type='{{usercardList.ButtonStatus}}' style='background: url(http://bbcfile.kukeduo.cn//postsplate/201801/2216/4c6879ec-bd31-4b74-8151-c0a570833e0e.png) center no-repeat ;background-size:cover;'>
+        <text style='color:#c23031'>再次分享</text>
+      </button>
+    </view>
+    <view class='close2' catchtap='close2'></view>
+  </view>
+</view>
+
+<view class='shadow {{isShow?"":"hide"}}' bindtap='close5'>
+  <view class='shadow-content' catchtap='innertouch'>
+    <view class='shadow-header'>
+      <view style='position:relative'>
+        <image class='photo no-border' src='{{userImg}}'></image>
+        <image class="photo-icon" src="http://appicon-1253690476.file.myqcloud.com/img/invite.png"></image> 
+      </view>
+      <label>{{userName}}</label>
+      <view class='shadow-header-time'>{{gameList.CreateTimeStr}}</view>
+    </view>
+    <scroll-view scroll-y="true" wx:if="{{sponsorName1.length>0}}" class="shadow-scroll" bindscrolltolower="scrollbottom">
+      <view class='shadow-center' wx:for="{{sponsorName1}}">
+        <view class='shadow-center-left'>
+          <image class='photo no-border' src='{{item.Photo}}'></image>
+          <text>{{item.NickName}}</text>
+        </view>
+        <view class='shadow-center-right'>
+          <text>{{item.CreateTimeStr}}助攻</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="close_msk1" catchtap="close5">
+    <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png"></image>
+  </view>
+</view>
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />
+<!-- <auth-info></auth-info> -->

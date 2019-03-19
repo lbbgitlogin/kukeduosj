@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "会员中心",
+  "usingComponents": {
+    "auth-info": "../../common/authorization-info/authorization-info"
+  }
+}

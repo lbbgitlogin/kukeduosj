@@ -1,0 +1,87 @@
+<!--积分余额  -->
+<view class='balanceBox'>
+  <view>积分余额</view>
+  <view>{{vipInfo.UsablePoint}}</view>
+  <view bindtap='toPoints'>
+    去花积分
+  </view>
+</view>
+<!--解读与明细按钮  -->
+<view class='content'>
+  <view class='title'>
+    <view class="{{isTrue?'order':''}}" catchtap='navAnalysis'>积分解读</view>
+    <view class="{{isTrue?'':'order'}}" catchtap='navdetail'>积分明细</view>
+  </view>
+  <!--解读文本  -->
+  <view wx:if="{{isTrue}}">
+    <view class='conText'>{{PointContent.memberPointData}}</view>
+    <!--积分规则  -->
+    <view class='regulation'>
+      <!--规则按钮  -->
+      <view class='top'>
+        积分获取规则
+      </view>
+      <!--签到  -->
+      <!--控制盒子切换  -->
+      <view>
+        <view class='signIn'>
+          <view>
+            <image src='http://appicon-1253690476.file.myqcloud.com/img/pen@1x.png'></image>
+          </view>
+          <view class='signInCon'>
+            <text class='texts'>签到</text>
+            <text>每日签到可获得{{PointContent.AttendancePoint}}个积分</text>
+          </view>
+        </view>
+        <!--购物  -->
+        <view class='goShop'>
+          <view>
+            <image src='http://appicon-1253690476.file.myqcloud.com/img/gift@1x.png'></image>
+          </view>
+          <view class='goShopCon'>
+            <text class='texts'>购物</text>
+            <text>确认收货后可获得积分=订单金额*{{PointContent.OrderPointRate}}</text>
+          </view>
+        </view>
+        <!--评价  -->
+        <view class='appraise'>
+          <view>
+            <image src='http://appicon-1253690476.file.myqcloud.com/img/chat@1x.png'></image>
+          </view>
+          <view class='appraiseCon'>
+            <text class='texts'>评价</text>
+            <text>评价一个订单并通过审核可获得{{PointContent.CommentPoint}}个积分</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{isTrue == false}}">
+    <view class='detail'>
+      <view>
+        <view>
+          签到
+        </view>
+        <view class='textCol'>
+          2018-09-09 22：23：11
+        </view>
+      </view>
+      <view>
+        +5
+      </view>
+    </view>
+    <view class='detail'>
+      <view>
+        <view>
+          签到
+        </view>
+        <view class='textCol'>
+          2018-09-09 22：23：11
+        </view>
+      </view>
+      <view>
+        +5
+      </view>
+    </view>
+  </view>
+</view>

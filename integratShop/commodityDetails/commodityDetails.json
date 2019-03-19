@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "html-view": "../../common/html-view/html-view"
+  }
+}

@@ -1,0 +1,52 @@
+<scroll-view  scroll-y="true" wx:if="{{UserList.length > 0}}" class="m-orderlist" bindscrolltolower="scrollbottom">
+  <view class='box_title_box'  wx:for="{{UserList}}" wx:for-item="item">
+    <view class="box_title" >
+
+ <navigator hover-class="none" url='../userspace/userspace?uid={{item.Id}}' style='display:flex'>
+      <view class='box_title_img'>
+        <image class='box_title_image'  src='{{item.photo}}'></image>
+      </view>
+      <view class='box_title_name'>{{item.NickName}}</view>
+ </navigator>
+
+      <view class='box_title_guanzhu' wx:if="{{isbenren}}">
+     
+        <button hover-class='none' style="line-height: 38rpx;" open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo2" class='box_title_guanzhu_text' bindtap="AddFollow" id='{{item.Id}}'  wx:if="{{item.IsFollow==0}}">关注</button>
+         <button style="line-height: 38rpx;"  hover-class='none' open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo3" class='box_title_guanzhu_text' bindtap="cancelFollow" id='{{item.Id}}' wx:else>取消关注</button>
+      </view>
+    </view>
+  </view>
+  <view class="m-loading-box">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <lael class="u-loading"></lael>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+      <view>
+        <text></text>
+      </view>
+    </block>
+		<block wx:else>
+			<view class="u-loadmore u-loadmore-line">
+				<text class="u-loadmore-tips" style='background-color: #fff'>已经没有了</text>
+			</view>
+		</block>
+  </view>
+
+     
+    <!-- <view wx:else>
+    <block>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有数据！</text>
+      </view>
+    </block>
+  </view>   -->
+</scroll-view>
+
+<view  class="m-nullpage" wx:else>
+  <view class="m-nullpage-middle">
+    <view class="m-null-tip">
+      <text>您还没有社区粉丝</text>
+    </view>
+  </view>
+</view> 

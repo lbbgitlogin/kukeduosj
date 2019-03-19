@@ -1,0 +1,122 @@
+<import src="../../tpl/coupon_msk.wxml" />
+<scroll-view scroll-y="true"  bindscrolltolower="fightPage" scroll-top="{{scposition}}" style="position: absolute;height:100%;width:100%;">
+  <view class="m-product-list">
+    <navigator url="../productdetail/productdetail?pid={{Info.ProductId}}" class="m-product-item m-product-GP">
+      <view class="m-product-img">
+        <image src="{{Info.ProductPic}}" />
+      </view>
+      <view class="m-product-info">
+        <view class="m-product-name" style='height:80rpx;'>
+          <label>{{Info.ProductName}}</label>
+        </view>
+        <view>
+          <view class="groupNumber" style='margin-bottom:12rpx'>
+            <!-- <label class="iconfont icon-icon"></label> -->
+            <text>{{Info.UserLimit}}</text>人团</view>
+          <view class="m-product-price">
+            <label>{{Currency}}</label>{{Info.PreferentialPrice}}
+            <label class="u-del-price">{{Currency}}{{Info.SalePrice}}</label>
+          </view>
+        </view>
+        <view class='prize' wx:if="{{Info.IsLucky}}">恭喜您中奖</view>
+        <view class='prize' wx:else>恭喜您获得优惠券</view>
+        <view class='getcoupon' wx:if="{{Info.IsLucky}}" catchtap='gotoorder'><image src='http://appicon-1253690476.file.myqcloud.com/img/lookprize.png'></image></view>
+        <view class='getcoupon' wx:if="{{Info.IsLucky==false&&Info.IsCouponDrawn==false}}" catchtap='getcoupon'><image src='http://appicon-1253690476.file.myqcloud.com/img/getcoupon.png'></image></view>
+        <view class='getcoupon' wx:if="{{Info.IsLucky==false&&Info.IsCouponDrawn}}" catchtap='gotocoupon'><image src='http://appicon-1253690476.file.myqcloud.com/img/lookcoupon.png'></image></view>
+      </view>
+    </navigator>
+  </view>
+  <view class='list'>
+    <view class='title'>
+      <text>一等奖名单</text>
+      <text bindtap='open' class='more' wx:if="{{Info.GroupUsers[0].Total>5}}">查看更多></text>
+    </view>
+    <view class='title-header border'>
+      <text style='width:33%'>幸运儿</text>
+      <text style='width:45%'>订单编号</text>
+      <text style='width:22%'>电话号码</text>
+    </view>
+    <view class='luckyname' wx:for="{{Info.GroupUsers}}">
+      <view style='width:33%' class='name'><image src='{{item.UserPhoto}}'></image><text style='width:156rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>{{item.NickName}}</text></view>
+      <view style='width:45%'>{{item.OrderNum}}</view>
+      <view style='width:22%'>{{item.Tel}}</view>
+    </view>
+  </view>
+  <view class="link">
+    <navigator url="../index/index" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/index.png"></image>
+      <text>首页逛逛</text>
+    </navigator>
+    <navigator url="../category/category" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/allproduct.png"></image>
+      <text>全部商品</text>
+    </navigator>
+    <navigator url="../receivecontent/receivecontent" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/coupon.png"></image>
+      <text>领券中心</text>
+    </navigator>
+    <navigator url="../UserCenter/UserCenter" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/center.png"></image>
+      <text>个人中心</text>
+    </navigator>
+  </view>
+
+  <view class='m-product-list m-listv'>
+    <view class='recommend'>一 为您推荐 一</view>
+    <navigator wx:for="{{ProductList}}" url="{{item.ProductForm==2?'../../server/productdetail/productdetail':'../productdetail/productdetail'}}?pid={{item.id}}" class="m-product-item">
+      <view class="m-product-img">
+        <image src="{{item.ProductPic}}" />
+      </view>
+      <view class="m-product-info" style="display:flex; flex-flow: column;justify-content: space-between;border-bottom:none">
+        <view class="m-product-name">
+          <label>{{item.SalesName}}</label>
+        </view>
+        <view class="m-product-price" style='line-height:70rpx;'>
+          <view class="money">
+            <label>{{Currency}}</label>
+            <label style='font-size:32rpx'>{{item.SalePrice}}</label>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <view class="u-top">
+    <view class="u-back" bindtap="returnTop">
+      <label class="iconfont icon-fanhuidingbu"></label>
+    </view>
+  </view>
+  <view class="m-loading-box">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <lael class="u-loading"></lael>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+<template is="success_msk" wx:if="{{!show}}" data="{{Coupons,Currency}}" />
+<view class='shadow {{isShow?"":"hide"}}' bindtap='close'>
+  <view class='shadow-content' catchtap='innertouch'>
+    <view class='shadow-header'>
+      <view class='title'>一等奖名单</view>
+      <view class='title-header' style='padding-top:12rpx'>
+        <text style='width:74%'>幸运儿</text>
+        <text style='width:26%'>电话号码</text>
+      </view>
+    </view>
+    <scroll-view scroll-y="true" class="shadow-scroll" bindscrolltolower="scrollbottom">
+      <view class='luckyname content' wx:for="{{luckyInfo}}">
+        <view style='width:74%' class='name'><image src='{{item.UserPhoto}}'></image><text>{{item.NickName}}</text></view>
+        <view style='width:26%'>{{item.Tel}}</view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="close_msk1" catchtap="close">
+    <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png"></image>
+  </view>
+</view>

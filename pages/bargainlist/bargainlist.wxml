@@ -1,0 +1,148 @@
+<import src="../../tpl/shareMskTpl.wxml" />
+<import src="../../tpl/bargainTpl/bargainTpl.wxml" />
+<view class="m-product-all">
+  <view class="m-tab">
+    <view class="m-navbar">
+      <view class="m-navbar-item {{tapindex==1?'m-navbar-item-on':''}}" bindtap="allOrders">
+        立即砍价
+      </view>
+      <view class="m-navbar-item {{tapindex==2?'m-navbar-item-on':''}}" bindtap="toBePaid">
+        即将开始
+      </view>
+    </view>
+    
+  </view>
+  <view class="{{tapindex==1?'':'hide'}}" style="font-size:28rpx;">
+    <block wx:if="{{isData}}">
+      <scroll-view scroll-y="true" scroll-top="{{scposition}}" bindscroll="scrolltoupper" wx:if="{{pdlist.length>0}}" class="m-orderlist" bindscrolltolower="scrollbottom" style="width:100%;height:100%;position:absolute;padding-top:66rpx;box-sizing: border-box;">
+        <block wx:for="{{pdlist}}" wx:for-item="item">
+          <navigator  wx:if="{{item.HasCut==false}}"  url="../bargainDetail/bargainDetail?pid={{item.ProductId}}&MEId={{item.Id}}" class="m-product-item m-product-GP">
+            <view class="m-product-img">
+              <zip-img source_img="{{item.ProductPicture}}"></zip-img>
+            </view>
+            <view class="m-product-info">
+              <view class="m-product-name">
+                <label>
+                  <text class='u-tuan-label'>砍</text>{{item.ProductName}}</label>
+                <view class="groupNumber">
+                  <count-down millisecond="{{item.ShowCountdownMilliseconds}}" Type="1">
+
+                  </count-down>
+                </view>
+              </view>
+              <view class="m-product-price" style='font-size:38rpx'>
+                <label style='color:#888888;margin-right:10rpx;'>底价</label>
+                <label>{{Currency}}</label>{{item.FloorPrice}}
+                <label class="u-del-price" style='font-size:30rpx;padding-left:20rpx'>{{Currency}}{{item.SalePrice}}</label>
+                <button class="u-btn u-btn-default">立即砍价</button>
+              </view>
+            </view>
+          </navigator>
+          <navigator wx:if="{{item.HasCut==true}}" url="../bargain/bargain?pid={{item.ProductId}}&MEId={{item.Id}}" class="m-product-item m-product-GP">
+            <view class="m-product-img">
+              <zip-img source_img="{{item.ProductPicture}}"></zip-img>
+            </view>
+            <view class="m-product-info">
+              <view class="m-product-name">
+                <label>
+                  <text class='u-tuan-label'>砍</text>{{item.ProductName}}</label>
+                <view class="groupNumber">
+                  <count-down millisecond="{{item.ShowCountdownMilliseconds}}" Type="1">
+
+                  </count-down>
+                </view>
+              </view>
+              <view class="m-product-price" style='font-size:38rpx'>
+                <label style='color:#888888;margin-right:10rpx;'>底价</label>
+                <label>{{Currency}}</label>{{item.FloorPrice}}
+                 <label class="u-del-price" style='font-size:30rpx;padding-left:20rpx'>{{Currency}}{{item.SalePrice}}</label>
+                <button class="u-btn u-btn-default">立即砍价</button>
+              </view>
+            </view>
+          </navigator>
+        </block>
+        <view class="m-loading-box">
+          <block wx:if="{{ispage}}">
+            <view class="u-loadmore">
+              <lael class="u-loading"></lael>
+              <text class="u-loadmore-tips">正在加载</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="u-loadmore u-loadmore-line">
+              <text class="u-loadmore-tips">没有更多数据啦！</text>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+
+    </block>
+    <view redirect="true" class="m-nullpage" wx:else>
+      <navigator url="../search/search" redirect="true" class="m-nullpage">
+        <view class="m-nullpage-middle">
+          <view class="m-null-tip">
+            <text>亲，砍价商品正在备货中~</text>
+          </view>
+        </view>
+      </navigator>
+    </view>
+
+  </view>
+  <view class="{{tapindex==2?'':'hide'}}" style="font-size:28rpx">
+    <block wx:if="{{isData1}}">
+      <scroll-view scroll-y="true" wx:if="{{fglist.length>0}}" class="m-orderlist" bindscrolltolower="scrollbottomtwo" style="width:100%;height:100%;position:absolute;padding-top:66rpx;box-sizing: border-box;">
+        <block wx:for="{{fglist}}" wx:for-item="item">
+          <navigator url="../productdetail/productdetail?pid={{item.ProductId}}&MEId={{item.MarketingEventId}}" class="m-product-item m-product-GP">
+            <view class="m-product-img">
+              <zip-img source_img="{{item.ProductPicture}}"></zip-img>
+            </view>
+            <view class="m-product-info">
+              <view class="m-product-name">
+                <label>
+                  <text class='u-tuan-label'>砍</text>{{item.ProductName}}</label>
+                <view class="groupNumber">
+                  <count-down millisecond="{{item.ShowStartCountdownMilliseconds}}" Type="0">
+
+                  </count-down>
+                </view>
+              </view>
+              <view class="m-product-price">
+                <label style='color:#888888;margin-right:10rpx;'>底价</label>
+                <label>{{Currency}}</label>{{item.FloorPrice}}
+                <label class="u-del-price" style='font-size:30rpx;padding-left:20rpx'>{{Currency}}{{item.SalePrice}}</label>
+                <button class="u-btn u-btn-default" style='background:#bdbdbd'>立即砍价</button>
+              </view>
+            </view>
+          </navigator>
+        </block>
+        <view class="m-loading-box">
+          <block wx:if="{{ispage1}}">
+            <view class="u-loadmore">
+              <lael class="u-loading"></lael>
+              <text class="u-loadmore-tips">正在加载</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="u-loadmore u-loadmore-line">
+              <text class="u-loadmore-tips">没有更多数据啦！</text>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+    </block>
+    <navigator url="../search/search" redirect="true" class="m-nullpage" wx:else>
+      <view class="m-nullpage-middle">
+        <view class="m-null-tip">
+          <text>亲，砍价商品正在备货中~</text>
+        </view>
+      </view>
+    </navigator>
+  </view>
+</view>
+<view class="u-top">
+  <navigator url='../index/index' open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+</view>
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />
+<template is="bargainTpl" wx:if="{{isData}}" data="{{bargainIndex}}" />

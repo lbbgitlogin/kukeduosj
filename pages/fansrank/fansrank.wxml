@@ -1,0 +1,117 @@
+<view class="m-tab-indent">
+  <view class="m-nav">
+    <view class="m-nav-item {{tapindex==1?'m-nav-item-on':''}}" bindtap="weekrank">
+      周排行
+    </view>
+    <view class="m-nav-item {{tapindex==2?'m-nav-item-on':''}}" bindtap="monthrank">
+      月排行
+    </view>
+    <view class="m-nav-item {{tapindex==3?'m-nav-item-on':''}}" bindtap="totalrank">
+      总排行
+    </view>
+  </view>
+</view>
+<block wx:if="{{ispage}}">
+  <scroll-view class="m-scrollBox" scroll-y="true" wx:if="{{RankList.length>0}}">
+    <view class="top3-box">
+      <view class="top3-item">
+        <block wx:if="{{RankList.length>=2}}">
+          <view class="top3-icon-box">
+            <image class="top3-icon-img" src="{{RankList[1].photo}}" style="border:6rpx solid #90B8DE;" />
+            <image class="top3-icon-front" src="http://kkdfile.kukeduo.cn/appicon/img/top2.png" />
+          </view>
+          <view class="top3-username" style="color:#90B8DE;">{{RankList[1].NickName}}</view>
+          <view class="top3-text">
+            <label style="color:gray;">粉丝数：</label>{{RankList[1].totalNum?RankList[1].totalNum:RankList[1].totalNum/10000+ "万"}}</view>
+        </block>
+        </view>
+
+        <view class="top3-item">
+          <view class="top1-box">
+            <view class="top3-icon-box">
+              <image class="top1-icon-img" src="{{RankList[0].photo}}" style="position:relative;top:-30rpx;border:6rpx solid #FDD23E;" />
+              <image class="top1-icon-front" src="http://kkdfile.kukeduo.cn/appicon/img/top1.png" />
+            </view>
+          </view>
+          <view class="top3-username" style="color:#FF5500;">{{RankList[0].NickName}}</view>
+          <view class="top3-text">
+            <label style="color:gray;">粉丝数：</label>{{RankList[0].totalNum?RankList[0].totalNum:RankList[0].totalNum/10000+ "万"}}</view>
+          </view>
+
+          <view class="top3-item">
+            <block wx:if="{{RankList.length>=3}}">
+              <view class="top3-icon-box">
+                <image class="top3-icon-img" src="{{RankList[2].photo}}" style="border:6rpx solid #F89BB5;" />
+                <image class="top3-icon-front" src="http://kkdfile.kukeduo.cn/appicon/img/top3.png" />
+              </view>
+              <view class="top3-username" style="color:#F99E6B;">{{RankList[2].NickName}}</view>
+              <view class="top3-text">
+                <label style="color:gray;">粉丝数：</label>{{RankList[2].totalNum?RankList[2].totalNum:RankList[2].totalNum/10000+ "万"}}</view>
+            </block>
+            </view>
+          </view>
+
+          <view class="my-fun-item" wx:for="{{RankList}}" wx:if="{{uid == item.UserId}}">
+            <view class="m-icon-box">
+              <image class="m-icon-img" src="{{item.photo}}" />
+            </view>
+            <view class="my-username-box">
+              <view class="my-username-text">{{item.NickName}}</view>
+              <view class="my-username-rank">第{{index+1}}名</view>
+            </view>
+            <label class="m-fun-num">{{item.totalNum?item.totalNum:item.totalNum/10000+ "万"}}</label>
+                <label class="m-fun-text">粉丝数：</label>
+          </view>
+          <view wx:for="{{RankList}}" wx:for-item="item" class="m-fun-item" wx:if="{{RankList.length > 3 &&index > 2}}">
+            <label class="m-rank-num">{{index+1}}</label>
+            <view class="m-icon-box">
+              <image class="m-icon-img" src="{{item.photo}}" />
+            </view>
+            <label class="m-username">{{item.NickName}}</label>
+            <label class="m-fun-num">{{item.totalNum?item.totalNum:item.totalNum/10000+ "万"}}</label>
+                <label class="m-fun-text">粉丝数：</label>
+          </view>
+  </scroll-view>
+
+  <view class="m-nullcontent" wx:else>
+    <view class="m-nullpage-middle">
+      <label class="iconfont icon-meiyougengduo"></label>
+      <view class="m-null-tip">
+        <text>亲~什么都没有</text>
+        <text>没有最新排行榜信息哦!</text>
+      </view>
+    </view>
+  </view>
+
+</block>
+
+<view class="u-tap-btn1" catchtap="clickrule">
+<image style="width: 88rpx;height: 88rpx;" src='http://appicon-1253690476.file.myqcloud.com/auth/fans_play.png'></image>
+  <!-- <view class="u-go-home1">
+    <view class="iconfont icon-liwu" style="font-size:50rpx;"></view>
+  </view>
+  <view class="u-go-home-text">奖励</view> -->
+</view>
+<view class="u-tap-btn">
+  <navigator hover-class='none' url='../index/index' open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/auth/fans_index.png'></image>
+  </navigator>
+</view>
+<view class="u-tap-btn2">
+  <navigator hover-class='none' url='../endorsement/endorsement'  class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/auth/fans_share.png'></image>
+  </navigator>
+</view>
+
+
+
+<view class="rule-msk" wx:if="{{isShowMsk}}" catchtap="closemsk">
+  <view class="rule-box" catchtap="clickrule">
+    <image src="http://appicon-1253690476.file.myqcloud.com/img/funsrank.png" class="rule-title"></image>
+    <view class="rule-text">
+      <html-view innerText='{{VendorDistributionDesc}}'></html-view>
+    </view>
+    <view class="rule-close" catchtap="closemsk">✕</view>
+  </view>
+</view>
+<!-- <auth-info></auth-info> -->

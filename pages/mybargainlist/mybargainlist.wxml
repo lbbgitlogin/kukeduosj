@@ -1,0 +1,97 @@
+<view class="m-product-all">
+  <view class="m-tab">
+    <view class="m-navbar">
+      <view class="m-navbar-item {{tapindex==1?'m-navbar-item-on':''}}" bindtap="allOrders">
+        我发起的
+      </view>
+      <view class="m-navbar-item {{tapindex==2?'m-navbar-item-on':''}}" bindtap="toBePaid">
+        我参与的
+      </view>
+    </view>
+  </view>
+  <block wx:if="{{isData}}">
+    <scroll-view wx:if="{{orderlist.length>0}}" scroll-y="true" class="m-orderlist" bindscrolltolower="scrollbottom">
+      <view wx:for="{{orderlist}}" wx:for-item="items" class="m-panel m-panel-access">
+        <view class="m-product-list">
+          <navigator url="../bargain/bargain?MEId={{items.MarketingEventId}}&pid={{items.ProductId}}&sid={{items.SponsorId}}&cutPriceActivityId={{items.CutPriceActivityId}}" class="m-product-item">
+            <view class="m-product-img">
+              <zip-img source_img="{{items.MainPicture}}"></zip-img>
+            </view>
+            <view class="m-product-info">
+              <view class="m-product-name">
+                <label>
+                  <text class='u-tuan-label'>砍</text>{{items.productName}}</label>
+                <view class="groupNumber" >
+                  <count-down wx:if="{{items.CutPriceStatusInt == 4 && items.IsEnabled}}" millisecond="{{items.ShowCountdownMilliseconds}}" Type="1">
+
+                  </count-down>
+                  <view wx:if="{{items.CutPriceStatusInt == 1 && items.IsEnabled}}">已下单</view>
+                  <view wx:if="{{items.CutPriceStatusInt == 2&& items.IsEnabled}}">未开始</view>
+                  <view wx:if="{{items.CutPriceStatusInt == 3||items.IsEnabled == false}}">已结束</view>
+                  <!-- <view wx:if="{{}}">已结束</view> -->
+                </view>
+              </view>
+              <view class="m-product-price" style='font-size:38rpx'>
+                <label style='color:#888888;margin-right:10rpx;'>底价</label>
+                <label>{{Currency}}</label>{{items.FloorPrice}}
+                <label class="u-del-price" style='font-size:30rpx;padding-left:20rpx'>{{Currency}}{{items.SalePrice}}</label>
+                <button class="u-btn u-btn-default" wx:if="{{items.CutPriceStatusInt == 4&&items.IsEnabled}}">找人帮砍</button>
+                 <button class="u-btn u-btn-default" wx:else>砍价详情</button>
+              </view>
+            </view>
+
+
+
+
+
+
+            <!-- <view class="m-product-img">
+              <zip-img source_img="{{items.MainPicture}}" ></zip-img>
+            </view>
+            <view class="m-product-info">
+              <view class="m-product-name" style="height:90rpx">
+                <label>{{items.productName}}</label>
+              </view>
+              <view class="progressBarBox">
+                <view class="u-progressBar">
+                  <view class="u-progressBar-cont" style="width:{{100*items.CutPricePercent}}%"></view>
+                </view>
+              </view>
+              <view class="m-product-price" style="display:flex;margin-top:16rpx;font-size:24rpx;justify-content: space-between;padding-right:36rpx">
+                <view>
+                  <label style="color:#717171">原价</label> {{Currency}}{{items.SalePrice}}</view>
+                <view style="color:#717171">{{items.CutPriceStatus}}</view>
+              </view>
+            </view> -->
+          </navigator>
+        </view>
+      </view>
+      <view class="m-loading-box">
+        <block wx:if="{{ispage}}">
+          <view class="u-loadmore">
+            <lael class="u-loading"></lael>
+            <text class="u-loadmore-tips">正在加载</text>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="u-loadmore u-loadmore-line">
+            <text class="u-loadmore-tips">没有更多数据啦！</text>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </block>
+  <navigator url="../bargainlist/bargainlist" redirect="true" class="m-nullpage" wx:else>
+    <view class="m-nullpage-middle">
+      <view class="m-null-tip">
+        <lable style="font-size:32rpx;">亲~您还没有砍价哦，</lable>
+        <lable style="border-bottom:1px solid #db384c;color: #db384c;font-size:32rpx;">快去看看吧</lable>
+      </view>
+    </view>
+  </navigator>
+</view>
+<view class="u-top">
+  <navigator url='../index/index' open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+</view>

@@ -1,0 +1,27 @@
+<view class="m-cells m-cells-form">
+    <view class="m-cell">
+        <view class="m-cell-hd"><label class="u-label">手机号码</label></view>
+        <view class="m-cell-bd">
+            <input class="u-input" type="number" placeholder="请输入手机号码" maxlength="11" bindinput="inputphone"/>
+        </view>
+        <view wx:if="{{!isPhone}}" class="m-cell-ft">
+            <icon class="m-icon-warn" type="warn" ></icon>
+        </view>
+    </view>
+    <view class="m-cell m-cell-vcode">
+        <view class="m-cell-hd">
+            <label class="u-label">验证码</label>
+        </view>
+        <view class="m-cell-bd">
+            <input class="u-input" type="number" placeholder="请输入验证码" maxlength="6" bindinput="inputcode"/>
+        </view>
+        <view wx:if="{{!isCode}}" class="m-cell-ft">
+            <icon class="m-icon-warn m-code" type="warn"></icon>
+        </view>
+        <view wx:if="{{isSend}}" bindtap="sendmessage" class="m-vcode-btn">{{btntext}}</view>
+        <view wx:else class="m-vcode-btn">{{btntext}}</view>
+    </view>
+</view>
+<view class="btn_box" bind="submitdata">
+    <button class="u-btn u-btn-default" bindtap="submitdata">保存</button>
+</view>

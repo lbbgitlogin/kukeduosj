@@ -1,0 +1,270 @@
+<import src="../../tpl/shareMskTpl.wxml" />
+<scroll-view class='u-pa1' bindscrolltolower="fightPage" scroll-y="true" scroll-top="{{scposition}}" bindscroll="scrolltoupper">
+  <movable-area class="move-area">
+    <movable-view wx:if="{{OrderInfo.IsRedPacketIcon}}" inertia class="move-img" direction="all" bindtap='IsShowRPK'>
+      <image src="http://kkdfile.kukeduo.cn/appicon/rpk_min.png"></image>
+    </movable-view>
+
+    <view class="m-cells">
+      <view class="m-cell ">
+        <view class="m-cell-bd">
+          <text>订单编号:{{OrderInfo.OrderNum}}</text>
+        </view>
+        <view class="m-cell-ft m-order-typetxt">{{OrderInfo.OrderStatusName}}</view>
+      </view>
+    </view>
+    <view wx:if="{{OrderInfo.ContactEnabled}}" class="massage" style="align-items: center;justify-content: space-between">
+      <view class="massage-name">
+        {{OrderInfo.Consignee}}
+      </view>
+      <view class="massage-tel" style="margin-right:40rpx">
+        {{OrderInfo.Tel}}
+      </view>
+    </view>
+    <view class="massage" wx:if="{{OrderInfo.ServicePlaceCode==2}}" style="display:flex;flex-flow: column;justify-content: space-around;align-items: stretch">
+      <text>我的地址</text>
+      <view class="massage-tel" style="color:#717171">
+        {{OrderInfo.Address}}
+      </view>
+    </view>
+    <view class="code1" style="background:#fff;padding-bottom:20rpx" wx:if="{{OrderInfo.ShowOrderButton.IsPay==false&&OrderInfo.ServicePlaceCode==1&&(OrderInfo.OrderStatusName=='待服务'||OrderInfo.OrderStatusName=='已完成')&&OrderInfo.IsGroupSuccess}}">
+      <image src="{{OrderInfo.ReservationCodeQRCode}}" style="width:375rpx;height:375rpx"></image>
+      <text>服务码:{{OrderInfo.ReservationCode}}</text>
+    </view>
+    <view class="m-product-all">
+      <view class="m-product-list">
+        <navigator wx:for="{{OrderInfo.OrderDetailVOList}}" wx:for-item="item" url="../productdetail/productdetail?pid={{item.ProductId}}" class="m-product-item">
+          <view class="m-product-img">
+            <image src="{{item.Path}}" mode="aspectFill" />
+          </view>
+          <view class="m-product-info">
+            <view class="m-product-name">
+              <label>{{item.ProductName}}</label>
+              <label class="m-min-name">{{item.SpecStr==null?"":item.SpecStr}}</label>
+            </view>
+            <view class="m-product-price">
+              <label>{{Currency}}</label>{{item.FactPrice}}
+              <text>x{{item.Amount}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+    <view wx:if="{{OrderInfo.Remark}}">
+      <view class="m-cells-title">备注</view>
+      <view class="m-cells m-cells-form">
+        <view class="m-cell">
+          <view class="m-cell-bd">
+            {{OrderInfo.Remark}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="m-cells total-info">
+      <!--<view class="m-cell">
+    <view class="m-cell-bd">
+      <text>商品总额</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">￥{{OrderInfo.ProTotalMoney}}</view>
+  </view>-->
+      <!--<view class="m-cell">
+    <view class="m-cell-bd">
+      <text>活动优惠</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">-￥{{OrderInfo.OrderTypeDiscount}}</view>
+  </view>-->
+      <!--<view class="m-cell">
+    <view class="m-cell-bd">
+      <text>优惠券</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">-￥{{OrderInfo.CouponDiscount}}</view>
+  </view>-->
+      <view class="m-cell" wx:if="{{OrderInfo.ReservationTimeEnabled}}">
+        <view class="m-cell-bd">
+          <text>服务时间</text>
+        </view>
+        <view class="m-cell-ft m-order-typetxt" style="color:#000">{{OrderInfo.ReservationTimeText}}</view>
+      </view>
+      <view class="m-cell">
+        <view class="m-cell-bd">
+          <text>商家电话</text>
+        </view>
+        <view bindtap="call" style="display:flex">
+          <image src="http://appicon-1253690476.file.myqcloud.com/img/call.png" style="width:30rpx;height:30rpx;margin-right:10rpx"></image>
+          <view class="m-cell-ft m-order-typetxt" style="color:#17abe3"> {{OrderInfo.StorePhone}}</view>
+        </view>
+      </view>
+
+      <view class="m-cell" style="display:flex;flex-flow: column;justify-content: space-between;align-items: stretch">
+        <view class="m-cell-bd">
+          <text>商家地址</text>
+        </view>
+        <view class="m-cell-ft m-order-typetxt" style="text-align:left;color:#717171">{{OrderInfo.StoreAddress}}</view>
+      </view>
+      <view class="m-cell" wx:if='{{OrderInfo.CustomRequiredOne != ""}}'>
+      <view class="m-cell-ft" style='color:black'>{{OrderInfo.CustomRequiredOneLabel}}</view>
+        <view class="m-cell-bd" style='text-align:right;'>
+          <text style='color:#999999'>{{OrderInfo.CustomRequiredOne}}</text>
+        </view>
+        
+      </view>
+      <view class="m-cell" wx:if='{{OrderInfo.CustomRequiredTwo !=  ""}}'>
+         <view class="m-cell-ft" style='color:black'>{{OrderInfo.CustomRequiredTwoLabel}}</view>
+        <view class="m-cell-bd" style='text-align:right;'>
+          <text style='color:#999999'>{{OrderInfo.CustomRequiredTwo}}</text>
+        </view>
+     
+      </view>
+      <view class="m-cell" wx:if='{{OrderInfo.CustomRequiredThree !=  ""}}'>
+       <view class="m-cell-ft" style='color:black'>{{OrderInfo.CustomRequiredThreeLabel}}</view>
+        <view class="m-cell-bd" style='text-align:right;'>
+          <text style='color:#999999'>{{OrderInfo.CustomRequiredThree}}</text>
+        </view>
+       
+      </view>
+      <view class="m-cell" wx:if='{{OrderInfo.CustomOptionalOne != ""}}'>
+       <view class="m-cell-ft" style='color:black'>{{OrderInfo.CustomOptionalOneLabel}}</view>
+        <view class="m-cell-bd" style='text-align:right;'>
+          <text style='color:#999999'>{{OrderInfo.CustomOptionalOne}}</text>
+        </view>
+       
+      </view>
+      <view class="m-cell" wx:if='{{OrderInfo.CustomOptionalTwo !=  ""}}'>
+        <view class="m-cell-ft" style='color:black'>{{OrderInfo.CustomOptionalTwoLabel}}</view>
+        <view class="m-cell-bd" style='text-align:right;'>
+          <text style='color:#999999'>{{OrderInfo.CustomOptionalTwo}}</text>
+        </view>
+      
+      </view>
+      <view class="m-cell" wx:if='{{OrderInfo.CustomOptionalThree !=  ""}}'>
+           <view class="m-cell-ft" style='color:black'>{{OrderInfo.CustomOptionalThreeLabel}}</view>
+        <view class="m-cell-bd" style='text-align:right;'>
+          <text style='color:#999999'>{{OrderInfo.CustomOptionalThree}}</text>
+        </view>
+   
+      </view>
+      <view class="m-cell">
+        <view class="m-cell-bd">
+          <text>商品总额</text>
+        </view>
+        <view class="m-cell-ft m-order-typetxt">{{Currency}}{{OrderInfo.TotalMoney}}</view>
+      </view>
+      <view class="m-cell" wx:if="{{OrderInfo.OrderTypeDiscount>0}}">
+        <view class="m-cell-bd">
+          <text>活动优惠</text>
+        </view>
+        <view class="m-cell-ft m-order-typetxt">-{{Currency}}{{OrderInfo.OrderTypeDiscount}}</view>
+      </view>
+      <view class="m-cell">
+        <view class="m-cell-bd">
+          <text>优惠券</text>
+        </view>
+        <view class="m-cell-ft m-order-typetxt">-{{Currency}}{{OrderInfo.CouponDiscount}}</view>
+      </view>
+      <view class="m-cell" wx:if="{{!(OrderInfo.LevelDiscount==0)}}">
+        <view class="m-cell-bd">
+          <text>会员折扣</text>
+          <text style="font-size:24rpx;color:#717171">({{OrderInfo.MomentMemberDiscount}}折)</text>
+        </view>
+        <view class="m-cell-ft m-order-typetxt">-{{Currency}}{{OrderInfo.LevelDiscount}}</view>
+      </view>
+      <view class="m-cell" wx:if="{{!(OrderInfo.PointAsCash==0)}}">
+        <view class="m-cell-bd">
+          <text>积分抵现</text>
+        </view>
+        <view class="m-cell-ft m-order-typetxt">-{{Currency}}{{OrderInfo.PointAsCash}}</view>
+      </view>
+
+      <view class="m-cell ">
+        <view class="m-cell-bd">
+        </view>
+        <view class="m-cell-ft m-total-info">
+          实付款：
+          <label class="m-total-price">{{Currency}}{{OrderInfo.RealTotal}}</label>
+          <view class="m-total-time" style="margin-top:20rpx">下单时间：{{OrderInfo.CreateTimeText}}</view>
+        </view>
+      </view>
+    </view>
+    <view class='m-product-list m-listv' wx:if="{{ProductList.length>0}}">
+      <view class='recommend'>一 为您推荐 一</view>
+      <navigator wx:for="{{ProductList}}" url="{{item.ProductForm==2?'../../server/productdetail/productdetail':'../productdetail/productdetail'}}?pid={{item.id}}" class="m-product-item">
+        <view class="m-product-img">
+          <image src="{{item.ProductPic}}" />
+        </view>
+        <view class="m-product-info" style="display:flex; flex-flow: column;justify-content: space-between;border-bottom:none">
+          <view class="m-product-name">
+            <label>{{item.SalesName}}</label>
+          </view>
+          <view class="m-product-price" style='line-height:70rpx;'>
+            <view class="money">
+              <label>{{Currency}}</label>
+              <label style='font-size:32rpx'>{{item.SalePrice}}</label>
+            </view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+    <view class="m-loading-box">
+      <block wx:if="{{ispage}}">
+        <view class="u-loadmore">
+          <lael class="u-loading"></lael>
+          <text class="u-loadmore-tips">正在加载</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips">没有更多数据啦！</text>
+        </view>
+      </block>
+    </view>
+    <view class="u-cleanbox"></view>
+    <view class="m-footer-btn">
+      <navigator url="../PComment/PComment?od={{OrderInfo.OrderNum}}" wx:if="{{OrderInfo.ShowOrderButton.IsOrderEvaluate}}" class="u-link-btn">去评价</navigator>
+      <navigator url="../PComment/PComment?od={{OrderInfo.OrderNum}}" wx:if="{{OrderInfo.ShowOrderButton.IsShowEvaluate}}" class="u-link-btn">查看评价</navigator>
+      <view data-ON="{{OrderInfo.OrderNum}}" wx:if="{{OrderInfo.ShowOrderButton.IsGoWriteOff&&OrderInfo.ServicePlaceCode==2}}" class="u-link-btn" bindtap="writeOrder">确认服务</view>
+      <view data-ON="{{OrderInfo.OrderNum}}" wx:if="{{OrderInfo.ShowOrderButton.IsCancel}}" class="u-link-btn" bindtap="cancelOrder">取消订单</view>
+    </view>
+  </movable-area>
+</scroll-view>
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />
+<view class="shareRPK " wx:if="{{showRPK && OrderInfo.IsRedPacketIcon}}">
+  <view class="shareRPKBox {{showRPK?'animated bounceIn':'animated bounceOut'}}" style='background:url(http://kkdfile.kukeduo.cn/appicon/rpk_box.png) no-repeat;background-size: cover;'>
+    <view class="sendRPK" bindtap='shareBox'></view>
+    <view class="closeRPK" bindtap='IsShowRPK'></view>
+  </view>
+</view>
+<view class="u-top" wx:if="{{isnav}}">
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+</view>
+<view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+  <view style='position:relative'>
+    <view class="u-top1">
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='../../pages/index/index' open-type='switchTab'>
+        <text>首页</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='../../pages/search/search'>
+        <text>搜索商品</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_search.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='../../pages/goodcollection/goodcollection'>
+        <text>我的收藏</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_my_favor.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='../../pages/UserCenter/UserCenter' open-type='switchTab'>
+        <text>个人中心</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_usercenter.png' class='quicknav'></image>
+      </navigator>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+      </view>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,4 @@
+<!--common/zip-img/zip-img.wxml-->
+<!-- <zip-img> -->
+  <image src='{{source_src}}' mode='scaleToFill' style='{{source_style}}'></image>
+<!-- </zip-img> -->

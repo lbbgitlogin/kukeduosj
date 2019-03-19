@@ -1,0 +1,25 @@
+<!--pages/Flavorcho/Flavorcho.wxml-->
+
+<view class="m-cells-title" style="margin-bottom:20rpx">备注</view>
+<view class="m-cells m-cells-form">
+  <view class="m-cell">
+    <view class="m-cell-bd">
+      <textarea class="u-textarea" maxlength="20" value="{{remark}}" bindinput='inputRemark'></textarea>
+    
+      <view class="u-textarea-counter">
+        <label>{{remarkLength2}}</label>/20</view>
+    </view>
+  </view>
+</view>
+<view style="display: flex;/*justify-content:*//*align-items: center*//*margin-top: 22px*/flex-wrap: wrap;padding: 20rpx; box-sizing: border-box;">
+  <block wx:for="{{choose}}">
+
+    <view data-num='{{num}}' data-state='{{item.state}}' class="condition {{item.state == '2' ?'checked':''}}" data-index='{{index}}' bindtap="condition" data-name="{{item.name}}" data-length="2">{{item.name}}</view>
+
+
+
+  </block>
+</view>
+
+
+<button class="u-btn u-btn-default" bindtap='goback' style="margin-top:50rpx">确认</button>

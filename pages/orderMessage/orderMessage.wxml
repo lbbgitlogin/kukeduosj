@@ -1,0 +1,66 @@
+<view class="header">
+  <view style='width:90%;display:flex;align-items: center;'>
+    <image src="{{shoplogo}}"></image>
+    <view class="shopname">{{shopname}}</view>
+  </view>
+</view>
+<view class="selected">订单信息</view>
+<view class="b">
+  <view class="b1">
+      <text>订单编号:{{Info[0].OrderNum}}</text>
+      <view class="order-typetxt"><view>支付状态:</view><view>{{Info[0].PayStatusName}}</view></view>
+  </view>
+  <view class="b2">
+      <view class="serial-number">流\r\n\r\n水\r\n\r号:{{Info[0].SequenceNum}}</view>
+      <view class="table-number"><view>桌\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r号:</view> <view>{{Info[0].Num}}</view></view>
+  </view>
+</view>
+<view class="selected">
+  已选菜品
+</view>
+<view class="m-cells total-info" style='height:{{height}}rpx;overflow:hidden;font-size:28rpx;'>
+  <view class="message" style="" wx:for="{{Info[0].OrderDetailVOList}}" wx:for-item="item">
+    <view style="display:flex;width:50%;justify-content: space-between">
+      <text style='width:95%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;'>{{item.Name}}</text>
+      <text>×{{item.Amount}}</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">{{Currency}}{{item.TotalMoney}}</view>
+  </view>
+</view>
+<view class="more" bindtap='more' wx:if="{{isShow}}">展示更多 ></view>
+<view class="selected">
+  已加菜品
+</view>
+<view class="m-cells total-info" style='height:{{height}}rpx;overflow:hidden;font-size:28rpx;'>
+  <view class="message" style="" wx:for="{{Info[0].OrderDetailAddMealVOList}}" wx:for-item="item">
+    <view style="display:flex;width:50%;justify-content: space-between">
+      <text style='width:95%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;'>{{item.Name}}</text>
+      <text>×{{item.Amount}}</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">{{Currency}}{{item.TotalMoney}}</view>
+  </view>
+</view>
+<view class="more" bindtap='more' wx:if="{{isShow}}">展示更多 ></view>
+<view class='totlemoney'>
+  <view style='text-align:right;width:52%'>共{{Info[0].DetailCount}}份</view>
+  <view style='text-align:right;padding-right:30rpx'>小计:<label style='color:#db384c'>{{Currency}}{{Info[0].TotalMoney}}</label> </view>
+</view>
+<view class="m-cells">
+  <view class='m-cell section'>
+    <view>就餐人数</view>
+    <view class="picker">
+      <text style='color:#717171'>{{Info[0].GuestCount}}人</text>
+    </view>
+  </view>
+  <view bindtap='remark' class="section m-cell">
+    <view>备注</view>
+    <view>
+      <view style='color:#717171'>{{Info[0].Remark}}</view>
+    </view>
+  </view>
+</view>
+<view style='height:104rpx'></view>
+<view class="m-footer-btn">
+  <view class="gobuy" bindtap="goback" style="border-right:1px solid #d9d9d9">我要加菜</view>
+  <view class="gobuy" bindtap="gobuy">去买单</view>
+</view>

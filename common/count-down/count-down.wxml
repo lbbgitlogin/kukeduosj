@@ -1,0 +1,4 @@
+<!--pages/count-down/count-down.wxml-->
+<count-down>
+  <label>{{time}}</label>
+</count-down>

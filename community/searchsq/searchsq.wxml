@@ -1,0 +1,70 @@
+<scroll-view scroll-y="true" class="test" bindscrolltolower="scrollbottom">
+  <view class="m-search-box">
+    <view class="u-input-search">
+      <label class="iconfont icon-sousuo-sousuo"></label>
+      <input type="text" bindinput="startinput" focus="true" bindconfirm="SelectProductList" placeholder="请输入搜索关键字" value='{{value}}' />
+      <view class="u-btn" bindtap="SelectProductList">搜索</view>
+    </view>
+    <view class="person_box">
+    </view>
+  </view>
+  <block>
+    <view class="m-product-all" wx:if="{{cartlist.length>0}}">
+      <view class="m-product-list">
+        <block wx:for="{{cartlist}}" wx:for-item="item">
+          <view class="m-product-item" bindtouchstart="removestart" bindtouchmove="removeload" bindtouchend="removeend" data-id="{{item.ProductId}}">
+            <view class="m-item-c {{(item.ProductId==T_Id)?'del':''}}">
+              <view class="m-cart-ck" catchtap="quanbu" data-sid="{{item.ProductId}}" data-id="{{item.ProductId}}" data-isck="{{item.checked}}">
+                <icon type="{{item.checked?'success':'circle'}} " color="{{item.checked?'#DB384C':'#d5d5d5'}}" />
+              </view>
+              <navigator url="../productdetail/productdetail?pid={{item.ProductId}}" class="m-product-img">
+                <image src="{{item.ProductPic}}" />
+              </navigator>
+              <view class="m-product-info">
+                <navigator url="../productdetail/productdetail?pid={{item.ProductId}}">
+                  <view class="m-product-name">
+                    <label style="padding-top:15rpx;">{{item.SalesName}}</label>
+                    <label class="m-min-name" style="overflow:hiddentext-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1">{{item.speStr==null?"":item.speStr}}</label>
+                  </view>
+                  <view class="m-product-price">
+                    {{item.Price}}
+                    <label>元</label>
+                  </view>
+                </navigator>
+                <block>
+                </block>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class='weizhaodao' wx:else>没有找到您想搜索的商品，请重新输入</view>
+  </block>
+  <view class="m-loading-box" wx:if="{{cartlist.length>0}}">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <label class="u-loading"></label>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+      <view class="u-cleanbox"></view>
+
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line" style='margin-bottom:100rpx;background-color: #fff'>
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+<!-- <navigator url="../index/index" open-type="switchTab" class="m-nullpage" wx:else>
+  <view class="m-nullpage-middle">
+    <label class="iconfont icon-konggouwuche"></label>
+    <view class="m-null-tip">
+      <text>暂无该商品哦，请重新查找</text>
+    </view>
+  </view>
+</navigator> -->
+<view class='fabu_box'>
+  <view class='fabu_box_fb' bindtap="AddMemberPosts">确定</view>
+</view>

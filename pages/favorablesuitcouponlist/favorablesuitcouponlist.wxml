@@ -1,0 +1,31 @@
+<scroll-view class="m-scrollBox" scroll-y="true" bindscrolltolower="scrollbottom">
+<block wx:if="{{UserCoupon.length>0}}">
+    <view  class="m-coupon-item" bindtap="changecoupon" data-id="{{item.Id}}" wx:for="{{UserCoupon}}" wx:for-item="item">
+        <image src="http://appicon-1253690476.file.myqcloud.com/img/coupon_red.png" class="item-bg"></image>
+        <view class="coupon-item-left">
+            <view class="item-left-top">{{Currency}}<label style="font-size:64rpx">{{item.DiscountMoney}}</label></view>
+            <view class="item-left-bottom">{{item.MoneyLimitDesc}}</view>
+        </view>
+        <view class="coupon-item-right">
+            <view class="item-title item-title-black">{{item.CouponName}}</view>
+            <view class="item-middle">
+                <lable class="item-time">{{item.StrValidateStart}}~{{item.StrValidateEnd}}</lable>
+            </view>
+            
+            <view class="item-desc">{{item.DiscountTypeName}}</view>
+        </view>
+        <image src="http://appicon-1253690476.file.myqcloud.com/img/checked.png" class="image-checked" wx:if="{{item.Id == id_checked}}"/>
+    </view>
+
+    <button class="u-btn u-btn-default" style="margin-top:30rpx;" bindtap="uesnothing">不使用优惠券</button>
+</block>
+  <view class="m-nullcontent" wx:else>
+    <view class="m-nullpage-middle">
+      <label class="iconfont icon-meiyougengduo"></label>
+      <view class="m-null-tip">
+        <text>亲~什么都没有</text>
+        <text>赶快去领券中心吧</text>
+      </view>
+    </view>
+  </view>
+</scroll-view >

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "send-message": "../../common/send-message/send-message",
+    "zip-img": "../../common/zip-img/zip-img",
+    "html-view": "../../common/html-view/html-view"
+  }
+}

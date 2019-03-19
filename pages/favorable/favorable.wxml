@@ -1,0 +1,77 @@
+<view class='bj_able'>
+  <view class="totalMoney">
+    <view class='able_text'>支付金额</view>
+   
+  </view>
+  <view class='able_input'>
+  <view class='able_fuhao'>{{Currency}}</view>
+  <!-- <view class='input_lab'> -->
+  <input class='input_lab' placeholder="" type="digit" bindinput="inputnum" maxlength="8" bindblur="blur" value='{{deliveryNum}}'>
+  </input>
+  <!-- </view> -->
+   <view class='pict_fal'  bindtap="clearnum"><image class='fal_pic' src='../../img/false.png'></image></view>
+  </view>
+
+  <view class="nodiscount" wx:if="{{isshow1}}">
+    <checkbox-group class="check" bindchange="checkboxChange">
+      <label class="checkbox">
+        <checkbox style="transform:scale(0.6);-webkit-transform:scale(0.6);-o-transform:scale(0.6);-moz-transform:scale(0.6);-ms-transform:scale(0.6)" />输入不参与优惠金额
+      </label>
+    </checkbox-group>
+  </view>
+  <view class="title" style="background"></view>
+  <view class="totalMoney  no_lab" wx:if="{{isshow}}" style="background:#fff">
+    <label>不参与优惠金额：</label>
+    <input placeholder="询问服务员后输入" type="digit" bindinput="nodiscount" maxlength="8" bindblur="blur1" value="{{nodiscountvalue}}" />
+  </view>
+
+  <view class="discount" wx:if="{{isshow1 && price<10}}">
+    <image src="http://appicon-1253690476.file.myqcloud.com/img/discount-icon.png" style="width:50rpx;height:54rpx;float:left;margin-top:16rpx"></image>
+    <text style="float:left;margin-left:20rpx">{{price||10}}折</text>
+    <text style="color:#db384c;float:right">-{{Currency}}{{discount}}</text>
+  </view>
+
+  <view class="pay">
+    <view class="coupon" bindtap="suitcouponlist" wx:if="{{CouponEnabeld==true&&isCoupon}}">
+      <view>
+        <text style='letter-spacing: 2.4rpx;font-size:26rpx;'>优惠券</text>
+      </view>
+      <view style="color:#db384c;">-{{Currency}}{{DiscountMoney}}
+        <text class="m-cell-ft"></text>
+      </view>
+    </view>
+    <view class="coupon" wx:if="{{MaxUsableCash>0&&isECashCard}}">
+      <view class="">
+        <text style='font-size:26rpx;'>余额抵扣</text>
+        <text style="font-size:24rpx;color: #333333;">(可使用{{Currency}}{{MaxUsableCash}})</text>
+      </view>
+      <view class="">
+        <text class="" wx:if="{{isBalance}}" style="position:absolute;right:19%;color:#db384c">{{Currency}}{{balance}}</text>
+        <switch checked bindchange="switchChange" style="transform:scale(0.6);position:absolute;right:36rpx" />
+      </view>
+    </view>
+    <view class=" payments">
+      <label style='letter-spacing: 2.4rpx;font-size:26rpx;'>实付款</label>
+      <text style="color:#db384c">{{Currency}}{{realPayMoney}}</text>
+    </view>
+  </view>
+  <form report-submit="true" bindsubmit="paysubmit" wx:if='{{isSubmit}}'>
+    <button class="payment" formType="submit">确认支付</button>
+  </form>
+  <form report-submit="true"  wx:else>
+    <button class="payment" formType="submit">确认支付</button>
+  </form>
+  <view class="explain" wx:if="{{Description}}">
+    <view class="title">买单说明：</view>
+    <view class="content">
+      {{Description}}
+    </view>
+  </view>
+</view>
+<view class="u-top">
+  <navigator url='../index/index' open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+</view>
+
+<!-- <auth-info></auth-info> -->

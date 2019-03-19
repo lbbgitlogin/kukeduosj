@@ -1,0 +1,10 @@
+<view class="cttitle">{{timeText}}</view>
+<view class="time-box" wx:if="{{flag}}">
+  <text wx:if="{{days>0 && !showType}}">{{days}}</text>
+  <label wx:if="{{days>0 && !showType}}">天</label>
+  <text>{{hours}}</text>
+  <label>:</label>
+  <text>{{minutes}}</text>
+  <label>:</label>
+  <text>{{seconds}}</text>
+</view>

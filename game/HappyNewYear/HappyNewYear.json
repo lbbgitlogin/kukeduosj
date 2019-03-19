@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "写福卡",
+  "usingComponents": {
+    "auth-info": "../../common/authorization-info/authorization-info"
+  }
+}

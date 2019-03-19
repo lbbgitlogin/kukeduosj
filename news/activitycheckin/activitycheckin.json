@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "活动签到",
+    "usingComponents": {
+      "html-view": "../../common/html-view/html-view"
+    }
+  }

@@ -1,0 +1,10 @@
+<view class="m-cells-title">备注</view>
+<view class="m-cells m-cells-form">
+  <view class="m-cell">
+    <view class="m-cell-bd">
+      <textarea class="u-textarea" maxlength="20" value="{{remark}}" bindinput="inputRemark"></textarea>
+      <view class="u-textarea-counter"><label>{{remarkLength}}</label>/20</view>
+    </view>
+  </view>
+</view>
+<view class='button' bindtap='goback'>确认</view>

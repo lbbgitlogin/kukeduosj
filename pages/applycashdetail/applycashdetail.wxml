@@ -1,0 +1,40 @@
+<scroll-view class="m-scrollBox" wx:if="{{CaseDetailList.length>0}}" scroll-y="true" bindscrolltolower="scrollbottom">
+  <view class="m-panel m-panel-access m-comment ">
+    <view class="m-panel-bd">
+      <view wx:for="{{CaseDetailList}}" wx:for-item="item" class="m-media-box m-media-box-appmsg">
+        <view class="m-media-box-bd">
+          <label class="m-media-box-title">{{item.ExtractionStatusText}}</label>
+          <label class="m-media-box-num">
+            <text>{{Currency}}{{item.ExtractionPrice}}</text>
+          </label>
+          <view class="m-media-box-info">
+            <view class="m-media-box-info-meta m-tiem">时间：{{item.CreateTimeStr}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="m-loading-box">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <lael class="u-loading"></lael>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+<view class="m-nullcontent" wx:else>
+    <view class="m-nullpage-middle">
+      <label class="iconfont icon-meiyougengduo"></label>
+      <view class="m-null-tip">
+        <text>亲~什么都没有</text>
+        <text>赶快去分享商品，赚取收益吧!</text>
+      </view>
+    </view>
+  </view>

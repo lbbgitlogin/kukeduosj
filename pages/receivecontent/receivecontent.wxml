@@ -1,0 +1,166 @@
+<view class="m-coupon-list" wx:if="{{ispage}}">
+  <block wx:if="{{CenterCoupon.length>0}}">
+
+    <view class="m-coupon-item" wx:for="{{CenterCoupon}}" wx:for-item="item" wx:for-index="i">
+      <view class="yes" wx:if="{{item.Percentage != 100}}">
+        <navigator hover-class='none' wx:if="{{item.IsCanReceive == 0 && item.Percentage != 100}}" class="m-coupon-info" url="../../pages/Coupondetails/Coupondetails?cid={{item.Id}}&i={{i}}">
+          <view class="m-coupon-text">
+            <label style='display:block'>{{item.Name}}{{item.CouponTypeDec}}</label>
+            <label class='CouponUserDesc_box' style="width: 100%;float: left;">
+              <text style="color: #f43032;font-weight: bold;/*line-height: 37rpx;*/padding-top: 14rpx;">{{Currency}}</text>
+              <text style='color:#f43032;font-weight: bold;font-size:40rpx;padding:0 4rpx 0 0;margin-right: 16rpx;'>{{item.DiscountMoney}}</text>
+              <view class="text1"> {{item.CouponUserDesc}}</view>
+            </label>
+            <!-- <label style="float: left;width: 45%;line-height: 73rpx;font-size: 22rpx;color: #ACACAC;">{{item.StrValidateEndCenter}}</label> -->
+          </view>
+          <view class='m-coupon-more m-cell-access'>
+            <view style='color:#9B9B9B;font-size:22rpx;flex:1'>
+              <label>更多详情</label>
+
+              <label wx:if="{{item.AllowOfflineWriteOff}}" class='xianxia'>（支持线下使用）</label>
+
+
+            </view>
+            <!-- -->
+
+            <text class="m-cell-ft"></text>
+          </view>
+        </navigator>
+        <navigator hover-class='none' wx:if="{{item.IsCanReceive != 0 && item.Percentage != 100}}" class="m-coupon-info" url='../Receivetails/Receivetails?cid={{item.Id}}&couponItemId={{item.CouponItemId}}&i={{i}}"'>
+          <view class="m-coupon-text">
+            <label style='display:block'>{{item.Name}}{{item.CouponTypeDec}}</label>
+            <label class='CouponUserDesc_box' style="width: 100%;float: left;">
+              <text style="color: #f43032;font-weight: bold;/*line-height: 37rpx;*/padding-top: 14rpx;">{{Currency}}</text>
+              <text style='color:#f43032;font-weight: bold;font-size:40rpx;padding:0 4rpx 0 0;margin-right: 16rpx;'>{{item.DiscountMoney}}</text>
+              <view class="text1"> {{item.CouponUserDesc}}</view>
+            </label>
+            <!-- <label style="float: left;width: 45%;line-height: 73rpx;font-size: 22rpx;color: #ACACAC;">{{item.StrValidateEndCenter}}</label> -->
+          </view>
+          <view class='m-coupon-more m-cell-access'>
+            <view style='color:#9B9B9B;font-size:22rpx;flex:1'>
+              <label>更多详情</label>
+
+              <label wx:if="{{item.AllowOfflineWriteOff}}" class='xianxia'>（支持线下使用）</label>
+
+
+            </view>
+            <!-- -->
+
+            <text class="m-cell-ft"></text>
+          </view>
+        </navigator>
+        <view class='but_box' wx:if="{{item.IsCanReceive == 0 && item.Percentage != 100}}">
+          <view class='but_top'>
+            <view class='but_rule'>
+              <text style='padding-top:18rpx;'>已抢</text>
+              <text style='font-size: 30rpx;'>{{item.Percentage}}%</text>
+            </view>
+          </view>
+          <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo11" class='lingqu' wx:if="{{item.CouponType==2}}" data-cardId="{{item.CardId}}" data-id="{{item.Id}}" data-idx="{{i}}" data-isreceive="{{item.IsCanReceive}}">
+            立即领取
+          </button>
+          <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo22" class='lingqu' wx:else data-id="{{item.Id}}" data-isreceive="{{item.IsCanReceive}}"  data-idx="{{i}}">
+            立即领取
+          </button>
+        </view>
+        <view class='but_box' wx:if="{{item.IsCanReceive != 0 && item.Percentage != 100}}">
+          <view class='but_top2'>
+            <view class='but_rule2' style='border:none'>
+              <image style='width:100%;height:100%' src='http://appicon-1253690476.file.myqcloud.com/coupon_token.png'></image>
+            </view>
+          </view>
+          <navigator wx:if="{{item.AllowOfflineWriteOff == false}}" class='lingqu' url='../couponsuitproduct/couponsuitproduct?id={{item.Id}}'>
+            去使用
+          </navigator>
+          <navigator class='lingqu' wx:if="{{item.AllowOfflineWriteOff}}" url='../Receivetails/Receivetails?cid={{item.Id}}&couponItemId={{item.CouponItemId}}'>
+            去使用
+          </navigator>
+        </view>
+      </view>
+    </view>
+    <view class="m-loading-box">
+      <block wx:if="{{isspage}}">
+        <view class="u-loadmore">
+          <lael class="u-loading"></lael>
+          <text class="u-loadmore-tips">正在加载</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips">没有更多数据啦！</text>
+        </view>
+      </block>
+    </view>
+  </block>
+  <view class="m-nullcontent" wx:if="{{showw}}">
+    <view class="m-nullpage-middle">
+      <label class="iconfont icon-meiyougengduo"></label>
+      <view class="m-null-tip">
+        <text>亲~什么都没有</text>
+        <text>没有可领的优惠券~</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="msk2" wx:if="{{!flag}}" bindtap="outertouch">
+  <view class='m-coupon-box' catchtap='innertouch'>
+    <view class='coupon_title'>领券成功</view>
+    <view class='coupon_back' style=''>
+      <view style='width:100%;height:280rpx;background:#fff;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx'>
+        <view class='shopbox'>
+          <view class='shop_name'>
+            {{Coupons.Name}}
+          </view>
+        </view>
+        <view class='context_box'>
+          <view wx:if="{{islength.length<4}}" class='left'>
+            <text style='font-size:48rpx'>￥</text>
+            <text style='font-size:80rpx'>{{Coupons.DiscountMoney}}</text>
+          </view>
+          <view wx:else class='left2'>
+            <text style='font-size:26rpx'>￥</text>
+            <text style='font-size:70rpx'>{{Coupons.DiscountMoney}}</text>
+          </view>
+          <view class='right' wx:if="{{islength.length<4}}">
+            <view class='youhuiquan' style='font-size:28rpx'>{{Coupons.CouponMoneyLimitDec}}</view>
+            <view class='manjian' style='font-size:24rpx'>{{Coupons.CouponTypeDec}}</view>
+          </view>
+          <view wx:else class='right'>
+            <view class='youhuiquan' style='font-size:28rpx'>{{Coupons.CouponMoneyLimitDec}}</view>
+            <view class='manjian' style='font-size:24rpx'>{{Coupons.CouponTypeDec}}</view>
+          </view>
+        </view>
+        <view class='under' wx:if="{{Coupons.AllowOfflineWriteOff}}">支持线下使用</view>
+        <!-- style='padding-top:{{Coupons.AllowOfflineWriteOff?"8rpx":"30rpx"}}' -->
+        <view class='youxiaoqi'>
+          <text>{{Coupons.StrValidateEnd}}</text>
+        </view>
+      </view>
+      <view style='width:100%;height:32rpx'>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/partingLine.png' style='width:100%;height:100%;vertical-align:top;'></image>
+      </view>
+      <view style='width:100%;height:136rpx;background:#fff;border-bottom-left-radius: 20rpx;border-bottom-right-radius: 20rpx'>
+        <navigator wx:if="{{Coupons.AllowOfflineWriteOff == false}}" class='lijishiyong_box' url='../couponsuitproduct/couponsuitproduct?id={{Id}}' hover-class='none'>
+          <view class='lijishiyong'>立即使用</view>
+        </navigator>
+        <navigator wx:if="{{Coupons.AllowOfflineWriteOff}}" class='lijishiyong_box' url='../Receivetails/Receivetails?cid={{Coupons.Id}}&couponItemId={{Coupons.CouponItemId}}' hover-class='none'>
+          <view class='lijishiyong'>立即使用</view>
+        </navigator>
+      </view>
+      <view class="close_msk1" wx:if="{{!flag}}" catchtap="outertouch">
+        <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="u-top">
+  <navigator url='../index/index' open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+</view>
+<view class='my_coupon'>
+  <view class='my_coubut' bindtap='nav_mycou'>
+    我的优惠券
+  </view>
+</view>
+<!-- <auth-info></auth-info> -->

@@ -1,0 +1,137 @@
+<!--pages/Coupondetails/Coupondetails.wxml-->
+<import src="../../tpl/shareMskTpl.wxml" />
+<view class='tails_box'>
+  <view class='tails_logo'>
+    <image style="width: 100rpx;height: 100rpx;" src='{{CenterCoupon.WapLogoPath}}'></image>
+  </view>
+  <view class='tails_shopname'>
+    <text>{{couponname}}</text>
+  </view>
+  
+  <view class='tails_couname'>
+    <text>{{CenterCoupon.Name}}</text>
+  </view>
+  <view class='tails_mon'>
+    <label style='font-size:30rpx;margin-right:8rpx'>{{Currency}}</label>
+    <label style='font-size:60rpx'>{{CenterCoupon.DiscountMoney}}</label>
+  </view>
+  <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo22" class='tails_but' data-id="{{CenterCoupon.Id}}" wx:if="{{CenterCoupon.UsedStatus == 1 && CenterCoupon.CouponType==1 }}">
+    立即领取
+  </button>
+  <button class='tails_but' open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo11"  data-cardId="{{CenterCoupon.CardId}}"  wx:if="{{CenterCoupon.UsedStatus == 1  && CenterCoupon.CouponType==2}}">
+    立即领取
+  </button>
+  <view class='tails_but' wx:if="{{CenterCoupon.UsedStatus == 2}}">
+    已领完
+  </view>
+  <!-- <view class='tails_but' >
+      立即使用
+    </view> -->
+  <navigator class='tails_but' wx:if="{{CenterCoupon.UsedStatus == 3}}" url='../couponsuitproduct/couponsuitproduct?id={{CenterCoupon.Id}}'>
+    去使用
+  </navigator>
+  <view class='tails_but' wx:if="{{CenterCoupon.UsedStatus == 4}}">
+    已使用
+  </view>
+  <view class='tails_time'>
+    {{CenterCoupon.StrValidateEnd}}
+  </view>
+  <view class='share' bindtap="shareBox">
+    <image src='../../img/shrae.png' style="width: 100%;height: 100%;"></image>
+  </view>
+</view>
+<view style='width:100%'>
+  <view class='tails_tox'>
+    <view class='tail_fo1' style="width: 90%;margin: 0 auto;">领取条件</view>
+    <view class='tail_fo2'>
+      <view style="/*margin-bottom: 5px*/width: 90%;margin: 13rpx auto 5px auto;"> 1、{{CenterCoupon.UnSentCountSr}}</view>
+      <view style="/*margin-bottom: 5px*/width: 90%;margin: 0 auto 5px auto;wxcs_style_margin: 0 auto 10rpx auto;"> 2、{{CenterCoupon.AmountLimitStr}}</view>
+
+    </view>
+  </view>
+</view>
+<view style='width:100%'>
+  <view class='tails_tox'>
+    <view class='tail_fo1' style="width: 90%;margin: 0 auto;">使用条件</view>
+    <view class='tail_fo2'>
+      <view style="/*margin-bottom: 5px*/width: 90%;margin: 13rpx auto 5px auto;">1、{{CenterCoupon.MoneyLimitStr}}</view>
+      <view style="/*margin-bottom: 5px*/width: 90%;margin: 0 auto 5px auto;wxcs_style_margin: 0 auto 10rpx auto;">
+            <label style="margin-right: 57rpx;float:left"> 2、{{CenterCoupon.ApplyTypeStr}}</label>
+              <!-- <label style="color: #FFCA81;"> -->
+              
+                <navigator hover-class='none' style="color: #FFCA81;float:left"  url='../couponsuitproduct/couponsuitproduct?id={{CenterCoupon.Id}}'> 查看 </navigator> 
+                <!-- </label> -->
+        </view>
+
+    </view>
+  </view>
+</view>
+<view style='width:100%' wx:if="{{CenterCoupon.Description != ''&& CenterCoupon.Description != null  || CenterCoupon.AllowOfflineWriteOff }}">
+  <view class='tails_tox' style="padding-bottom:60rpx;width: 83%;">
+    <view class='tail_fo1' style='color:#9B9B9B '>使用说明</view>
+    <view class='tail_fo3' style='color:#9B9B9B;height:43rpx' wx:if="{{Coupons.AllowOfflineWriteOff}}">支持线下使用，领取后向店员展示优惠券详情 </view>
+        <view class='tail_fo3' style='color:#9B9B9B;height:43rpx' wx:if="{{Coupons.AllowOfflineWriteOff == undefined &&CenterCoupon.AllowOfflineWriteOff}}">支持线下使用，领取后向店员展示优惠券详情 </view>
+    <!-- <view class='tail_fo3' style='color:#9B9B9B;white-space:pre-wrap' wx:if="{{CenterCoupon.Description != ''}}">
+      {{CenterCoupon.Description}}
+    </view> -->
+      <rich-text wx:if='{{CenterCoupon.Description}}'style="white-space: pre-line;word-break:break-all" class='text_color' nodes='{{CenterCoupon.Description}}'></rich-text>
+  </view>
+</view>
+<view class="msk2" wx:if="{{!flag}}" bindtap="outertouch">
+  <view class='m-coupon-box' catchtap='innertouch'>
+    <view class='coupon_title'>领券成功</view>
+    <view class='coupon_back' style=''>
+      <view style='width:100%;height:280rpx;background:#fff;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx'>
+        <view class='shopbox'>
+          <view class='shop_name'>
+            {{Coupons.Name}}
+          </view>
+        </view>
+        <view class='context_box'>
+          <view wx:if="{{islength.length<4}}" class='left'>
+            <text style='font-size:48rpx'>￥</text>
+            <text style='font-size:80rpx'>{{Coupons.DiscountMoney}}</text>
+          </view>
+          <view wx:else class='left2'>
+            <text style='font-size:26rpx'>￥</text>
+            <text style='font-size:70rpx'>{{Coupons.DiscountMoney}}</text>
+          </view>
+          <view class='right' wx:if="{{islength.length<4}}">
+            <view class='youhuiquan' style='font-size:28rpx'>{{Coupons.CouponMoneyLimitDec}}</view>
+            <view class='manjian' style='font-size:24rpx'>{{Coupons.CouponTypeDec}}</view>
+          </view>
+          <view wx:else class='right'>
+            <view class='youhuiquan' style='font-size:28rpx'>{{Coupons.CouponMoneyLimitDec}}</view>
+            <view class='manjian' style='font-size:24rpx'>{{Coupons.CouponTypeDec}}</view>
+          </view>
+        </view>
+          <view class='under' wx:if="{{Coupons.AllowOfflineWriteOff}}">支持线下使用</view>
+       <!-- style='padding-top:{{Coupons.AllowOfflineWriteOff?"8rpx":"30rpx"}}' -->
+        <view class='youxiaoqi' >
+          <text>{{Coupons.StrValidateEnd}}</text>
+        </view>
+      </view>
+      <view style='width:100%;height:32rpx'>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/partingLine.png' style='width:100%;height:100%;vertical-align:top;'></image>
+      </view>
+      <view style='width:100%;height:136rpx;background:#fff;border-bottom-left-radius: 20rpx;border-bottom-right-radius: 20rpx'>
+           <navigator wx:if="{{Coupons.AllowOfflineWriteOff == false}}" class='lijishiyong_box' url='../couponsuitproduct/couponsuitproduct?id={{Id}}' hover-class='none'>
+          <view class='lijishiyong'>立即使用</view>
+        </navigator>
+          <navigator wx:if="{{Coupons.AllowOfflineWriteOff}}" class='lijishiyong_box' url='../Receivetails/Receivetails?cid={{Coupons.Id}}&couponItemId={{Coupons.CouponItemId}}' hover-class='none'>
+          <view class='lijishiyong'>立即使用</view>
+        </navigator>
+      </view>
+      <view class="close_msk1" wx:if="{{!flag}}" catchtap="outertouch">
+        <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="u-tap-btn">
+ 
+  <navigator url="../../pages/index/index" open-type="switchTab" class="u-go-home" style="box-shadow:0px 0rpx 0rpx;">
+    <view class="iconfont icon-shouyeshouye" style="font-size:50rpx;"></view>
+  </navigator>
+</view>
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />

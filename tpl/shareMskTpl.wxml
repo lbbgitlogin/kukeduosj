@@ -1,0 +1,36 @@
+<template name="shareMskTpl">
+  <view class="shareMsk {{PageQRCodeInfo.IsShare?'':'hide'}}">
+    <view class="sharebox {{PageQRCodeInfo.IsShareBox?'bounceInUp animated':'bounceOutDown animated'}}">
+      <view class='shareList g-flex '>
+        <view class='shareItem g-flex-item'>
+          <view class='shareBtn'>
+            <button  open-type="share" style='line-height:0' hover-class="none">
+              <image src='http://appicon-1253690476.file.myqcloud.com/img/friend.png' style='width:100rpx;height:100rpx;margin-bottom:6rpx'></image>
+            </button>
+
+            <label>分享给好友</label>
+          </view>
+        </view>
+        <view class='shareItem g-flex-item'>
+          <view class='shareBtn'>
+            <button open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" style='line-height:0' hover-class="none">
+              <image src='http://appicon-1253690476.file.myqcloud.com/img/allfriend.png' style='width:100rpx;height:100rpx'></image>
+
+            </button>
+            <label>生成海报</label>
+          </view>
+        </view>
+      </view>
+      <view class='cancelShare' bindtap='cancelShare'>取消</view>
+    </view>
+    <view class="shareCodeImg {{PageQRCodeInfo.IsJT?'':'hide'}}">
+      <icon type="clear" size="20" bindtap='cancelShare'></icon>
+      <view bindtap='showCodeImg'>
+        <image mode="widthFix" src='{{PageQRCodeInfo.Path}}'></image>
+      </view>
+      <label>保存至相册 分享给好友</label>
+      <button type="primary" size="mini" bindtap="saveImg" style='background:#1AAD19'> 保存图片 </button>
+    </view>
+  </view>
+
+</template>

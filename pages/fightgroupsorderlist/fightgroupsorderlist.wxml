@@ -1,0 +1,81 @@
+<view class="m-product-all">
+  <view class="m-tab">
+    <view class="m-navbar">
+      <view class="m-navbar-item {{tapindex==1?'m-navbar-item-on':''}}" bindtap="allOrders">
+        全部拼团
+      </view>
+      <view class="m-navbar-item {{tapindex==2?'m-navbar-item-on':''}}" bindtap="toBePaid">
+        进行中
+      </view>
+      <view class="m-navbar-item {{tapindex==3?'m-navbar-item-on':''}}" bindtap="receiptOfGoods">
+        拼团成功
+      </view>
+      <view class="m-navbar-item {{tapindex==4?'m-navbar-item-on':''}}" bindtap="toBeEvaluated">
+        拼团失败
+      </view>
+    </view>
+  </view>
+  <block wx:if="{{isData}}">
+  <scroll-view wx:if="{{orderlist.length>0}}" scroll-y="true" class="m-orderlist" bindscrolltolower="scrollbottom">
+    <view wx:for="{{orderlist}}" wx:for-item="items" class="m-panel m-panel-access">
+      <view class="m-panel-hd">订单编号：{{items.OrderNum}}
+      <!-- <label wx:if="{{items.IsCancel}}">拼团失败</label>
+      <label wx:if="{{items.IsSuccess}}">拼团成功</label>
+      <label wx:if="{{!items.IsSuccess && !items.IsCancel}}">拼团中</label> -->
+      <label>{{items.StatuText}}</label>
+      </view>
+      <view class="m-product-list">
+        <navigator url="../productdetail/productdetail?pid={{items.ProductId}}" class="m-product-item">
+          <view class="m-product-img">
+            <!-- <image src="{{items.ProductPic}}" mode="aspectFill" /> -->
+            <zip-img source_img="{{items.ProductPic}}" ></zip-img>
+          </view>
+          <view class="m-product-info">
+            <view class="m-product-name">
+              <label><text class='u-tuan-label' wx:if="{{items.Type=='FIGHTGROUP'}}">拼</text><text class='u-tuan-label' wx:if="{{items.Type=='LUCKYFIGHTGROUP'}}">抽</text>{{items.ProductName}}</label>
+            </view>
+            <view class="m-product-price">
+              <label>{{Currency}}</label>{{items.PreferentialPrice}}
+              <text style="text-decoration: line-through;">{{Currency}}{{items.SalePrice}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+      <view class="m-total-info">
+        实付款：
+        <label class="m-total-price">{{Currency}}{{items.RealTotal}}</label>
+      </view>
+      <view class="m-total-btn">
+        <view data-ON="{{items.OrderNum}}" wx:if="{{!items.IsPaySuccess&&!items.IsSuccess&&items.PayMehodCode!=2}}" class="u-link-btn" bindtap="gotopay">去支付</view>
+        <navigator wx:if="{{items.IsCancel||items.IsSuccess&&items.IsPaySuccess}}" url="../fightgroupsdetail/fightgroupsdetail?pid={{items.ProductId}}&on={{items.OrderNum}}&isfg=true&type={{items.Type}}" class="u-link-btn">拼团详情</navigator>
+        <navigator wx:if="{{!items.IsCancel&&!items.IsSuccess&&(items.IsPaySuccess||items.PayMehodCode==2)}}" url="../fightgroupsdetail/fightgroupsdetail?pid={{items.ProductId}}&on={{items.OrderNum}}&isfg=true&type={{items.Type}}" class="u-link-btn">邀请好友参团</navigator>
+      </view>
+    </view>
+    <view class="m-loading-box">
+      <block wx:if="{{ispage}}">
+        <view class="u-loadmore">
+          <lael class="u-loading"></lael>
+          <text class="u-loadmore-tips">正在加载</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips">没有更多数据啦！</text>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+  </block>
+  <navigator url="../fightgroupslist/fightgroupslist" redirect="true" class="m-nullpage" wx:else>
+    <view class="m-nullpage-middle">
+      <view class="m-null-tip">
+        <label style="font-size:32rpx;">亲~您还没有参与拼团哦，</label><label style="border-bottom:1px solid #db384c;color: #db384c;font-size:32rpx;">快去看看吧</label>
+      </view>
+    </view>
+  </navigator>
+</view>
+<view class="u-top">
+  <navigator url='../index/index' open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+</view>

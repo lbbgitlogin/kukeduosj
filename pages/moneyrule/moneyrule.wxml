@@ -1,0 +1,62 @@
+<view wx:if="{{ruleInfo.RuleEnabled}}">
+  <view class='titlebox'>
+    <image class='t1' src='http://appicon-1253690476.file.myqcloud.com/endorsement/t1.png'></image>
+  </view>
+  <view class='descbox'>
+    <rich-text nodes="{{ruleInfo.PromotionRule}}"></rich-text>
+  </view>
+</view>
+<view class='titlebox'>
+  <image class='t2' src='http://appicon-1253690476.file.myqcloud.com/endorsement/t2.png'></image>
+</view>
+<view class='descbox'>
+  <view class='textbox'>
+    <label>1、如何产生佣金收益</label>
+    当你的粉丝在商城内使用微信支付且成功支付订单后，你将会收到预计佣金收益，<text>{{ruleInfo.ValidDays}}</text>天后，用户没有发生退款行为，自动转为实际佣金，实际佣金满<text>{{ruleInfo.WithdrawThreshold}}</text>元可提现。
+
+  </view>
+  <view class='textbox'> 
+    <label>2、如何计算佣金收益</label>
+    商城里的商品都有相应的佣金收益比例，一级粉丝购物会产生<text>{{ruleInfo.Level1Discount}}%</text>收益，二级粉丝购物会产生<text>{{ruleInfo.Level2Discount}}%</text>收益，<text style='text-decoration: underline;'  wx:if="{{ListInfo.length>0}}" bindtap='ShowPop'>特殊商品除外</text>；粉丝成功支付后，（订单实付金额-运费)*佣金比例即是你的佣金收益。
+  </view>
+  <view class='textbox'>
+    注：订单实付金额，指粉丝实际使用微信支付产生的金额，优惠券抵扣、会员积分抵扣、会员等级折扣不计算在内；按照国家法律规定，当你的月累计收入达到相关税金起征点后，商家会为你代缴税款，你的收益将是税后收入。
+
+  </view>
+</view>
+<view class='titlebox'>
+  <image class='t3' src='http://appicon-1253690476.file.myqcloud.com/endorsement/t3.png'></image>
+</view>
+<view class='descbox'>
+  <view class='textbox'>
+    <label>1、如何才能建立粉丝关系？</label>
+    <navigator style='display:inline' wx:if="{{ruleInfo.UseThreshold}}">
+    当你在商城内购物满足<text>{{ruleInfo.OrderCountThreshold}}</text>次，且购买金额满足<text>{{ruleInfo.OrderTotalMoneyThreshold}}</text>元时，你将可以与其他用户建立粉丝关系；</navigator>将小程序任意页面分享给好友，如果TA未与其他用户绑定粉丝关系，且是通过你的分享首次进入了小程序，那么TA将成为你的一级粉丝；你的一级粉丝也通过这种方式发展了TA自己的一级粉丝，那么TA的一级粉丝会成为你的二级粉丝。
+
+
+  </view>
+  <view class='textbox'>
+    <label>2、粉丝可以解绑吗？
+    </label>
+    粉丝关系一旦绑定，将不能更改，粉丝持续在商城购物，你也会持续获得收益。
+  </view>
+</view>
+<view class='pop-box' wx:if="{{isPop}}">
+  <view class='pop-con'>
+    <view class='pop-title'>
+      自定义分销比例商品
+    </view>
+    <scroll-view scroll-y class='pinfo-box'>
+      <view class='pinfo' wx:for="{{ListInfo}}">
+        <view class='ptitle'>
+            {{item.productName}}
+        </view>
+        <view>一级粉丝佣金比例：{{item.Level1Discount}}%</view>
+        <view>二级粉丝佣金比例：{{item.Level2Discount}}%</view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class='pop-close' bindtap='ShowPop'>
+      <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/close.png'></image>
+    </view>
+</view>

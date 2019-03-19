@@ -1,0 +1,53 @@
+<scroll-view scroll-y="true" class="m-product-all u-pa" bindscrolltolower="scrollbottom" scroll-top="{{scposition}}" wx:if="{{isdata}}">
+	<view class="m-product-list {{viewtype==1?'fadeIn animated m-listv':''}}">
+		<view wx:for="{{PInfo}}" wx:for-item="item" class="m-product-item" data-pid="{{item.ProductId}}" data-ptype="{{item.ProductForm}}" bindtouchstart="removestart" bindtouchmove="removeload" bindtouchend="removeend" data-id="{{item.ProductId}}" bindtap="{{item.IsDelete==true?'tiaozhuan':'gotoProduct'}}">
+			<view  class="m-item-c {{(item.ProductId==T_Id)?'del':''}}">
+				<view style='position:relative' class="m-product-img">
+					<!-- <image src="{{item.Path}}" /> -->
+          <zip-img source_img="{{item.Path}}" ></zip-img>
+           <view class="{{item.ProductStatusStr==''?'hide':'show'}}" style="width:82%;height:44rpx;background-color:rgba(0,0,0,0.6);position:absolute;top:71%;left:9%;color:white;font-size:22rpx;line-height:45rpx">{{item.ProductStatusStr}}</view>
+				</view>
+        
+				<view class="m-product-info">
+					<view class="m-product-name">
+						<label>{{item.ProductName}}</label>
+					</view>
+					<view class="m-product-price">
+						<label>{{Currency}}</label>{{item.price}}
+						<label class="iconfont icon-cart m-addCart"></label>
+					</view>
+				</view>
+				<view class="u-del" data-id="{{item.ProductId}}" catchtap="cancelCollection">
+					取消收藏
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="m-loading-box">
+		<block wx:if="{{ispage}}">
+			<view class="u-loadmore">
+				<lael class="u-loading"></lael>
+				<text class="u-loadmore-tips">正在加载</text>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="u-loadmore u-loadmore-line">
+				<text class="u-loadmore-tips">没有更多数据啦！</text>
+			</view>
+		</block>
+	</view>
+</scroll-view>
+<navigator url="../index/index" open-type="switchTab" class="m-nullpage" wx:else>
+	<view class="m-nullpage-middle">
+		<label class="iconfont icon-meiyougengduo"></label>
+		<view class="m-null-tip">
+			<text>什么都没有</text>
+			<text class="m-null-tipck" style="margin-top:20rpx">马上去选几件中意的商品</text>
+		</view>
+	</view>
+</navigator>
+<view class="u-top">
+  <navigator url='../index/index' open-type="switchTab" class="u-back2">
+    <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+</view>

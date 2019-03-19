@@ -1,0 +1,28 @@
+
+.list-box{background-color: #fff;color: #333;}
+.item-box{padding: 20rpx; border-bottom: 1rpx solid #eee;}
+.flex-box{display: flex;align-items: center;position: relative;}
+.flex-shop{width: 30rpx;height: 30rpx;}
+.flex-title{font-size: 30rpx;margin-left: 10rpx;max-width: 75%;overflow: hidden;height: 40rpx;text-overflow: ellipsis;white-space:nowrap;}
+.flex-postion{display: flex;align-items: center;position: absolute;right: 0;}
+.flex-postion image{width: 20rpx;height: 26rpx;}
+.flex-postion label{font-size: 24rpx;color: #9b9b9b;margin-left: 10rpx;}
+.m-nearbylist{position: absolute;width: 100%;height: 100%;}
+.flex-info{display: flex;flex-direction:column;justify-content: center;}
+.flex-info view{margin: 10rpx 0 0 0;font-size: 28rpx;}
+.flex-info-box{display: flex;align-items: flex-start;}
+.flex-info label{display: inline-block;vertical-align: top;word-wrap:break-word;width: 520rpx;}
+.flex-info image{width: 40rpx;height: 40rpx;position:absolute;right:10rpx; }
+.flex-info-title{flex-basis: 145rpx;}
+.open_ba{width: 80%;margin:0 auto}
+.open_dl{
+width:34%;
+height:79rpx;
+background:#33cc66;
+border-radius:20rpx;
+text-align:center;
+color:#fff;
+margin:79rpx auto 0 auto;
+line-height:75rpx;
+
+}

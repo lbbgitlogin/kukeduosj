@@ -1,0 +1,96 @@
+.paysuccess{
+  height: 160rpx;
+  margin-left:30rpx;
+  display: flex;
+  align-items: center;
+  font-size: 36rpx;
+  color: #000;
+}
+.content{
+  height: 320rpx;
+  background: #fff;
+  padding: 0 30rpx
+}
+.store{
+  font-size: 28rpx;
+  color: #000;
+  height: 80rpx;
+  border-bottom: 1px solid #d9d9d9;
+  line-height: 90rpx;
+}
+.details{
+  display: flex;
+  font-size: 24rpx;
+  color: #000;
+}
+.details-left{
+  width: 45%;
+}
+.details-left view{
+  margin-top: 40rpx;
+}
+.details-right{
+  width: 55%;
+}
+.details-right view{
+  margin-top: 40rpx;
+}
+.m-footer-btn{width: 100%;position:fixed;bottom: 0;left: 0;background-color: #fff;text-align: right;border-top: 1rpx solid #d5d5d5;box-sizing: border-box;padding: 20rpx;}
+.u-link-btn{margin: 0 10rpx;vertical-align: middle;display: inline-block;line-height: 40rpx;}
+
+.move-area {
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
+}
+
+.move-img {
+  height: 126rpx;
+  width: 100rpx;
+  z-index: 5;
+  margin-top: 70%;
+  margin-left: 650rpx;
+}
+
+.move-img image {
+  height: 126rpx;
+  width: 100rpx;
+}
+.shareRPK{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+.shareRPKBox{
+  width: 640rpx;
+  height: 698rpx;
+  background-color: red;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-left: -320rpx;
+  margin-top: -349rpx;
+}
+.sendRPK{
+  width: 222rpx;
+  height: 70rpx;
+  position: absolute;
+  left: 50%;
+  margin-left: -100rpx;
+  top: 50%;
+  margin-top: 140rpx;
+}
+.closeRPK{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  left: 50%;
+  margin-left: -22rpx;
+  bottom: 25rpx;
+}
+.shareCodeImg{height: 800rpx;}
+.u-back2 image{border-radius: 100%;width: 77rpx;height: 77rpx;border: 1px solid #eee;font-size: 20rpx;text-align: center;background-color: #fff;box-shadow: 0px 4rpx 8rpx rgba(0,0,0,0.35);z-index: 999;opacity: 0.8;line-height:77rpx; margin-bottom: 20rpx;}

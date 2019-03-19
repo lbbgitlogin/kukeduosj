@@ -1,0 +1,278 @@
+<!--<navigator wx:if="{{addressid>0}}" url="../addresslist/addresslist?adid={{submitinfo.DeliveryAddress.id}}{{spinfo==''?'':'&spid='+spinfo}}" class="m-addres-info m-cell-access">
+	<view class="m-ad-name">
+		<text>{{submitinfo.DeliveryAddress.consignee}}</text><text>{{submitinfo.DeliveryAddress.phone}}</text>
+	</view>
+	<view class="m-ad-address">
+		<text>{{submitinfo.DeliveryAddress.consigneeAddress}}</text>
+	</view>
+	<view class="m-cell-ft "></view>
+</navigator>-->
+<!--<navigator wx:else url="../addressmanage/addressmanage?adid=-1&issub=true{{spinfo==''?'':'&spid='+spinfo}}" class="m-addres-info m-cell-access">
+	<view class="m-ad-address u-null-ad">
+		<label class="iconfont icon-shouhuodizhi"></label>你还没有收货地址,马上<text>添加</text>
+	</view>
+	<view class="m-cell-ft "></view>
+</navigator>-->
+<view class="m-product-all" wx:if="{{specification}}">
+	<view class="m-product-list">
+		<block wx:for="{{submitinfo.VendorShoppingCartItemsList}}" wx:for-item="items">
+			<view wx:for="{{items.ShoppingCartList}}" wx:for-item="item" class="m-product-item">
+				<view class="m-product-img">
+					<image src="{{item.ProductPic}}" />
+				</view>
+				<view class="m-product-info">
+					<view class="m-product-name">
+						<label>{{item.ProductSaleName}}</label>
+						<label class="m-min-name">{{item.speStr==null?"":item.speStr}}</label>
+					</view>
+					<view class="m-product-price">
+						<label>{{Currency}}{{item.ProductPrice}}</label>
+						<view class="u-cart-num" style="color:#000000" wx:if="{{marktingEventId==0&&type===''}}">
+							<view class="u-num-btn" catchtap="sub" data-num="{{item.Amount}}"  >-</view>
+							<input type="number" value="{{item.Amount}}" bindblur="writenum" type="number" />
+							<view class="u-num-btn" catchtap="add" data-num="{{item.Amount}}"  >+</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+	</view>
+</view>
+<view class="m-product-all" wx:if="{{specification==false}}">
+  <view class="m-product-list">
+    <block wx:for="{{submitinfo.VendorShoppingCartItemsList}}" wx:for-item="items">
+      <view wx:for="{{items.ShoppingCartList}}" wx:for-item="item" class="m-product-item">
+        <view class="m-product-img">
+          <image src="{{item.ProductPic}}" />
+        </view>
+        <view class="m-product-info">
+          <view class="m-product-name">
+            <label>{{item.ProductSaleName}}</label>
+            <label class="m-min-name" style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1">{{item.speStr==null?"":item.speStr}}</label>
+          </view>
+          <view class="m-product-price1">
+            <label>{{Currency}}</label>{{item.ProductPrice}}<text>x{{item.Amount}}</text>
+            <view class="u-cart-num" style="color:#000000" wx:if="{{marktingEventId==0&&type===''}}">
+							<view class="u-num-btn" catchtap="sub" data-num="{{item.Amount}}"  >-</view>
+							<input type="number" value="{{item.Amount}}" bindblur="writenum" type="number" />
+							<view class="u-num-btn" catchtap="add" data-num="{{item.Amount}}"  >+</view>
+						</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+<view class="datetime" wx:if="{{showdate=='true'}}" style="background:#fff;margin-top:20rpx;padding:20rpx 20rpx;display:flex;font-size:30rpx">
+  <view class="section" style="width:60%">
+    <picker mode="date" value="{{date}}" start="{{stdate}}" end="{{eddate}}" bindchange="bindDateChange">
+      <view class="picker">
+        选择日期: {{date}}
+      </view>
+    </picker>
+  </view>
+  <view class="section" style="width:40%">
+    <picker mode="time" value="{{time}}" start="{{st}}" end="{{et}}" bindchange="bindTimeChange"> 
+      <view class="picker">
+        选择时间: {{time}}
+      </view>
+    </picker>
+  </view>
+</view>
+
+<!--地图-->
+<navigator url="../nearbylist/nearbylist?adid={{addressid}}&pid={{ProductId}}&spid={{spinfo}}" class="m-addres-info m-cell-access" style="margin-top:20rpx" wx:if="{{sp==1}}">
+	<label style="font-size:28rpx;margin-left:20rpx">请选择门店:</label>
+	<view class="nearbylist-item"  data-address="{{AddressInfo.Address}}" data-name="{{AddressInfo.StoreName}}"  data-lat="{{AddressInfo.AddressLat}}" data-lng="{{AddressInfo.AddressLng}}" >
+    <view class="item-info">
+      <lable class="item-name">{{AddressInfo.StoreName}}</lable>
+      <lable class="item-distance">{{AddressInfo.Distance}}</lable>
+      <view class="item-phone">商家电话：<label style='color:#0095fd'>{{AddressInfo.StorePhone}}</label></view>
+      <view class="item-address">商家地址：{{AddressInfo.Address}}</view>
+    </view>
+  </view>
+</navigator>
+<!--地图-->
+
+
+
+	<view class="m-cells m-cells-form" style="margin-top:20rpx;z-index:1">
+	<view class="m-cell" wx:if="{{showname=='true'}}">
+		<view class="m-cell-hd" style="width:20%"><label class="u-label">预约人</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" maxlength="20" type="text" value="{{showconsignee}}" placeholder="请输入预约人姓名" bindinput="inputconsignee" />
+		</view>
+		<div wx:if="{{consignee==''}}" class="m-cell-ft">
+			<icon class="m-icon-warn" type="warn"></icon>
+		</div>
+	</view>
+	
+	<view class="m-cell" wx:if="{{showname=='true'}}">
+		<view class="m-cell-hd" style="width:20%"><label for="" class="u-label">手机号码</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" type="number" value="{{showphone}}" placeholder="请输入手机号码" bindinput="inputphone" />
+		</view>
+		<div wx:if="{{!isre || phone==''}}" class="m-cell-ft">
+			<icon class="m-icon-warn" type="warn"></icon>
+		</div>
+	</view>
+  <!-- 必填 -->
+  <view class="m-cell" wx:if="{{submitinfo.ServiceProductExtend.CustomRequiredOne}}">
+		<view class="m-cell-hd" style="width:20%"><label for="" class="u-label">{{submitinfo.ServiceProductExtend.CustomRequiredOne}}</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" maxlength='200' value="{{CustomRequiredOne}}" placeholder="请输入{{submitinfo.ServiceProductExtend.CustomRequiredOne}}(必填)" bindinput="CustomRequiredOne" />
+		</view>
+	</view>
+  <view class="m-cell" wx:if="{{submitinfo.ServiceProductExtend.CustomRequiredTwo}}">
+		<view class="m-cell-hd" style="width:20%"><label for="" class="u-label">{{submitinfo.ServiceProductExtend.CustomRequiredTwo}}</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" maxlength='200' value="{{CustomRequiredTwo}}" placeholder="请输入{{submitinfo.ServiceProductExtend.CustomRequiredTwo}}(必填)" bindinput="CustomRequiredTwo" />
+		</view>
+	</view>
+  <view class="m-cell" wx:if="{{submitinfo.ServiceProductExtend.CustomRequiredThree}}">
+		<view class="m-cell-hd" style="width:20%"><label for="" class="u-label">{{submitinfo.ServiceProductExtend.CustomRequiredThree}}</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" maxlength='200' value="{{CustomRequiredThree}}" placeholder="请输入{{submitinfo.ServiceProductExtend.CustomRequiredThree}}(必填)" bindinput="CustomRequiredThree" />
+		</view>
+	</view>
+  <!-- 必填 -->
+  <!-- 选填 -->
+  <view class="m-cell" wx:if="{{submitinfo.ServiceProductExtend.CustomOptionalOne}}">
+		<view class="m-cell-hd" style="width:20%"><label for="" class="u-label">{{submitinfo.ServiceProductExtend.CustomOptionalOne}}</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" maxlength='200' value="{{CustomOptionalOne}}" placeholder="请输入{{submitinfo.ServiceProductExtend.CustomOptionalOne}}(选填)" bindinput="CustomOptionalOne" />
+		</view>
+	</view>
+  <view class="m-cell" wx:if="{{submitinfo.ServiceProductExtend.CustomOptionalTwo}}">
+		<view class="m-cell-hd" style="width:20%"><label for="" class="u-label">{{submitinfo.ServiceProductExtend.CustomOptionalTwo}}</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" maxlength='200' value="{{CustomOptionalTwo}}" placeholder="请输入{{submitinfo.ServiceProductExtend.CustomOptionalTwo}}(选填)" bindinput="CustomOptionalTwo" />
+		</view>
+	</view>
+  <view class="m-cell" wx:if="{{submitinfo.ServiceProductExtend.CustomOptionalThree}}">
+		<view class="m-cell-hd" style="width:20%"><label for="" class="u-label">{{submitinfo.ServiceProductExtend.CustomOptionalThree}}</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" maxlength='200' value="{{CustomOptionalThree}}" placeholder="请输入{{submitinfo.ServiceProductExtend.CustomOptionalThree}}(选填)" bindinput="CustomOptionalThree" />
+		</view>
+	</view>
+  <!-- 选填 -->
+  <view class="m-cell" wx:if="{{sp==2}}">
+		<view class="m-cell-hd" style="width:20%"><label for="" class="u-label">详细地址</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" maxlength="100" type="text" value="{{showdetail}}" placeholder="请输入详细地址" bindinput="inputdetail" />
+		</view>
+		<view wx:if="{{detail==''}}" class="m-cell-ft">
+			<icon class="m-icon-warn" type="warn"></icon>
+		</view>
+	</view>
+  <view class="m-cell">
+		<view class="m-cell-hd" style="width:20%"><label for="" class="u-label">备注</label></view>
+		<view class="m-cell-bd">
+      <textarea class="u-textarea" maxlength="200" value="{{remark}}" bindinput="inputRemark"  style="height:60rpx"></textarea>
+			<view class="u-textarea-counter"><label>{{remarkLength}}</label>/200</view>
+		</view>
+	</view>
+</view>
+<!--地图-->
+<view wx:if="{{wishi==''}}" style='height:2rpx' >
+	<!-- <label>温馨提示:</label> -->
+	<text>
+		{{wishi}}
+	</text>
+</view>
+<view wx:else class="hint">
+	<label>温馨提示:</label>
+	<text>
+		{{wishi}}
+	</text>
+</view>
+<view class="m-cells total-info">
+	<view class="m-cell">
+		<view class="m-cell-bd">
+			<text>商品总额</text>
+		</view>
+		<view class="m-cell-ft m-order-typetxt">{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.TotalPrice}}</view>
+		<view class="arrow" ></view>
+	</view>
+	<view class="m-cell" wx:if="{{isNullsubmitinfo.ShoppingCartHeaderInfo.OrderEventDiscountMoney>0}}">
+		<view class="m-cell-bd">
+			<text>活动优惠</text>
+		</view>
+		<view class="m-cell-ft m-order-typetxt">-{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.OrderEventDiscountMoney}}</view>
+		<view class="arrow" ></view>
+	</view>
+	<view class="m-cell" bindtap="suitcouponlist" wx:if="{{isCoupon&&type!='LUCKYFIGHTGROUP'}}">
+		<view class="m-cell-bd">
+			<text>优惠券</text> <text style="color:#DB384C;font-size:24rpx;" wx:if="{{submitinfo.ShoppingCartCouponInfoList!=null}}">  ({{submitinfo.ShoppingCartCouponInfoList.length}}张优惠券可用)</text>
+			<text style="color:#DB384C;font-size:24rpx;" wx:else> (无可用优惠券)</text>
+		</view>
+		<view class="m-cell-ft m-order-typetxt">-{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.CouponDiscountMoney}}</view>
+		<view class="arrow m-cell-access" ><view class="m-cell-ft "></view></view>	
+	</view>
+  <view class="m-cell" wx:if="{{!(submitinfo.UserMembership.MemberDiscountMoney==0)&&isMembership}}">
+		<view class="m-cell-bd">
+			<text>会员折扣</text>
+      <text style="font-size:24rpx;color:#717171">({{submitinfo.UserMembership.MemberDiscount}}折)</text>
+		</view>
+		<view class="m-cell-ft m-order-typetxt">-{{Currency}}{{submitinfo.UserMembership.MemberDiscountMoney}}</view>
+		<view class="arrow" ></view>
+	</view>
+  <view class="m-cell" wx:if="{{submitinfo.UserMembership.AllowPointAsCash&&submitinfo.UserMembership.UsablePoint>0&&isMembership}}">
+		<view class="m-cell-bd">
+			<text>使用积分</text>
+      <text style="font-size:24rpx;color:#717171">(可使用{{submitinfo.UserMembership.UsablePoint}}积分)</text>
+		</view>
+    <input type="number" class=" m-cell-ft m-order-typetxt" value="{{integral}}" placeholder="请输入抵扣积分" bindinput="count"/>
+		<view class="arrow" ></view>
+	</view>
+  <view class="m-cell" wx:if="{{submitinfo.UserMembership.AllowPointAsCash&&submitinfo.UserMembership.UsablePoint>0&&isMembership}}">
+    <view class="m-cell-bd">
+        积分抵现
+    </view>
+    <view class="m-cell-ft m-order-typetxt" style="padding-right:20rpx">-{{Currency}}{{discount}}</view>
+  </view>
+  <view class="m-cell" wx:if="{{pm==1&&submitinfo.ShoppingCartHeaderInfo.MaxUsableCash>0&&isECashCard}}">
+    <view class="m-cell-bd">
+      <text>余额抵扣</text>
+      <text style="font-size:24rpx;color:#717171">(可使用{{Currency}}{{submitinfo.ShoppingCartHeaderInfo.MaxUsableCash}})</text>
+    </view>
+    <view class=" m-cell-ft m-order-typetxt" wx:if="{{isBalance}}">{{Currency}}{{balance}}</view>
+    <switch checked bindchange="switchChange" style="transform:scale(0.6);"/>
+  </view>
+	<view class="m-cell ">
+		<view class="m-cell-bd">
+		</view>
+		<view class="m-cell-ft m-total-info" wx:if="{{pm==1}}">
+			实付款：
+      <label class="m-total-price" wx:if="{{isBalance}}">{{Currency}}{{realMoney}}</label>
+      <label class="m-total-price" wx:if="{{isBalance==false}}">{{Currency}}{{disbursements}}</label>
+		</view>
+    <view class="m-cell-ft m-total-info" wx:if="{{pm==2}}">
+			应付款：
+      <label class="m-total-price">{{Currency}}{{disbursements}}</label>
+		</view>
+	</view>
+	<view class="m-cell " style="height:80rpx">
+	</view>
+</view>
+<!--<view class="u-cleanbox"></view>-->
+<view class="m-footer-btn">
+	<view class="m-footer-btn-list">
+		<view class="m-footer-btn-item m-cart-total" style="margin-top:18rpx" >
+			<view>合计：<label>{{Currency}}</label>
+      <text class="m-total-price" wx:if="{{isBalance}}">{{realMoney}}</text>
+      <text class="m-total-price" wx:if="{{isBalance==false}}">{{disbursements}}</text>
+      </view>
+			<!--<view>运费(<label>￥{{submitinfo.ShoppingCartHeaderInfo.FreightPrice}}</label>)</view>-->
+		</view>
+	</view>
+	<view wx:if="{{isSubmit}}" class="m-footer-btn-main u-disabled">
+		正在提交....
+	</view>
+	<block wx:else>
+		<form report-submit="true" bindsubmit="submitorder">
+			<button  class="m-footer-btn-main" formType="submit">提交预约</button>
+		</form>
+	</block>
+</view>
+<!-- <auth-info></auth-info> -->

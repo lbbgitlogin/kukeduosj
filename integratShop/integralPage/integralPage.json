@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "积分商城",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "send-message": "../../common/send-message/send-message",
+    "auth-info": "../../common/authorization-info/authorization-info",
+    "zip-img": "../../common/zip-img/zip-img"
+  }
+}

@@ -1,0 +1,77 @@
+<view class='box'>
+  <view class='box_title'>
+    <input value="{{postTitle2}}" placeholder="帖子标题3~18个字以内" placeholder-style="color:#999;font-size: 30rpx;" class='box_text_input' maxlength="18" bindblur="bindinputpostTitle" bindinput="inputpostTitle">
+
+    </input>
+  </view>
+  <view class='box_text'>
+    <textarea value="{{postContent}}" class='textarea' bindblur="bindTextAreaBlur" placeholder="帖子内容5~3000个字以内" auto-height="true" placeholder-style="  font-size: 30rpx;color: #999;" maxlength="3000" bindinput="inputpostContent" />
+  </view>
+  <view class='pic_box'>
+    <view class='pic_box_img'>
+      <block wx:for="{{ImgList}}" wx:for-item="item">
+        <view style='display: inline-block;position: relative'>
+          <view class='pic_box_image' style='background: url({{item.Url}}) center no-repeat ;background-size:cover;'></view>
+          <view class='shanchu' style=''>
+            <label class="iconfont icon-delete" style='color:#fff' data-id="{{item.SkuId}}" bindtap='delImg' data-index="{{index}}"></label>
+            <!-- <image class='scimg' src='http://appicon-1253690476.file.myqcloud.com/img/yhkj_10.png'  data-index="{{index}}" bindtap='delImg'></image> -->
+          </view>
+        </view>
+
+      </block>
+      <send-message bindtap='UploadImg'>
+        <image class='pic_box_image' src='http://appicon-1253690476.file.myqcloud.com/img/pic_11.png'></image>
+      </send-message>
+
+    </view>
+
+    <!-- <view class='pic_box_pic' bindtap='pic'>
+      <image class='pic_box_image' src='http://appicon-1253690476.file.myqcloud.com/img/pic_11.png'></image>
+    </view> -->
+  </view>
+
+  <view style='background-color:#f6f6f6;padding:20rpx 0 0rpx 0;'>
+    <view class='bk_box'>
+      <view class='bk_box_title'>
+        <span>推荐商品</span>
+      </view>
+      <view class='pic_box_pic'>
+        <view style='display: inline-block;'>
+          <view style='display: inline-block;'>
+            <view wx:for="{{shopback}}" wx:for-item="item" class='pic_box_image' style='background: url({{item.ProductPic}}) center no-repeat ;background-size:cover;'>
+              <view class='shanchu' data-index='{{item.ProductId}}' bindtap='delshopImg' style='bottom:0rpx;margin:0'>
+                <label class="iconfont icon-delete" style='color:#fff' data-id="{{item.ProductId}}" data-index="{{index}}"></label>
+              </view>
+            </view>
+            <image bindtap='shopsearch' wx:if="{{shopback.length < 4}}" class='pic_box_image' src='http://appicon-1253690476.file.myqcloud.com/img/pic_11.png'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style='height:20rpx;background-color:#f6f6f6'></view>
+  <view>
+    <view class='bk_box'>
+      <view class='bk_box_title'>
+        <span>添加到板块</span>
+      </view>
+      <view class='bkspan'>
+        <block wx:for="{{PostsPlateList}}" wx:for-item="item">
+          <send-message id="{{item.Id}}" bindtap="ChoosePlate">
+            <view class="bkspan_span {{item.Id==plateId?'borred':''}}">{{item.PlateName}}</view>
+          </send-message>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+<view style='width:100%;height:79rpx'></view>
+<view class='fabu_box'>
+  <send-message bindtap="AddMemberPosts">
+    <view class='fabu_box_fb'>发布</view>
+  </send-message>
+  <view style='width:2rpx;height:100%;backgroud-color:#fff'></view>
+  <send-message bindtap="SaveDraft">
+    <view class='fabu_box_fb' style='width:375rpx;'>保存草稿</view>
+  </send-message>
+</view>

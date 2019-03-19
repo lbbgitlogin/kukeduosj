@@ -1,0 +1,24 @@
+<template name="shop9">
+    <view class="m-banner">
+      <image src="{{commonTPL.shopinfo.BackGroundPath}}" />
+      <view class="m-content-box">
+      </view>
+      <view class="m-logo">
+        <image src="{{commonTPL.shopinfo.WapLogoPath}}" />
+      </view>
+      <view class="m-shopinfo">
+        <label>{{commonTPL.shopinfo.ShopName}}</label>
+        <label class="iconfont icon-qijiandian"></label>
+        <text wx:if="{{commonTPL.shopinfo.ShopFeatures!=''}}">公告：{{commonTPL.shopinfo.ShopFeatures}}</text>
+      </view>
+    </view>
+    <view class="message">
+      <view class="map">
+        <label></label>
+        <text>上海市闵行区宜山路1768号福维克大厦</text>
+      </view>
+      <view class="call">
+        <image src=""></image>
+      </view>
+    </view>
+</template>

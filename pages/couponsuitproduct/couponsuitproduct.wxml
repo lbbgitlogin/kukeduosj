@@ -1,0 +1,58 @@
+<view>
+  <!-- <view class="m-nullcontent" wx:if="{{SuitProduct.length <= 0&&IsShow}}"> -->
+
+
+  <view class="m-scroll-box" wx:if="{{SuitProducts > 0}}">
+    <scroll-view scroll-y="true" bindscrolltolower="scrollbottom" bindscroll="scrollView" bindscrolltoupper="scrollTop" class="m-product-all u-pa {{istop?'u-patop':'u-pabtn'}}">
+
+      <view class="m-product-list {{viewtype==1?'fadeIn animated m-listv':''}}" style="padding-top:0;">
+        <navigator wx:for="{{SuitProduct}}" wx:for-item="item" url="{{item.ProductForm==2?'../../server/productdetail/productdetail':'../productdetail/productdetail'}}?pid={{item.id}}" class="m-product-item">
+          <view class="m-product-img">
+            <image src="{{item.ProductPic}}" mode="aspectFill" />
+          </view>
+          <view class="m-product-info">
+            <view class="m-product-name">
+              <label>{{item.SalesName}}</label>
+            </view>
+            <view class="m-product-price">
+              <label>{{Currency}}</label>{{item.SalePrice}}
+            </view>
+          </view>
+        </navigator>
+      </view>
+      <view class="u-top">
+        <view class="u-view" bindtap="viewType">
+          <label class="iconfont {{viewtype==1?'icon-viewlist':'icon-viewgallery'}}"></label>
+        </view>
+        <view class="u-back hide" bindtap="retruntop">
+          <label class="iconfont icon-fanhuidingbu"></label>
+        </view>
+        <navigator url='../index/index' open-type="switchTab" class="u-view">
+    <image style='width:31px;height:31px;margin-top:20%' src='http://appicon-1253690476.file.myqcloud.com/endorsement/gohome.png'></image>
+  </navigator>
+      </view>
+      <view class="m-loading-box">
+        <block wx:if="{{ispage}}">
+          <view class="u-loadmore">
+            <lael class="u-loading"></lael>
+            <text class="u-loadmore-tips">正在加载</text>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="u-loadmore u-loadmore-line">
+            <text class="u-loadmore-tips">没有更多数据啦！</text>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+  <view class="m-nullcontent" wx:if="{{SuitProducts <= 0}}">
+    <view class="m-nullpage-middle">
+      <label class="iconfont icon-meiyougengduo"></label>
+      <view class="m-null-tip">
+        <text>亲~什么都没有</text>
+        <text>该优惠券没有可适用的商品~</text>
+      </view>
+    </view>
+  </view>

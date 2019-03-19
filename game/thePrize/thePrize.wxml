@@ -1,0 +1,113 @@
+<scroll-view scroll-y="true" class="m-product-all u-pa" bindscrolltolower="scrollbottom" style='background-color:#f8f8f8;'>
+
+  <view wx:if="{{isdata}}">
+    <block wx:for="{{pdlist}}" wx:for-item="item">
+      <view class="m-product-item">
+        <view class="m-product-img">
+          <image src="{{item.PrizePic}}" />
+        </view>
+        <view class="m-product-info2">
+          <view class="m-product-name" style='height:87rpx;'>
+            <label style='height:87rpx;'>{{item.PrizeName}}</label>
+          </view>
+          <view style='display:flex'>
+            <view style='width:360rpx;'>
+              <view class='price_box'>
+              </view>
+              <view class="m-product-price" style='font-size:25rpx;color:#666'>
+                {{item.CreateTimeStr}}
+              </view>
+            </view>
+            <view class='xiajia_box'>
+              <view class='xiajia' bindtap='drawcoupon' data-id='{{item.Id}}' data-couponid='{{item.CouponId}}' data-islength='{{item.islength}}' data-strValidateEnd='{{item.CouponInfo.StrValidateEnd}}' data-CouponMoneyLimitDec='{{item.CouponInfo.CouponMoneyLimitDec}}' data-CouponTypeDec='{{item.CouponInfo.CouponTypeDec}}' data-DiscountMoney='{{item.CouponInfo.DiscountMoney}}' data-Name='{{item.CouponInfo.Name}}' wx:if="{{item.GrantStatus == 2&&item.CouponId>0}}">
+                领奖品
+              </view>
+              <view class='xiajia' bindtap='receive' data-id='{{item.Id}}' data-url='{{item.PrizePic}}' data-prizename='{{item.PrizeName}}' data-type='{{item.PrizeType}}' wx:if="{{item.GrantStatus == 2&&item.CouponId==0}}">
+                领奖品
+              </view>
+              <view class='xiajia' style='background:#999;' wx:if='{{item.GrantStatus != 2}}'>
+                已领取
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:else class="m-nullpage">
+    <view class="m-nullpage-middle">
+      <label class="iconfont icon-meiyougengduo"></label>
+      <view class="m-null-tip">
+        <text>亲~什么都没有</text>
+        <!-- <text>请尽快去商城后后台完善内容哦</text> -->
+      </view>
+    </view>
+  </view>
+  <view class="m-loading-box" wx:if="{{isdata}}">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <label class="u-loading"></label>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="u-top">
+    <view class="u-back2" bindtap="homeindex">
+      <view class='iconfont icon-shouyeshouye'></view>
+    </view>
+  </view>
+</scroll-view>
+
+
+ <view class="msk2" wx:if="{{!show}}" bindtap="outertouch">
+  <view class='m-coupon-box' catchtap='innertouch'>
+    <view class='coupon_title'>领券成功</view>
+    <view class='coupon_back' style=''>
+    <view style='width:100%;height:280rpx;background:#fff;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx'>
+      <view class='shopbox'>
+        <view class='shop_name'>
+          {{name}}
+        </view>
+      </view>
+      <view class='context_box'>
+        <view wx:if="{{islength.length<4}}" class='left'>
+          <text style='font-size:48rpx'>￥</text>
+          <text style='font-size:80rpx'>{{discountmoney}}</text>
+        </view>
+        <view wx:else class='left2'>
+          <text style='font-size:26rpx'>￥</text>
+          <text style='font-size:70rpx'>{{discountmoney}}</text>
+        </view>
+        <view class='right' wx:if="{{islength.length<4}}">
+          <view class='youhuiquan' style='font-size:35rpx'>{{CouponMoneyLimitDec}}</view>
+          <view class='manjian' style='font-size:24rpx'>{{CouponTypeDec}}</view>
+        </view>
+        <view wx:else class='right'>
+          <view class='youhuiquan' style='font-size:30rpx'>{{CouponMoneyLimitDec}}</view>
+          <view class='manjian' style='font-size:24rpx'>{{CouponTypeDec}}</view>
+        </view>
+      </view>
+      <view class='youxiaoqi'>
+        <text>有效日期至：{{strValidateEnd}}</text>
+      </view>
+      </view>
+      <view style='width:100%;height:32rpx'>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/partingLine.png' style='width:100%;height:100%;vertical-align:top;'></image>
+      </view>
+      <view style='width:100%;height:136rpx;background:#fff;border-bottom-left-radius: 20rpx;border-bottom-right-radius: 20rpx'>
+      <navigator class='lijishiyong_box' url='../couponsuitproduct/couponsuitproduct?id={{couponId}}' hover-class='none'>
+        <view class='lijishiyong'>立即使用</view>
+      </navigator>
+      </view>
+      <view class="close_msk1" wx:if="{{!show}}" catchtap="outertouch">
+        <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png"></image>
+      </view>
+    </view>
+  </view>
+</view> 

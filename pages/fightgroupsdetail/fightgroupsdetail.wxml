@@ -1,0 +1,229 @@
+<import src="../../tpl/shareMskTpl.wxml" />
+<import src="../../tpl/coupon_msk.wxml" />
+<!-- {{FGInfo.ProductPic}} -->
+<scroll-view scroll-y="true" bindscrolltolower="fightPage" scroll-top="{{scposition}}" bindscroll="scrolltoupper" style="position: absolute;height:100%;width:100%;">
+  <view class="m-product-list">
+    <navigator url="../productdetail/productdetail?pid={{FGInfo.ProductId}}" class="m-product-item m-product-GP">
+      <view class="m-product-img">
+        <image src="{{FGInfo.ProductPic}}" />
+        <!-- <zip-img source_img="{{FGInfo.ProductPic}}" ></zip-img>  -->
+
+      </view>
+      <view class="m-product-info">
+        <view class="m-product-name">
+          <label>{{FGInfo.ProductName}}</label>
+          <view class='groupNumber' style='margin-top:18rpx'>拼团省{{FGInfo.CheapPrice}}</view>
+        </view>
+        <view style='position:absolute;bottom:20rpx;'>
+          <view class="groupNumber" style='margin-bottom:12rpx'>
+            <!-- <label class="iconfont icon-icon"></label> -->
+            <text>{{FGInfo.UserLimit}}</text>人团</view>
+          <view class="m-product-price">
+            <label>{{Currency}}</label>{{FGInfo.PreferentialPrice}}
+            <label class="u-del-price">{{Currency}}{{FGInfo.SalePrice}}</label>
+          </view>
+        </view>
+        <view class="isSucces">
+       <!-- IsSuccess  是否拼团成立   MarketingEventStatus活动状态 抽奖团抽奖状态：1 待抽奖，2 抽奖中，3 已抽奖  IsGroups是否为该团成员  -->
+          <image class='simg' wx:if="{{FGInfo.IsSuccess && FGInfo.MarketingEventStatus=='3' && !FGInfo.IsGroups}}" src='http://bbcfile.kukeduo.cn//postsplate/2017/12/1c55ae4c-0212-4ead-9e94-4930cc4d7ec4.png'></image>
+
+          <image class='simg' wx:if="{{FGInfo.IsSuccess && FGInfo.MarketingEventStatus!='3'}}" src='http://bbcfile.kukeduo.cn//postsplate/2017/12/1c55ae4c-0212-4ead-9e94-4930cc4d7ec4.png'></image>
+
+          <!-- IsCancel 是否已取消拼团 -->
+          <image class='simg' wx:if="{{FGInfo.IsCancel}}" src='http://bbcfile.kukeduo.cn//postsplate/2017/12/5831a8b8-eb8f-4b9f-a3cc-86cb04d1eb1d.png'></image>
+        </view>
+        <view class='detail' catchtap='gotodetail' wx:if="{{type=='LUCKYFIGHTGROUP'&&FGInfo.MarketingEventStatus=='3'&&FGInfo.IsSuccess&&FGInfo.IsCancel==false&&FGInfo.IsGroups}}">中奖详情</view>
+      </view>
+    </navigator>
+    <view class="headPhoto">
+      <view class="personPhoto" wx:for="{{GroupUsers}}" bindtap='open'>
+        <image class="photo" src="{{item.UserPhoto}}"></image>
+        <image class="photo-icon" src="http://bbcfile.kukeduo.cn//postsplate/2017/12/86bf4319-aa78-479c-8dab-12fd43dc114c.png" wx:if="{{item.IsOwner}}"></image>
+      </view>
+      <view class="personPhoto" wx:for="{{FGInfo.UserLimit>8?8-FGInfo.UserNum:FGInfo.UserLimit-FGInfo.UserNum}}">
+        <image class="photo-bg" src='http://bbcfile.kukeduo.cn//postsplate/2017/12/fffd39c9-02d8-4076-ba84-bf22e596763e.png'></image>
+      </view>
+    </view>
+    <view class="surplus" wx:if="{{!FGInfo.IsCancel && !FGInfo.IsSuccess &&show}}">
+      <view>仅剩{{FGInfo.UserLimit-FGInfo.UserNum}}个名额,</view>
+      <!-- <label style='min-width:160rpx;'>
+      <count-down style="color:#db384c;font-size:38rpx;height:40rpx;line-height:38rpx;" millisecond="{{FGInfo.ShowCountdownMilliseconds}}" Type="2">
+      
+      </count-down>
+      </label> -->
+      <lable style="color:#db384c;min-width:170rpx;text-align:center;">
+        {{time}}
+      </lable>
+      <label>后结束</label>
+    </view>
+    <view class='surplus' wx:if="{{FGInfo.IsCancel&& ispaysuccess}}" style='color:#999999'>未成团,款项将原路返还</view>
+    <block wx:if="{{show}}">
+      <view class='surplus' wx:if="{{FGInfo.MarketingEventStatus=='1'&&  ispaysuccess&&FGInfo.IsSuccess&&type=='LUCKYFIGHTGROUP'}}" style='color:#999999'>{{FGInfo.SuccessTimeStr}}拼团成功,待抽奖</view>
+      <view class="m-btn-box" wx:if="{{!FGInfo.IsCancel && !FGInfo.IsSuccess&&ispaysuccess}}">
+        <send-message MessageType="3" class="u-btn u-btn-default" bindtap="shareBox">邀请好友参团</send-message>
+      </view>
+      <view data-url="../fightgroupslist/fightgroupslist" class="m-btn-box" wx:if="{{FGInfo.IsCancel&&type=='FIGHTGROUP'}}" bindtap='goToUrl'>
+        <send-message MessageType="3" class="u-btn u-btn-default">点击再开一团</send-message>
+      </view>
+
+      <view data-url="../fightgroupslist/fightgroupslist" class="m-btn-box" wx:if="{{FGInfo.IsSuccess&&type=='FIGHTGROUP'}}" bindtap='goToUrl'>
+        <send-message MessageType="3" class="u-btn u-btn-default">点击再开一团</send-message>
+      </view>
+
+      <view data-url="../luckyfightgroupslist/luckyfightgroupslist" class="m-btn-box" wx:if="{{FGInfo.IsCancel&&type=='LUCKYFIGHTGROUP'}}" bindtap='goToUrl'>
+        <send-message MessageType="3" class="u-btn u-btn-default">点击再开一团</send-message>
+      </view>
+
+      <view data-url="../luckyfightgroupslist/luckyfightgroupslist" class="m-btn-box" wx:if="{{FGInfo.IsSuccess&&type=='LUCKYFIGHTGROUP'}}" bindtap='goToUrl'>
+        <send-message MessageType="3" class="u-btn u-btn-default">点击再开一团</send-message>
+      </view>
+
+      <view class="m-btn-box" wx:if="{{!FGInfo.IsSuccess &&!FGInfo.IsCancel&& !ispaysuccess}}">
+
+        <send-message MessageType="3" class="u-btn u-btn-default" bindtap="immediatelyOffered">参与活动</send-message>
+
+      </view>
+    </block>
+  </view>
+  <view class='rule'>
+    <view class='rule-header'>
+      拼团规则
+    </view>
+    <view class='rule-content'>
+    <rich-text nodes="{{FGInfo.Description}}"></rich-text>
+      <!-- <html-view innerText='{{FGInfo.Description}}'></html-view> -->
+    </view>
+  </view>
+  <view class="link">
+    <navigator url="../index/index" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/index.png"></image>
+      <text>首页逛逛</text>
+    </navigator>
+    <navigator url="../category/category" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/allproduct.png"></image>
+      <text>全部商品</text>
+    </navigator>
+    <navigator url="../receivecontent/receivecontent" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/coupon.png"></image>
+      <text>领券中心</text>
+    </navigator>
+    <navigator url="../UserCenter/UserCenter" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/center.png"></image>
+      <text>个人中心</text>
+    </navigator>
+  </view>
+
+  <view class='m-product-list m-listv' wx:if="{{ProductList.length>0}}">
+    <view class='recommend'>一 为您推荐 一</view>
+    <navigator wx:for="{{ProductList}}" url="{{item.ProductForm==2?'../../server/productdetail/productdetail':'../productdetail/productdetail'}}?pid={{item.id}}" class="m-product-item">
+      <view class="m-product-img">
+        <image src="{{item.ProductPic}}" />
+      </view>
+      <view class="m-product-info" style="display:flex; flex-flow: column;justify-content: space-between;border-bottom:none">
+        <view class="m-product-name">
+          <label>{{item.SalesName}}</label>
+        </view>
+        <view class="m-product-price" style='line-height:70rpx;'>
+          <view class="money">
+            <label>{{Currency}}</label>
+            <label style='font-size:32rpx'>{{item.SalePrice}}</label>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <view class="m-loading-box">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <lael class="u-loading"></lael>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+  <!-- <view class="u-top">
+    <view class="u-back" bindtap="returnTop">
+      <label class="iconfont icon-fanhuidingbu"></label>
+    </view>
+  </view> -->
+  <view class="u-top" wx:if="{{isnav}}">
+    <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+    <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+    <!-- <view class="u-view" bindtap="viewType">
+        <label class="iconfont {{viewtype==1?'icon-viewlist':'icon-viewgallery'}}"></label>
+      </view>
+      <view class="u-back" bindtap="returnTop">
+        <label class="iconfont icon-fanhuidingbu"></label>
+      </view> -->
+  </view>
+  <view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+    <view style='position:relative'>
+      <view class="u-top1">
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='../index/index' open-type='switchTab'>
+          <text>首页</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+        </navigator>
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='../fightgroupsorderlist/fightgroupsorderlist'>
+          <text>我的{{type=='FIGHTGROUP'?'拼团':'抽奖团'}}</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_my_fightgrp.png' class='quicknav'></image>
+        </navigator>
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='{{type=="FIGHTGROUP"?"../fightgroupslist/fightgroupslist":"../luckyfightgroupslist/luckyfightgroupslist"}}'>
+          <text>{{type=='FIGHTGROUP'?'拼团':'抽奖团'}}列表</text>
+          <image src='{{type=="FIGHTGROUP"?"http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_fightgrp.png":"http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_lkyfightgrp.png"}}' class='quicknav'></image>
+        </navigator>
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='../UserCenter/UserCenter' open-type='switchTab'>
+          <text>个人中心</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_usercenter.png' class='quicknav'></image>
+        </navigator>
+        <view class='navtext'>
+          <text></text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+        </view>
+        <view class='navtext'>
+          <text></text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+</scroll-view>
+<view class='shadow {{isShow?"":"hide"}}' bindtap='close'>
+  <view class='shadow-content' catchtap='innertouch'>
+    <view class='shadow-header'>
+      <view style='position:relative'>
+        <image class='photo no-border' src='{{colonel.UserPhoto}}'></image>
+        <image class="photo-icon" src="http://bbcfile.kukeduo.cn//postsplate/2017/12/86bf4319-aa78-479c-8dab-12fd43dc114c.png"></image>
+      </view>
+      <label>{{colonel.NickName}}</label>
+      <view class='shadow-header-time'>{{colonel.CreateTimeStr}}</view>
+    </view>
+    <scroll-view scroll-y="true" wx:if="{{participant.length>0}}" class="shadow-scroll" bindscrolltolower="scrollbottom">
+      <view class='shadow-center' wx:for="{{participant}}" wx:if="{{!item.IsOwner}}">
+        <view class='shadow-center-left'>
+          <image class='photo no-border' src='{{item.UserPhoto}}'></image>
+          <text>{{item.NickName}}</text>
+        </view>
+        <view class='shadow-center-right'>
+          <text>{{item.CreateTimeStr}}参团</text>
+        </view>
+      </view>
+      <view class='hint' wx:if="{{!FGInfo.IsCancel && !FGInfo.IsSuccess&&  ispaysuccess}}">
+        人数不足 快邀请小伙伴参团吧~
+      </view>
+    </scroll-view>
+  </view>
+  <view class="close_msk1" catchtap="close">
+    <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png"></image>
+  </view>
+</view>
+
+
+<template is="index_msk" wx:if="{{IsNewUser==1 && CouponAmount>0}}" data="{{CouponAmount, isCancel}}" />
+<template is="success_msk" wx:if="{{!isCancelSuccess}}" data="{{Coupons}}" />
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />

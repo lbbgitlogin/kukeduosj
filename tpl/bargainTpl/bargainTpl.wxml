@@ -1,0 +1,12 @@
+<template name="bargainTpl">
+  <view class='takeBox' wx:if="{{bargainIndex !=null}}">
+    <view class='takeIn'>
+      <view>
+        <image src='{{bargainIndex.Photo}}'></image>
+      </view>
+      <view class='takeText'>
+        <text>{{bargainIndex.Name}}</text>
+      </view>
+    </view>
+  </view>
+</template>

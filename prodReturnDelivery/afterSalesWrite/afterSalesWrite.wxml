@@ -1,0 +1,44 @@
+<view class='hint'>
+  <text> 寄回信息</text> ( 将寄回的物流信息告诉商家)
+</view>
+<view class='flex'>
+  <view>快递公司</view>
+  <view>
+    <input maxlength='30' placeholder='请输入快递公司' value='{{expressCompany}}' bindblur='inputBlur' />
+  </view>
+</view>
+<view class='flex'>
+  <view>快递单号</view>
+  <view class='scan'>
+    <input maxlength='30' placeholder='请输入快递单号' type="text" bindblur='logisticsBlur' value='{{logisticsNum}}'></input>
+    <!-- <input maxlength='30' placeholder='请输入快递单号或扫描快递单号'  type="text" bindblur='logisticsBlur' value='{{logisticsNum}}' ></input> -->
+    <!-- <image src='http://appicon-1253690476.file.myqcloud.com/icon/scan.png'  catchtap="sao"></image> -->
+  </view>
+</view>
+
+<view class='w-product'>
+  <view class='w-title'>寄回商品</view>
+  <block wx:for="{{readyInfo.OrderDetailList}}" wx:for-item="items">
+    <view class='product'>
+      <view class="product-img">
+        <image src='{{items.Path}}'></image>
+      </view>
+      <view class="product-info">
+        <view class='product-name'>{{items.ProductName}}</view>
+        <view class='product-specification'>{{items.SpecStr==null?"":items.SpecStr}}</view>
+        <view class='product-num'>
+          <view class='product-price'>{{Currency}}{{items.FactPrice}}</view>
+          <view>x{{items.Amount}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+
+
+
+
+<view class='d-btn'>
+  <button bindtap='EditSendOrderInfo'>提交信息</button>
+</view>

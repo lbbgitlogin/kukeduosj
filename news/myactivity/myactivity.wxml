@@ -1,0 +1,36 @@
+<block wx:if="{{ispage}}">
+  <scroll-view scroll-y="true" wx:if="{{Info.length>0}}" bindscrolltolower="scrollbottom" style="width:100%;height:{{windowHeight}}px">
+    <navigator url="../activity/activity?id={{items.EventId}}" class="m-activity-item" wx:for="{{Info}}" wx:for-item="items">
+      <image src="{{items.EventMainPic}}" mode="aspectFill" class="m-activity-img" />
+      <view class="m-activity-info">
+        <view class="m-activity-name">{{items.Title}} </view>
+        <label class="iconfont icon-shijian gray"></label>
+          <label class="m-activity-time">{{items.EventTime}}</label>
+      </view>
+    </navigator>
+    <view class="m-loading-box">
+      <block wx:if="{{flag}}">
+        <view class="u-loadmore">
+          <lael class="u-loading"></lael>
+          <text class="u-loadmore-tips">正在加载</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="u-loadmore u-loadmore-line">
+          <text class="u-loadmore-tips">没有更多数据啦！</text>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+ <view class="m-nullcontent" wx:else>
+    <view class="m-nullpage-middle">
+      <label class="iconfont icon-meiyougengduo"></label>
+      <view class="m-null-tip">
+        <text>没有任何活动~~</text>
+        <view style="color:#DB384C;padding:10rpx;" bindtap="gotoActivityList">前往活动中心</view>
+      </view>
+    </view>
+  </view>
+</block>
+

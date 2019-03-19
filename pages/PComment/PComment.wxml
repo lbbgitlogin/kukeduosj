@@ -1,0 +1,74 @@
+<view class="{{show?'cover':''}}" style="z-index:2">
+
+</view>
+<view class="m-box">
+
+  <view class="m-box-item" wx:for="{{CommentInfo.ProductCommentList}}" wx:for-item="item" style="z-index:1">
+    <view class="m-title">
+      <view class="m-pimg">
+        <image mode="scaleToFill" src="{{item.pic}}"></image>
+      </view>
+      <!-- <view style="font-size:24rpx;color:#888;float:left;">
+          <label wx:for="{{item.CommentProductSkuList}}" wx:for-item="Skuitem">
+            {{Skuitem.Name}}：{{Skuitem.SpecificationValueAlias}}
+          </label>
+        </view> -->
+      <view class="m-start">
+        <view class="m-label">商品评分</view>
+        <view wx:if="{{item.ProductCommentId<=0}}" class="m-startBox" wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="itemIndex">
+          <label  class="iconfont icon-start {{(item.Grade!=null&&itemIndex<=item.Grade)?'sel':''}}" data-index="{{itemIndex}}"  data-type="3" data-id="{{item.SkuId}}" bindtap="ServiceStart"></label>
+        </view>
+        <view wx:if="{{item.ProductCommentId>0}}" class="m-startBox" wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="itemIndex">
+          <label  class="iconfont icon-start {{(item.Grade!=null&&itemIndex<=item.Grade)?'sel':''}}"></label>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{item.ProductCommentId<=0}}" class="m-text">
+      <textarea style="z-index:2" auto-height placeholder="分享你的购买心得" maxlength="200" 
+      data-id="{{item.SkuId}}" bindinput="inputOpinion"/>
+      </view>
+<view class="m-text" wx:if="{{item.ProductCommentId>0 && item.CommentInfo!=null}}">
+      <label   data-id="{{item.id}}" disabled="true" >{{item.CommentInfo}}</label>
+    </view>
+    <view class="m-upImg">
+      <view class="m-upImg-item" data-id="{{item.SkuId}}" wx:for="{{item.CommentPicList}}" wx:for-item="imglist" >
+        <image mode="aspectFit" data-id="{{item.SkuId}}" src="{{imglist.Path}}" bindtap="ImgTap"></image>
+        <view wx:if="{{item.ProductCommentId<=0}}" class="u-del-item" data-id="{{item.SkuId}}" data-index="{{index}}" catchtap="delImg"><label class="iconfont icon-delete" data-id="{{item.SkuId}}" data-index="{{index}}"></label></view>
+      </view>
+      <view wx:if="{{item.ProductCommentId<=0}}" class="m-upImg-item upSelect" data-id="{{item.SkuId}}" catchtap="upImgs">
+        <label data-id="{{item.SkuId}}" class="iconfont icon-xiangji"></label>
+      </view>
+    </view>
+  </view>
+
+</view>
+<view class="m-VComment">
+  <view class="m-VConmmenBox">
+    <view class="m-label">卖家服务</view>
+    <view wx:if="{{isDisable}}" class="m-startBox" wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="itemIndex">
+      <label class="iconfont icon-start {{(CommentInfo.VendorScore!=null&&itemIndex<=CommentInfo.VendorScore)?'sel':''}}" data-index="{{itemIndex}}" data-type="1" bindtap="ServiceStart"></label>
+    </view>
+    <view wx:if="{{!isDisable}}" class="m-startBox" wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="itemIndex">
+      <label class="iconfont icon-start {{(CommentInfo.VendorScore!=null&&itemIndex<=CommentInfo.VendorScore)?'sel':''}}"></label>
+    </view>
+  </view>
+  <view class="m-VConmmenBox">
+    <view class="m-label">物流服务</view>
+    <view wx:if="{{isDisable}}" class="m-startBox" wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="itemIndex">
+      <label class="iconfont icon-start {{(CommentInfo.Logisticsservice&&itemIndex<=CommentInfo.Logisticsservice)?'sel':''}}" data-index="{{itemIndex}}" data-type="2" bindtap="ServiceStart"></label>
+    </view>
+    <view wx:if="{{!isDisable}}" class="m-startBox" wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="itemIndex">
+      <label class="iconfont icon-start {{(CommentInfo.Logisticsservice&&itemIndex<=CommentInfo.Logisticsservice)?'sel':''}}"></label>
+    </view>
+  </view>
+</view>
+<view style="height:120rpx;"></view>
+<view class="m-submitComment" wx:if="{{isDisable}}">
+    <view class="m-subBtn" bindtap="submitComment">
+        提交评价
+    </view>
+</view>
+<view class="alert" wx:if="{{show}}" style="z-index:3">
+    <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/true.png"></image>
+  <text style="margin-left:20rpx" >{{Info}}</text>
+</view>

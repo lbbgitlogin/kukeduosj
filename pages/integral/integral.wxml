@@ -1,0 +1,97 @@
+<scroll-view class="m-product-all" scroll-y="true" bindscrolltolower="scrollbottom" style="width:100%;height:100%;position: absolute;">
+  <!--积分余额  -->
+  <view class='balanceBox'>
+    <view>积分余额</view>
+    <view>{{Info.UsablePoint}}</view>
+    <view bindtap='toPoints'>
+      <!-- <navigator url="../index/index" open-type="switchTab"> -->
+       <navigator url="/integratShop/integralPage/integralPage" wx:if="{{PointContent.IsEnabled}}">
+        去花积分
+      </navigator>
+      <navigator url="../index/index" open-type="switchTab" wx:else>
+        去花积分
+      </navigator>
+    </view>
+  </view>
+  <view class='content'>
+    <view class='title'>
+      <view class="{{isTrue?'order':''}}" data-type="1" catchtap='navAnalysis'>积分解读</view>
+      <view class="{{isTrue?'':'order'}}" data-type="2" catchtap='navAnalysis'>积分明细</view>
+    </view>
+    <!--解读文本  -->
+    <view wx:if="{{isTrue}}">
+      <view class='conText'>{{PointContent.memberPointData}}</view>
+      <!--积分规则  -->
+      <view class='regulation'>
+        <!--规则按钮  -->
+        <view class='top'>
+          积分获取规则
+        </view>
+        <!--签到  -->
+        <!--控制盒子切换  -->
+        <view>
+          <view class='signIn'>
+            <view>
+              <image src='http://appicon-1253690476.file.myqcloud.com/img/pen@1x.png'></image>
+            </view>
+            <view class='signInCon'>
+              <text class='texts'>签到</text>
+              <text>每日签到可获得{{PointContent.AttendancePoint}}个积分</text>
+            </view>
+          </view>
+          <!--购物  -->
+          <view class='goShop'>
+            <view>
+              <image src='http://appicon-1253690476.file.myqcloud.com/img/gift@1x.png'></image>
+            </view>
+            <view class='goShopCon'>
+              <text class='texts'>购物</text>
+              <text>确认收货后可获得积分=订单金额*{{PointContent.OrderPointRate}}</text>
+            </view>
+          </view>
+          <!--评价  -->
+          <view class='appraise'>
+            <view>
+              <image src='http://appicon-1253690476.file.myqcloud.com/img/chat@1x.png'></image>
+            </view>
+            <view class='appraiseCon'>
+              <text class='texts'>评价</text>
+              <text>评价一个订单并通过审核可获得{{PointContent.CommentPoint}}个积分</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{isTrue == false}}">
+      <view wx:if="{{list.length>0}}">
+        <view class="detail" wx:for="{{list}}" wx:for-item="items">
+          <view class="detail-left">
+            <text>{{items.Description}}</text>
+            <view  class='textCol'>{{items.CreateTimeStr}}</view>
+          </view>
+          <view class="detail-right">{{items.DirectionStr}}{{items.Point}}</view>
+        </view>
+        <view class="m-loading-box">
+          <block wx:if="{{ispage}}">
+            <view class="u-loadmore">
+              <lael class="u-loading"></lael>
+              <text class="u-loadmore-tips">正在加载</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="u-loadmore u-loadmore-line">
+              <text class="u-loadmore-tips">没有更多数据啦！</text>
+            </view>
+          </block>
+        </view>
+      </view>
+      <view redirect="true" class="m-nullpage" wx:else style="top:20%">
+        <view class="m-nullpage-middle">
+          <view class="m-null-tip">
+            <text>亲~您还没有积分哦</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

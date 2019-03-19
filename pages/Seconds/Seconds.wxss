@@ -1,0 +1,2 @@
+@import '../fightgroupslist/fightgroupslist.wxss';
+.u-back2 image{border-radius: 100%;width: 77rpx;height: 77rpx;border: 1px solid #eee;font-size: 20rpx;text-align: center;background-color: #fff;box-shadow: 0px 4rpx 8rpx rgba(0,0,0,0.35);z-index: 999;opacity: 0.8;line-height:77rpx; margin-bottom: 20rpx;}

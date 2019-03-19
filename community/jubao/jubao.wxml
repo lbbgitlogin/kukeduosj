@@ -1,0 +1,26 @@
+<view class="box">
+  <view class='box_title'>
+    <span>请选择举报原因：</span>
+  </view>
+  <view class='box_text' catchtap="ckitem"  data-id="{{item.Id}}" data-content="{{item.Content}}" wx:for="{{jubaoInfo}}" wx:for-item="item">
+    <view class="m-cart-ck" catchtap="ckitem" data-id="{{item.Id}}" data-content="{{item.Content}}">
+      <icon type="{{item.Id==t_id?'success':'circle'}} " color="{{item.Id==t_id?'#DB384C':'#d5d5d5'}}" />
+    </view>
+    <span>{{item.Content}}</span>
+  </view>
+
+  <view class='box_text'>
+    <view class="m-cart-ck" catchtap="ckitem" data-id="{{inputtapnum}}">
+      <icon type="{{t_id== -1?'success':'circle'}} " color="{{t_id == -1?'#DB384C':'#d5d5d5'}}" />
+    </view>
+    <span wx:if="{{t_id != -1}}">
+      <input class='box_text_input' value="{{value}}" placeholder="其他" placeholder-style="font-size:30rpx;color:#000" disabled="true"></input>
+    </span>
+    <span wx:else>
+      <input class='box_text_input2' focus="{{focus}}" value="{{value}}" placeholder="其他" placeholder-style="font-size:30rpx;color:#000" bindinput="textareavalue"></input>
+    </span>
+  </view>
+</view>
+<view class="btn_box" style='margin-top:60rpx;' bind="submitdata">
+  <view class="u-btn u-btn-default" bindtap="{{buttonClicked?'submitdata':''}}">提交</view>
+</view>

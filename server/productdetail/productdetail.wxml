@@ -1,0 +1,759 @@
+<import src="../../tpl/coupon_msk.wxml" />
+<import src="../../tpl/shareMskTpl.wxml" />
+<import src="../../tpl/bargainTpl/bargainTpl.wxml" />
+<block wx:if="{{isdata}}">
+  <scroll-view class='u-pa1' scroll-y scroll-top="{{scposition}}" bindscroll="scrolltoupper">
+    <view class="m-banner-ad">
+      <swiper indicator-dots="true" autoplay="true" interval="3000" duration="300">
+        <swiper-item wx:for="{{ProductInfo.ProductPicList}}" wx:for-item="item">
+          <image class="slide-image" mode="aspectFill" src="{{item.Path}}" />
+          <navigator wx:if="{{ProductInfo.Video}}" url="../../pages/video/video?pid={{ProductInfo.ProductId}}" class="video">
+            <image src="http://appicon-1253690476.file.myqcloud.com/img/play.png" style="width:100rpx;height:100rpx"></image>
+          </navigator>
+        </swiper-item>
+      </swiper>
+      <!-- 砍价活动剩余时间 -->
+      <view class='bargaining' wx:if="{{ProductEventService.Type=='CUTPRICE'}}">
+        <view class='bargaining_left'>
+          <view class='bargaining_left_num'>
+            已有
+            <text>{{ProductEventService.CutPriceEvent.CutPriceCount}}</text>人参加
+          </view>
+          <view class='bargaining_left_inventory'>
+            库存{{ProductPriceDetail.Stock}}件
+          </view>
+        </view>
+        <view class='bargaining_right'>
+          <view class='bargaining_left_num2'>
+            距离活动结束还剩：
+          </view>
+          <view class='bargaining_left_inventory2'>
+            <block wx:if="{{IsDay==true}}">
+              <text class="m-FGB-time2">{{Time2.day|| 00}}</text>
+              <text class="m-FGB-time-tip">天</text>
+            </block>
+            <text class="m-FGB-time2">{{Time2.hour || 00}}</text>
+            <text class="m-FGB-time-tip">:</text>
+            <text class="m-FGB-time2">{{Time2.min|| 00}}</text>
+            <text class="m-FGB-time-tip">:</text>
+            <text class="m-FGB-time2">{{Time2.sec || 00}}</text>
+            <text class="m-FGB-time-tip"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <!-- 秒杀活动 剩余时间 -->
+    <view class="seckill" wx:if="{{ProductEventService.GroupEventInfo.IsShowCountdown}}">
+      <view class="seckill-left ">
+        <view class="discountPrice ">{{Currency}}
+          <text>{{ProductPriceDetail.ShowPrice}}</text> </view>
+        <view class="Price ">
+          <image src="http://appicon-1253690476.file.myqcloud.com/img/seckill.png "></image>
+          <view>{{Currency}}
+            <text>{{ProductPriceDetail.MarketPrice}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="seckill-right ">
+        <view class="endTime ">距结束还剩</view>
+        <view class="Time ">
+          <text class="time ">{{hours}}</text>
+          <text class="time-tip ">:</text>
+          <text class="time ">{{minutes}}</text>
+          <text class="time-tip ">:</text>
+          <text class="time ">{{seconds}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 普通商品  服务 -->
+    <view class="m-cells " style="margin-top:0" wx:if="{{ProductEventService.Type==''}}">
+
+      <!-- ProductEventService.GroupEventInfo.IsShowCountdown -->
+      <view class="m-cell m-info-box ">
+        <view class="m-cell-bd ">
+          <text>{{ProductInfo.ProductName}}</text>
+          <label>{{ProductInfo.SellingPoints || " "}}</label>
+        </view>
+        <view class="dis " style=" " wx:if="{{ProductInfo.FakeSoldSaleAmount>0}}">
+          <view class="num">
+            已服务
+            <lable style="color:#DB384C">{{ProductInfo.FakeSoldSaleAmount}}</lable>人次
+          </view>
+        </view>
+      </view>
+
+      <view class="m-cell m-info-box">
+        <view class="m-cell-bd" style="width:100%">
+          <view class="" style="width:100%;display:flex;align-items: center;justify-content: space-between">
+            <view class="m-info-price" style="width:100%;display:flex;align-items: center;justify-content: space-between">
+              <view>
+                <text class="m-ShowPrice" wx:if="{{ProductEventService.Type=='CUTPRICE'}}">{{Currency}}{{ProductPriceDetail.ShowPrice}}</text>
+                <text class="m-ShowPrice" wx:elif="{{ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP'}}">{{Currency}}{{ProductPriceDetail.SalePrice}}</text>
+                <text class="m-ShowPrice" wx:elif="{{ProductEventService.Type!='CUTPRICE'}}">{{Currency}}{{ProductPriceDetail.SalePrice}}</text>
+                <text class="m-info-delprice">{{Currency}}{{ProductPriceDetail.MarketPrice}}</text>
+              </view>
+              <view class="progressBarBox" wx:if="{{FGType==2 && (ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP')}}">
+                <view class="progressBarBox-content">
+                  <label style="width:{{(ProductEventService.GroupEventInfo.TimeLimit/ProductEventService.GroupEventInfo.UserLimit)*100}}%"></label>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{SpecLst.length>0}}" class="m-cell m-cell-access m-info-sp" bindtap="ckselectsp">
+        <view class="m-cell-bd">
+          <text class="m-info-tip">已选</text>
+          <label class="m-imfo-sp-selext">
+            <block wx:for="{{SpecLst}}" wx:for-item="items">
+              <block wx:for="{{items.svLst}}" wx:for-item="item">
+                <block wx:if="{{item.IsChecked}}">{{item.Name}} </block>
+              </block>
+            </block>
+          </label>
+        </view>
+        <view class="m-cell-ft"></view>
+      </view>
+    </view>
+
+
+    <!-- 砍价 -->
+    <view class="m-cells" style="margin-top:0" wx:if="{{ProductEventService.GroupEventInfo.IsShowCountdown||ProductEventService.Type=='CUTPRICE'}}">
+      <view class="m-cell m-info-box ">
+        <view class="m-cell-bd ">
+          <text>{{ProductInfo.ProductName}}</text>
+          <label>{{ProductInfo.SellingPoints || " "}}</label>
+        </view>
+        <view class="dis" style=" " wx:if="{{ProductInfo.FakeSoldSaleAmount>0}}">
+          <view class="num">
+            已服务
+            <lable style="color:#DB384C">{{ProductInfo.FakeSoldSaleAmount}}</lable>人次
+          </view>
+        </view>
+      </view>
+
+      <view class="m-cells" wx:if="{{ProductEventService.GroupEventInfo.IsShowCountdown==false}}">
+        <view class="m-cell m-info-box">
+          <view class="m-cell-bd" style="width:100%">
+            <view class="" style="width:100%;display:flex;align-items: center;justify-content: space-between">
+              <view class="m-info-price" style="width:100%;display:flex;align-items: center;justify-content: space-between">
+                <view>
+                  <text class="m-ShowPrice" wx:if="{{ProductEventService.Type=='CUTPRICE'}}">{{Currency}}{{ProductPriceDetail.ShowPrice}}</text>
+                  <text class="m-ShowPrice" wx:elif="{{ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP'}}">{{Currency}}{{ProductPriceDetail.SalePrice}}</text>
+                  <text class="m-ShowPrice" wx:elif="{{ProductEventService.Type!='CUTPRICE'}}">{{Currency}}{{ProductPriceDetail.SalePrice}}</text>
+                  <text class="m-info-delprice">{{Currency}}{{ProductPriceDetail.MarketPrice}}</text>
+                </view>
+                <view class="progressBarBox" wx:if="{{FGType==2 && (ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP')}}">
+                  <view class="progressBarBox-content">
+                    <label style="width:{{(ProductEventService.GroupEventInfo.TimeLimit/ProductEventService.GroupEventInfo.UserLimit)*100}}%"></label>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{SpecLst.length>0}}" class="m-cell m-cell-access m-info-sp" bindtap="ckselectsp">
+        <view class="m-cell-bd">
+          <text class="m-info-tip">已选</text>
+          <label class="m-imfo-sp-selext">
+            <block wx:for="{{SpecLst}}" wx:for-item="items">
+              <block wx:for="{{items.svLst}}" wx:for-item="item">
+                <block wx:if="{{item.IsChecked}}">{{item.Name}} </block>
+              </block>
+            </block>
+          </label>
+        </view>
+        <view class="m-cell-ft"></view>
+      </view>
+    </view>
+
+
+    <!--拼团活动倒计时  -->
+    <view class="m-cells" wx:if="{{ProductEventService.GroupEventInfo.IsShowCountdown==false&&(ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP')}}">
+      <view class="m-cell m-info-box">
+        <view class="m-cell-bd" style="width:100%">
+          <text>{{ProductInfo.ProductName}}</text>
+          <view class="introduce">{{ProductInfo.SellingPoints || " "}}</view>
+          <view class='UserLimit' style='color:#777777;font-size:28rpx;padding-top:6rpx;' wx:if="{{ProductEventService.Type=='LUCKYFIGHTGROUP'}}">抽奖团
+            <text style='color:#ffa600'>{{ProductEventService.GroupEventInfo.UserLimit}}</text>人团</view>
+          <view class="" style="width:100%;display:flex;align-items: center;justify-content: space-between">
+            <view class="m-info-price" style="width:100%;display:flex;align-items: center;justify-content: space-between">
+              <view>
+                <text class="m-ShowPrice" wx:if="{{ProductEventService.Type=='CUTPRICE'}}">{{Currency}}{{ProductPriceDetail.ShowPrice}}</text>
+                <text class="m-ShowPrice" wx:elif="{{ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP'}}">{{Currency}}{{ProductPriceDetail.ShowPrice}}</text>
+                <text class="m-ShowPrice" wx:elif="{{ProductEventService.Type==''}}">{{Currency}}{{ProductPriceDetail.SalePrice}}</text>
+                <text class="m-info-delprice" wx:if="{{ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP'}}">{{Currency}}{{ProductPriceDetail.SalePrice}}</text>
+                <text class="m-info-delprice" wx:else>{{Currency}}{{ProductPriceDetail.MarketPrice}}</text>
+              </view>
+              <view>
+                <label class="m-price-tip" wx:if="{{ProductEventService.Type=='FIGHTGROUP'}}">{{ProductEventService.GroupEventInfo.UserLimit}}人团省{{Currency}}{{SavePrice}}</label>
+              </view>
+              <view class="progressBarBox" wx:if="{{ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP'}}">
+                距离结束还剩：
+                <block wx:if="{{d>1}}">
+                  <text class="m-FGB-time">{{Time.day || 00}}</text>
+                  <text class="m-FGB-time-tip">天</text>
+                </block>
+                <block wx:else>
+                  <text class="m-FGB-time">{{Time.hour || 00}}</text>
+                  <text class="m-FGB-time-tip">:</text>
+                  <text class="m-FGB-time">{{Time.min || 00}}</text>
+                  <text class="m-FGB-time-tip">:</text>
+                  <text class="m-FGB-time">{{Time.sec || 00}}</text>
+                </block>
+              </view>
+              <view class="progressBarBox" wx:if="{{FGType==2 && (ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP')}}">
+                <view class="progressBarBox-content">
+                  <label style="width:{{(ProductEventService.GroupEventInfo.TimeLimit/ProductEventService.GroupEventInfo.UserLimit)*100}}%"></label>
+                  <view class="progressBarBox-text">
+                    <text>还差{{ProductEventService.GroupEventInfo.UserLimit-ProductEventService.GroupEventInfo.TimeLimit}}人成团</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <!-- 暂时注释  避免要用 此处许注释 -->
+            <!-- <view class="dis" style="" wx:if="{{ProductInfo.FakeSoldSaleAmount>0}}">
+              <view class="num">
+                已服务
+                <lable style="color:#DB384C">{{ProductInfo.FakeSoldSaleAmount}}</lable>人次
+              </view>
+            </view> -->
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{SpecLst.length>0}}" class="m-cell m-cell-access m-info-sp" bindtap="ckselectsp">
+        <view class="m-cell-bd">
+          <text class="m-info-tip">已选</text>
+          <label class="m-imfo-sp-selext">
+            <block wx:for="{{SpecLst}}" wx:for-item="items">
+              <block wx:for="{{items.svLst}}" wx:for-item="item">
+                <block wx:if="{{item.IsChecked}}">{{item.Name}} </block>
+              </block>
+            </block>
+          </label>
+        </view>
+        <view class="m-cell-ft"></view>
+      </view>
+    </view>
+    <view class="m-panel m-panel-access m-comment m-fg-comment" wx:if="{{(ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP')&&  ProductEventService.GroupEventInfo.GroupUserInfo.length>0}}">
+      <view class="m-panel-hd">进行中的拼团</view>
+      <view class="m-panel-bd" style="{{!isAll?'max-height:240rpx;overflow:hidden;':''}}">
+        <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo55" wx:for="{{ProductEventService.GroupEventInfo.GroupUserInfo}}" wx:for-item="item" data-InfoId="{{item.OwnGroupId}}" class="m-media-box m-media-box-appmsg button">
+          <view class="m-media-box-hd">
+            <image class="m-media-box-thumb" src="{{item.photo}}" />
+          </view>
+          <view class="m-media-box-bd">
+            <label class="m-media-box-title">{{item.NickName}}</label>
+            <text class="m-media-box-desc">正在开团中</text>
+          </view>
+          <view class="m-media-box-bd m-media-box-bd-tip">
+            <label class="m-media-box-title m-media-box-title-tip">还差{{item.UserLimit-item.UserNum}}人成团</label>
+            <text wx:if="{{item.Time.day>1}}" class="m-media-box-desc m-media-box-desc-tip">剩余 {{item.Time.day}}天 结束
+          </text>
+            <text wx:else class="m-media-box-desc m-media-box-desc-tip">剩余 {{item.Time.hour}}:{{item.Time.min}}:{{item.Time.sec}} 结束
+          </text>
+          </view>
+          <view class="m-media-box-bd">
+            <button class="u-btn u-btn-default">立即参团</button>
+          </view>
+        </button>
+      </view>
+      <view class="m-panel-ft" bindtap="lookall" wx:if="{{(ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP')&& ProductEventService.GroupEventInfo.GroupUserInfo.length>2}}">
+        <a href="javascript:void(0);" class="m-cell m-cell-access m-cell-link">
+          <view class="m-cell-bd" wx:if="{{!isAll}}">查看全部参团</view>
+          <view class="m-cell-bd" wx:else>收起</view>
+          <text class="m-cell-ft"></text>
+        </a>
+      </view>
+    </view>
+
+    <!--参团部分-->
+
+    <!--砍价部分-->
+    <view class='rule' wx:if="{{ProductEventService.Type=='CUTPRICE'}}">
+      <view class="m-ce m-cell-access">
+        <view class="m-cell-bd m-cell-primary">
+          <p>砍价说明</p>
+        </view>
+      </view>
+      <view class="m-Packinglist" style="font-size:24rpx;padding:0">
+        <view style="text-align:left;padding-bottom:10rpx">活动时间：{{ProductEventService.CutPriceEvent.StartTimeStr}} - {{ProductEventService.CutPriceEvent.EndTimeStr}}</view>
+        <html-view innerText='{{ProductEventService.CutPriceEvent.Description}}'></html-view>
+      </view>
+    </view>
+
+    <view>
+      <view class="m-panel m-panel-access m-detail">
+        <view class="m-tab">
+          <view class="m-navbar">
+            <view class="m-navbar-item {{tapindex==1?'m-navbar-item-on':''}}" bindtap="picDetail">
+              服务详情
+            </view>
+            <!-- <view class="m-navbar-item {{tapindex==2?'m-navbar-item-on':''}}" bindtap="spcParam">
+              优惠信息
+            </view> -->
+            <view class="m-navbar-item {{tapindex==3?'m-navbar-item-on':''}}" bindtap="afterService">
+              服务说明
+            </view>
+            <view class="m-navbar-item {{tapindex==4?'m-navbar-item-on':''}}" bindtap="packingList">
+              服务评论
+            </view>
+          </view>
+        </view>
+        <view class="{{tapindex==1?'':'hide'}}">
+          <rich-text nodes="{{ProductInfo.ProductIntro}}" style='word-wrap:break-word'></rich-text>
+        </view>
+        <view class="{{tapindex==2?'':'hide'}}">
+          <view class="m-coupon-list" wx:if="{{ispage}}">
+            <block wx:if="{{CenterCoupon.length>0}}">
+              <view class="m-coupon-item" wx:for="{{CenterCoupon}}">
+                <view class="yes">
+                  <view class="m-coupon-info">
+                    <view class="m-coupon-text">
+                      <label style='display:block'>{{item.Name}}</label>
+                      <view class='CouponUserDesc_box'>
+                        <text style='color:#f43032;font-weight: bold;font-size:40rpx;padding:0 10rpx 0 0'>{{item.DiscountMoney}}</text>
+                        <view class="text1"> {{item.CouponUserDesc}}</view>
+                      </view>
+                      <text>有效日期至：{{item.StrValidateEnd}}</text>
+                    </view>
+                  </view>
+                  <view class='but_box' wx:if="{{item.IsCanReceive == 0 && item.Percentage != 100}}">
+                    <view class='but_top'>
+                      <view class='but_rule'>
+                        <text style='padding-top:18rpx;'>已抢</text>
+                        <text style='font-size: 30rpx;'>{{item.Percentage}}%</text>
+                      </view>
+                    </view>
+                    <view class='lingqu' wx:if="{{item.CouponType==2}}" bindtap="receivenowWeixin" data-cardId="{{item.CardId}}" data-id="{{item.Id}}" data-isreceive="{{item.IsCanReceive}}">
+                      立即领取
+                    </view>
+                    <view class='lingqu' wx:else bindtap="receivenow" data-id="{{item.Id}}" data-isreceive="{{item.IsCanReceive}}">
+                      立即领取
+                    </view>
+                  </view>
+                  <view class='but_box' wx:if="{{item.IsCanReceive != 0 && item.Percentage != 100}}">
+                    <view class='but_top2'>
+                      <view class='but_rule2' style='border:none'>
+                        <image style='width:100%;height:100%' src='http://appicon-1253690476.file.myqcloud.com/coupon_token.png'></image>
+                      </view>
+                    </view>
+                    <navigator class='lingqu' url='../../pages/couponsuitproduct/couponsuitproduct?id={{item.Id}}'>
+                      去使用
+                    </navigator>
+                  </view>
+                </view>
+              </view>
+
+            </block>
+            <view class="m-nullcontent" wx:else>
+              <view class="m-nullpage-middle">
+                <label class="iconfont icon-meiyougengduo"></label>
+                <view class="m-null-tip">
+                  <text>亲~什么都没有</text>
+                  <text>没有可领的优惠券~</text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="msk2" wx:if="{{!flag}}" bindtap="outertouch">
+            <view class='m-coupon-box' catchtap='innertouch'>
+              <view class='coupon_title'>领券成功</view>
+              <view class='coupon_back' style=''>
+                <view style='width:100%;height:280rpx;background:#fff;border-top-left-radius: 20rpx;border-top-right-radius: 20rpx'>
+                  <view class='shopbox'>
+                    <view class='shop_name'>
+                      {{Coupons.Name}}
+                    </view>
+                  </view>
+                  <view class='context_box'>
+                    <view wx:if="{{islength.length<4}}" class='left'>
+                      <text style='font-size:48rpx'>￥</text>
+                      <text style='font-size:80rpx'>{{Coupons.DiscountMoney}}</text>
+                    </view>
+                    <view wx:else class='left2'>
+                      <text style='font-size:26rpx'>￥</text>
+                      <text style='font-size:70rpx'>{{Coupons.DiscountMoney}}</text>
+                    </view>
+                    <view class='right' wx:if="{{islength.length<4}}">
+                      <view class='youhuiquan' style='font-size:35rpx'>{{Coupons.CouponMoneyLimitDec}}</view>
+                      <view class='manjian' style='font-size:24rpx'>{{Coupons.CouponTypeDec}}</view>
+                    </view>
+                    <view wx:else class='right'>
+                      <view class='youhuiquan' style='font-size:30rpx'>{{Coupons.CouponMoneyLimitDec}}</view>
+                      <view class='manjian' style='font-size:24rpx'>{{Coupons.CouponTypeDec}}</view>
+                    </view>
+                  </view>
+                  <view class='youxiaoqi'>
+                    <text>有效日期至：{{Coupons.StrValidateEnd}}</text>
+                  </view>
+                </view>
+                <view style='width:100%;height:32rpx'>
+                  <image src='http://appicon-1253690476.file.myqcloud.com/img/partingLine.png' style='width:100%;height:100%;vertical-align:top;'></image>
+                </view>
+                <view style='width:100%;height:136rpx;background:#fff;border-bottom-left-radius: 20rpx;border-bottom-right-radius: 20rpx'>
+                  <navigator class='lijishiyong_box' url='../../pages/couponsuitproduct/couponsuitproduct?id={{Id}}' hover-class='none'>
+                    <view class='lijishiyong'>立即使用</view>
+                  </navigator>
+                </view>
+                <view class="close_msk1" wx:if="{{!flag}}" catchtap="outertouch">
+                  <image style="width:50rpx;height:50rpx" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="{{tapindex==3?'':'hide'}}">
+          <rich-text nodes="{{ProductInfo.AfterService}}" style='word-wrap:break-word '></rich-text>
+        </view>
+        <view class="{{tapindex==4?'':'hide'}} m-Packinglist">
+          <view class="m-panel m-panel-access m-comment {{ProductInfoService.CommentCount<=0?'hide':''}}">
+            <view class="m-panel-hd">评价（{{ProductInfoService.CommentCount}}）
+            </view>
+            <view class="m-panel-bd">
+              <view class="m-media-box m-media-box-appmsg">
+                <view class="m-media-box-hd">
+                  <image class="m-media-box-thumb" src="{{ProductInfoService.Productcomment[0].Title}}" />
+                </view>
+                <view class="m-media-box-bd">
+                  <label class="m-media-box-title">{{ProductInfoService.Productcomment[0].Account_User}}</label>
+                  <view class="m-media-box-desc">
+                    <view style="margin-bottom:10rpx;">
+                      <label wx:for="{{ProductInfo.CommentProductSkuList}}" wx:for-item="itemSku" style="margin-right:10rpx;font-size:20rpx;">
+                        {{itemSku.Name}}：{{itemSku.SpecificationValueAlias}}
+                      </label>
+                    </view>
+                    <label wx:if="{{ProductInfoService.Productcomment[0].CommentInfo!=null}}"> {{ProductInfoService.Productcomment[0].CommentInfo}}</label>
+                  </view>
+
+                  <view class="m-media-box-info">
+                    <view class="m-media-box-info-meta m-start" wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="itemIndex">
+                      <label class="iconfont icon-start {{(itemIndex<=ProductInfoService.Productcomment[0].Grade)?'sel':''}}" data-index="{{itemIndex}}" data-type="1" bindtap="ServiceStart"></label>
+                    </view>
+                    <view class="m-media-box-info-meta m-tiem">{{ProductInfoService.Productcomment[0].CreateTimeStr}}</view>
+                    <view class="m-media-list">
+                      <image wx:for="{{ProductInfoService.Productcomment[0].ProductCommentPicList}}" wx:for-item="item" src="{{item.Path}}" bindtap="ImgTap"></image>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="m-panel-ft" wx:if="{{ProductInfoService.CommentCount>1}}">
+              <navigator url="../PCommentList/PCommentList?Id={{ProductInfo.ProductId}}" class="m-cell m-cell-access m-cell-link">
+                <view class="m-cell-bd">查看全部评论</view>
+                <text class="m-cell-ft"></text>
+              </navigator>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="u-cleanbox"></view>
+    <view class="m-footer-btn" wx:if="{{ProductEventService.Type==''&&hide}}">
+      <view class="m-footer-btn-list">
+        <view class="m-footer-btn-item" data-id="{{ProductInfo.Id}}">
+          <view class="m-footer-btn-icon">
+            <contact-button size="27" type="default-dark" session-from="weapp">
+            </contact-button>
+            <label class="iconfont icon-more "></label>
+          </view>
+          <text>客服</text>
+        </view>
+        <view class="m-footer-btn-item" bindtap="PDCollection" data-id="{{ProductInfo.Id}}">
+          <view class="m-footer-btn-icon">
+            <label class="iconfont {{isCollection?'icon-favoritesfilling':'icon-favorite'}}" style="{{isCollection?'color:#DB384C':''}}"></label>
+          </view>
+          <text>{{isCollection?'已收藏':'收藏'}}</text>
+        </view>
+      </view>
+      <block wx:if="{{ProductPriceDetail.Stock<=0}}">
+        <view class="m-footer-btn-main m-footer-desable">
+          立即预约
+        </view>
+        <view class="m-footer-btn-main m-footer-desable">
+          库存不足
+        </view>
+      </block>
+      <block wx:if="{{ProductInfo.Status=='offline'||ProductInfo.Pstatus=='offline'||ProductInfo.IsDelete}}">
+        <view class="m-footer-btn-main m-footer-desable">
+          立即预约
+        </view>
+        <view class="m-footer-btn-main m-footer-desable">
+          商品已下架
+        </view>
+      </block>
+      <block wx:else>
+        <view wx:if="{{ProductPriceDetail.SpecLst.length>0}}" class="m-footer-btn-main m-now" bindtap="ckselectsp" style="width:50%">
+          立即预约
+        </view>
+        <view wx:else class="m-footer-btn-main m-now" catchtap="buynow" style="width:50%">
+          立即预约
+        </view>
+      </block>
+    </view>
+    <!-- 拼团 -->
+    <view class="m-footer-btn m-fg-btn" wx:if="{{ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP'&&hide}}">
+      <view class="m-footer-btn-list">
+        <view class="m-footer-btn-item" data-id="{{ProductInfo.Id}}" style="width:50%">
+          <view class="m-footer-btn-icon">
+            <contact-button size="27" type="default-dark" session-from="weapp">
+            </contact-button>
+            <label class="iconfont icon-more "></label>
+          </view>
+          <text>客服</text>
+        </view>
+        <view class="m-footer-btn-item" bindtap="PDCollection" data-id="{{ProductInfo.Id}}" style="width:50%">
+          <view class="m-footer-btn-icon">
+            <label class="iconfont {{isCollection?'icon-favoritesfilling':'icon-favorite'}}" style="{{isCollection?'color:#DB384C':''}}"></label>
+          </view>
+          <text>{{isCollection?'已收藏':'收藏'}}</text>
+        </view>
+      </view>
+      <block wx:if="{{ProductPriceDetail.Stock<=0||ProductInfo.Status=='offline'||ProductInfo.Pstatus=='offline'||ProductInfo.IsDelete}}">
+        <view class="m-footer-btn-main m-footer-desable u-fg">
+          <view>{{Currency}}{{ProductPriceDetail.SalePrice}}</view>
+          <view>普通预约</view>
+        </view>
+        <view class="m-footer-btn-main m-footer-desable u-fg">
+          <view>{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+          <view>开团预约</view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="m-footer-btn-main m-now u-fg" wx:if="{{ProductPriceDetail.SpecLst.length>0}}" bindtap="ckselectsp" data-type="1">
+          <view>{{Currency}}{{ProductPriceDetail.SalePrice}}</view>
+          <view>普通预约</view>
+        </view>
+        <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo31" class="m-footer-btn-main m-now u-fg" wx:else style='border-radius:0'>
+          <view>{{Currency}}{{ProductPriceDetail.SalePrice}}</view>
+          <view>普通预约</view>
+        </button>
+        <view wx:if="{{ProductPriceDetail.SpecLst.length>0&&jiongroup==false}}" data-type="0" class="m-footer-btn-main u-fg" style='background-color: #ff9402;color: #fff;' bindtap="ckselectsp">
+          <view>{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+          <view>开团预约</view>
+        </view>
+        <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo41" wx:if="{{ProductPriceDetail.SpecLst.length<=0&&jiongroup==false}}" class="m-footer-btn-main u-fg" style='background-color: #ff9402;color: #fff;border-radius:0px;'>
+          <view>{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+          <view>开团预约</view>
+        </button>
+        <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo21" data-type="0" wx:if="{{ProductPriceDetail.SpecLst.length>0&&jiongroup}}" class="m-footer-btn-main u-fg" style='background-color: #ff9402;color: #fff;border-radius:0px'>
+          <view>{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+          <view>立即参团</view>
+        </button>
+        <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo41" wx:if="{{ProductPriceDetail.SpecLst.length<=0&&jiongroup}}" class="m-footer-btn-main u-fg" style='background-color: #ff9402;color: #fff;border-radius:0px'>
+          <view>{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+          <view>立即参团</view>
+        </button>
+      </block>
+    </view>
+    <!-- 砍价 -->
+    <view class="m-footer-btn m-fg-btn" wx:if="{{FightGroup&&hide}}">
+      <view class="m-footer-btn-list">
+        <view class="m-footer-btn-item" data-id="{{ProductInfo.Id}}" style="width:50%">
+          <view class="m-footer-btn-icon">
+            <contact-button size="27" type="default-dark" session-from="weapp">
+            </contact-button>
+            <label class="iconfont icon-more "></label>
+          </view>
+          <text>客服</text>
+        </view>
+        <view class="m-footer-btn-item" bindtap="PDCollection" data-id="{{ProductInfo.Id}}" style="width:50%">
+          <view class="m-footer-btn-icon">
+            <label class="iconfont {{isCollection?'icon-favoritesfilling':'icon-favorite'}}" style="{{isCollection?'color:#DB384C':''}}"></label>
+          </view>
+          <text>{{isCollection?'已收藏':'收藏'}}</text>
+        </view>
+      </view>
+      <block wx:if="{{ProductPriceDetail.Stock<=0||ProductInfo.Status=='offline'||ProductInfo.Pstatus=='offline'||ProductInfo.IsDelete}}">
+        <view class="m-footer-btn-main m-footer-desable u-fg">
+          <view>{{Currency}}{{ProductPriceDetail.SalePrice}}</view>
+          <view>立即预约</view>
+        </view>
+        <view class="m-footer-btn-main m-footer-desable u-fg" style='background-color: #ff9402;color: #fff;'>
+          <view>{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+          <view>立即砍价</view>
+        </view>
+      </block>
+      <block wx:else>
+        <button style='border-radius:0px;width:262rpx;' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo21" wx:if="{{ProductPriceDetail.SpecLst.length>0}}" class="m-footer-btn-main u-fg" data-type="1">
+          <view>{{Currency}}{{ProductPriceDetail.SalePrice}}</view>
+          <view>立即预约</view>
+        </button>
+        <button style='border-radius:0' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo7" wx:else class="m-footer-btn-main m-now u-fg" data-type="1">
+          <view>{{Currency}}{{ProductPriceDetail.SalePrice}}</view>
+          <view>立即预约</view>
+        </button>
+        <view wx:if="{{ProductPriceDetail.SpecLst.length>0}}" data-type="0" class="m-footer-btn-main u-fg" style='background-color: #ff9402;color: #fff;' bindtap="ckselectsp">
+          <view>{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+          <view>立即砍价</view>
+        </view>
+        <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo2" wx:if="{{ProductPriceDetail.SpecLst.length<=0}}" class="m-footer-btn-main u-fg" style='background-color: #ff9402;color: #fff;border-radius:0px;'>
+          <view>{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+          <view>立即砍价</view>
+        </button>
+      </block>
+    </view>
+
+    <!-- 普通 -->
+    <view class="m-footer-btn" wx:if="{{(ProductEventService.Type==''||ProductEventService.Type=='PRODUCT')&&!FightGroup&&hide}}">
+      <view class="m-footer-btn-list">
+        <view class="m-footer-btn-item" data-id="{{ProductInfo.Id}}">
+          <view class="m-footer-btn-icon">
+            <contact-button size="27" type="default-dark" session-from="weapp">
+            </contact-button>
+            <label class="iconfont icon-more "></label>
+          </view>
+          <text>客服</text>
+        </view>
+        <view class="m-footer-btn-item" bindtap="PDCollection" data-id="{{ProductInfo.Id}}">
+          <view class="m-footer-btn-icon">
+            <label class="iconfont {{isCollection?'icon-favoritesfilling':'icon-star_off'}} " style="{{isCollection?'color:#DB384C':''}}"></label>
+          </view>
+          <text>{{isCollection?'已收藏':'收藏'}}</text>
+        </view>
+      </view>
+      <block wx:if="{{ProductPriceDetail.Stock<=0}}">
+        <view class="m-footer-btn-main m-footer-desable">
+          立即预约
+        </view>
+        <view class="m-footer-btn-main m-footer-desable">
+          库存不足
+        </view>
+      </block>
+      <block wx:if="{{ProductInfo.Status=='offline'||ProductInfo.Pstatus=='offline'||ProductInfo.IsDelete}}">
+        <view style="width:50%" class="m-footer-btn-main m-footer-desable">
+          已暂停服务
+        </view>
+      </block>
+      <block wx:else>
+        <button style='border-radius:0px;width:50%;' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo21" wx:if="{{ProductPriceDetail.SpecLst.length>0}}" data-type='1' class="m-footer-btn-main m-now">
+          立即预约
+        </button>
+        <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo7" wx:else class="m-footer-btn-main m-now" style="width:50%;border-radius:0px;">
+          立即预约
+        </button>
+      </block>
+    </view>
+
+    <view class="m-panel-sp {{selectsp==0?'hide':''}} " bindtap="closesp">
+      <view class="m-panel-sp-content {{selectct==0?'bounceOutDown animated':'bounceInUp animated'}}" catchtap>
+        <view class="m-panel-sp-pinfo">
+          <view class="m-panel-sp-pimg">
+            <image wx:if="{{selectimg}}" src="{{selectimg}}" />
+            <image wx:else src="{{ProductInfo.productPicList[0].Path}}" />
+          </view>
+          <view class="m-panel-sp-pname">
+            <view class="m-pprice" wx:if="{{ProductEventService.Type=='CUTPRICE'&& maketype !=1}}">{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+            <view class="m-pprice" wx:elif="{{ProductEventService.Type=='CUTPRICE'&& maketype==1}}">{{Currency}}{{ProductPriceDetail.SalePrice}}</view>
+            <view class="m-pprice" wx:elif="{{(ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP')&& maketype !=1}}">{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+            <view class="m-pprice" wx:elif="{{(ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP')&& maketype==1}}">{{Currency}}{{ProductPriceDetail.SalePrice}}</view>
+            <view class="m-pprice" wx:elif="{{ProductEventService.Type=='PRODUCT'&& maketype ==1}}">{{Currency}}{{ProductPriceDetail.ShowPrice}}</view>
+            <view class="m-pprice" wx:else>{{Currency}}{{ProductPriceDetail.SalePrice}}</view>
+            <view class="m-pstock">库存{{ProductPriceDetail.Stock}}件</view>
+            <view wx:if="{{SpecLst.length}}" class="m-pstock">已选择：
+              <block wx:for="{{SpecLst}}" wx:for-item="items">
+                <block wx:for="{{items.svLst}}" wx:for-item="item">
+                  <block wx:if="{{item.IsChecked}}">{{item.Name}} </block>
+                </block>
+              </block>
+            </view>
+          </view>
+          <icon type="cancel" class="m-panel-sp-icon" color="#888" catchtap="closesp" />
+        </view>
+        <scroll-view class="m-panel-sp-listbox" scroll-y>
+          <block wx:for="{{SpecLst}}" wx:for-item="items">
+            <view class="m-panel-sp-listbox-item">
+              <view class="m-cells-title">{{items.Name}}</view>
+              <view class="m-panel-sp-labellist">
+                <block wx:for="{{items.svLst}}" wx:for-item="item">
+                  <label wx:if="{{item.IsChecked}}" class="m-panel-sp-sellabel">{{item.Name}}</label>
+                  <label wx:else data-ckid="{{items.ckid}}" data-spid="{{item.Id}}" catchtap="selectsp">{{item.Name}}</label>
+                </block>
+              </view>
+            </view>
+          </block>
+          <view style="height:96rpx;width:100%;"></view>
+        </scroll-view>
+        <view class="m-m-panel-sp-btn">
+          <view class="m-m-panel-sp-lbtn" wx:if="{{maketype ==1}}" style="{{FightGroup&&isModified==false?'display:none':''}}">
+            <view class="u-cart-num" style="margin-top:21rpx">
+              <view class="u-num-btn" hover-class='u-num-btn-left-hover' catchtap="sub">-</view>
+              <input type="number" value="{{numval}}" bindblur="writenum" />
+              <view class="u-num-btn" hover-class='u-num-btn-left-hover' catchtap="add">+</view>
+            </view>
+          </view>
+          <block wx:if="{{ProductPriceDetail.Stock<=0}}">
+            <view class="m-m-panel-sp-rbtn m-footer-desable" style="width:100%" wx:if="{{(ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP') && maketype !=1}}">立即开团</view>
+            <view class="m-m-panel-sp-rbtn m-footer-desable" style="width:100%" wx:if="{{ProductEventService.Type=='CUTPRICE' && maketype !=1}}">立即砍价</view>
+
+            <view class="m-m-panel-sp-rbtn m-footer-desable" wx:else style="width:50%">立即预约</view>
+          </block>
+          <block wx:else>
+            <view class="m-m-panel-sp-rbtn" style="width:100%" catchtap="immediatelyOffered" wx:if="{{(ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP')&& maketype !=1&&ownGroupId==0}}">立即开团</view>
+            <view class="m-m-panel-sp-rbtn" style="width:100%" catchtap="immediatelyOffered" wx:if="{{(ProductEventService.Type=='FIGHTGROUP'||ProductEventService.Type=='LUCKYFIGHTGROUP')&& maketype !=1&&ownGroupId>0}}">立即参团</view>
+            <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo2" class="m-m-panel-sp-rbtn" style="width:100%" wx:if="{{ProductEventService.Type=='CUTPRICE'&& maketype !=1}}">立即砍价</button>
+            <button open-type="getUserInfo" lang="zh_CN" data-type='1' bindgetuserinfo="onGotUserInfo7" class="m-m-panel-sp-rbtn" style="width:50%;border-radius: 0;" wx:else>立即预约</button>
+          </block>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</block>
+<view class="m-nullpage" wx:else>
+  <view class="m-nullpage-middle">
+    <label class="iconfont icon-meiyougengduo"></label>
+    <view class="m-null-tip">
+      <text>什么都没有</text>
+    </view>
+  </view>
+</view>
+
+
+<!--快捷导航 与 关闭 切换  -->
+<view class="u-top" wx:if="{{isnav}}">
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+</view>
+<view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+  <view style='position:relative'>
+    <view class="u-top1">
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='../../pages/index/index' open-type='switchTab'>
+        <text>首页</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+      </navigator>
+      <view class='{{animation?"navtext1":"navtext"}}' bindtap='shareBox'>
+        <text>分享</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_share.png' class='quicknav'></image>
+      </view>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='../../pages/goodcollection/goodcollection'>
+        <text>我的收藏</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_my_favor.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='../../pages/UserCenter/UserCenter' open-type='switchTab'>
+        <text>个人中心</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_usercenter.png' class='quicknav'></image>
+      </navigator>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+      </view>
+    </view>
+  </view>
+
+</view>
+<!--快捷导航结束  -->
+<template is="index_msk" wx:if="{{IsNewUser==1 && CouponAmount>0}}" data="{{CouponAmount, isCancel}}" />
+<template is="success_msk" wx:if="{{!isCancelSuccess}}" data="{{Coupons}}" />
+
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />
+<template is="bargainTpl" wx:if="{{ProductEventService.Type=='CUTPRICE'}}" data="{{bargainIndex}}" />
+<!-- <auth-info></auth-info> -->

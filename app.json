@@ -1,0 +1,196 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/fansrank/fansrank",
+    "pages/luckydraw/luckydraw",
+    "pages/smashgoldeneggs/smashgoldeneggs",
+    "pages/fightgroupslist/fightgroupslist",
+    "pages/productdetail/productdetail",
+    "pages/category/category",
+    "pages/fightgroupsdetail/fightgroupsdetail",
+    "pages/cart/cart",
+    "pages/Flavorcho/Flavorcho",
+    "pages/rili/rili",
+    "pages/ordersubmit/ordersubmit",
+    "pages/Receivetails/Receivetails",
+    "pages/orderlist/orderlist",
+    "pages/search/search",
+    "pages/UserCenter/UserCenter",
+    "pages/personaldata/personaldata",
+    "pages/cashaccount/cashaccount",
+    "pages/carDdetails/carDdetails",
+    "pages/endorsement/endorsement",
+    "pages/addresslist/addresslist",
+    "pages/addressmanage/addressmanage",
+    "pages/bindphone/bindphone",
+    "pages/orderdetail/orderdetail",
+    "pages/goodcollection/goodcollection",
+    "pages/productlist/productlist",
+    "pages/logisticsprogress/logisticsprogress",
+    "pages/profitlist/profitlist",
+    "pages/fanslist/fanslist",
+    "pages/cashdetaillist/cashdetaillist",
+    "pages/applycash/applycash",
+    "pages/fightgroupsorderlist/fightgroupsorderlist",
+    "pages/nearbylist/nearbylist",
+    "pages/usercoupon/usercoupon",
+    "pages/couponsuitproduct/couponsuitproduct",
+    "pages/applycashdetail/applycashdetail",
+    "pages/suitcouponlist/suitcouponlist",
+    "pages/userfeedback/userfeedback",
+    "pages/PComment/PComment",
+    "pages/PCommentList/PCommentList",
+    "pages/AboutMerchant/AboutMerchant",
+    "pages/favorable/favorable",
+    "pages/favorableorderdetail/favorableorderdetail",
+    "pages/favorablesuitcouponlist/favorablesuitcouponlist",
+    "pages/member/member",
+    "pages/growthValue/growthValue",
+    "pages/integral/integral",
+    "pages/takeOut/takeOut",
+    "pages/video/video",
+    "pages/drawnearbylist/drawnearbylist",
+    "pages/bargain/bargain",
+    "pages/bargainlist/bargainlist",
+    "pages/bargainDetail/bargainDetail",
+    "pages/mybargainlist/mybargainlist",
+    "pages/orderFood/orderFood",
+    "pages/orderTrue/orderTrue",
+    "pages/scan/scan",
+    "pages/remark/remark",
+    "pages/orderMessage/orderMessage",
+    "pages/orderPay/orderPay",
+    "pages/orderMessageDetail/orderMessageDetail",
+    "pages/QRcode/QRcode",
+    "pages/SecondaryPage/SecondaryPage",
+    "pages/publicQRcode/publicQRcode",
+    "pages/recharge/recharge",
+    "pages/cashbalance/cashbalance",
+    "pages/rechargeorderdetail/rechargeorderdetail",
+    "pages/webpage/webpage",
+    "pages/redpacket/redpacket",
+    "pages/luckyfightgroupslist/luckyfightgroupslist",
+    "pages/winningdetails/winningdetails",
+    "pages/greetingCard/greetingCard",
+    "pages/Popularitycharts/Popularitycharts",
+    "pages/receivecontent/receivecontent",
+    "pages/Seconds/Seconds",
+    "pages/moneyrule/moneyrule",
+    "server/productdetail/productdetail",
+    "server/PCommentList/PCommentList",
+    "server/orderlist/orderlist",
+    "server/orderdetail/orderdetail",
+    "server/offlineorderdetail/offlineorderdetail",
+    "server/PComment/PComment",
+    "server/nearbylist/nearbylist",
+    "server/ordersubmit/ordersubmit",
+    "server/productList/productList",
+    "server/suitcouponlist/suitcouponlist",
+    "integratShop/integralPage/integralPage",
+    "integratShop/memberIntegral/memberIntegral",
+    "integratShop/forRecord/forRecord",
+    "integratShop/commodityDetails/commodityDetails",
+    "integratShop/IntegralOrder/IntegralOrder",
+    "integratShop/IntegralDetail/IntegralDetail",
+    "integratShop/IntegralList/IntegralList",
+    "pages/DIYcontent/DIYcontent",
+    "pages/newsletter/newsletter",
+    "pages/navigationpage/navigationpage",
+    "pages/datalits_card/datalits_card",
+    "pages/vip_ind/vip_ind",
+    "prodReturnDelivery/afterSalesIndex/afterSalesIndex",
+    "prodReturnDelivery/afterFor/afterFor",
+    "prodReturnDelivery/afterSalesDetali/afterSalesDetali",
+    "prodReturnDelivery/afterSalesProgress/afterSalesProgress",
+    "prodReturnDelivery/afterSalesWrite/afterSalesWrite",
+    "pages/Coupondetails/Coupondetails"
+  ],
+  "subPackages": [
+    {
+      "root": "news",
+      "pages": [
+        "newsletterdetail/newsletterdetail",
+        "activitylist/activitylist",
+        "activity/activity",
+        "activitycheckin/activitycheckin",
+        "activitysignin/activitysignin",
+        "myactivity/myactivity"
+      ]
+    },
+    {
+      "root": "game",
+      "pages": [
+        "myprize/myprize",
+        "setCards/setCards",
+        "thePrize/thePrize",
+        "mythePrize/mythePrize",
+        "HappyNewYear/HappyNewYear",
+        "HappyNewYearIndex/HappyNewYearIndex",
+        "receiveprize/receiveprize",
+        "previewcard/previewcard"
+      ]
+    },
+    {
+      "root": "community",
+      "pages": [
+        "sqxx/sqxx",
+        "tzparticulars/tzparticulars",
+        "attention/attention",
+        "fans/fans",
+        "Publishedarticles/Publishedarticles",
+        "plate/plate",
+        "jubao/jubao",
+        "userspace/userspace",
+        "searchsq/searchsq",
+        "Postalist/Postalist"
+      ]
+    }
+  ],
+    "permission": {
+      "scope.userLocation": {
+        "desc": "为你寻找最近的健身门店！"
+      }
+    },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#DB384C",
+    "navigationBarTitleText": "",
+    "backgroundColor": "#f8f8f8",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "selectedColor": "#DB384C",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "img/tabBar1.png",
+        "selectedIconPath": "img/tabBar_sel1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "iconPath": "img/tabBar2.png",
+        "selectedIconPath": "img/tabBar_sel2.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "iconPath": "img/tabBar3.png",
+        "selectedIconPath": "img/tabBar_sel3.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "integratShop/integralPage/integralPage",
+        "iconPath": "img/tabBar3.png",
+        "selectedIconPath": "img/tabBar_sel3.png",
+        "text": "积分商城"
+      },
+      {
+        "pagePath": "pages/UserCenter/UserCenter",
+        "iconPath": "img/tabBar4.png",
+        "selectedIconPath": "img/tabBar_sel4.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

@@ -1,0 +1,844 @@
+.notHave {
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  line-height: 33rpx;
+  color: #9b9b9b;
+  /* letter-spacing: 0; */
+  text-align: center;
+}
+.u-top3{
+position:fixed;
+right:-1rpx;
+top:150rpx;
+z-index:99;
+height:67rpx;
+}
+.notHave image {
+  display: block;
+  width: 424rpx;
+  height: 209rpx;
+  margin: 137rpx auto 100rpx;
+  /* margin-top: 137rpx; */
+}
+
+.notText {
+  font-family: PingFangSC-Medium;
+  font-size: 26rpx;
+  line-height: 37rpx;
+  color: #000;
+  margin-top: 40rpx;
+}
+.button {
+  position:inherit;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align:initial;
+  text-decoration: none;
+  line-height:initial;
+  border-radius: 0rpx;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  color: #000;
+  background:none;
+  border: none;
+}
+.button::after{
+  border: none;
+}
+
+.swiperbox {
+  width: 100%;
+  height: 424rpx;
+}
+
+.swiperbox image {
+  width: 100%;
+  height: 100%;
+}
+
+.forRecordBox {
+  width: 100%;
+  height: 160rpx;
+  margin-bottom: 22rpx;
+  box-sizing: border-box;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0 2px 0 0 #efefef, 0 -2px 0 0 #efefef;
+  position: relative;
+}
+
+.forRecordBox .headPortrait {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.forRecordBox .headPortrait image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.forRecordBox .nickBox {
+  margin-left: 20rpx;
+}
+
+.forRecordBox  .nick {
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #000;
+}
+
+.nickName {
+  display:inline-block;
+  max-width: 200rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.forRecordBox  .nick image {
+  width: 27rpx;
+  height: 20rpx;
+  margin-left: 10rpx;
+  margin-right: 5rpx;
+}
+
+.forRecordBox  .nick .vip {
+  font-size: 22rpx;
+  color: #ffc129;
+  line-height: 30rpx;
+}
+
+.forRecordBox  .usable {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  line-height: 33rpx;
+  color: #9b9b9b;
+}
+
+.recordBox {
+  position: absolute;
+  right: 30rpx;
+}
+
+.recordBox image {
+  width: 21rpx;
+  height: 22rpx;
+  margin-right: 19rpx;
+}
+
+.recordBox text {
+  font-size: 24rpx;
+  line-height: 33rpx;
+  color: #9b9b9b;
+}
+
+.recordBox image:last-child {
+  width: 17rpx;
+  height: 17rpx;
+  margin-left: 17rpx;
+}
+
+.overbalance {
+  width: 100%;
+  margin: 22rpx auto;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: 0 -2px 0 0 #efefef, 0 2px 0 0 #efefef;
+}
+
+.overbalanceTitle {
+  width: 720rpx;
+  height: 88rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 26rpx;
+  color: #000;
+  font-weight: 500;
+  line-height: 37rpx;
+  margin-left: 30rpx;
+  padding-top: 27rpx;
+  padding-bottom: 24rpx;
+  box-sizing: border-box;
+  /* letter-spacing: 0; */
+  background: #fff;
+  box-shadow: 0 2rpx 0 0 #efefef;
+}
+
+.overbalanceTitle image {
+  width: 23rpx;
+  height: 26rpx;
+  margin-right: 15rpx;
+}
+
+.overbalanceConversion {
+  width: 100%;
+  height: 469rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+  white-space: nowrap;
+  display: flex;
+}
+
+.everyConversion {
+  display: inline-block;
+  width: 300rpx;
+  height: 430rpx;
+  margin-right: 20rpx;
+  padding: 20rpx 25rpx 34rpx;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: 0 5rpx 10rpx 0 rgba(0, 0, 0, 0.06);
+  border-radius: 8rpx;
+}
+
+.everyConversion .moreCoupon {
+  width: 250rpx;
+  height: 250rpx;
+  background-image: linear-gradient(-225deg, #f87c5e 0%, #db384c 100%);
+  margin-bottom: 24rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  line-height: 33rpx;
+  padding-top: 55rpx;
+  color: #fff;
+}
+
+.moreCoupon view:first-child {
+  width: 100%;
+  height: 90rpx;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 40rpx;
+}
+
+.moreCoupon view:first-child text {
+  font-size: 64rpx;
+  line-height: 90rpx;
+}
+
+.moreCoupon view:last-child {
+  width: 100%;
+  text-align: center;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.everyConversion image {
+  display: block;
+  width: 250rpx;
+  height: 250rpx;
+  margin-bottom: 24rpx;
+}
+
+.everyConversion .titel {
+  display: block;
+  width: 100%;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  line-height: 33rpx;
+  color: #000;
+  /* letter-spacing: 0; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 19rpx;
+}
+
+.everyConversion  .integralBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+
+.everyConversion  .integralBtn text {
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #db384c;
+  /* letter-spacing: 0; */
+}
+
+.everyConversion  .integralBtn button {
+  width: 100rpx;
+  height: 50rpx;
+  background: #db384c;
+  border-radius: 10rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #fff;
+  /* letter-spacing: 0; */
+  padding: 0;
+  margin: 0;
+  line-height: 50rpx;
+}
+
+.sizerBox {
+  width: 100%;
+  height: 470rpx;
+  padding: 20rpx 20rpx 76rpx 46rpx;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.12);
+  position: absolute;
+  z-index: 2;
+}
+
+.sortTit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  line-height: 33rpx;
+  color: #000;
+  margin-bottom: 23rpx;
+}
+
+.sortTit > view:last-child {
+  font-size: 24rpx;
+  color: #db384c;
+  border-bottom: 2rpx solid #db384c;
+}
+
+.sizer {
+  display: flex;
+  align-items: center;
+}
+
+.sizer  view {
+  width: 100rpx;
+  height: 56rpx;
+  text-align: center;
+  line-height: 56rpx;
+  font-size: 24rpx;
+  color: #9b9b9b;
+  margin-right: 20rpx;
+  background: #fff;
+  border: 1px solid #dfdfdf;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+  margin-bottom: 30rpx;
+}
+
+.sizer view.Items {
+  background: #fff9fa;
+  border: 1px solid #db384c;
+}
+
+.InputBox {
+  display: flex;
+  align-items: center;
+}
+
+.place {
+  font-size: 24rpx;
+  color: #9b9b9b;
+}
+
+.InputBox input {
+  width: 280rpx;
+  height: 56rpx;
+  font-size: 24rpx;
+  background: #f8f8f8;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.resetBtn {
+  display: flex;
+  align-items: center;
+  margin-top: 40rpx;
+  border-top: 3px solid #efefef;
+  padding: 41rpx 0;
+  box-sizing: border-box;
+}
+
+.resetBtn button {
+  background: #db384c;
+  border-radius: 10rpx;
+  width: 300rpx;
+  height: 70rpx;
+  padding: 0;
+  margin: 0;
+  font-size: 28rpx;
+  line-height: 70rpx;
+  color: #fff;
+}
+
+.resetBtn button:first-child {
+  background: #f5f5f5;
+  border: 2rpx solid #e8e8e8;
+  box-sizing: border-box;
+  color: #808080;
+  margin-right: 20rpx;
+}
+
+.conversionTitle, .onlyMall, .onlyCoupon {
+  width: 100%;
+  height: 88rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  font-weight: 500;
+  line-height: 37rpx;
+  color: #9d9d9d;
+  background: #fff;
+  position: relative;
+}
+
+.conversionTitle > view {
+  height: 88rpx;
+  line-height: 86rpx;
+  box-sizing: border-box;
+}
+
+.ItemsIndex {
+  color: #db384c;
+  font-weight: 500;
+  border-bottom: 4rpx solid #db384c;
+}
+
+.onlyMall image, .onlyCoupon image {
+  width: 26rpx;
+  height: 26rpx;
+  margin-top: -6rpx;
+  vertical-align: middle;
+  margin-right: 11rpx;
+}
+
+.titleTab {
+  margin-right: 50rpx;
+}
+
+.filtrate {
+  position: absolute;
+  right: 30rpx;
+}
+
+.filtrate image {
+  width: 24rpx;
+  height: 20rpx;
+  margin-right: 15rpx;
+}
+
+.commodityBox {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  min-height: 1000rpx;
+}
+
+.expect {
+  width: 100%;
+  margin-top: 50rpx;
+  text-align: center;
+  font-size: 33rpx;
+}
+
+.commodityBox .commodityLeft:nth-child(odd) {
+  margin-right: 10rpx;
+}
+
+.commodityLeft {
+  width: 370rpx;
+  height: 490rpx;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;
+  background: #fff;
+  border: 2rpx solid #efefef;
+  margin-bottom: 10rpx;
+}
+
+.commodityLeft:first-child, .commodityLeft:nth-child(2) {
+  margin-top: 0;
+}
+
+.commodityLeft image {
+  width: 310rpx;
+  height: 310rpx;
+  margin-bottom: 15rpx;
+}
+
+.commodityLeft > text {
+  display: block;
+  width: 100%;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  line-height: 33rpx;
+  color: #000;
+  /* letter-spacing: 0; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price {
+  margin-top: 28rpx;
+  margin-bottom: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.price > view:first-child {
+  /* display: block; */
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  font-weight: 600;
+  color: #db384c;
+  max-width: 160rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.price > view:last-child {
+  /* display: block; */
+  font-family: PingFangSC-Regular;
+  font-size: 22rpx;
+  line-height: 30rpx;
+  color: #9b9b9b;
+  /* letter-spacing: 0; */
+}
+
+.m-coupon-item {
+  min-height: 1000rpx;
+}
+
+.yes {
+  width: 700rpx;
+  height: 192rpx;
+  margin: 00rpx auto;
+  padding: 12rpx;
+  box-sizing: border-box;
+  background: url(http://appicon-1253690476.file.myqcloud.com/coupon_bg.png) center no-repeat;
+  background-size: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* 
+.m-coupon-info {
+   float: left; 
+  width: 520rpx;
+  margin-left: 18rpx;
+  margin-top: 25.5rpx;
+} */
+
+.m-coupon-info {
+  width: 520rpx;
+  /* margin-left: 18rpx;
+  margin-top: 25.5rpx; *//* display: flex;
+  flex-direction: column; */
+  padding-left: 18rpx;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.m-coupon-text {
+  /* float: left;
+  width: 490rpx; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.m-coupon-text label {
+  color: #333;
+  font-size: 28rpx;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.m-coupon-text text {
+  display: inline-block;
+  font-size: 20rpx;
+  color: #999;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-top: 10rpx;
+  box-sizing: border-box;
+}
+
+/* .CouponUserDesc_box {
+  display: flex;
+   padding-top: 13rpx; 
+  align-items: center;
+} */
+
+.CouponUserDesc_box {
+  margin-top: 13rpx;
+}
+
+.text1 {
+  font-size: 24rpx;
+  color: #9b9b9b;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 5rpx 10rpx;
+  max-width: 360rpx;
+}
+
+.but_box {
+  width: 150rpx;
+  height: 95%;
+  float: left;
+  position: relative;
+}
+
+.but_top {
+  width: 105rpx;
+  height: 90rpx;
+  overflow: hidden;
+  position: absolute;
+  top: 17rpx;
+  left: 37rpx;
+}
+
+.but_rule {
+  width: 100rpx;
+  height: 100rpx;
+  border: 1rpx solid #f43032;
+  border-radius: 100%;
+  color: #f43032;
+  text-align: center;
+  font-size: 22rpx;
+}
+
+.integralVal text {
+  font-family: PingFangSC-Semibold;
+  font-size: 22rpx;
+  line-height: 30rpx;
+  color: #db384c;
+}
+
+.integralVal text:nth-child(2) {
+  font-size: 38rpx;
+  line-height: 40rpx;
+  margin-right: 24rpx;
+}
+
+.but_rule text {
+  display: block;
+  line-height: 30rpx;
+}
+
+.lingqu {
+  font-size: 22rpx;
+  background-color: #f43032;
+  padding: 8rpx 5rpx;
+  color: #fff;
+  border-radius: 77rpx;
+  width: 129rpx;
+  text-align: center;
+  bottom: 0;
+  left: 20rpx;
+  position: absolute;
+}
+
+.msk2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.m-coupon-box {
+  background-color: #db384c;
+  padding: 10rpx 25rpx 35rpx 25rpx;
+  border-radius: 35rpx;
+  width: 62%;
+  margin: 25% auto;
+}
+
+.coupon_title {
+  font-size: 52rpx;
+  color: #fff;
+  margin: 30rpx auto;
+  text-align: center;
+  letter-spacing: 3rpx;
+}
+
+.coupon_back {
+  width: 468rpx;
+  height: 450rpx;
+}
+
+.shopbox {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 48rpx 22rpx 38rpx;
+}
+
+.shop_name {
+  font-size: 28rpx;
+}
+
+.context_box {
+  margin: 10rpx auto 0;
+  display: flex;
+  align-items: center;
+  color: #db384c;
+}
+
+.left {
+  margin-right: 20rpx;
+  text-align: center;
+  width: 30%;
+  max-width: 45%;
+  overflow: hidden;
+}
+
+.left2 {
+  margin-right: 20rpx;
+  text-align: center;
+  width: 35%;
+  max-width: 50%;
+  overflow: hidden;
+  line-height: 53px;
+  font-size: 38rpx;
+}
+
+.right {
+  margin: auto 0;
+  overflow: hidden;
+}
+
+.youhuiquan {
+  border-bottom: 1rpx solid #db384c;
+  overflow: hidden;
+  height: 47rpx;
+  max-width: 280rpx;
+  line-height: 43rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.manjian {
+  max-width: 306rpx;
+  line-height: 50rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.youxiaoqi {
+  font-size: 24rpx;
+  color: #999;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-top: 22rpx;
+  /* text-align: center; */
+  padding-left: 38rpx;
+}
+
+.lijishiyong_box {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lijishiyong {
+  width: 250rpx;
+  height: 60rpx;
+  background-color: #db384c;
+  color: #fff;
+  border-radius: 35rpx;
+  letter-spacing: 4rpx;
+  text-align: center;
+  font-size: 28rpx;
+  line-height: 60rpx;
+  margin-top: 32rpx;
+}
+
+.close_msk1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 124rpx;
+}
+.cover {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+.alert {
+  font-size: 32rpx;
+  width: 70%;
+  height: 200rpx;
+  position: fixed;
+  left: 15%;
+  top: 40%;
+  background: #fff;
+  border-radius: 10rpx;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.anniu_qd{
+font-size:12px;
+color:#292929;
+padding-left:0;
+padding-right:0;
+line-height:38rpx;
+letter-spacing:10rpx;
+background:#fff;
+width:120rpx;
+height:60rpx;
+border-radius:0;
+border-top-left-radius:36rpx;
+border-bottom-left-radius:36rpx;
+
+}
+.alert1 {
+  font-size: 32rpx;
+  width: 70%;
+  height: 200rpx;
+  position: fixed;
+  left: 15%;
+  top: 40%;
+  background: #fff;
+  border-radius: 10rpx;
+  justify-content: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.inter_bj{
+  width: 100%;height: 100%;
+}
+.jifen_inter{
+  width: 30rpx;height: 30rpx;position: absolute;top: 20%;left: 12%;
+}

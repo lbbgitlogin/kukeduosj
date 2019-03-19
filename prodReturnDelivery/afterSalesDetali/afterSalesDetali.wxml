@@ -1,0 +1,108 @@
+<view class='detali-header'>
+  <view class='d-num'>
+    <text>售后单号：{{Info.GoodsReturnNum}}</text>
+  </view>
+
+  <navigator url="/prodReturnDelivery/afterSalesProgress/afterSalesProgress?on={{Info.GoodsReturnNum}}&statusStr={{Info.StatusStr}}">
+    <!-- <view  class='m-addres-info m-cell-access select'>
+      <text class='detali_state'>{{Info.StatusStr}}</text>
+      <text>详情</text>
+      <view class="m-cell-ft"></view>
+    </view> -->
+      <view class='m-addres-info m-cell-access select'>
+        <view class='detali_state'>{{Info.StatusStr}}</view>
+        <view>详情</view>
+        <view class="m-cell-ft"></view>
+      </view>
+  </navigator>
+</view>
+
+<view class='merchant' wx:if="{{Info.AuditNote!=''}}">
+  <view class='m-header'>商家审核留言</view>
+  <view class='m-txt'>
+    <text>{{Info.AuditNote}}</text>
+  </view>
+</view>
+
+<view class='describe'>
+  <view class='d-top'>我的申请描述</view>
+  <view class='d-content' wx:if="{{Info.Remark!=''}}">
+    <text>{{Info.Remark}}</text>
+  </view>
+  <view class='d-img' wx:if="{{Info.ImgList.length > 0}}">
+    <block wx:for="{{Info.ImgList}}" wx:for-index='index'>
+      <image data-idx='{{index}}' catchtap='lookImg' src='{{Info.ImgList[index]}}'></image>
+    </block>
+  </view>
+</view>
+
+<view class='f-product'>
+  <view class='f-titlt'>申请物品</view>
+  <block wx:for="{{Info.OrderDetailList}}">
+    <view class='product'>
+      <view class="product-img">
+        <image src='{{item.Path}}'></image>
+      </view>
+      <view class="product-info">
+        <view class='product-name'>{{item.ProductName}}</view>
+        <view class='product-specification'>{{item.SpecStr==null?"":item.SpecStr}}</view>
+        <view class='product-num'>
+          <view class='product-price'>{{Currency}}{{item.FactPrice}}</view>
+          <view>x{{item.Amount}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+</view>
+
+<view class="u-top" wx:if="{{isnav}}">
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+</view>
+
+<view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+  <view class="u-top1">
+    <view style='position:relative'>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/index/index' open-type='switchTab'>
+        <text>首页</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/orderlist/orderlist'>
+        <text>我的订单</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/icon/myOrder.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/UserCenter/UserCenter' open-type='switchTab'>
+        <text>个人中心</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_usercenter.png' class='quicknav'></image>
+      </navigator>
+
+      <!-- 联系客服 -->
+      <view class='{{animation?"navtext1":"navtext"}}'>
+        <text style=' color: #fff;'>联系客服</text>
+        <contact-button size='28' type="default-dark" session-from="weapp">
+
+        </contact-button>
+        <image src='http://appicon-1253690476.file.myqcloud.com/icon/link.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+<swiper indicator-dots='true' class='look' wx:if="{{isImg}}" current="{{imgIndex}}">
+  <swiper-item wx:for="{{Info.ImgList}}">
+    <view bindtap='imgTap'>
+      <image src="{{item}}" mode='widthFix' />
+    </view>
+  </swiper-item>
+</swiper>

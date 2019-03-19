@@ -1,0 +1,156 @@
+page {
+  background-color: #fff;
+}
+
+.box {
+  width: 100%;
+}
+
+.box_text {
+  width: 700rpx;
+  margin: 30rpx 25rpx 35rpx 25rpx;
+  position: relative;
+  color: #333;
+}
+
+.textarea {
+  width: 690rpx;
+  height: 227rpx;
+  display: block;
+  position: relative;
+  word-wrap: break-word;
+  word-break: break-all;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.pic_box {
+  margin: 24rpx 27rpx;
+  display: flex;
+}
+
+.pic_box_img {
+  width: 100%;
+}
+
+.pic_box_image {
+  width: 117rpx;
+  height: 117rpx;
+  margin: 0 11rpx;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+}
+
+.pic_box_pic {
+  padding: 24rpx 27rpx;
+}
+
+.btn_box {
+  margin-top: 110rpx;
+  text-align: center;
+  display: flex;
+}
+
+.u-btn-default {
+  width: 566rpx;
+  margin: 0 92rpx;
+}
+
+.box_title {
+  padding: 0 25rpx;
+  height: 81rpx;
+  color: #000;
+}
+
+.box_title::before {
+  content: " ";
+  position: absolute;
+  left: 25rpx;
+  top: 81rpx;
+  right: 25rpx;
+  height: 1px;
+  border-top: 1px solid #d9d9d9;
+  color: #d9d9d9;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+.box_text_input {
+  height: 81rpx;
+  font-size: 30rpx;
+  padding-left: 5rpx;
+}
+
+.bk_box {
+  background-color: #fff;
+}
+
+.bk_box_title {
+  height: 53rpx;
+  font-size: 30rpx;
+  padding: 24rpx 0 0 25rpx;
+  color: #818181;
+  line-height: 60rpx;
+}
+
+.bkspan_span {
+  border: 1rpx solid #b6b6b6;
+  color: #878787;
+  font-size: 28rpx;
+  margin: 8rpx 7rpx;
+  border-radius: 35rpx;
+  text-align: center;
+  padding: 5rpx 20rpx;
+  display: inline-block;
+}
+
+.bkspan {
+  padding: 20rpx 25rpx 0 15rpx;
+}
+
+.fabu_box_fb {
+  background: #db384c;
+  color: #fff;
+  width: 374rpx;
+  text-align: center;
+  float: left;
+  font-size: 30rpx;
+  height: 77rpx;
+  line-height:77rpx;
+
+}
+
+.fabu_box {
+  height: 79rpx;
+  line-height: 79rpx;
+  font-size: 30rpx;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+}
+
+.borred {
+  border: 1rpx solid #db384c;
+  color: #db384c;
+}
+
+.scimg {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.shanchu {
+  width: 117rpx;
+  margin: 0 11rpx;
+  position: absolute;
+  bottom: 9rpx;
+  height: 50rpx;
+  background-color: #000;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

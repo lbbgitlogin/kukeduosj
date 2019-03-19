@@ -1,0 +1,41 @@
+<scroll-view scroll-y="true" wx:if="{{UserList.length > 0}}" class="m-orderlist" bindscrolltolower="scrollbottom">
+  <view class='box_title_box' wx:for="{{UserList}}" wx:for-item="item">
+    <view class="box_title">
+
+ <navigator hover-class="none" url='../userspace/userspace?uid={{item.Id}}' style='display: flex'>
+      <view class='box_title_img'>
+        <image class='box_title_image' src='{{item.photo}}'></image>
+      </view>
+      <view class='box_title_name'>{{item.NickName}}</view>
+ </navigator>
+      
+      <view class='box_title_guanzhu'  wx:if="{{isbenren}}">
+        <view class='box_title_guanzhu_text'  bindtap="cancelFollow" id='{{item.Id}}'>已关注</view>
+      </view>
+    </view>
+  </view>
+  <view class="m-loading-box">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <lael class="u-loading"></lael>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+      <view>
+        <text></text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips" style='background-color: #fff'>已经没有了</text>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+ 
+<view  class="m-nullpage" wx:else>
+  <view class="m-nullpage-middle">
+    <view class="m-null-tip">
+      <text>您还没有关注社区用户</text>
+    </view>
+  </view>
+</view> 

@@ -1,0 +1,61 @@
+<view class="m-cells m-cells-form">
+	<view class="m-cell">
+		<view class="m-cell-hd"><label class="u-label">收件人</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" type="text" value="{{showconsignee||''}}" placeholder="请输入收件人姓名" bindinput="inputconsignee" />
+		</view>
+		<div wx:if="{{consignee==''}}" class="m-cell-ft">
+			<icon class="m-icon-warn" type="warn"></icon>
+		</div>
+	</view>
+	<view class="m-cell m-cell-select-before" bindtap="showbox">
+		<view class="m-cell-hd"><label class="u-label">省/市/区</label></view>
+		<view class="m-cell-bd">
+			<label>{{seladstr}}</label>
+		</view>
+	</view>
+	<view class="m-cell">
+		<view class="m-cell-hd"><label for="" class="u-label">详细地址</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" type="text" value="{{showdetail ||''}}" placeholder="请输入详细地址" bindinput="inputdetail" />
+		</view>
+		<div wx:if="{{detail==''}}" class="m-cell-ft">
+			<icon class="m-icon-warn" type="warn"></icon>
+		</div>
+	</view>
+	<view class="m-cell">
+		<view class="m-cell-hd"><label for="" class="u-label">电话号码</label></view>
+		<view class="m-cell-bd">
+			<input class="u-input" type="number" value="{{showphone ||''}}" placeholder="请输入电话号码" bindinput="inputphone" />
+		</view>
+		<div wx:if="{{!isre || phone==''}}" class="m-cell-ft">
+			<icon class="m-icon-warn" type="warn"></icon>
+		</div>
+	</view>
+	<view class="m-cell">
+		<view class="m-cell-hd"><label for="" class="u-label">常用地址</label></view>
+		<view class="m-cell-bd">
+			<switch type="switch" checked="{{addressinfo.isDefault?true:false}}" bindchange="ckDefault" />
+		</view>
+	</view>
+</view>
+
+<view wx:if="{{isShow}}" class="m-select-box-msk" bindtap="closead">
+    <view class="m-select-box" catchtap="notap">
+		<view class="m-close-panel"><label catchtap="closead">关闭</label></view>
+		<view class="m-select-content">
+			<picker-view indicator-style="height:50px" class="u-select" value="{{value}}" bindchange="bindChange">
+				<picker-view-column>
+					<view class="m-cell-bd" wx:for="{{Province.pname}}"><label>{{item}}</label></view> 
+				</picker-view-column>
+				<picker-view-column>
+					<view class="m-cell-bd" wx:for="{{City.cname}}"><label>{{item}}</label></view>
+				</picker-view-column>
+				<picker-view-column>
+					<view class="m-cell-bd" wx:for="{{District.dname}}"><label>{{item}}</label></view>
+				</picker-view-column>
+			</picker-view>
+		</view>
+    </view>
+</view>
+<button class="u-btn u-btn-default" bindtap="submitinfo">保存</button>

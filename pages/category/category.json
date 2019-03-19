@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "商品分类",
+    "usingComponents": {
+      "zip-img": "../../common/zip-img/zip-img"
+    }
+  }

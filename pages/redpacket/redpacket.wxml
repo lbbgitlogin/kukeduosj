@@ -1,0 +1,88 @@
+<view class="banner">
+</view>
+<view class='errInfo' wx:if="{{isShowMessage && isShowBox}}">
+  <view class="b1">
+    <view class="couponBox">
+      <view class='info'>
+        <view class='infoER'>
+          <label>抢光啦</label>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="RPKBox" wx:if="{{!isShowMessage && isShowBox}}">
+  <view class="b1">
+    <view class="couponBox" wx:if="{{ActivityGroup.DrawStatus<2}}">
+      <view class="info">
+        <view class="infoL">
+          <view class="labelt">
+            {{ActivityGroup.CouponName||'通用红包'}}
+          </view>
+          <view class='labelb'>
+            {{ActivityGroup.MoneyLimit}}
+          </view>
+        </view>
+        <view class="infoR">
+          <label>{{Currency}}</label>
+          <text>{{ActivityGroup.DiscountMoney}}</text>
+        </view>
+      </view>
+      <navigator url='../index/index' open-type='switchTab' class="linkInfo">
+        <label>{{ActivityGroup.ValidateEnd}}过期</label>
+        <text>去使用></text>
+      </navigator>
+    </view>
+
+    <view class="couponBox" wx:else>
+      <view class='info' wx:if="{{ActivityGroup.DrawStatus==2 || ActivityGroup.DrawStatus==4 ||ActivityGroup.DrawStatus==5}}">
+        <view class='infoER'>
+          <label>抢光啦</label>
+        </view>
+      </view>
+      <view class='info' wx:if="{{ActivityGroup.DrawStatus==3}}">
+        <view class='infoER'>
+          <label>已过期</label>
+        </view>
+      </view>
+    </view>
+    <button type="warn" bindtap='Using' wx:if="{{ActivityGroup.DrawStatus<2}}"> 立即使用 </button>
+    <button type="warn" bindtap='Using' wx:if="{{ActivityGroup.DrawStatus>2}}"> 查看其他活动 </button>
+  </view>
+  <view class="b1" wx:if="{{ActivityGroup.DrawStatus<2}}" >
+    <view class='listtitle'>
+      <label>看看朋友手气</label>
+    </view>
+    <view class='userList'>
+      <view class='userItem' wx:for="{{ActivityGroup.DrawActivities}}">
+        <view class='userPhone'>
+          <image src='{{item.ParticipantAvatar}}'></image>
+        </view>
+        <view class='t1'>
+          <view class='tTop'>
+            <label>{{item.ParticipantNickName}}</label>
+            <text>{{Currency}}{{item.DiscountMoney}}</text>
+          </view>
+          <view class='tBottom'>
+            {{item.DrawTime}}
+            <text class="iconfont icon-zan" wx:if="{{item.IsLucky}}">手气最佳</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="lookMore" bindtap="lookMore" wx:if="{{ActivityGroup.DrawActivityCount>20 && ActivityGroup.DrawActivities.length!=ActivityGroup.DrawActivityCount}}">查看更多</view>
+  </view>
+
+  <view class="b1">
+    <view class='listtitle'>
+      <label>活动规则</label>
+    </view>
+    <rich-text nodes="{{ActivityGroup.EventDescription}}"></rich-text>
+  </view>
+
+</view>
+<view class="u-top">
+  <navigator url='../index/index' open-type='switchTab' class="u-view">
+    <label class="iconfont icon-shouyeshouye" style='font-size:40rpx'></label>
+  </navigator>
+</view>

@@ -1,0 +1,61 @@
+<view style="background:#f8f8f8">
+  <view class="totalMoney" style="background:#fff">
+    <label>消费总金额：</label>
+    <input wx:if="{{Info.AllowChangeCash}}" type="digit" value="{{money}}"  bindinput="inputnum" bindblur="blur"  maxlength="8" />
+    <input wx:else disabled type="digit" value="{{money}}"  bindinput="inputnum" bindblur="blur"  maxlength="8" />
+  </view>
+  <view class="tishi">
+    温馨提示：请与服务员确认消费金额
+  </view>
+  <view class="m-cells total-info" style="margin-top:30rpx;font-size:28rpx">
+  <view class="m-cell"  bindtap="suitcouponlist" wx:if="{{isCoupon}}">
+      <view class="m-cell-bd">
+        <text>优惠券</text> 
+      </view>
+      <view class="m-cell-ft m-order-typetxt" style="color:#db384c;">-{{Currency}}{{DiscountMoney}}   <text style="color:#717171">></text></view>
+  </view>
+  <view class="m-cell" wx:if="{{Info.MemberDiscount!=10&&isMembership}}">
+    <view class="m-cell-bd">
+      <text>会员折扣</text>
+      <text style="font-size:24rpx;color:#717171">({{Info.MemberDiscount}}折)</text>
+    </view>
+    <view class="m-cell-ft m-order-typetxt">-{{Currency}}{{membediscountmoney}}</view>
+    <view class="arrow"></view>
+  </view>
+  <view class="m-cell" wx:if="{{Info.AllowPointAsCash&&Info.UsablePoint>0&&isMembership}}">
+    <view class="m-cell-bd">
+      <text>使用积分</text>
+      <text style="font-size:24rpx;color:#717171">(可使用{{Info.UsablePoint}}积分)</text>
+    </view>
+    <input type="number" class=" m-cell-ft m-order-typetxt" value="{{integral}}" placeholder="请输入抵扣积分" bindinput="count" />
+    <view class="arrow"></view>
+  </view>
+  <view class="m-cell" wx:if="{{Info.AllowPointAsCash&&Info.UsablePoint>0&&isMembership}}">
+    <view class="m-cell-bd">
+      积分抵现
+    </view>
+    <view class="m-cell-ft m-order-typetxt">-{{Currency}}{{discount}}</view>
+  </view>
+  <view class="m-cell" wx:if="{{MaxUsableCash>0&&isECashCard}}">
+    <view class="m-cell-bd">
+      <text>余额抵扣</text>
+      <text style="font-size:24rpx;color:#717171">(可使用{{Currency}}{{MaxUsableCash}})</text>
+    </view>
+    <view class=" m-cell-ft m-order-typetxt" wx:if="{{isBalance}}" style="position:absolute;right:15%">{{Currency}}{{balance}}</view>
+    <switch checked bindchange="switchChange" style="transform:scale(0.6);position:absolute;right:0;bottom:10rpx"/>
+  </view>
+  <view class="m-cell ">
+    <view class="m-cell-bd">
+    </view>
+    <view class="m-total-info">
+      实付款：
+      <label class="m-total-price" style="color:#db384c" wx:if="{{!isMembership&&!isECashCard&&!isCoupon}}">{{Currency}}{{money}}</label>
+      <label class="m-total-price" style="color:#db384c" wx:if="{{isBalance&&(isMembership||isECashCard||isCoupon)}}">{{Currency}}{{realMoney}}</label>
+      <label class="m-total-price" style="color:#db384c" wx:if="{{isBalance==false&&(isMembership||isECashCard||isCoupon)}}">{{Currency}}{{payment}}</label>
+    </view>
+  </view>
+</view>
+  <form report-submit="true" bindsubmit="paysubmit">
+    <button  class="payment" formType="submit">确认买单</button>
+  </form>
+</view>

@@ -1,0 +1,158 @@
+<import src="../../tpl/shareMskTpl.wxml" />
+<view class="m-product-all">
+  <view class="m-tab">
+    <view class="m-navbar">
+      <view class="m-navbar-item {{tapindex==1?'m-navbar-item-on':''}}" bindtap="allOrders">
+        立即开团
+      </view>
+      <view class="m-navbar-item {{tapindex==2?'m-navbar-item-on':''}}" bindtap="toBePaid">
+        即将开团
+      </view>
+    </view>
+  </view>
+  <view class="{{tapindex==1?'':'hide'}}" style="font-size:28rpx;">
+    <block wx:if="{{isData}}">
+      <scroll-view scroll-y="true" scroll-top="{{scposition}}" bindscroll="scrolltoupper" wx:if="{{pdlist.length>0}}" class="m-orderlist" bindscrolltolower="scrollbottom" style="width:100%;height:100%;position:absolute;padding-top:66rpx;box-sizing: border-box;">
+        <block wx:for="{{pdlist}}" wx:for-item="item">
+          <navigator url="../productdetail/productdetail?pid={{item.ProductId}}&MEId={{item.MarketingEventId}}" class="m-product-item m-product-GP">
+
+            <view class="m-product-img">
+              <!-- <image src="{{item.ProductPic}}" /> -->
+              <zip-img source_img="{{item.ProductPic}}"></zip-img>
+            </view>
+            <view class="m-product-info">
+              <view class="m-product-name">
+                <label>
+                  <text class='u-tuan-label'>抽</text>{{item.ProductName}}</label>
+                <view class="groupNumber">
+                  <count-down millisecond="{{item.ShowCountdownMilliseconds}}" Type="1">
+
+                  </count-down>
+                </view>
+              </view>
+              <view class="m-product-price" style='font-size:38rpx'>
+                <label>{{Currency}}</label>{{item.PreferentialPrice}}
+                <label class="u-del-price" style='margin-left:8rpx'>{{Currency}}{{item.SalePrice}}</label>
+                <button class="u-btn u-btn-default">立即开团</button>
+              </view>
+            </view>
+          </navigator>
+        </block>
+        <view class="m-loading-box">
+          <block wx:if="{{ispage}}">
+            <view class="u-loadmore">
+              <lael class="u-loading"></lael>
+              <text class="u-loadmore-tips">正在加载</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="u-loadmore u-loadmore-line">
+              <text class="u-loadmore-tips">没有更多数据啦！</text>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+      
+    </block>
+    <view redirect="true" class="m-nullpage" wx:else>
+      <view class="m-nullpage-middle">
+        <view class="m-null-tip">
+          <text>亲，抽奖团商品正在备货中~</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="{{tapindex==2?'':'hide'}}" style="font-size:28rpx">
+    <block wx:if="{{isData1}}">
+      <scroll-view scroll-y="true" wx:if="{{fglist.length>0}}" class="m-orderlist" bindscrolltolower="scrollbottomtwo" style="width:100%;height:100%;position:absolute;padding-top:66rpx;box-sizing: border-box;">
+        <block wx:for="{{fglist}}" wx:for-item="item">
+          <view class="m-product-item m-product-GP">
+            <view class="m-product-img">
+              <!-- <image src="{{item.ProductPic}}" /> -->
+              <zip-img source_img="{{item.ProductPic}}"></zip-img>
+            </view>
+            <view class="m-product-info">
+              <view class="m-product-name">
+                <label>
+                  <text class='u-tuan-label'>抽</text>{{item.ProductName}}</label>
+                <view class="groupNumber">
+                  <count-down millisecond="{{item.ShowStartCountdownMilliseconds}}" Type="0">
+
+                  </count-down>
+                </view>
+              </view>
+              <view class="m-product-price">
+                <label>{{Currency}}</label>{{item.PreferentialPrice}}
+                <label class="u-del-price">{{Currency}}{{item.SalePrice}}</label>
+                <button class="u-btn u-btn-default" style='background:#bdbdbd'>立即开团</button>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view class="m-loading-box">
+          <block wx:if="{{ispage1}}">
+            <view class="u-loadmore">
+              <lael class="u-loading"></lael>
+              <text class="u-loadmore-tips">正在加载</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="u-loadmore u-loadmore-line">
+              <text class="u-loadmore-tips">没有更多数据啦！</text>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+    </block>
+    <view redirect="true" class="m-nullpage" wx:else>
+      <view class="m-nullpage-middle">
+        <view class="m-null-tip">
+          <text>亲，抽奖团商品正在备货中~</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="u-top" wx:if="{{isnav}}">
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+</view>
+
+<view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+  <view class="u-top1">
+  <view style='position:relative'>
+    <navigator class='{{animation?"navtext1":"navtext"}}' url='../index/index' open-type='switchTab'>
+      <text>首页</text>
+      <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+    </navigator>
+    <button class='{{animation?"navtext1":"navtext"}}' open-type='share'>
+      <text>分享</text>
+      <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_share.png' class='quicknav'></image>
+    </button>
+    <!-- <navigator class='{{animation?"navtext1":"navtext"}}' url='../goodcollection/goodcollection'>
+      <text>我的收藏</text>
+      <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_my_favor.png' class='quicknav'></image>
+    </navigator> -->
+    <navigator class='{{animation?"navtext1":"navtext"}}' url='../fightgroupsorderlist/fightgroupsorderlist'>
+        <text>我的拼团</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_my_fightgrp.png' class='quicknav'></image>
+      </navigator>
+
+    <navigator class='{{animation?"navtext1":"navtext"}}' url='../UserCenter/UserCenter' open-type='switchTab'>
+      <text>个人中心</text>
+      <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_usercenter.png' class='quicknav'></image>
+    </navigator>
+    <view class='navtext'>
+      <text></text>
+      <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+    </view>
+    <view class='navtext'>
+      <text></text>
+      <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+    </view>
+    </view>
+  </view>
+</view>
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />

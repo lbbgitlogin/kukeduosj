@@ -1,0 +1,28 @@
+<block wx:if="{{isPage}}">
+  <navigator url="../activity/activity?id={{Info.Id}}" class="m-activity-item">
+    <image src="{{Info.EventMainPic}}" mode="aspectFill" class="m-activity-img" />
+    <view class="m-activity-info">
+      <view class="m-activity-name">{{Info.Title}}</view>
+      <label class="iconfont icon-shijian gray"></label>
+        <label class="m-activity-time">{{Info.EventTime}}</label>
+    </view>
+  </navigator>
+
+  <view class="icon-box">
+  <icon type="success" size="70" />
+      <view class="icon-box__ctn">
+        <view class="icon-box-title">签到成功!</view>
+        <view class="icon-box-desc">签到时间：{{Info.CheckInTime}}</view>
+      </view>
+  </view>
+
+   <view class="m-activity-otherinfo" wx:if="{{Info.AgendaPlan!=null}}">
+        <view class="item-otherinfo">
+          <view class="item-title">活动议程</view>
+        </view>
+        <!--<view style="padding:10rpx 30rpx;font-size:30rpx;">{{Info.AgendaPlan}}</view>-->
+        <view style="padding:10rpx 30rpx;font-size:30rpx;">
+          <html-view innerText='{{activityagenda}}'></html-view>
+        </view>
+      </view>
+</block>

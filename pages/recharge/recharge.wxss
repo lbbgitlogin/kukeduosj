@@ -1,0 +1,63 @@
+.header{
+  font-size: 32rpx;
+  margin: 40rpx 30rpx;
+}
+.content{
+  width:100%
+}
+.grayborder{
+  border: 1px solid #aaaaaa
+}
+.redborder{
+  border: 1px solid #db384c
+}
+.grayfont{
+  color: rgb(122, 122, 122)
+}
+.redfont{
+  color: #db384c;
+}
+.money{
+  width: 20%; 
+  height: 78rpx;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 8rpx;
+  padding: 20rpx 30rpx;
+  float: left;
+  margin: 0 0 3.5% 3.6%;
+}
+.realMoney{
+  font-size: 28rpx
+}
+.giveMoney{
+  font-size: 24rpx;
+}
+.payment-box{
+  position: fixed;
+  bottom: 15rpx;
+  left: 0;
+  width: 100%;
+}
+.payment{
+  height: 80rpx;
+  line-height: 82rpx;
+  background: #db384c;
+  color: #fff;
+  margin-top:100rpx;
+  width: 90%;
+  margin: 0 auto;
+}
+.message{
+  font-size: 30rpx;
+  padding: 0 30rpx 30rpx 30rpx;
+  color: #999;
+}
+.hidden{
+  display: none;
+}
+.desc-box{
+  margin-bottom: 100rpx;
+}

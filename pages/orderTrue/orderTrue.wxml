@@ -1,0 +1,60 @@
+<view>
+  <view class="header">
+    <view style='width:50%;display:flex;align-items: center;'>
+      <image src="{{shoplogo}}"></image>
+      <view class="shopname">{{shopname}}</view>
+    </view>
+    <view>{{tableNum}}桌</view>
+  </view>
+  <view class="selected">
+    已选菜品
+  </view>
+  <view class="m-cells total-info" style='height:{{height}}rpx;overflow:hidden;font-size:28rpx;' wx:for="{{submitinfo.VendorShoppingCartItemsList}}" wx:for-item="items">
+    <view class="message" style="" wx:for="{{items.ShoppingCartList}}" wx:for-item="item">
+      <view style="display:flex;width:64%;justify-content: space-between">
+        <text style='width:55%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;'>{{item.ProductSaleName}}</text>
+        <text style="color:#999" wx:if="{{item.speStr}}">({{item.speStr}})</text>
+        <text>×{{item.Amount}}</text>
+      </view>
+      <view class="m-order-typetxt" style="color:#999999">{{Currency}}{{item.ProductPrice}}</view>
+    </view>
+  </view>
+  <view class="more" bindtap='more' wx:if="{{isShow}}">展示更多</view>
+  <view class='totlemoney'>
+    <view style='text-align:right;width:67%'>共{{much}}份</view>
+    <view style='text-align:right;padding-right:30rpx'>小计:
+      <label style='color:#db384c'>{{Currency}}{{submitinfo.VendorShoppingCartItemsList[0].ShoppingCartItemsTotalPrice}}</label>
+    </view>
+  </view>
+  <view class="m-cells" wx:if="{{orderNum=='undefined'}}">
+    <view class='m-cell section1'>
+      <view>就餐人数</view>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" style="width:50%">
+        <view class="picker" style="display:flex;width:100%;justify-content: flex-end">
+          <view style='color:#717171' wx:if="{{peopleNum}}">{{peopleNum}}人</view>
+          <view style='color:#717171' wx:else>请选择就餐人数
+            <text class="m-cell-ft"></text>
+          </view>
+        </view>
+      </picker>
+    </view>
+    <view bindtap='select' class="section1 m-cell">
+      <view style="width: 18%;">备注</view>
+      <view>
+      <view style='color:#717171' wx:if="{{remark1 == ''}}">{{remark}}</view>
+        <view style='color:#717171' wx:if="{{remark == ''}}">{{remark1}}</view>
+          <view style='color:#717171' wx:if="{{remark != '' && remark1 != '' }}">{{remark}},{{remark1}}</view>
+        <view style='color:#717171' wx:if="{{remark == '' && remark1 == ''}}">口味偏好等
+          <text class="m-cell-ft"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style='height:104rpx'></view>
+  <view class="m-footer-btn" style="border-top:0">
+    <form report-submit="true" bindsubmit="submitorder">
+      <button class="m-footer-btn-main" formType="submit">确认下单</button>
+    </form>
+  </view>
+</view>
+

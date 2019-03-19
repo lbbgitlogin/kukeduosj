@@ -1,0 +1,241 @@
+<import src="../../tpl/coupon_msk.wxml" />
+<import src="../../tpl/shareMskTpl.wxml" />
+
+<scroll-view class='u-pa1' scroll-y="true" scroll-top="{{scposition}}" bindscroll="scrolltoupper">
+
+  <!-- //轮播图 -->
+  <view class="m-banner-ad">
+    <swiper indicator-dots="true" autoplay="true" interval="3000" duration="300">
+      <swiper-item wx:for="{{ProductInfo.ProductPicList}}" wx:for-item="item">
+        <image class="slide-image" mode="aspectFill" src="{{item.Path}}" />
+        <navigator wx:if="{{ProductInfo.Video}}" url="/pages/video/video?pid={{ProductInfo.ProductId}}" class="video">
+          <image src="http://appicon-1253690476.file.myqcloud.com/img/play.png" style="width:100rpx;height:100rpx"></image>
+        </navigator>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- wx:if="{{ProductEventService.GroupEventInfo.IsShowCountdown==false}}" -->
+  <view class="m-cells">
+    <view class="m-cell m-info-box">
+      <view class="m-cell-bd">
+        <text>{{ProductInfo.ProductName}}</text>
+        <label>{{ProductInfo.SellingPoints || " "}}</label>
+        <view class="m-info-price">
+          <text class='proudct'>{{ProductPoint.SalePricePoint}}</text>
+          <text class='proudctText'>积分</text>
+          <text class="m-info-delprice">{{Currency}}{{ProductPriceDetail.SalePrice}}</text>
+          <view class="progressBarBox" wx:if="{{ProductInfo.IsShowSoldAmount}}">
+            <text>已售 </text>
+            <text style='color:#db384c'>{{ProductInfo.FakeSoldSaleAmount}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{SpecLst.length>0}}" class="m-cell m-cell-access m-info-sp" bindtap="ckselectsp">
+      <view class="m-cell-bd">
+        <text class="m-info-tip">已选</text>
+        <label class="m-imfo-sp-selext">
+          <block wx:for="{{SpecLst}}" wx:for-item="items">
+            <block wx:for="{{items.svLst}}" wx:for-item="item">
+              <block wx:if="{{item.IsChecked}}">{{item.Name}} </block>
+            </block>
+          </block>
+        </label>
+      </view>
+      <view class="m-cell-ft"></view>
+    </view>
+  </view>
+
+
+
+
+
+  <view class="m-panel m-panel-access m-comment {{ProductInfoService.CommentCount<=0?'hide':''}}">
+    <view class="m-panel-hd">评价（{{ProductInfoService.CommentCount}}）
+      <!--<label wx:if="{{ProductInfo.Goodgrade>0}}">好评度
+        <text>{{ProductInfo.Goodgrade}}%</text>
+      </label>-->
+    </view>
+    <view class="m-panel-bd">
+      <view class="m-media-box m-media-box-appmsg">
+        <view class="m-media-box-hd">
+          <image class="m-media-box-thumb" src="{{ProductInfoService.Productcomment[0].Title}}" />
+        </view>
+        <view class="m-media-box-bd">
+          <label class="m-media-box-title">{{ProductInfoService.Productcomment[0].Account_User}}</label>
+          <view class="m-media-box-desc">
+            <view style="margin-bottom:10rpx;">
+              <label wx:for="{{ProductInfoService.CommentProductSkuList}}" wx:for-item="itemSku" style="margin-right:10rpx;font-size:20rpx;">
+                {{itemSku.Name}}：{{itemSku.SpecificationValueAlias}}
+              </label>
+            </view>
+            <label wx:if="{{ProductInfoService.Productcomment[0].CommentInfo!=null}}"> {{ProductInfoService.Productcomment[0].CommentInfo}}</label>
+          </view>
+
+          <view class="m-media-box-info">
+            <view class="m-media-box-info-meta m-start" wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="itemIndex">
+              <label class="iconfont icon-start {{(itemIndex<=ProductInfoService.Productcomment[0].Grade)?'sel':''}}" data-index="{{itemIndex}}" data-type="1" bindtap="ServiceStart"></label>
+            </view>
+            <view class="m-media-box-info-meta m-tiem">{{ProductInfoService.Productcomment[0].CreateTimeStr}}</view>
+            <view class="m-media-list">
+              <image wx:for="{{ProductInfoService.Productcomment[0].ProductCommentPicList}}" wx:for-item="item" src="{{item.Path}}" bindtap="ImgTap"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="m-panel-ft" wx:if="{{ProductInfoService.CommentCount>1}}">
+      <navigator url="/pages/PCommentList/PCommentList?Id={{ProductInfo.ProductId}}" class="m-cell m-cell-access m-cell-link">
+        <view class="m-cell-bd">查看全部评论</view>
+        <text class="m-cell-ft"></text>
+      </navigator>
+    </view>
+  </view>
+
+  <view class="m-panel m-panel-access m-detail">
+    <view class="m-tab">
+      <view class="m-navbar">
+        <view class="m-navbar-item {{tapindex==1?'m-navbar-item-on':''}}" bindtap="picDetail" style='z-index:0'>
+          图文详情
+        </view>
+        <view class="m-navbar-item {{tapindex==2?'m-navbar-item-on':''}}" wx:if="{{ProductInfo.IsShowSpecInfo}}" bindtap="spcParam" style='z-index:0'>
+          规格参数
+        </view>
+        <view class="m-navbar-item {{tapindex==3?'m-navbar-item-on':''}}" wx:if="{{ProductInfo.IsShowPackInfo}}" bindtap="packingList" style='z-index:0'>
+          包装清单
+        </view>
+        <view class="m-navbar-item {{tapindex==4?'m-navbar-item-on':''}}" wx:if="{{ProductInfo.IsShowSoldService}}" bindtap="afterService" style='z-index:0'>
+          售后服务
+        </view>
+      </view>
+    </view>
+    <view class="{{tapindex==1?'':'hide'}}">
+      <html-view wx:if='{{ProductInfo.ProductIntro}}' innerText='{{ProductInfo.ProductIntro}}'></html-view>
+      <view class="u-cleanbox"></view>
+    </view>
+    <view class="{{tapindex==2?'':'hide'}}">
+      <view wx:for="{{Parameters}}" wx:for-item="items">
+        <view wx:for="{{items.data}}" wx:for-item="item">
+          <div class="g-flex">
+            <div class="g-flex-item">{{item.ParameterItemName}}</div>
+            <div class="g-flex-item">{{item.ParameterItemValue}}</div>
+          </div>
+        </view>
+      </view>
+      <view class="u-cleanbox"></view>
+    </view>
+    <view class="{{tapindex==3?'':'hide'}} m-Packinglist">
+      {{ProductInfo.Packinglist}}
+      <view class="u-cleanbox"></view>
+    </view>
+    <view class="{{tapindex==4?'':'hide'}}">
+      <html-view wx:if='{{ProductInfo.AfterService}}' innerText='{{ProductInfo.AfterService}}'></html-view>
+      <view class="u-cleanbox"></view>
+    </view>
+  </view>
+  <view class="m-footer-btn">
+    <!-- 下一行 catchtap='ckselectsp1' -->
+    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">立即兑换</button>
+  </view>
+  <view class="m-panel-sp {{selectsp==0?'hide':''}} " bindtap="closesp">
+    <view class="m-panel-sp-content {{selectct==0?'bounceOutDown animated':'bounceInUp animated'}}" catchtap>
+      <view class="m-panel-sp-pinfo">
+        <view class="m-panel-sp-pimg">
+          <image wx:if="{{selectimg}}" src="{{selectimg}}" />
+          <image wx:else src="{{ProductInfo.productPicList[0].Path}}" />
+        </view>
+        <view class="m-panel-sp-pname">
+
+          <!-- ProductPriceDetail.SalePrice -->
+          <!-- ProductPriceDetail.ShowPrice -->
+          <!-- ProductPriceDetail.ShowPrice -->
+          <view class="m-pprice" wx:if="{{!FightGroup}}">{{ProductPoint.SalePricePoint}}积分</view>
+          <!-- <view class="m-pprice" wx:if="{{!FightGroup}}">{{ProductPoint.ShowPrice}}积分这</view> -->
+          <view class="m-pprice" wx:if="{{FightGroup&&!isModified}}">{{ProductPoint.ShowPrice}}积分</view>
+
+
+          <view class="m-pstock" wx:if="{{kucun}}">库存{{ProductPriceDetail.Stock}}件</view>
+          <view class="m-pstock" wx:if="{{kucun==false}}">库存0件</view>
+          <view wx:if="{{SpecLst.length}}" class="m-pstock">已选择：
+            <block wx:for="{{SpecLst}}" wx:for-item="items">
+              <block wx:for="{{items.svLst}}" wx:for-item="item">
+                <block wx:if="{{item.IsChecked}}">{{item.Name}} </block>
+              </block>
+            </block>
+          </view>
+        </view>
+        <icon type="cancel" class="m-panel-sp-icon" color="#888" catchtap="closesp" />
+      </view>
+      <scroll-view class="m-panel-sp-listbox" scroll-y="true">
+        <block wx:for="{{SpecLst}}" wx:for-item="items">
+          <view class="m-panel-sp-listbox-item">
+            <view class="m-cells-title">{{items.Name}}</view>
+            <view class="m-panel-sp-labellist">
+              <block wx:for="{{items.svLst}}" wx:for-item="item">
+                <label wx:if="{{item.IsChecked}}" class="m-panel-sp-sellabel">{{item.Name}}</label>
+                <label wx:else data-ckid="{{items.ckid}}" data-spid="{{item.Id}}" catchtap="selectsp">{{item.Name}}</label>
+              </block>
+            </view>
+          </view>
+        </block>
+        <view style="height:96rpx;width:100%;"></view>
+      </scroll-view>
+      <view style="height:100rpx"></view>
+      <view class="m-m-panel-sp-btn">
+        <view class="m-m-panel-sp-lbtn" style="{{FightGroup&&isModified==false?'display:none':''}}">
+          <view class="u-cart-num" style="margin-top:21rpx">
+            <view class="u-num-btn" hover-class='u-num-btn-left-hover' catchtap="sub">-</view>
+            <input type="number" value="{{numval}}" bindblur="writenum" />
+            <view class="u-num-btn" hover-class='u-num-btn-left-hover' catchtap="add">+</view>
+          </view>
+        </view>
+        <view class="m-m-panel-sp-rbtn" catchtap="buynow">立即兑换</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+
+
+<view class="u-top" wx:if="{{isnav}}">
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav'></image>
+  <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop"></image>
+</view>
+
+<view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+  <view class="u-top1">
+    <view style='position:relative'>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/index/index' open-type='switchTab'>
+        <text>首页</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+      </navigator>
+      <!-- <view class='{{animation?"navtext1":"navtext"}}' bindtap='shareBox'>
+        <text>分享</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_share.png' class='quicknav'></image>
+      </view> -->
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/usercoupon/usercoupon'>
+        <text>我的券</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/img/myticket.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/goodcollection/goodcollection'>
+        <text>我的收藏</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_my_favor.png' class='quicknav'></image>
+      </navigator>
+      <navigator class='{{animation?"navtext1":"navtext"}}' url='/pages/UserCenter/UserCenter' open-type='switchTab'>
+        <text>个人中心</text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_usercenter.png' class='quicknav'></image>
+      </navigator>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+      </view>
+      <view class='navtext'>
+        <text></text>
+        <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+      </view>
+    </view>
+  </view>
+</view>
+<template is="index_msk" wx:if="{{IsNewUser==1 && CouponAmount>0}}" data="{{CouponAmount, isCancel}}" />
+<template is="success_msk" wx:if="{{!isCancelSuccess}}" data="{{Coupons}}" />
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />

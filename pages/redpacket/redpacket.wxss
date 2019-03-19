@@ -1,0 +1,39 @@
+page{background:url(http://kkdfile.kukeduo.cn/appicon/rpk_num2.png) no-repeat #f82912;background-size:100% auto; }
+.banner{width: 750rpx;height:633rpx;position:relative; }
+.banner::after{content: "";position: absolute;width: 100%;height: 160rpx;background-image:-webkit-linear-gradient(to bottom, #fd432e, #f82912); background-image:linear-gradient(to bottom,#fd432e,#f82912);bottom: -160rpx;}
+.banner image{width: 100%;height: 100%;}
+.RPKBox{box-sizing: border-box;padding: 20rpx;}
+.b1{box-sizing: border-box;padding: 50rpx 24rpx;background-color: #f4a19d;position: relative;z-index: 2;border-radius: 8rpx;margin-bottom: 40rpx;}
+.couponBox{height: 204rpx; background-color: #fff;border-radius: 8rpx;position: relative;box-sizing: border-box;padding: 16rpx;}
+.couponBox::after{content: "";position: absolute;width:48rpx;height: 48rpx;background-color: #f4a19d;border-radius: 100%;top: 50%;margin-top: -24rpx;left: -24rpx; }
+.couponBox::before{content: "";position: absolute;width:48rpx;height: 48rpx;background-color: #f4a19d;border-radius: 100%;top: 50%;margin-top: -24rpx;right: -24rpx; }
+.info{padding: 20rpx 28rpx;overflow: hidden;position: relative;}
+.infoL{float: left;}
+.infoR{color:#f03121;position: absolute;bottom: 20rpx;right: 28rpx;}
+.labelt{font-size:36rpx;color:#f03121;}
+.labelb{font-size: 24rpx;color: #333333;line-height: 40rpx;padding-top: 5rpx;}
+.infoR label{font-size: 40rpx;}
+.infoR text{font-size: 76rpx;}
+.linkInfo{border-top: 1px dashed #888;font-size: 24rpx;line-height: 50rpx;padding: 0 10rpx;}
+.linkInfo label{color: #696969;display: inline-block;}
+.linkInfo text{color: #f03121;float: right;}
+.b1 button{font-size: 32rpx;margin: 40rpx auto 0 auto;background-color:#f82912; }
+.listtitle{font-size:30rpx;text-align: center; position: relative;}
+.listtitle::after{content: "";position: absolute;width: 100%;height: 100%;left:0;top: 50%;border-top: 1rpx solid #c78b8d}
+.listtitle label{display: inline-block;background-color: #f4a19d;position: relative;z-index: 2;padding: 0 30rpx;color: #333333;}
+.userList{margin-top: 20rpx;}
+.userItem{padding: 10rpx 0;border-bottom: 1rpx solid #c78b8d;}
+.userItem image{display: inline-block;width: 70rpx;height: 70rpx;border-radius: 100%;}
+.t1{display: inline-block;font-size: 24rpx;vertical-align: top;width: 85%;line-height: 40rpx;}
+.tTop{font-size: 28rpx;color: #333333;}
+.tTop text{float: right;}
+.userPhone{display: inline-block;width: 15%;}
+.tBottom{color: #68494e;}
+.b1 rich-text{font-size: 24rpx;padding-top:20rpx; display: block;}
+.infoER{font-size: 40rpx;color: #d9d9d9;text-align: center;padding: 40rpx;position: relative}
+.infoER label{background-color: #fff;padding: 0 20rpx;z-index: 5;position: relative;}
+.infoER::after{content: "";position: absolute;width: 400rpx;border-top: 2rpx solid #d9d9d9;left: 50%;top: 50%;margin-left: -200rpx;}
+.lookMore{text-align: center;font-size: 24rpx;padding-top: 20rpx;color:blue;text-decoration: underline;}
+.tBottom text{float: right;font-size: 20rpx;background-color: #fdf017;padding:0 10rpx;border-radius: 8rpx; height: 40rpx;}
+.errInfo{text-align: center;padding: 20rpx;font-size: 40rpx;color: #333333;}
+.u-top{top: 50%;margin-top: 300rpx;opacity: 0.8;}

@@ -1,0 +1,6 @@
+<form report-submit="true" bindsubmit="formSubmit">
+    <switch name="switch"/>
+    <button formType="submit">发送消息</button>
+</form>
+<button bindtap="getCode">获取页面二维码</button>
+<button bindtap="sao">扫一扫</button>

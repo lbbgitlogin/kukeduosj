@@ -1,0 +1,103 @@
+.notHave {
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  line-height: 33rpx;
+  color: #9b9b9b;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.notHave image {
+  display: block;
+  width: 424rpx;
+  height: 209rpx;
+  margin: 137rpx auto 33rpx;
+  /* margin-top: 137rpx; */
+}
+
+.notText {
+  font-family: PingFangSC-Medium;
+  font-size: 26rpx;
+  line-height: 37rpx;
+  color: #000;
+  margin-top: 40rpx;
+}
+
+.notText  text {
+  color: #db384c;
+}
+
+.have label {
+  display: block;
+  width: 100%;
+  height: 73rpx;
+  font-size: 26rpx;
+  line-height: 73rpx;
+  text-align: center;
+}
+
+.haveRecord {
+  display: flex;
+  align-items: center;
+  padding: 32rpx 30rpx 32rpx 37rpx;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: 0 2px 0 0 #efefef, 0 -2px 0 0 #efefef;
+  margin-bottom: 22rpx;
+}
+
+.commodity image {
+  width: 114rpx;
+  height: 124rpx;
+  margin-right: 41rpx;
+  border-radius: 10rpx;
+}
+
+.commodity .coupon {
+  width: 128rpx;
+  height: 128rpx;
+  text-align: center;
+  line-height: 128rpx;
+  margin-right: 41rpx;
+  background-image: linear-gradient(-225deg, #f87c5e 0%, #db384c 100%);
+  border-radius: 10rpx;
+}
+
+.commodity .coupon > view:first-child {
+  text-align: center;
+  font-size: 24rpx;
+  color: #ffffff;
+}
+.commodity .coupon > view:first-child text {
+  font-size: 36rpx;
+}
+.mid view:first-child {
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #000;
+}
+
+.mid view:nth-child(2) {
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  line-height: 33rpx;
+  color: #9b9b9b;
+  margin-top: 5rpx;
+  margin-bottom: 15rpx;
+}
+
+.mid view:last-child {
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #db384c;
+  letter-spacing: 0;
+}
+
+.pageTurns image {
+  width: 17rpx;
+  height: 17rpx;
+  position: absolute;
+  right: 30rpx;
+}

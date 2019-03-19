@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "个人中心",
+    "usingComponents": {
+      "send-message": "../../common/send-message/send-message",
+      "auth-info": "../../common/authorization-info/authorization-info"
+    }
+  }

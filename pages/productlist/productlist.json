@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "zip-img": "../../common/zip-img/zip-img"
+  }
+}

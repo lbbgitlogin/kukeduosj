@@ -1,0 +1,56 @@
+<import src="../../tpl/shareMskTpl.wxml" />
+<view class='bg' style='width:100%; height:100%; background:url(http://kkdfile.kukeduo.cn/appicon/img/greetingCard1.jpg) no-repeat;background-size:cover' wx:if='{{isdata}}'>
+  <view class='bg' style='width:100%; height:100%; background:url(http://kkdfile.kukeduo.cn/appicon/img2/greetingCard-bg.gif) no-repeat;background-size:cover'>
+    <image class='animated swing img1' src='http://appicon-1253690476.file.myqcloud.com/img/greetingCard2.png' mode='widthFix'></image>
+    <image class='animated swing1 img2' src='http://appicon-1253690476.file.myqcloud.com/img/greetingCard3.png' mode='widthFix'></image>
+    <image class='animated swing img3' src='http://appicon-1253690476.file.myqcloud.com/img/greetingCard2.png' mode='widthFix'></image>
+    <image class='animated swing1 img4' src='http://appicon-1253690476.file.myqcloud.com/img/greetingCard3.png' mode='widthFix'></image>
+    <image class='animated flipInX img5' src='http://kkdfile.kukeduo.cn/appicon/img/greetingCard4.png' mode='widthFix'></image>
+    <view class='animated pulse  congratulations' style='background:url(http://kkdfile.kukeduo.cn/appicon/img/greetingCard5.png) no-repeat;background-size:cover'>
+      <view class='name'>
+        <view style='margin-right:10rpx;'>祝 {{GameMsg.UserCall}}</view>
+      </view>
+      <view bindinput='CongratulationsInput' class='statement'>{{GameMsg.Congratulations}}</view>
+      <view class='congratulations-bottom'>
+        <view class='shuming'>
+          <image src='{{GameMsg.UserPhotoPath}}'></image>
+          <text>{{GameMsg.UserName}} 敬上</text>
+        </view>
+      </view>
+    </view>
+    <view class='action'>
+      <button bindtap='gotohny' class='write commonality' style=' background:url(http://kkdfile.kukeduo.cn/appicon/img2/greetingCard6.png) no-repeat;background-size:cover'>
+        <text>写福卡</text>
+      </button>
+      <navigator url='../Popularitycharts/Popularitycharts?bid={{bid}}' hover-class="none" class='popularity commonality' style=' background:url(http://kkdfile.kukeduo.cn/appicon/img2/greetingCard6.png) no-repeat;background-size:cover'>
+        <text>比福气</text>
+      </navigator>
+      <button class='share commonality' style=' background:url(http://kkdfile.kukeduo.cn/appicon/img2/greetingCard6.png) no-repeat;background-size:cover' bindtap='shareQRCode'>
+        <text>朋友圈</text>
+      </button>
+    </view>
+    <view class='hint' wx:if="{{!IsChannel}}">酷客多小程序提供技术支持</view>
+    <view class='bottom'>
+      <view class='yun1'>
+        <view class='move1' style='background:url(http://kkdfile.kukeduo.cn/appicon/img/greetingCard9.png) no-repeat;background-size:cover'></view>
+        <!-- <image class='move1' src='../../img/greetingCard9.png'></image> -->
+      </view>
+      <view class='yun2'>
+        <view class='move2' style='background:url(http://kkdfile.kukeduo.cn/appicon/img/greetingCard8.png) no-repeat;background-size:cover'></view>
+        <!-- <image class='move2' src='../../img/greetingCard8.png'></image> -->
+      </view>
+    </view>
+  </view>
+  <navigator class='btn' url='../index/index' open-type='switchTab'>
+    <image class='animated tada1' src='http://appicon-1253690476.file.myqcloud.com/img/greetingCard7.png'></image>
+  </navigator>
+</view>
+<view wx:else class="m-nullpage">
+  <view class="m-nullpage-middle">
+    <label class="iconfont icon-meiyougengduo"></label>
+    <view class="m-null-tip">
+      <text style='color:#888'>什么都没有</text>
+    </view>
+  </view>
+</view>
+<template is="shareMskTpl" data="{{PageQRCodeInfo}}" />

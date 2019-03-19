@@ -1,0 +1,66 @@
+<scroll-view scroll-y="true" class="m-product-all u-pa" bindscrolltolower="fightPage" scroll-top="{{scposition}}" style='background-color:#f8f8f8'>
+  <view class="box">
+    <view class="box_logo">
+      <image class="box_logo_img" src="{{img}}"></image>
+    </view>
+    <view class="box_logo_box">
+      恭喜您，获得了 "{{prize}}"
+    </view>
+    <view class="box_logo_text_box">
+      <view class="box_logo_text">我们已经收到了您的中奖信息，客服可能主</view>
+      <view class="box_logo_text">动和你联系确认中奖信息</view>
+    </view>
+  </view>
+
+  <view class="link">
+    <navigator url="../index/index" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/index.png"></image>
+      <text>首页逛逛</text>
+    </navigator>
+    <navigator url="../category/category" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/allproduct.png"></image>
+      <text>全部商品</text>
+    </navigator>
+    <navigator url="../receivecontent/receivecontent" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/coupon.png"></image>
+      <text>领券中心</text>
+    </navigator>
+    <navigator url="../UserCenter/UserCenter" open-type="switchTab" class="nav">
+      <image class="nav-img" src="http://appicon-1253690476.file.myqcloud.com/img/center.png"></image>
+      <text>个人中心</text>
+    </navigator>
+  </view>
+
+  <view class='m-product-list m-listv' wx:if="{{ProductList.length>0}}">
+    <view class='recommend'>一 为您推荐 一</view>
+    <navigator wx:for="{{ProductList}}" url="{{item.ProductForm==2?'../../server/productdetail/productdetail':'../productdetail/productdetail'}}?pid={{item.id}}" class="m-product-item">
+      <view class="m-product-img">
+        <image src="{{item.ProductPic}}" />
+      </view>
+      <view class="m-product-info" style="display:flex; flex-flow: column;justify-content: space-between;border-bottom:none">
+        <view class="m-product-name">
+          <label>{{item.SalesName}}</label>
+        </view>
+        <view class="m-product-price" style='line-height:70rpx;'>
+          <view class="money">
+            <label>{{Currency}}</label>
+            <label style='font-size:32rpx'>{{item.SalePrice}}</label>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <view class="m-loading-box">
+    <block wx:if="{{ispage}}">
+      <view class="u-loadmore">
+        <lael class="u-loading"></lael>
+        <text class="u-loadmore-tips">正在加载</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="u-loadmore u-loadmore-line">
+        <text class="u-loadmore-tips">没有更多数据啦！</text>
+      </view>
+    </block>
+  </view>
+</scroll-view>

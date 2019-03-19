@@ -1,0 +1,9 @@
+.m-ad-item{background-color: #fff;padding: 24rpx 20rpx 24rpx 30rpx;position: relative;border-bottom: 1px solid #d5d5d5;}
+.m-ad-l{width: 70%;display: inline-block;}
+.m-ad-i-top{font-size: 16px;line-height: 20px;}
+.m-ad-i-top text{margin-right: 20rpx;}
+.m-ad-i-bot{font-size: 14px;color: #888;line-height: 20px;margin-top: 10rpx;}
+.m-ad-icon{font-size: 12px;padding:4rpx 8rpx;background-color:#DB384C;color: #fff;border-radius: 8rpx;margin-right: 8rpx;text-align: center;}
+.m-ad-edit{position: absolute;right:20rpx;top:50%;width: 80rpx;height: 100rpx;margin-top: -50rpx;padding-left: 40rpx;}
+.m-ad-edit label{width: 40rpx;height: 50rpx;line-height: 50rpx;font-size: 35rpx;display: block;vertical-align: middle;text-align: center;color:#888888;}
+.m-ad-edit::after{content: "";position: absolute;border-left: 1px solid #d5d5d5;left: 0;top: 0;width: 1px;height: 100%;}

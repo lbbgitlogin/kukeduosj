@@ -1,0 +1,19 @@
+.m-cells{font-size: 28rpx;}
+.m-logistbox{margin-top: 20rpx;}
+.m-logistitem{font-size: 28rpx;background-color: #fff;padding:40rpx 20rpx 40rpx 100rpx;border-bottom: 1rpx solid #C8C8CD;line-height: 40rpx;color: #888;position: relative;}
+.m-logistitem::after{content: "";position: absolute;left: 0;top: 0;width: 1rpx;height: 100%;border-left: 1rpx solid #C8C8CD;margin-left: 50rpx;}
+.m-logistitem::before{content: "";position: absolute;width: 30rpx;height: 30rpx;left: 0;top: 0;background-color: #d5d5d5;border-radius: 100%;margin-left: 35rpx;margin-top: 40rpx;z-index: 2;}
+.m-logistitem:first-child{color:#DB384C; }
+.m-logistitem:first-child::before{content: "";position: absolute;width: 30rpx;height: 30rpx;left: 0;top: 0;background-color: #DB384C;border-radius: 100%;margin-left: 35rpx;margin-top: 40rpx;z-index: 2;}
+.map{
+  /* margin-top: 20rpx; */
+  
+}
+.map image{
+  width: 60rpx;
+  height: 60rpx;
+  z-index: 999;
+  position: absolute;
+  top: 100rpx;
+  right: 20rpx;
+}

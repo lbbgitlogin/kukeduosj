@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "预约订单提交",
+    "usingComponents": {
+      "auth-info": "../../common/authorization-info/authorization-info"
+    }
+  }

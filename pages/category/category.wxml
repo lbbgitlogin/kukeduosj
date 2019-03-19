@@ -1,0 +1,74 @@
+<view class="m-category" wx:if="{{!isShow}}">
+  <block wx:if="{{isData}}">
+    <navigator url="../search/search" class="u-search-box">
+      <view class="u-search-cont">
+        <icon type="search" size="14"></icon>
+        <text>搜索商品</text>
+      </view>
+    </navigator>
+    <view wx:if="{{Category.length>0}}">
+      <scroll-view class="m-category-l" scroll-y="true">
+        <block wx:for="{{Category}}" wx:for-index="i" wx:for-item="item">
+          <view class="m-category-l-item {{item.Id==fid?'m-category-l-select':''}}" data-id="{{item.Id}}" bindtap="ckCategoryitem">{{item.Name}}</view>
+        </block>
+        <view class="m-category-l-item"></view>
+      </scroll-view>
+      <scroll-view class="m-category-r" scroll-y="true">
+        <view class="g-grids">
+          <navigator wx:for="{{CategoryTwo}}" hover-class='none' wx:for-item="item" url="../productlist/productlist?cid={{item.Id}}&cname={{item.Name}}" class="g-grid">
+            <view class="g-grid-icon">
+              <!-- <image class="m-cell-default-icon" src="{{item.PicPath}}" /> -->
+               <zip-img  source_img="{{item.PicPath}}" ></zip-img>  
+            </view>
+            <p class="g-grid-label">{{item.Name}}</p>
+          </navigator>
+          
+        </view>
+      </scroll-view>
+    </view>
+  </block>
+  <view wx:else class="m-nullpage">
+    <view class="m-nullpage-middle">
+      <label class="iconfont icon-meiyougengduo"></label>
+      <view class="m-null-tip">
+        <text>亲~什么都没有</text>
+        <text>请尽快去商城后后台完善内容哦</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="m-category" wx:if="{{isShow}}">
+  <block wx:if="{{isData}}">
+    <navigator url="../search/search" class="u-search-box">
+      <view class="u-search-cont">
+        <icon type="search" size="14"></icon>
+        <text>搜索商品</text>
+      </view>
+    </navigator>
+    <scroll-view class="scroll" scroll-y="true" wx:if="{{Info.length>0}}">
+      <view class="category" wx:for="{{Info}}" wx:for-item="items" wx:if="{{items.productCategoryVo.length>0}}">
+        <view class="title">-
+          <label style="margin:0 10rpx">{{items.Name}}</label>-</view>
+        <view class="categoryTwo">
+          <navigator url="../productlist/productlist?cid={{item.Id}}&cname={{item.Name}}" hover-class='none' class="c-product" wx:for="{{items.productCategoryVo}}" wx:for-item="item">
+            <view class="c-product-img">
+              <zip-img  source_img="{{item.PicPath}}" ></zip-img>
+            </view>
+            <p class="c-product-name g-grid-label">{{item.Name}}</p>
+          </navigator>
+        </view>
+      </view>
+      <view style="height:100rpx"></view>
+    </scroll-view>
+  </block>
+  <view wx:else class="m-nullpage">
+    <view class="m-nullpage-middle">
+      <label class="iconfont icon-meiyougengduo"></label>
+      <view class="m-null-tip">
+        <text>亲~什么都没有</text>
+        <text>请尽快去商城后后台完善内容哦</text>
+      </view>
+    </view>
+  </view>
+</view>

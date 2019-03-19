@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "抽奖团",
+  "usingComponents": {
+    "count-down": "../../common/count-down/count-down",
+    "zip-img": "../../common/zip-img/zip-img"
+  }
+}

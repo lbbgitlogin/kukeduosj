@@ -1,0 +1,121 @@
+<view class='f-title'>
+  <view class='f-callbox'>
+    <view>
+      <text class='f-Info-name'>售后类型</text> (建议您先与商家进行沟通)
+    </view>
+    <view catchtap='callUp'>
+      <image src="http://appicon-1253690476.file.myqcloud.com/icon/photo.png" style="width:15px;height:15px;margin-right:5px; vertical-align: middle;"></image>
+      <text class='f-call'>联系商家</text>
+    </view>
+  </view>
+
+  <view>
+    <view class="u-link-btn">退货</view>
+  </view>
+</view>
+
+<view class='f-product'>
+  <view class='f-product-heade'>
+    选择售后商品
+  </view>
+  <block wx:for="{{orderDetailList}}" wx:for-item="items">
+    <view class="m-product-all clear">
+      <view class="m-item-c">
+        <view class=" m-cart-ck" catchtap="ckitem" data-skuid="{{items.SkuId}}">
+          <icon type="{{items.IsCheck?'success':'circle'}}" color="{{items.IsCheck? '#DB384C': '#d5d5d5'}} " />
+        </view>
+        <view class="m-product-img ">
+          <image src='{{items.Path}}' />
+        </view>
+        <view class="m-product-info ">
+          <view url="../productdetail/productdetail">
+            <view class="m-product-name ">
+              <label>{{items.ProductName}}</label>
+              <label class="m-min-name " style="overflow:hiddentext-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1 ">{{items.SpecStr==null?" ":items.SpecStr}}</label>
+            </view>
+            <view class="m-product-price ">
+              <label>{{Currency}}</label>{{items.Price}}
+            </view>
+          </view>
+          <view class="u-cart-num ">
+            <view class="u-num-btn" catchtap="sub" data-num="{{items.CanRefundAmount}}" data-cid="{{items.SkuId}}">-</view>
+            <input type="number" value="{{items.CanRefundAmount||1}}" bindblur="writenum" data-cid="{{items.SkuId}}" />
+            <view class="u-num-btn" catchtap="add" data-num="{{items.CanRefundAmount}}" data-cid="{{items.SkuId}}">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+
+
+  <picker class='reason-box' bindchange="bindPickerChange" value="{{index}}" range="{{rangeArray}}">
+    <view class='reason'>
+      <view class='r-title'>
+        申请原因
+        <text>(必选)</text>
+      </view>
+      <view class='m-addres-info m-cell-access select'>
+        <view wx:if="{{IsChange==false}}">请选择</view>
+        <view wx:if="{{IsChange}}">{{rangeArray[index]}}</view>
+        <view class="m-cell-ft"></view>
+      </view>
+    </view>
+    <view class='r-text' wx:if="{{IsChange}}">建议你先与商家沟通,描述退货原因,并上传图片细节</view>
+  </picker>
+
+</view>
+<!-- 文本 -->
+<view class='describe-box'>
+  <view class='describe-top'>
+    <view class='d-tile'>问题描述</view>
+    <view>{{textVal.length||inputLen}}/500</view>
+  </view>
+  <view>
+    <textarea value="{{textVal}}" bindblur="txtVal" bindinput="txtEven" placeholder='请您在此描述商品问题' placeholder-class='describe-place' class='describe' maxlength='500'></textarea>
+  </view>
+  <!-- <view>{{textVal}}</view> -->
+  <view class='describe-top'>
+    <view class='d-tile'>添加图片</view>
+    <view>{{ImgList.length}}/9</view>
+  </view>
+  <view>
+    <view class='d-pic'>
+      <block wx:for="{{ImgList}}">
+        <view style='display: inline-block;position: relative'>
+          <image src='{{item.Url}}' />
+          <view class='shanchu'>
+            <label class="iconfont icon-delete" style='color:#fff' data-id="{{item.SkuId}}" bindtap='delImg' data-index="{{index}}"></label>
+          </view>
+        </view>
+      </block>
+      <view class='add-pic' catchtap='UploadImg'>+</view>
+    </view>
+  </view>
+</view>
+
+<!-- 电话 -->
+<view class='d-link'>
+  <view class='link-way'>
+    <view>联系人</view>
+    <view>
+      <input maxlength='30' value='{{valName}}' bindinput="linkName"></input>
+    </view>
+  </view>
+  <view class='link-way'>
+    <view>联系电话</view>
+    <view>
+      <input  maxlength='20' type='number' value='{{valTel}}' bindinput="linkTel"></input>
+    </view>
+  </view>
+</view>
+<!-- 底部文字说明 -->
+<view class='explain'>
+  <view>温馨提示</view>
+  <text>建议您提交申请前,先与商家沟通,提交申请之后,商家可能与您电话沟通,请保持电话畅通!</text>
+</view>
+
+<view class='d-btn'  bindtap='{{Isclosed?"affterTap":""}}'>
+  <!-- <button>提交申请</button> -->
+  提交申请
+</view>

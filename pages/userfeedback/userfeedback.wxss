@@ -1,0 +1,5 @@
+.feedback-box{padding: 30rpx;}
+.m-cells::before{border: none;}
+.m-cells::after{border: none;}
+.m-cell::before{border: none;}
+.btn_box{margin-top: 50rpx;}

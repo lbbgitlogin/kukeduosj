@@ -1,0 +1,136 @@
+page{
+}
+.box_logo{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 240rpx;
+}
+.box_logo_img{
+ width:220rpx;
+height:220rpx;
+margin-top:20px;
+}
+.box_logo_box{
+  font-size: 25rpx;
+  padding: 43rpx 0;
+  display: flex;
+  justify-content: center;
+  color:#111;
+}
+.box_logo_box_logo{
+  width: 52rpx;
+  height: 52rpx;
+  float: left;
+  padding-left: 25rpx;
+}
+.box_logo_box_logo_img{
+  width: 52rpx;
+  height: 52rpx;
+}
+.box_logo_box_title{
+    float: left;
+}
+.box_logo_text_box{
+  width: 750rpx;
+}
+.box_logo_text{
+  font-size: 25rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+   display: flex;
+  justify-content: center;
+  color: #888888;
+}
+.color{
+  color: #26a6d0;
+}
+.bottom{
+  font-size: 25rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: #888888;
+}
+.u-view2{
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 93rpx;
+  border-radius: 100%;
+  overflow: hidden;
+  text-align: center;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.u_top {
+  width: 40rpx;
+  height: 40rpx;
+}
+.u-back2 {
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 100%;
+  overflow: hidden;
+  text-align: center;
+  background-color: #fff;
+  opacity: 0.9;
+  border:1rpx solid #d9d9d9;
+
+}
+.iconfont{
+  font-size: 50rpx;
+}
+@import '../../utils/layout.wxss';
+.box{
+  background-color: white;
+  padding-bottom:95rpx;
+
+}
+@import '../../utils/layout.wxss';
+
+.price_text {
+margin-right:190rpx;
+float:right;
+font-size:24rpx;
+color:#666;
+padding-right:20rpx;
+
+}
+.link{
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  margin-top:20rpx 
+}
+.nav{
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 200rpx
+}
+.nav-img{
+  width: 80rpx;
+  height: 80rpx
+}
+.nav text{
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: #333
+}
+.recommend{
+  text-align: center;
+  padding: 20rpx 0;
+  color:#DB384c;
+}
+.u-pa .m-product-list{
+  padding-top :0;
+  margin-top: 20rpx
+}

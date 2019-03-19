@@ -1,0 +1,126 @@
+<import src="../../tpl/groupshare.wxml" />
+<import src="../../tpl/sunshare.wxml" />
+
+<view class='all_bj' style='background:url({{desc.BackgroudPic  == "" || desc.IsDistribution == false  ? "http://appicon-1253690476.file.myqcloud.com/auth/20181023171657.png":desc.BackgroudPic}}) center no-repeat;background-size: cover;'>
+  <view class='box1' wx:if="{{BoxType==1}}">
+    <view class='buse_sho' style='display:{{ desc.IsDistribution ? "":"none"}}'>
+      <view style="width: 82%;height: 91px;background: #fff;position: relative;padding: 33px;border-radius: 8px;">
+        <view style="width: 152rpx;height: 152rpx;position: absolute;top: -40px;left: 38%;border-radius: 50%;overflow: hidden;">
+          <image style="width: 152rpx;height: 152rpx;/*position: absolute*//*top: -40px*//*left: 38%;*/" src='{{desc.WapLogoPath}}'></image>
+        </view>
+        <view style="text-align: center;margin-top: 16px;">{{desc.ShopName}}</view>
+        <view style="font-size: 12px;margin-top: 25rpx;color:#cb9a7e;height: 88rpx;line-height: 30rpx;display: -webkit-box;word-break: break-all;text-overflow: ellipsis;overflow: hidden;-webkit-box-orient: vertical;-webkit-line-clamp: 3;">{{desc.VendorInfo}}</view>
+      </view>
+    </view>
+    <!-- <view class='banner'>
+    <image class='image1' src='http://appicon-1253690476.file.myqcloud.com/endorsement/top-block.png'></image>
+
+    <image class='image2' src='http://appicon-1253690476.file.myqcloud.com/endorsement/top-bar.png'></image>
+
+    <image class='image3' src='http://appicon-1253690476.file.myqcloud.com/endorsement/adtitle.png'></image>
+
+    <image class='image4' src='http://appicon-1253690476.file.myqcloud.com/endorsement/box.png'></image>
+  </view>
+  <view class='warp'>
+    <image class='image5' src='http://appicon-1253690476.file.myqcloud.com/endorsement/shadow.png'></image>
+    <view class='info-box'>
+      <view class='photo'>
+      <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class='text'>
+        <view class='text1'><open-data type="userNickName"></open-data></view>
+        <view class='text2'>我为好产品代言</view>
+      </view>
+    </view>
+     <!-- bindtap='shareBox' -->
+    <view style='width: 50%;float: left;margin-top:{{!desc.IsDistribution? "700rpx":""}}' wx:if="{{IsSatisfyDistribution}}">
+      <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo3" class='img-btn' style='background:{{desc.SelfDYBgColor}};color:{{desc.SelfDYWrdColor}}'>
+        我要代言
+      </button>
+    </view>
+    <view style="width: 50%;float: left;margin-top:{{!desc.IsDistribution  ? '700rpx':''}}" wx:else>
+      <view class='img-btn' bindtap='shareBoxOff' style='background:{{desc.SelfDYBgColor}};color:{{desc.SelfDYWrdColor}}'>
+        我要代言
+      </view>
+    </view>
+    <view style='width: 50%;float: left;margin-top:{{!desc.IsDistribution == "" ? "":"700rpx"}}' wx:if="{{IsSatisfyDistribution}}">
+      <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo2" class='img-btn' style='background:{{desc.InvitDYBgColor}};color:{{desc.InvitDYWrdColor}}'>
+        邀请好友代言
+      </button>
+    </view>
+    <view style="width: 50%;float: left;margin-top:{{!desc.IsDistribution == '' ? '':'700rpx'}}" wx:else>
+      <view bindtap='shareBoxOff' class='img-btn' style='background:{{desc.InvitDYBgColor}};color:{{desc.InvitDYWrdColor}}'>
+        邀请好友代言
+      </view>
+    </view>
+    <!-- <view class='link-btn'>
+      <navigator url='../moneyrule/moneyrule' class='link'>
+        <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/rul.png'></image>
+        <label>佣金规则</label>
+      </navigator>
+      <navigator url='../fanslist/fanslist' class='link'>
+        <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/fans.png'></image>
+        <label>我的粉丝</label>
+      </navigator>
+    </view> -->
+    <!-- </view> -->
+  </view>
+</view>
+<!-- <view class='box2' wx:if="{{BoxType==2}}">
+  <image class='image1' src='http://appicon-1253690476.file.myqcloud.com/endorsement/top-block.png'></image>
+  <image class='image2' src='http://appicon-1253690476.file.myqcloud.com/endorsement/top-bar.png'></image>
+  <view class='main'>
+    <view class='main-top'>
+      <view class='photo'>
+        <image src="{{Photo}}"></image>
+      </view>
+      <view class='nicename'>{{NickName}}</view>
+      <image class='image6' src='http://appicon-1253690476.file.myqcloud.com/endorsement/slogan.png'></image>
+    </view>
+    <view class='hr'></view>
+    <view class='main-bottom'>
+      <view class='info-box2'>
+        <view class='photo'>
+          <image src="{{VendorInfo.WapLogoPath}}"></image>
+        </view>
+        <view class='text'>
+          <view class='text1'>{{VendorInfo.ShopName}}</view>
+        </view>
+        <navigator class='btn-go' open-type="switchTab" url='../index/index'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/goshop.png'></image>
+        </navigator>
+      </view>
+      <view class='img-btn2' bindtap='BoxType'>
+        <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/mybutton.png'></image>
+      </view>
+      <view class='link-btn' wx:if="{{DisplayDistributionSettingDetail}}">
+        <navigator url='../moneyrule/moneyrule' class='link'>
+          <image src='http://appicon-1253690476.file.myqcloud.com/endorsement/rul.png'></image>
+          <label>佣金规则</label>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view> -->
+<!-- <auth-info></auth-info> -->
+<template is="shareMskTpl1" data="{{PageQRCodeInfo2}}" />
+<template is="sunshare" data="{{PageQRCodeInfo1}}" />
+
+<view class='u-top3' style='z-index:10'>
+  <navigator hover-class="none" url='../moneyrule/moneyrule' style="width: 69px;height: 30px;position: ：relative;">
+    <image style="width: 100%;height: 100%;/*background-size: 100% 100%*/" src='../../img/gz.png'></image>
+    <image src='../../img/wh_fx.png' style="width: 30rpx;height: 30rpx;position: absolute;top: 21%;left: 17%;"></image>
+    <text style="font-size: 25rpx;color: #fff;position: absolute;top: 19%;left: 47%;">规则</text>
+  </navigator>
+</view>
+<view style='position:fixed;right:3%;bottom:50%;display:flex;flex-direction: column;'>
+  <navigator hover-class="none" url='../index/index' open-type="switchTab" >
+    <image mode="widthFix" src='http://appicon-1253690476.file.myqcloud.com/auth/fs-home.png' style='width:100rpx;height:100rpx'></image>
+  </navigator>
+  <navigator hover-class="none" url='../fanslist/fanslist' >
+    <image mode="widthFix" src='http://appicon-1253690476.file.myqcloud.com/auth/fs-wode.png'  style='width:100rpx;height:100rpx'></image>
+  </navigator>
+  <navigator hover-class="none" url='../fansrank/fansrank' >
+    <image mode="widthFix" src='http://appicon-1253690476.file.myqcloud.com/auth/fs-paihang.png'  style='width:100rpx;height:100rpx'></image>
+  </navigator>
+</view>

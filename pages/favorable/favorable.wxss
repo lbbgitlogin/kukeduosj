@@ -1,0 +1,216 @@
+.totalMoney {
+  width: 90%;
+  display: flex;
+  margin: 24rpx auto 0;
+  justify-content: space-betwee;
+  height: 92rpx;
+  border-radius: 8rpx;
+}
+
+.totalMoney label {
+  width: 54%;
+  height: 92rpx;
+  line-height: 92rpx;
+  font-size: 26rpx;
+  color: #000;
+}
+
+.totalMoney input {
+  height: 92rpx;
+  line-height: 92rpx;
+  font-size: 26rpx;
+  text-align: right;
+  margin-right: 20rpx;
+}
+
+.nodiscount {
+  width: 90%;
+  margin: 51rpx auto 20rpx auto;
+}
+
+.check {
+  height: 58rpx;
+  line-height: 58rpx;
+  font-size: 26rpx;
+  color: #808080;
+}
+
+.discount {
+  height: 85rpx;
+  line-height: 90rpx;
+  padding: 0 40rpx;
+  background: #fff;
+  font-size: 28rpx;
+  color: #000;
+  margin: 24rpx 0;
+}
+
+.pay {
+  padding: 0 40rpx;
+  background: #fff;
+}
+
+.coupon {
+  display: flex;
+  justify-content: space-between;
+  height: 98rpx;
+  line-height: 98rpx;
+  font-size: 26rpx;
+  color: #000;
+  border-bottom: 1rpx solid #f1f1f1;
+}
+
+.payments {
+  display: flex;
+  justify-content: space-between;
+  height: 98rpx;
+  line-height: 98rpx;
+  font-size: 28rpx;
+  color: #000;
+}
+
+.payment {
+  width: 90%;
+  height: 80rpx;
+  line-height: 82rpx;
+  background: #db384c;
+  color: #fff;
+  margin-top: 50rpx;
+}
+
+.explain {
+  width: 90%;
+  margin: 50rpx auto;
+}
+
+.title {
+  font-size: 28rpx;
+  color: #000;
+}
+
+.content {
+  font-size: 24rpx;
+  color: #717171;
+  margin-top: 10rpx;
+}
+
+.m-cell-ft::after {
+  content: " ";
+  display: inline-block;
+  height: 12rpx;
+  width: 12rpx;
+  border-width: 4rpx 4rpx 0 0;
+  border-color: #999;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: relative;
+  margin-top: -8rpx;
+  top: -4rpx;
+  right: -4rpx;
+}
+
+.u-back2 image {
+  border-radius: 100%;
+  width: 77rpx;
+  height: 77rpx;
+  border: 1px solid #eee;
+  font-size: 20rpx;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0px 4rpx 8rpx rgba(0, 0, 0, 0.35);
+  z-index: 999;
+  opacity: 0.8;
+  line-height: 77rpx;
+  margin-bottom: 20rpx;
+}
+
+.bj_able {
+  background: #fff;
+  width: 92%;
+  margin: 0 auto;
+  padding-bottom: 40rpx;
+}
+
+.able_text {
+  letter-spacing: 2rpx;
+  width: 54%;
+  height: 92rpx;
+  line-height: 92rpx;
+  font-size: 26rpx;
+  color: #000;
+}
+
+.able_input {
+ width:90%;
+margin:20rpx auto 0 auto;
+border-bottom:1rpx solid #f1f1f1;
+height:110rpx;
+display:flex;
+
+}
+
+.able_fuhao {
+  font-family: PingFangSC-Medium;
+  font-size: 60rpx;
+  color: #000;
+  letter-spacing: 0.84rpx;
+  text-align: center;
+  line-height: 94rpx;
+  margin-right: 10rpx;
+  font-weight: bold
+}
+
+/* .input_lab {
+  float: left;
+  width: 75%;
+  height: 100%;
+} */
+
+.checkbox {
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #7b7b7b;
+  letter-spacing: 0.5rpx;
+  text-align: center;
+}
+
+.no_lab {
+  width: 90%;
+  display: flex;
+  margin: 24rpx auto 0;
+  justify-content: space-betwee;
+  height: 98rpx;
+  border-radius: 8rpx;
+  line-height: 98rpx;
+  border-bottom: 1rpx solid #f1f1f1;
+}
+
+.pict_fal {
+  width: 38rpx;
+  height: 38rpx;
+  position: absolute;
+  top: 161rpx;
+  right: 9%;
+}
+
+.fal_pic {
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.input_lab{
+  width: 87%; 
+  font-family: UICTFontTextStyleBody;
+  font-size: 74rpx;
+  height: 74rpx;
+  /* line-height:74rpx; *//* padding:8rpx 0; */
+  min-height: 83rpx;
+  line-height: normal;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  vertical-align: middl;
+   font-weight: bold
+ 
+}

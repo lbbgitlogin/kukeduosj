@@ -1,0 +1,57 @@
+<template name="sunshare" style="z-index:11">
+  <view class="shareMsk {{PageQRCodeInfo1.IsShare?'':'hide'}}">
+    <view class="sharebox {{PageQRCodeInfo1.IsShareBox?'bounceInUp animated':'bounceOutDown animated'}}">
+      <view class='shareList g-flex '>
+        <view class='shareItem g-flex-item'>
+          <view class='shareBtn'>
+            <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo4" hover-class="none" style="line-height: 36rpx;" class='login-button'>
+              <image src='../../img/Group5.png' style='width:100rpx;height:100rpx'></image>
+            </button>
+            <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo4" style='line-height:0' hover-class="none" style="font-size:24rpx;display:block;margin-top:19rpx;" class='login-button'>我的代言码</button>
+          </view>
+        </view>
+        <view class='shareItem g-flex-item'>
+          <view class='shareBtn'>
+            <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo5" hover-class="none" style="line-height: 36rpx;" class='login-button'>
+              <image src='../../img/Group6.png' style='width:100rpx;height:100rpx'></image>
+            </button>
+
+            <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo5" style='line-height:0' hover-class="none" style="font-size:24rpx;display:block;margin-top:19rpx;" class='login-button'>我的代言海报</button>
+
+            <!-- <label></label> -->
+          </view>
+        </view>
+      </view>
+      <view class='cancelShare' bindtap='cancelShare1'>取消</view>
+    </view>
+    <!-- 我要代言taiyangma  -->
+    <!-- <icon style="position: absolute;top: 70%;left: 50%;"  type="clear" size="20" bindtap='cancelShare1' ></icon> -->
+    <image bindtap='cancelShare1' class=" {{PageQRCodeInfo1.IsJT?'':'hide'}}" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png" style="position: absolute;top: 70%;left: 46%;width: 21px;height: 21px;"></image>
+    <view class="shareCodeImg {{PageQRCodeInfo1.IsJT?'':'hide'}}" style='height:550rpx;top:61%;'>
+
+      <view bindtap='showCodeImg' data-imgurl='{{PageQRCodeInfo1.Path}}'>
+        <image mode="widthFix" src='{{PageQRCodeInfo1.Path}}' style="box-shadow:0 1px 3px #fff;width:246rpx;height:246rpx"></image>
+      </view>
+      <!-- <label style='margin:32rpx 20rpx 20rpx 20rpx;'>微信扫一扫 或 长按识别</label> -->
+      <button hover-class='none' style='margin:44rpx auto 0 auto;border-radius:0;' type="primary" size="mini" bindtap="saveImg1"> 保存图片 </button>
+    </view>
+    <!-- 我的代言吗生成的haibao -->
+    <!-- <view class="shareCodeImg {{PageQRCodeInfo1.IsJT1?'':'hide'}}" style="width: 540rpx;top:43%;padding-top:20rpx;left:47%;left:47%;padding-bottom:20rpx;">
+      <view bindtap='showCodeImg'>
+        <image mode="widthFix" src='{{PageQRCodeInfo1.Path}}' style='width:91%;height:380px'></image>
+      </view>
+    </view>
+    <label style="position: absolute;top: 78%;left: 46%;"  class=" {{PageQRCodeInfo1.IsJT1?'':'hide'}}" style="font-size: 12px;display: block;margin: 10px;color: #fff;position: absolute;top: 78%;left: 30%;">保存至相册，分享到朋友圈</label>
+      <button hover-class='none'  class=" {{PageQRCodeInfo1.IsJT1?'':'hide'}}" style='width:400rpx;margin:0 auto;background:#caa686;position: absolute;top: 72%;left: 24%;' type="primary" size="mini" bindtap="saveImg2"> 保存图片 </button> -->
+
+    <view class="{{PageQRCodeInfo1.IsJT1?'':'hide'}}" style='position:absolute;width:100%;height:100%;left:0;top:0;display:flex;justify-content:center;align-items:center;flex-direction:column;'>
+      <view  bindtap='showCodeImg' data-imgurl='{{PageQRCodeInfo1.Path}}' style='width: 540rpx;background-color:#fff;padding:20rpx;box-sizing: border-box;'>
+        <image mode="widthFix" src='{{PageQRCodeInfo1.Path}}' style='width:100%;'></image>
+      </view>
+      <button hover-class='none'  class=" {{PageQRCodeInfo1.IsJT1?'':'hide'}}" style='width:400rpx;margin:0 auto;background:#caa686;margin-top:20rpx;' type="primary" size="mini" bindtap="saveImg2"> 保存图片 </button>
+      <label   class=" {{PageQRCodeInfo1.IsJT1?'':'hide'}}" style="font-size: 12px;display: block;margin: 10px;color: #fff;">保存至相册，分享到朋友圈</label>
+       <image bindtap='cancelShare2' class=" {{PageQRCodeInfo1.IsJT1?'':'hide'}}" src="http://appicon-1253690476.file.myqcloud.com/img/delete.png" style="width: 21px;height: 21px;margin-top:10rpx;"></image>
+    </view>
+  </view>
+
+</template>

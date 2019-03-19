@@ -1,0 +1,102 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.4.2",
+	"appid": "wx27a8e93c9543324a",
+	"projectname": "kkd",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 10,
+			"list": [
+				{
+					"id": -1,
+					"name": "拼团订单普通购买",
+					"pathName": "pages/fightgroupsdetail/fightgroupsdetail",
+					"query": "MEId=2580&ShareGuid=2487f3b0-59ab-8147-7700-aea8661873b9&pid=22286&type=FIGHTGROUP&uid=1019"
+				},
+				{
+					"id": -1,
+					"name": "优惠买单",
+					"pathName": "pages/favorable/favorable",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "jifen ",
+					"pathName": "/integratShop/integralPage/integralPage",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "jifen ",
+					"pathName": "integratShop/integralPage/integralPage",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "评价",
+					"pathName": "pages/PComment/PComment",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "扫码典藏",
+					"pathName": "pages/orderTrue/orderTrue",
+					"query": "tableNum=8888&orderNum=undefined"
+				},
+				{
+					"id": -1,
+					"name": "扫码典藏",
+					"pathName": "pages/orderdetail/orderdetail",
+					"query": "on=O80680312424095&tp=0"
+				},
+				{
+					"id": -1,
+					"name": "111",
+					"pathName": "integratShop/commodityDetails/commodityDetails",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "rili",
+					"pathName": "pages/rili/rili",
+					"query": ""
+				},
+				{
+					"id": 9,
+					"name": "productdetail/?pid=19257",
+					"pathName": "pages/productdetail/productdetail",
+					"query": "pid=19261"
+				},
+				{
+					"id": -1,
+					"name": "充值demo",
+					"pathName": "pages/recharge/recharge",
+					"query": "pid=19261"
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,409 @@
+<scroll-view scroll-y="true" class="m-orderlist" bindscrolltolower="scrollbottom" bindscroll="scrolltoupper" style='height:100%;position:absolute;top:0' scroll-top="{{scposition}}" wx:if="{{isdata == true}}">
+  <view class="wrap-box">
+    <!-- 写评论 -->
+    <view class='hidden_box' bindtap='textblock' wx:if="{{ishidden== true}}">
+    </view>
+    <view class='hidden_box_Input' wx:if="{{ishidden== true}}">
+      <view class='hidden_box_Input_box'>
+        <view class='hidden_box_input'>
+          <input class='input_box_input_input' wx:if="{{datauser.IsComment}}" placeholder-style="color:#666;font-size:30rpx" placeholder="禁言" fixed="true" style='background-colo:#fff;color:#f6f6f6;font-size:30rpx' show-confirm-bar="{{bar}}" cursor-spacing="110"
+            maxlength="300" disabled="true"></input>
+          <input wx:else class='input_box_input_input' placeholder-style="color:#939ca9;font-size:30rpx" placeholder="{{huifuvalue}}" bindinput="textareavalue" fixed="true" style='background-colo:#fff' value="{{value2}}" bindblur='textareabind'    focus="{{focus}}" cursor-spacing="150" maxlength="150"></input>
+        </view>
+      </view>
+      <view class='hidden_box_Input_but'>
+        <span class='hidden_box_Input_button' wx:if="{{datauser.IsComment==true|| value==''}}">发送</span>
+        <!-- bindtap="AddComment" -->
+        <button hover-class='none' open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo6" wx:else class='hidden_box_Input_button' style="background-color:#DB384C;line-height:40rpx" >发送</button>
+      </view>
+    </view>
+    <!-- 写评论 -->
+    <view class='box_box'>
+      <!-- 发帖人信息 -->
+      <view class='box_title'>
+        <view bindtap='gerenzhongxin' style='display:flex;float:left'>
+          <view class='box_title_img'>
+            <image class='box_title_image' src='{{datauser.UserPhoto}}'></image>
+          </view>
+          <view class='box_title_name'>
+            <view class='NiceName_box'> 
+              <view class="NiceName">{{datauser.NiceName}}</view>
+              <view class="louzhu">
+                <span>楼主</span>
+              </view>
+              <view class='zhiding' wx:if="{{datauser.IsTop}}">置顶</view>
+            </view>
+            <view class='box_title_name'>
+              <span style="display:block;">{{datauser.CreateTimeStr}}</span>
+            </view>
+          </view>
+
+        </view>
+
+
+        <!-- 关注取消关注按钮 -->
+        <view wx:if="{{isbenren}}"></view>
+        <view class='box_title_guanzhu' wx:else>
+         <!-- bindtap="cancelFollow" -->
+          <button hover-class='none'  open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo4"  class='box_title_guanzhu_text' wx:if="{{dataContent.IsFollow}}" id='{{datauser.UserId}}'>取消关注</button>
+          <!-- bindtap="AddFollow" -->
+          <button hover-class='none' open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo3"  class='box_title_guanzhu_text' wx:else  id='{{datauser.UserId}}'>关注</button>
+        </view>
+        <!-- 关注取消关注按钮 -->
+      </view>
+      <!-- 发帖人信息 -->
+      <view class='box'>
+        <!-- 标题，内容 -->
+        <view class="box_text">
+          <view class='box_text_title'>
+            {{datauser.PostsTitle}}
+          </view>
+
+          <view class="aaa">
+            <block wx:for="{{datauser.ContentList}}" wx:for-item="item">
+              <text wx:if="{{item.ContentType==1}}">{{item.PostsContent}}</text>
+            </block>
+          </view>
+        </view>
+        <!-- 标题，内容 -->
+        <!-- 图片 -->
+        <view class='newsimg_box'>
+          <view class='newsimg_box_img'>
+            <block wx:for="{{datauser.ContentList}}" wx:for-item="item">
+              <!-- <image class='newsimg_box_image3' wx:if="{{item.ContentType==2}}" src='{{item.ImgPath}}'></image> -->
+              <view bindtap='yulan' data-url='{{item.ImgPath}}' class='newsimg_box_image3' wx:if="{{item.ContentType==2}}" style='background: url({{item.ImgPath}}) center no-repeat ;background-size:cover;'></view>
+            </block>
+          </view>
+        </view>
+        <!-- 图片 -->
+        <!-- 举报 -->
+        <view class=''>
+          <navigator hover-class="none" open-type="navigate" class='time' url='../jubao/jubao?id={{datauser.Id}}&userid={{datauser.UserId}}&content={{datauser.PostsTitle}}&type=1&tzid={{datauser.Id}}' style='float:right'>举报
+          </navigator>
+        </view>
+        <!-- 举报 -->
+        <!-- 点赞头像， 点赞数量 -->
+        <view class='givealike_box'>
+          <view class='box_title_image2_box'>
+            <view wx:if="{{isshowdzphoto}}">
+              <view class='box_title_image2_box_box'>
+                <view style='display:flex;'>
+                  <block wx:for="{{dataContent.PostsFabulousUserList}}" wx:for-item="item">
+                    <image class='box_title_image2' src='{{item.UserPhoto}}'></image>
+                  </block>
+                  <view class='FabulousUserTotal'>
+                    {{dataContent.FabulousUserTotal}}个赞
+                  </view>
+                </view>
+
+              </view>
+
+            </view>
+            <view class="myz" wx:else>
+              <span>此帖现在还没有赞哦</span>
+            </view>
+            <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo5" class='dzys' wx:if="{{dataContent.IsFabulous == true}}" style="background: #fff;/*width: 200rpx;*//*height: 100rpx;*/padding-left: 0"  data-id='{{datauser.Id}}'>
+              <image class='dzys_img' src='http://appicon-1253690476.file.myqcloud.com/img/side1_03.png'></image>
+            </button>
+            <button hover-class='none' style='background:#fff;padding-left: 0'  class='dzys' wx:else  data-id='{{datauser.Id}}' open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo1">
+              <image class='dzys_img' src='http://appicon-1253690476.file.myqcloud.com/img/side1_05.png'></image>
+            </button >
+          </view>
+        </view>
+        <view style='width:100%;background-color:#f6f6f6;height:20rpx;'></view>
+        <!-- 点赞头像， 点赞数量 -->
+        <!-- 口碑商品 -->
+        <view class='commodity' wx:if="{{dataContent.ProList.length>0}}">
+          <view class='commodity_box'>
+            <image class='commodity_img' src='http://appicon-1253690476.file.myqcloud.com/img/tzxq_07.png'></image>
+            <span class='commodity_text'>推荐商品</span>
+          </view>
+          <view style='margin:-10rpx 0 30rpx 0'>
+            <view class='commodity_shop' wx:for="{{dataContent.ProList}}" wx:for-item="item">
+              <navigator hover-class="none" url='../../pages/productdetail/productdetail?pid={{item.Id}}'>
+                <view class='commodity_shopImg'>
+
+                  <view class='commodity_shopImg' style='background: url({{item.Path}}) center no-repeat ;background-size:cover;'></view>
+                </view>
+                <view class='commodity_shop_name'>
+                  <span class='commodity_shop_nametext'>{{item.SalesName}}</span>
+                </view>
+                <view class='commodity_shop_pic'>
+                  <span>{{item.SalePrice}}元</span>
+                </view>
+              </navigator>
+            </view>
+          </view>
+        </view>
+        <!-- 口碑商品 -->
+
+        <view class='rmtz_box'>
+          <!-- 热门帖子 -->
+          <view style='background-color:#fff;' wx:if="{{PostsList.length>0}}">
+            <image class='rmtz_box_title' src='http://appicon-1253690476.file.myqcloud.com/img/tzxq_06.png'></image>
+            <block wx:for="{{PostsList}}" wx:item="item">
+              <view class='rmtz_box_content_box'>
+
+                <view class='rmtz_box_content_box2'>
+                  <view class='rmtz_box_content_box_text' bindtap='remen' data-id="{{item.MemberPostsId}}">
+                    <span>{{item.PostsTitle}}</span>
+                  </view>
+                  <view class='pldz_box'>
+                    <view class='rmtz_box_content_box_dz'>
+                      <image class='dz' src='http://appicon-1253690476.file.myqcloud.com/img/tzxq_03.png'></image>
+                      <span>{{item.BrowseCount}}</span>
+                    </view>
+                    <view class='rmtz_box_content_box_pl'>
+                      <image class='pl' src='http://appicon-1253690476.file.myqcloud.com/img/tzxq_05.png'></image>
+                      <span>{{item.CommentCount}}</span>
+                    </view>
+                    <button style='padding-left:22rpx;margin-left:0' wx:if="{{item.IsFabulous == 1}}" data-id='{{item.MemberPostsId}}' class='rmtz_box_content_box_pl'open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo5">
+                      <image class='pl' src='http://appicon-1253690476.file.myqcloud.com/img/side1_03.png'></image>
+                      <span style='font-size:12px'>{{item.FabulousUserTotal}}</span>
+                    </button>
+<!-- bindtap="dianzan" -->
+                    <button style='padding-left:22rpx;margin-left:0' wx:else data-id='{{item.MemberPostsId}}'  class='rmtz_box_content_box_pl' open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo1">
+                      <image class='pl' src='http://appicon-1253690476.file.myqcloud.com/img/side1_05.png'></image>
+                      <span  style='font-size:12px'>{{item.FabulousUserTotal}}</span>
+                    </button>
+                  </view>
+                </view>
+                <view class='rmtz_box_content_img' bindtap='remen' data-id="{{item.MemberPostsId}}">
+                  <view class='rmtz_box_content_Img' style='background: url({{item.ImgPath}}) center no-repeat ;background-size:cover;'></view>
+                </view>
+              </view>
+            </block>
+
+          </view>
+          <view style='width:100%;background-color:#f6f6f6;height:20rpx;'></view>
+          <!-- 热门帖子 -->
+        </view>
+        <view class='rmtz_box' wx:if="{{!datauser.IsComment}}">
+          <!-- 帖子评论 -->
+          <view class='commentaries_box'>
+            <view class='commentaries2'>
+              <view class='commentaries'>
+                <span class="commentaries_tzpl">帖子评论</span>
+                <span class="all_pl" wx:if="{{dataComment.length>0}}">共{{dataComment[0].AllCommentCount}}条评论</span>
+                <span class="all_pl" wx:else>共0条评论</span>
+              </view>
+            </view>
+
+            <view wx:if="{{dataComment.length>0}}">
+              <!-- for -->
+              <view class='h_box' wx:for="{{dataComment}}" wx:for-item="item" wx:for-index="index">
+                <view class='h_box_touxiang'>
+                  <image class='h_box_touxiang' src='{{item.CreatePhotoPath}}'></image>
+                </view>
+                <view class='h_box_neirong'>
+                  <view class='neirong_name'>{{item.CreateNiceName}}</view>
+                  <view class='neirong_text'>{{item.CommentContent}}</view>
+                  <view class='neirong_time'>
+                    <view class='neirong_time_time'>
+                      <span>{{item.CreateTimeStr}}</span>
+                    </view>
+                    <view class='tupianbox'>
+                      <button style="background: #fff;"  open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo58" class='tupianbox_img' wx:if="{{item.IsFabulous == 0}}"  id='{{item.Id}}'>
+                        <image class='commentaries_text_time_img' src='http://appicon-1253690476.file.myqcloud.com/img/side1_05.png'></image>{{item.FabulousCount}}
+                      </button>
+                      <view class='tupianbox_img' wx:else bindtap='cancelzan' id='{{item.Id}}'>
+                        <image class='commentaries_text_time_img' src='http://appicon-1253690476.file.myqcloud.com/img/side1_03.png'></image>{{item.FabulousCount}}
+                      </view>
+                      <view class="time_aa" bindtap="aaa" data-id="{{item.Id}}" data-type="1">
+                        <image class='ddd' src='http://appicon-1253690476.file.myqcloud.com/img/ddd_03.png'></image>
+                        <view class='hidden_ddd' wx:if="{{hiddenddd}}" catchtap='hiddend'></view>
+                        <view wx:if="{{datauser.IsComment&&item.IsShow}}"  class="triangle_border_right01"></view> 
+                        <view class="{{!datauser.IsComment?'hidden_time_aa':'falhidden_time_aa'}}"  data-id="{{item.Id}}" wx:if="{{item.IsShow}}">
+
+
+                          <view class="hidden_time_bb"  wx:if="{{!datauser.IsComment}}" data-id="{{item.CreateUserId}}" data-name="{{item.CreateNiceName}}" data-fcomId="{{item.Id}}" data-comId="{{item.Id}}" catchtap='ahuifu'>回复</view>
+                          <navigator hover-class="none" open-type="navigate" url='../jubao/jubao?id={{item.Id}}&userid={{item.CreateUserId}}&content={{item.CommentContent}}&type=2&tzid={{datauser.Id}}' class='hidden_time_cc'>举报
+                          </navigator>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <view class="zihuifu_box {{item.Id==userid?'':'circle'}}" data-id='{{item.Id}}'>
+                    <block wx:for="{{item.commentList}}" wx:for-item="items" wx:for-index="indexs">
+                      <view class='z_title_box'>
+                        <view class='z_box_touxiang'>
+                          <image class='z_box_touxiang' src='{{items.CreateUserPhoto}}'></image>
+                        </view>
+                        <view class='zihuifu_name'>
+                          <span>{{items.CreateNiceName}}</span>
+                          <span wx:if="{{items.CreateUserId==datauser.UserId}}">(楼主)</span>
+                          <span>@</span>
+                          <span>{{items.ReplyUserNiceName}}</span>
+                          <span wx:if="{{items.ReplyUserId==datauser.UserId}}">(楼主)</span>
+                        </view>
+                      </view>
+                      <view class='zihuifu_text'>{{items.CommentContent}}</view>
+                      <view class='neirong_time'>
+                        <view class='z_neirong_time_time'>
+                          <span>{{items.CreateTimeStr}}</span>
+                        </view>
+                        <view class='tupianbox'>
+                          <view class='tupianbox_img' wx:if="{{items.IsFabulous == 0}}" data-index='{{index}}' bindtap='zan2' id='{{items.Id}}'>
+                            <image class='commentaries_text_time_img' src='http://appicon-1253690476.file.myqcloud.com/img/side1_05.png'></image>{{items.FabulousCount}}
+                          </view>
+                          <view class='tupianbox_img' wx:else bindtap='cancelzan2' data-index='{{index}}' id='{{items.Id}}'>
+                            <image class='commentaries_text_time_img' src='http://appicon-1253690476.file.myqcloud.com/img/side1_03.png'></image>{{items.FabulousCount}}
+                          </view>
+                          <view class="time_a" bindtap="aaa" data-id="{{items.Id}}" data-type="2">
+                            <image class='ddd' src='http://appicon-1253690476.file.myqcloud.com/img/ddd_03.png'></image>
+                             <view wx:if="{{datauser.IsComment&&items.IsShow}}"  class="triangle_border_right01"></view> 
+                            <view  class="{{!datauser.IsComment?'hidden_time_a':'falhidden_time_a'}}"  wx:if="{{items.IsShow}}">
+                              <view class='hidden_time_b'  wx:if="{{!datauser.IsComment}}" data-id="{{items.CreateUserId}}" data-name="{{items.CreateNiceName}}" data-fcomId="{{items.PostCommentId}}" data-comId="{{items.Id}}" catchtap='ahuifu'>回复</view>
+                                
+                              <navigator hover-class="none" url='../jubao/jubao?id={{items.Id}}&userid={{items.CreateUserId}}&content={{items.CommentContent}}&type=2&tzid={{datauser.Id}}' class='hidden_time_c'>举报
+                              </navigator>
+                            </view>
+                          </view>
+                        </view>
+                      </view>
+                    </block>
+                    <view bindtap='commentariehidden' data-id='{{item.Id}}' class='shouqi'>
+                      <span style="padding-left:99px;">收起所有回复</span>
+
+                      <image class='top' src='http://appicon-1253690476.file.myqcloud.com/img/top.png'></image>
+                    </view>
+                  </view>
+                  <view class='zihuifu_box' bindtap='commentari' data-id='{{item.Id}}' wx:if="{{item.commentList.length>0&&item.Id!=userid}}">
+                    <span class="zihuifu_dengr">{{item.commentList[0].CreateNiceName}}等人</span>
+                    <span class="gonghuifu">共{{item.commentList.length}}条回复</span>
+                  </view>
+                </view>
+
+              </view>
+              <!-- for -->
+              <view class="m-loading-box">
+                <block wx:if="{{ispage}}">
+                  <view class="u-loadmore">
+                    <lael class="u-loading"></lael>
+                    <text class="u-loadmore-tips">正在加载</text>
+                  </view>
+                  <view>
+                    <text></text>
+                    <canvas />
+                  </view>
+                </block>
+              </view>
+            </view>
+          </view>
+          <!-- 帖子评论 -->
+
+
+        </view>
+
+        <!-- 总评论数量 -->
+        <view wx:if="{{!datauser.IsComment}}">
+          <view class='tianchong' wx:if="{{dataComment.length>0}}">
+            查看全部{{dataComment[0].AllCommentCount}}条评论
+          </view>
+          <view class='tianchong' wx:else>
+            就等您来抢楼了!
+          </view>
+        </view>
+      </view>
+      <!-- 总评论数量 -->
+
+    </view>
+  </view>
+
+
+  <view style='height:87rpx'  wx:if="{{!datauser.IsComment}}"></view>
+  <!-- 回复 -->
+  <view class='input_box'  wx:if="{{!datauser.IsComment}}">
+    <view class='input_box_input' bindtap='texthidden'>
+      <image class='xiepinglun' src='http://appicon-1253690476.file.myqcloud.com/img/xq_03.png'></image>
+      <span>
+        写下看法，参与讨论
+      </span>
+      <span style="margin-left:104rpx;" wx:if="{{dataComment.length>0}}">
+        {{dataComment[0].AllCommentCount}}人已回复
+      </span>
+      <span style="margin-left:104rpx;" wx:else>
+        0人已回复
+      </span>
+    </view>
+
+    <view class='input_box_fs' wx:if="{{dataContent.IsCollection}}">
+      <image class='xiepinglun' bindtap="cancelshoucang" id='{{datauser.Id}}' src='http://appicon-1253690476.file.myqcloud.com/img/tzxq_10.png'></image>
+    </view>
+
+    <view class='input_box_fs' wx:else>
+      <image class='xiepinglun' bindtap="shoucang" id='{{datauser.Id}}' src='http://appicon-1253690476.file.myqcloud.com/img/xq_05.png'></image>
+    </view>
+
+  </view>
+  <!-- 回复 -->
+  <!-- <view class="u-tap-btn">
+    <button open-type='share' class="u-go-home">
+      <view class="iconfont icon-share" style="position: absolute;left: 18rpx;font-size:21px;"></view>
+    </button>
+    <navigator hover-class="none" url="../../pages/index/index" open-type="switchTab" class="u-go-home">
+      <view class="iconfont icon-shouyeshouye"></view>
+    </navigator>
+  </view> -->
+  
+  <view class="u-top" wx:if="{{isnav}}">
+    <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_nav.png' class='quicknav' bindtap='nav' style='position: fixed;right: 20rpx;bottom:320rpx'></image>
+    <button open-type="getUserInfo" lang="zh_CN"  bindgetuserinfo="onGotUserInfo2"  >
+    <image  src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_post.png' class='quicknav' style='position: fixed;right: 20rpx;top:74%'></image>
+ </button>
+    <image src='http://appicon-1253690476.file.myqcloud.com/nav/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' bindtap="returnTop" style='position: fixed;right: 20rpx;bottom:120rpx'></image>
+  </view>
+  <view class='{{animation?"zhezhaoceng1":"zhezhaoceng"}}' wx:else bindtap='outnav'>
+    <view style='position:relative'>
+      <view class="u-top1">
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='../../pages/DIYcontent/DIYcontent'>
+          <text>社区首页</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_comnityhome.png' class='quicknav'></image>
+        </navigator>
+        <button class='{{animation?"navtext1":"navtext"}}' open-type='share' style='padding:0;background:none;width:none'>
+          <text>分享</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_share.png' class='quicknav'></image>
+        </button>
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='../userspace/userspace'>
+          <text>我的帖子</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_my_post.png' class='quicknav'></image>
+        </navigator>
+        <navigator class='{{animation?"navtext1":"navtext"}}' url='../../pages/index/index' open-type='switchTab'>
+          <text>商城首页</text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/gray/nav_home.png' class='quicknav'></image>
+        </navigator>
+        <view class='navtext' style='margin-bottom:12rpx'>
+          <text></text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_icon_close.png' class='quicknav'></image>
+        </view>
+        <navigator url='../Publishedarticles/Publishedarticles' class='navtext' style='margin-bottom:2rpx'>
+          <text></text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_post.png' class='quicknav'></image>
+        </navigator>
+        <view class='navtext'>
+          <text></text>
+          <image src='http://appicon-1253690476.file.myqcloud.com/nav/black/nav_gotop.png' class='quicknav {{isquicknav?"":"hide"}}' catchtap="returnTop"></image>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+</scroll-view>
+
+<view wx:else>
+  <block>
+
+    <navigator hover-class="none" url="../../pages/DIYcontent/DIYcontent" open-type="redirect" class="m-nullpage">
+      <!-- url="../productlist/productlist" redirect="true" -->
+      <view class="m-nullpage-middle">
+        <view class="m-null-tip">
+          <text>当前帖子不存在！</text>
+          <text style='color:#DB384C;'>社区首页-></text>
+        </view>
+      </view>
+    </navigator>
+
+  </block>
+</view>
+<!-- <auth-info></auth-info> -->
